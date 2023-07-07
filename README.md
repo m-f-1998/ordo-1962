@@ -16,9 +16,9 @@ We also have plans for a rolling updates:
 - A Wider Variety of Prayers
 - Localization Support
 
-![Liturgical Ordo in App](https://github.com/m-f-1998/app-store-images/iphone-xs/iphone-xs-1.png "Liturgical Ordo")
-![App Prayers](https://github.com/m-f-1998/app-store-images/iphone-xs/iphone-xs-2.png "App Prayers")
-![App Setings](https://github.com/m-f-1998/app-store-images/iphone-xs/iphone-xs-3.png "App Settings")
-![App Widget](https://github.com/m-f-1998/app-store-images/iphone-xs/iphone-xs-4.png "App Widget")
+![Liturgical Ordo in App](https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-1.png "Liturgical Ordo")
+![App Prayers](https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-2.png "App Prayers")
+![App Setings](https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-3.png "App Settings")
+![App Widget](https://github.com/m-f-1998/ordo-1962/blob/main/iphone-xs/iphone-xs-4.png "App Widget")
 
 If you are able to offer support for localisation of the ordo, please get in touch.
