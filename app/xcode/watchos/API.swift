@@ -75,6 +75,12 @@ class API: ObservableObject {
         url_request.setValue ( "application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type" )
         url_request.setValue ( "application/json", forHTTPHeaderField: "Accept" )
 
+        var body: URLComponents = URLComponents ( )
+        body.queryItems = [
+            URLQueryItem ( name: "timezone", value: TimeZone.current.abbreviation ( ) )
+        ]
+        url_request.httpBody = body.query?.data ( using: .utf8 )
+
         let ( data, response ) = try await URLSession.shared.data ( for: url_request )
         let status_code: Int? = ( response as? HTTPURLResponse )?.statusCode
 

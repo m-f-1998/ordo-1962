@@ -27,8 +27,11 @@ func CurrentMonth ( ) -> String {
 }
 
 // Current Day In Int (Array Index Is -1)
-func CurrentDay ( ) -> Int {
-    return Calendar.current.component ( .day, from: .now )
+func CurrentDay ( add: Int = 0 ) -> Int {
+    var dateComponent = DateComponents()
+    dateComponent.day = add
+    let today = Calendar.current.date ( byAdding: dateComponent, to: .now )
+    return Calendar.current.component ( .day, from: today! )
 }
 
 // Current Year As A String

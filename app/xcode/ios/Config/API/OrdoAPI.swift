@@ -18,7 +18,12 @@ class OrdoAPI: ObservableObject {
         UserDefaults.standard.set ( now, forKey: "lastUpdate" )
 
         let new_year = CurrentDay ( ) == 1 && CurrentMonth ( ) == "January"
-        let data = await api.GetData ( ignore_cache: ignore_cache, new_year: new_year, wait: true, file: file, url: url, type: OrdoData.self )
+        let queries = [
+            URLQueryItem ( name: "year", value: UserDefaults.standard.string ( forKey: "year" ) ?? "2023" ),
+            URLQueryItem ( name: "timezone", value: TimeZone.current.abbreviation ( ) )
+        ]
+
+        let data = await api.GetData ( ignore_cache: ignore_cache, new_year: new_year, wait: true, file: file, url: url, type: OrdoData.self, queries: queries )
         DispatchQueue.main.async { self.res = data }
     }
     

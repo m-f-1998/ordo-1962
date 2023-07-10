@@ -14,9 +14,9 @@ class API {
     @ObservedObject private var net: NetworkMonitor = NetworkMonitor ( )
 
     // Get Data From Local Device Or From API
-    func GetData <T:Decodable> ( ignore_cache: Bool = false, just_cache: Bool = false, new_year: Bool = false, wait: Bool, file: String, url: String, type: T.Type ) async -> ResultAPI <T> {
+    func GetData <T:Decodable> ( ignore_cache: Bool = false, just_cache: Bool = false, new_year: Bool = false, wait: Bool, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
         do {
-            if !ignore_cache && UseCache ( is_new_year: new_year, only_cache: just_cache ) {
+            if false && !ignore_cache && UseCache ( is_new_year: new_year, only_cache: just_cache ) {
                 if ( wait ) {
                     try await Task.sleep ( nanoseconds: UInt64 ( 1 * Double ( NSEC_PER_SEC ) ) )
                 }
@@ -25,7 +25,7 @@ class API {
                 }
             }
             if !just_cache && self.net.connected {
-                return .success ( try await self.SaveCache ( url: url, file: file, type: T.self ) )
+                return .success ( try await self.SaveCache ( url: url, file: file, type: T.self, url_query: queries ) )
             }
             return .failure ( "Data Could Not Be Fetched" )
         } catch ErrorAPI.fetching ( let message ) {
@@ -66,10 +66,10 @@ class API {
     }
 
     // Save a cache file which is accessible only while the device is unlocked
-    private func SaveCache <T:Decodable> ( url: String, file: String, type: T.Type ) async throws -> T {
+    private func SaveCache <T:Decodable> ( url: String, file: String, type: T.Type, url_query: [ URLQueryItem ] ) async throws -> T {
         do {
             let year: String = UserDefaults.standard.string ( forKey: "year" ) ?? "2023"
-            let data = try await self.HTTP ( year: year, url: url )
+            let data = try await self.HTTP ( url: url, request_params: url_query )
             if year == CurrentYear ( ) {
                 try data.write ( to: self.GetURL ( file_name: file ), options: .completeFileProtection )
             }
@@ -80,7 +80,7 @@ class API {
     }
 
     // Run a URL Request To API
-    private func HTTP ( year: String, url: String ) async throws -> Data {
+    private func HTTP ( url: String, request_params: [ URLQueryItem ] ) async throws -> Data {
         guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/\(url)" ) else { throw ErrorAPI.fetching ( "URL Invalid" ) }
 
         var url_request: URLRequest = URLRequest ( url: address )
@@ -89,11 +89,10 @@ class API {
         url_request.setValue ( "application/json", forHTTPHeaderField: "Accept" )
 
         var body: URLComponents = URLComponents ( )
-        body.queryItems = [
-            URLQueryItem ( name: "user_id", value: try await Auth.auth ( ).signInAnonymously ( ).user.uid ),
-            URLQueryItem ( name: "year", value: year ),
-            URLQueryItem ( name: "lang", value: UserDefaults.standard.string ( forKey: "lang" )! )
+        let default_params = [
+            URLQueryItem ( name: "user_id", value: try await Auth.auth ( ).signInAnonymously ( ).user.uid )
         ]
+        body.queryItems = request_params + default_params
         url_request.httpBody = body.query?.data ( using: .utf8 )
 
         let ( data, response ) = try await URLSession.shared.data ( for: url_request )
@@ -101,7 +100,7 @@ class API {
         
         if status_code == 401 {
             try Auth.auth ( ).signOut ( )
-            return try await HTTP ( year: year, url: url )
+            return try await HTTP ( url: url, request_params: request_params )
         }
 
         guard status_code == 200 else { throw ErrorAPI.fetching ( "HTTP Status Code \(status_code ?? -1)" ) }

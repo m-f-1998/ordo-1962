@@ -27,7 +27,7 @@ struct Provider: TimelineProvider {
      Provides a timeline entry representing a placeholder version of the widget.
      */
     func placeholder ( in context: Context ) -> SimpleEntry {
-        SimpleEntry ( date: Date ( ), feast: FeastData ( title: "", rank: 1, colors: [ "r" ] ), loading: true )
+        SimpleEntry ( date: .now, feast: FeastData ( title: "", rank: 1, colors: [ "r" ] ), loading: true )
     }
 
     /*
@@ -67,9 +67,9 @@ struct SystemWidget : View {
                 .padding ( [ .bottom ], 1 )
                 .redacted ( reason: entry.loading ? .placeholder : [ ] )
             Text ( .now, style: .date )
-                .font ( .system ( size: 12 ) )
                 .italic ( )
         }
+            .font ( .system ( size: 14 ) )
             .padding ( )
             .frame ( maxWidth: .infinity, maxHeight: .infinity, alignment: .center )
             .bold ( )

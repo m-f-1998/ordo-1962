@@ -24,7 +24,6 @@ struct Options: View {
 
 struct OrdoOptions: View {
     @EnvironmentObject var ordo: OrdoAPI
-    @EnvironmentObject var prayers: PrayerAPI
 
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
     @Binding var settings_open: Bool
@@ -36,9 +35,6 @@ struct OrdoOptions: View {
     var locations: [ String ] = [ "General" ]
     @State var locale: String = "General"
 
-    var languages: [ String ] = [ "English", "Latin" ]
-    @State var lang: String = UserDefaults.standard.string ( forKey: "lang" )!
-    
     var body: some View {
         Section {
             if ( self.net.connected ) {
@@ -55,14 +51,6 @@ struct OrdoOptions: View {
                         }
                     }
                 Options ( data: self.locations, title: "Calendar", selected: self.$locale )
-                Options ( data: self.languages, title: "Prayer Language", selected: self.$lang )
-                    .onChange ( of: lang ) { change in
-                        UserDefaults.standard.set ( change, forKey: "lang" )
-                        Task {
-                            self.settings_open = false
-                            await prayers.Update ( ignore_cache: true )
-                        }
-                    }
             }
         } header: {
             Text ( "App Options" )

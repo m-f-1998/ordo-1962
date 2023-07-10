@@ -8,54 +8,45 @@
 
   if ( isset ( $_POST [ 'user_id' ] ) && isset ( $_POST [ 'lang' ] ) ) {
 
-    if ( filter_input ( INPUT_POST, "year", FILTER_VALIDATE_INT ) == false ) {
+    if ( ctype_alnum ( $_POST [ 'user_id' ] ) && $_POST [ 'user_id' ] !== "" && $_POST [ 'lang' ] !== "" ) {
 
-      http_response_code ( 422 );
-      echo 'Unprocessable Year';
+      $factory = ( new Factory )->withServiceAccount ( dirname ( __DIR__ ) . '/../private/ordo-1962/ordo-1962-firebase-adminsdk-fy1k4-2db9663aea.json' );
+      $auth = $factory->createAuth ( );
 
-    } else {
+      try {
 
-      if ( ctype_alnum ( $_POST [ 'user_id' ] ) && $_POST [ 'user_id' ] !== "" && $_POST [ 'lang' ] !== "" ) {
+        $user = $auth->getUser ( $_POST [ 'user_id' ] );
 
-        $factory = ( new Factory )->withServiceAccount ( dirname ( __DIR__ ) . '/../private/ordo-1962/ordo-1962-firebase-adminsdk-fy1k4-2db9663aea.json' );
-        $auth = $factory->createAuth ( );
+        $path = dirname ( __DIR__ ) . '/../private/ordo-1962/prayers/' . $_POST[ 'lang' ] . '.json';
 
-        try {
-
-          $user = $auth->getUser ( $_POST [ 'user_id' ] );
-
-          $path = dirname ( __DIR__ ) . '/../private/ordo-1962/prayers/' . $_POST[ 'lang' ] . '.json';
-
-          if ( file_exists ( $path ) && filesize ( $path ) > 0 ) {
-            
-            echo file_get_contents ( $path );
+        if ( file_exists ( $path ) && filesize ( $path ) > 0 ) {
           
-          } else {
-            
-            http_response_code ( 400 );
-            echo 'API Corrupted';
+          echo file_get_contents ( $path );
+        
+        } else {
           
-          }
-
-        } catch ( \Kreait\Firebase\Exception\Auth\UserNotFound $e ) {
-
-          http_response_code ( 401 );
-          echo 'Authorization Failed';
-
-        } catch ( \Kreait\Firebase\Exception\AuthException $e ) {
-
           http_response_code ( 400 );
-          echo 'Unkown Error Occured';
+          echo 'API Corrupted';
         
         }
 
-      } else {
+      } catch ( \Kreait\Firebase\Exception\Auth\UserNotFound $e ) {
 
-        http_response_code ( 422 );
-        echo 'Unprocessable User ID';
+        http_response_code ( 401 );
+        echo 'Authorization Failed';
 
+      } catch ( \Kreait\Firebase\Exception\AuthException $e ) {
+
+        http_response_code ( 400 );
+        echo 'Unkown Error Occured';
+      
       }
-    
+
+    } else {
+
+      http_response_code ( 422 );
+      echo 'Unprocessable User ID';
+
     }
   
   } else {

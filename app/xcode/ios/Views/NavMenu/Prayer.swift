@@ -14,26 +14,30 @@ struct PrayerView: View {
     @State var show_latin: Bool = false
     
     var body: some View {
-        Text ( title )
-            .font ( .title )
-            .bold ( )
-            .multilineTextAlignment ( .center )
-            .frame ( maxWidth: .infinity )
-            .padding ( [ .bottom ], 10 )
-            .background ( LinearGradient ( ).overlay ( .ultraThinMaterial ) )
-
-        GeometryReader { proxy in
-            VStack {
-                ScrollView ( .vertical, showsIndicators: false ) {
-                    Text ( text )
-                        .bold ( )
-                        .lineSpacing ( 10 )
-                        .frame ( minHeight: proxy.size.height )
-                        .font ( .system ( .title2, design: .rounded ) )
-                }
-            }
-                .padding ( [ .leading, .trailing ], 20 )
+        VStack ( spacing: 0 ) {
+            Text ( title )
+                .font ( .title2 )
+                .bold ( )
                 .multilineTextAlignment ( .center )
+                .frame ( maxWidth: .infinity )
+                .padding ( [ .bottom ], 20 )
+                .padding ( [ .trailing, .leading ], 20 )
+                .background ( LinearGradient ( ).overlay ( .ultraThinMaterial ) )
+            
+            GeometryReader { proxy in
+                VStack {
+                    ScrollView ( .vertical, showsIndicators: false ) {
+                        Text ( text )
+                            .bold ( )
+                            .lineSpacing ( 10 )
+                            .frame ( maxWidth: .infinity, minHeight: proxy.size.height )
+                            .font ( .system ( .body, design: .monospaced ) )
+                            .padding ( [ .top, .bottom ], 20 )
+                    }
+                }
+                    .padding ( [ .leading, .trailing ], 20 )
+                    .multilineTextAlignment ( .center )
+            }
         }
     }
 }
@@ -41,11 +45,25 @@ struct PrayerView: View {
 struct Prayer: View {
     @Binding var open_tab: Bool
     @EnvironmentObject var prayers: PrayerAPI
+    
+    var languages: [ String ] = [ "English", "Latin" ]
+    @State var lang: String = UserDefaults.standard.string ( forKey: "lang" )!
+    @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
 
     var body: some View {
         NavigationView {
             VStack {
                 if case let .success ( res ) = prayers.res {
+                    if ( net.connected ) {
+                        Options ( data: self.languages, title: "Prayer Language", selected: self.$lang )
+                            .onChange ( of: lang ) { change in
+                                prayers.SetLoading ( )
+                                UserDefaults.standard.set ( change, forKey: "lang" )
+                                Task {
+                                    await prayers.Update ( ignore_cache: true, lang: change )
+                                }
+                            }
+                    }
                     List {
                         ForEach ( Array ( res.keys ).sorted ( by: < ), id: \.self ) { category in
                             Section ( header: Text ( category ) ) {
@@ -72,7 +90,7 @@ struct Prayer: View {
                 Text ( "Done" ).bold ( )
             } )
         }.task {
-            await prayers.Update ( )
+            await prayers.Update ( lang: self.lang )
         }
     }
 }

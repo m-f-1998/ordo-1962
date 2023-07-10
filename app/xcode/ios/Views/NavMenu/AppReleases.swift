@@ -40,7 +40,7 @@ struct AppReleases: View {
                     "Changable Years"
                 ] )
                 DataParagraphs ( subtitle: "Future Updates", points: [
-                    "A Wider Variety of Prayers",
+                    "Propers of the Mass",
                     "Android Implemntation",
                     "Localization Suport"
                 ] )

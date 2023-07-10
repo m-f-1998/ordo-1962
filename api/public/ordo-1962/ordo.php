@@ -6,7 +6,7 @@
 
   use Kreait\Firebase\Factory;
 
-  if ( isset ( $_POST [ 'user_id' ] ) && isset ( $_POST [ 'year' ] ) ) {
+  if ( isset ( $_POST [ 'user_id' ] ) && isset ( $_POST [ 'year' ] ) && isset ( $_POST [ 'timezone' ] ) ) {
 
     if ( filter_input ( INPUT_POST, "year", FILTER_VALIDATE_INT ) == false ) {
 
@@ -58,16 +58,17 @@
     
     }
   
-  } else {
+  } else if ( isset ( $_POST [ 'timezone' ] ) ) {
 
     $path = dirname ( __DIR__ ) . '/../private/ordo-1962/ordo/' . date ( 'Y' ) . '.json';
 
-    if ( file_exists ( $path ) && filesize ( $path ) > 0 ) {
+    if ( file_exists ( $path ) && filesize ( $path ) > 0 && timezone_name_from_abbr ( $_POST [ 'timezone' ] ) ) {
 
       $file = file_get_contents ( $path );
       $json = json_decode ( $file, true );
 
       $res = array ( );
+      date_default_timezone_set ( timezone_name_from_abbr ( $_POST [ 'timezone' ] ) );
       $month = date ( 'F' );
       $next_month = date ( 'F', strtotime ( 'first day of +1 month' ) );
       $to_test = array_merge ( $json [ $month ], $json [ $next_month ] );
@@ -92,9 +93,14 @@
     } else {
 
       http_response_code ( 400 );
-      echo 'Missing Parameters';
+      echo 'Data Missing';
 
     }
+
+  } else {
+
+    http_response_code ( 400 );
+    echo 'Missing Parameters';
 
   }
 
