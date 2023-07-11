@@ -29,16 +29,16 @@ struct ContentView: View {
                 ErrorView ( description: error )
             case .loading ( let data ), .success ( let data ):
                 Ordo ( data: data )
-            }
-            if ( !self.net.connected ) {
-                VStack ( alignment: .center ) {
-                    Text ( "No Internet Connection" )
-                        .bold ( )
-                        .foregroundColor ( .white )
-                        .frame ( maxWidth: .infinity )
-                        .padding ( [ .top ], 10 )
+                if ( !self.net.connected ) {
+                    VStack ( alignment: .center ) {
+                        Text ( "No Internet Connection" )
+                            .bold ( )
+                            .foregroundColor ( .white )
+                            .frame ( maxWidth: .infinity )
+                            .padding ( [ .top ], 10 )
+                    }
+                        .background ( .red )
                 }
-                    .background ( .red )
             }
         }
             .environmentObject ( ordo )

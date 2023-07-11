@@ -20,7 +20,7 @@ struct PrayerView: View {
                 .bold ( )
                 .multilineTextAlignment ( .center )
                 .frame ( maxWidth: .infinity )
-                .padding ( [ .bottom ], 20 )
+                .padding ( [ .bottom, .top ], 20 )
                 .padding ( [ .trailing, .leading ], 20 )
                 .background ( LinearGradient ( ).overlay ( .ultraThinMaterial ) )
             

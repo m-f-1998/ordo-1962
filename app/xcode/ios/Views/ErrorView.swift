@@ -18,6 +18,8 @@ struct ErrorView: View {
                 .padding ( )
             Button ( action: {
                 Task {
+                    self.ordo.SetLoading ( )
+                    try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
                     await self.ordo.Update ( )
                 }
             } ) {

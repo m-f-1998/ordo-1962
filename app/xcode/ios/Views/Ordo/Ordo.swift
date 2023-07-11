@@ -7,33 +7,86 @@
 
 import SwiftUI
 
+struct PropersButton: View {
+    @State private var showing_sheet = false
+    let title: String, content: String
+
+    var body: some View {
+        Button {
+            self.showing_sheet.toggle ( )
+        } label: {
+            Text ( self.title ).padding ( 6 )
+        }
+            .sheet ( isPresented: $showing_sheet ) {
+                PrayerView ( text: self.content, title: self.title, open_tab: self.$showing_sheet )
+            }
+            .background ( LinearGradient ( ) )
+            .cornerRadius ( 10 )
+    }
+}
+
 struct Row: View { // Entire Row for a given Feat Day
     let feast: CelebrationData
     let date, month: String
     let current_date: String = FormatDate ( short: true ).string ( from: .now )
+    
+    @State var menu_expanded: Bool = false
 
     var body: some View {
-        HStack {
-            Day ( date: feast.date, month: month ).foregroundColor ( self.current_date == self.date ? .red : nil )
-            LazyVStack ( alignment: .leading ) {
-                Feast ( data: self.feast.celebration, font: 16.0 )
-                if self.feast.commemoration.count > 0 {
-                    Feast ( data: self.feast.commemoration, font: 13.0, comm: true )
+        VStack {
+            HStack {
+                Day ( date: feast.date, month: month ).foregroundColor ( self.current_date == self.date ? .red : nil )
+                LazyVStack ( alignment: .leading ) {
+                    Feast ( data: self.feast.celebration, font: 16.0 )
+                    if self.feast.commemoration.count > 0 {
+                        Feast ( data: self.feast.commemoration, font: 13.0, comm: true )
+                    }
+                    Text ( self.feast.options )
+                        .font ( .system ( size: 12 ) )
+                        .frame ( maxWidth: .infinity, alignment: .leading )
+                        .padding ( [ .top ], 2 )
+                    ScrollView ( .horizontal, showsIndicators: false ) {
+                        HStack {
+                            Tag (
+                                title: self.feast.season.title,
+                                colors: self.feast.season.colors.map {
+                                    Color ( word: $0 )!.opacity ( 0.5 )
+                                }
+                            )
+                            Tag ( title: "Class \(self.feast.celebration [ 0 ].rank)", colors: [ .green.opacity ( 0.3 ), .blue.opacity ( 0.5 ) ] )
+                        }.padding ( [ .top, .bottom ], 5 )
+                    }
                 }
-                Text ( self.feast.options )
-                    .font ( .system ( size: 12 ) )
-                    .frame ( maxWidth: .infinity, alignment: .leading )
-                    .padding ( [ .top ], 2 )
-                ScrollView ( .horizontal, showsIndicators: false ) {
-                    HStack {
-                        Tag (
-                            title: self.feast.season.title,
-                            colors: self.feast.season.colors.map {
-                                Color ( word: $0 )!.opacity ( 0.5 )
-                            }
-                        )
-                        Tag ( title: "Class \(self.feast.celebration [ 0 ].rank)", colors: [ .green.opacity ( 0.3 ), .blue.opacity ( 0.5 ) ] )
-                    }.padding ( [ .top, .bottom ], 5 )
+                Image ( systemName: menu_expanded ? "chevron.up" : "chevron.down" )
+                    .resizable ( )
+                    .frame ( width: 13, height: 6 )
+            }.onTapGesture {
+                menu_expanded.toggle ( )
+            }
+            if ( menu_expanded ) {
+                HStack {
+                    VStack {
+                        // TODO: Content
+                        PropersButton ( title: "INTROIT", content: "" )
+                        PropersButton ( title: "COLLECT", content: "" )
+                        PropersButton ( title: "EPISTLE", content: "" )
+                        PropersButton ( title: "GRADUAL", content: "" )
+                        PropersButton ( title: "GOSPEL", content: "" )
+                    }
+                        .frame ( maxWidth: .infinity )
+                        .font ( .system ( size: 13 ) )
+                        .buttonStyle ( PlainButtonStyle ( ) )
+
+                    VStack {
+                        PropersButton ( title: "OFFERTORY", content: "" )
+                        PropersButton ( title: "SECRET", content: "" )
+                        PropersButton ( title: "PREFACE", content: "" )
+                        PropersButton ( title: "COMMUNION", content: "" )
+                        PropersButton ( title: "POSTCOMMUNION", content: "" )
+                    }
+                        .frame ( maxWidth: .infinity )
+                        .font ( .system ( size: 13 ) )
+                        .buttonStyle ( PlainButtonStyle ( ) )
                 }
             }
         }

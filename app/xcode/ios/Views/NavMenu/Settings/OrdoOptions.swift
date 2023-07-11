@@ -36,8 +36,8 @@ struct OrdoOptions: View {
     @State var locale: String = "General"
 
     var body: some View {
-        Section {
-            if ( self.net.connected ) {
+        if ( self.net.connected ) {
+            Section {
                 Options ( data: self.years, title: "Year", selected: self.$year )
                     .onChange ( of: year ) { change in
                         UserDefaults.standard.set ( change, forKey: "year" )
@@ -51,11 +51,11 @@ struct OrdoOptions: View {
                         }
                     }
                 Options ( data: self.locations, title: "Calendar", selected: self.$locale )
+            } header: {
+                Text ( "App Options" )
+            } footer: {
+                Text ( "Localization Options Coming Soon" )
             }
-        } header: {
-            Text ( "App Options" )
-        } footer: {
-            Text ( "Localization Options Coming Soon" )
         }
     }
 }
