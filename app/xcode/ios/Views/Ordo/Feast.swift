@@ -17,7 +17,8 @@ struct Feast: View { // Information row on the feast of the day
             HStack {
                 Text ( feast.title + ( self.comm ? " (Commem)" : "" ) )
                     .frame ( alignment: .leading )
-                    .font ( .system ( size: self.font, weight: .bold ) )
+                    .scaledFont ( size: self.font )
+                    .bold ( )
                 Circle ( )
                     .strokeBorder ( .black, lineWidth: 1 )
                     .background (

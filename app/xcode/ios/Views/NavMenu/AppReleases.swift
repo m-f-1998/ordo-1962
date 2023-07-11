@@ -13,10 +13,12 @@ private struct DataParagraphs: View {
 
     var body: some View {
         VStack ( alignment: .leading, spacing: 10 ) {
-            Text ( self.subtitle ).font ( .title3 )
+            Text ( self.subtitle )
+                .font ( .title3 )
             VStack ( alignment: .leading, spacing: 10 ) {
                 ForEach ( self.points.map ( { "•\t\($0)" } ), id: \.self) { data in
-                    Text ( data ).font ( .system ( size: 14 ) )
+                    Text ( data )
+                        .scaledFont ( size: 15 )
                 }
             }.padding ( [ .leading ], 20 )
         }.padding ( [ .leading ], 20 )
@@ -37,12 +39,15 @@ struct AppReleases: View {
                     "Home Screen Widgets",
                     "Basic Prayers",
                     "Options Information for Feasts",
-                    "Changable Years"
+                    "Changable Years",
+                    "Propers of the Mass"
                 ] )
                 DataParagraphs ( subtitle: "Future Updates", points: [
-                    "Propers of the Mass",
-                    "Android Implemntation",
-                    "Localization Suport"
+                    "Android Implementation",
+                    "Localization Suport",
+                    "Votive Masses",
+                    "An Increased Quantity of Prayers",
+                    "A Wider Variety of Languages"
                 ] )
                 Text ( "†JMJ†" )
                     .frame ( maxWidth: .infinity, alignment: .center )

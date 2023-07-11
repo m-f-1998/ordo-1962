@@ -27,7 +27,7 @@ struct PrayerView: View {
             GeometryReader { proxy in
                 VStack {
                     ScrollView ( .vertical, showsIndicators: false ) {
-                        Text ( text )
+                        Text ( try! AttributedString ( markdown: text, options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace ) ) )
                             .bold ( )
                             .lineSpacing ( 10 )
                             .frame ( maxWidth: .infinity, minHeight: proxy.size.height )
@@ -47,7 +47,7 @@ struct Prayer: View {
     @EnvironmentObject var prayers: PrayerAPI
     
     var languages: [ String ] = [ "English", "Latin" ]
-    @State var lang: String = UserDefaults.standard.string ( forKey: "lang" )!
+    @State var lang: String = UserDefaults.standard.string ( forKey: "prayers-lang" )!
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
 
     var body: some View {
@@ -58,7 +58,7 @@ struct Prayer: View {
                         Options ( data: self.languages, title: "Prayer Language", selected: self.$lang )
                             .onChange ( of: lang ) { change in
                                 prayers.SetLoading ( )
-                                UserDefaults.standard.set ( change, forKey: "lang" )
+                                UserDefaults.standard.set ( change, forKey: "prayers-lang" )
                                 Task {
                                     await prayers.Update ( ignore_cache: true, lang: change )
                                 }

@@ -14,12 +14,12 @@ struct Provider: TimelineProvider {
     func getEntry ( ) async -> [ SimpleEntry ] {
         await api.GetData ( )
         switch api.res {
-            case .success ( let data ):
-                let json = data [ 0 ].celebration [ 0 ]
-                let entry = SimpleEntry ( date: .now, feast: json, loading: false )
-                return [ entry ]
-            default:
-                fatalError ( "No Data Retrieved" )
+        case .success ( let data ):
+            let json = data [ 0 ].celebration [ 0 ]
+            let entry = SimpleEntry ( date: .now, feast: json, loading: false )
+            return [ entry ]
+        default:
+            fatalError ( "No Data Retrieved" )
         }
     }
 
@@ -69,7 +69,7 @@ struct SystemWidget : View {
             Text ( .now, style: .date )
                 .italic ( )
         }
-            .font ( .system ( size: 14 ) )
+            .font ( .system ( size: 16 ) )
             .padding ( )
             .frame ( maxWidth: .infinity, maxHeight: .infinity, alignment: .center )
             .bold ( )
@@ -84,6 +84,7 @@ struct RectangularWidgetView : View {
 
     var body: some View {
         Text ( "\(entry.feast.title) (Class \(entry.feast.rank))" )
+            .font ( .system ( size: 16 ) )
             .redacted ( reason: entry.loading ? .placeholder : [ ] )
             .multilineTextAlignment ( .center )
             .bold ( )
@@ -108,15 +109,15 @@ struct EntryView: View {
 
     var body: some View {
         switch family {
-            case .accessoryRectangular:
-                // Rectangular Lock Screen UI
-                RectangularWidgetView ( entry: entry )
-            case .accessoryInline:
-                // Inline Lock Screen  UI
-                InlineWidgetView ( entry: entry )
-            default:
-                // UI for Home Screen widget
-                SystemWidget ( entry: entry )
+        case .accessoryRectangular:
+            // Rectangular Lock Screen UI
+            RectangularWidgetView ( entry: entry )
+        case .accessoryInline:
+            // Inline Lock Screen  UI
+            InlineWidgetView ( entry: entry )
+        default:
+            // UI for Home Screen widget
+            SystemWidget ( entry: entry )
         }
     }
 }

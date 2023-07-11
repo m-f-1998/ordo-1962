@@ -14,11 +14,12 @@ struct ContentView: View {
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
     @ObservedObject var ordo: OrdoAPI = OrdoAPI ( )
     @ObservedObject var prayers: PrayerAPI = PrayerAPI ( )
+    @ObservedObject var propers: PropersAPI = PropersAPI ( )
 
     init ( ) {
         UserDefaults.standard.set ( CurrentYear ( ), forKey: "year" )
-        if UserDefaults.standard.string ( forKey: "lang" ) == nil {
-            UserDefaults.standard.set ( "English", forKey: "lang" )
+        if UserDefaults.standard.string ( forKey: "prayers-lang" ) == nil {
+            UserDefaults.standard.set ( "English", forKey: "prayers-lang" )
         }
     }
 
@@ -43,6 +44,7 @@ struct ContentView: View {
         }
             .environmentObject ( ordo )
             .environmentObject ( prayers )
+            .environmentObject ( propers )
             .task {
                 await ordo.Update ( )
             }

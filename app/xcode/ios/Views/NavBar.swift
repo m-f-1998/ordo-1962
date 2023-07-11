@@ -53,7 +53,7 @@ struct NavBar: View { // The top navigation bar with settings buttons
                             HStack {
                                 Image ( systemName: "arrow.up.arrow.down" )
                                 Text ( "Go To Today" )
-                                    .font ( .system ( size: 12 ) )
+                                    .scaledFont ( size: 14 )
                             }
                         }
                         Divider ( )

@@ -43,15 +43,24 @@ func CurrentYear ( ) -> String {
 extension Color {
     init? ( word: String ) {
         switch word {
-            case "y": self = Color ( red: 0.9882352941, green: 0.7607843137, blue: 0 )
-            case "b": self = .black
-            case "w": self = .white
-            case "r": self = .red
-            case "o": self = .orange
-            case "g": self = .green
-            case "v": self = Color ( red: 1.43, green: 0, blue: 2.55 )
-            case "p": self = Color ( red: 2.55, green: 0, blue: 1.27 )
-            default:  self = .red
+        case "y":
+            self = Color ( red: 0.9882352941, green: 0.7607843137, blue: 0 )
+        case "b":
+            self = .black
+        case "w":
+            self = .white
+        case "r":
+            self = .red
+        case "o":
+            self = .orange
+        case "g":
+            self = .green
+        case "v":
+            self = Color ( red: 1.43, green: 0, blue: 2.55 )
+        case "p":
+            self = Color ( red: 2.55, green: 0, blue: 1.27 )
+        default:
+            self = .white
         }
     }
 }

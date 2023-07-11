@@ -23,12 +23,12 @@ struct Day: View { // Text (of the date) displayed in a circle clip shape
         VStack {
             Text ( self.day )
             Text ( self.date )
-                .font ( .system ( size: 22 ) )
+                .font ( .system ( size: 24 ) )
                 .bold ( )
             Text ( self.month )
         }
             .frame ( maxWidth: 60, maxHeight: .infinity, alignment: .center )
-            .font ( .system ( size: 12 ) )
+            .font ( .system ( size: 14 ) )
             .multilineTextAlignment( .center )
             .background ( LinearGradient ( ) )
             .clipShape ( RoundedRectangle ( cornerRadius: 8 ) )

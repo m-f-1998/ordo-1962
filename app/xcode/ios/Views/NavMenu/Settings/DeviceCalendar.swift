@@ -61,15 +61,15 @@ struct DeviceCalendar: View {
     
     func permission ( ) async {
         switch EKEventStore.authorizationStatus ( for: .event ) {
-            case .authorized:
+        case .authorized:
             self.permissions = true
-            case .notDetermined:
-                do {
-                    self.permissions = try await self.store.requestAccess ( to: .event )
-                } catch {
-                    self.permissions = false
-                }
-            default:
+        case .notDetermined:
+            do {
+                self.permissions = try await self.store.requestAccess ( to: .event )
+            } catch {
+                self.permissions = false
+            }
+        default:
             self.permissions = false
         }
     }

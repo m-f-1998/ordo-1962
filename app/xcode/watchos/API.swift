@@ -22,7 +22,7 @@ class API: ObservableObject {
     // Get Data From Local Device Or From API
     func GetData ( ) async {
         do {
-            if false && self.CacheExists ( ) && CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" {
+            if self.CacheExists ( ) && CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" {
                 let ordo: OrdoData = try self.Decode ( data: Data ( contentsOf: self.GetURL ( ) ), type: OrdoData.self ),
                 cal: Calendar = .current, next_month = cal.monthSymbols [ cal.component ( .month, from: .now ) ],
                 months_to_show: [ CelebrationData ] =  ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
@@ -77,7 +77,7 @@ class API: ObservableObject {
 
         var body: URLComponents = URLComponents ( )
         body.queryItems = [
-            URLQueryItem ( name: "timezone", value: TimeZone.current.abbreviation ( ) )
+            URLQueryItem ( name: "timezone", value: TimeZone.current.identifier )
         ]
         url_request.httpBody = body.query?.data ( using: .utf8 )
 

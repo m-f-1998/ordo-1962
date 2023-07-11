@@ -16,7 +16,7 @@ class API {
     // Get Data From Local Device Or From API
     func GetData <T:Decodable> ( ignore_cache: Bool = false, just_cache: Bool = false, new_year: Bool = false, wait: Bool, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
         do {
-            if false && !ignore_cache && UseCache ( is_new_year: new_year, only_cache: just_cache ) {
+            if !ignore_cache && UseCache ( is_new_year: new_year, only_cache: just_cache ) {
                 if ( wait ) {
                     try await Task.sleep ( nanoseconds: UInt64 ( 1 * Double ( NSEC_PER_SEC ) ) )
                 }
