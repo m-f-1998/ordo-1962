@@ -186,7 +186,6 @@ Temporary Items
 # Project Specific
 api/private/
 **/.vscode/
-api/public/resources/*
 **/vendor/*
 composer.lock
 *.xcodeproj/

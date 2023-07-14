@@ -38,6 +38,7 @@ typealias PrayerData = [ String : String ]
 // MARK: Liturgical Ordo
 
 typealias OrdoData = [ String: [ CelebrationData ] ]
+typealias ReducedOrdoData = [ String: [ ReducedCelebrationData ] ]
 
 struct CelebrationData: Codable, Hashable, Identifiable {
     let id: String
@@ -46,6 +47,12 @@ struct CelebrationData: Codable, Hashable, Identifiable {
     let commemoration: [ FeastData ]
     let season: SeasonData
     let options: String
+}
+
+struct ReducedCelebrationData: Codable, Hashable, Identifiable {
+    let id: String
+    let date: String
+    let celebration: [ FeastData ]
 }
 
 struct SeasonData: Codable, Hashable {

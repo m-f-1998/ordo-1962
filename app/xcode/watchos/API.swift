@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum ResultAPI: Equatable {
-    case loading, success ( [ CelebrationData ] ), failure ( String )
+    case loading, success ( [ ReducedCelebrationData ] ), failure ( String )
 }
 
 enum ErrorAPI: Error {
@@ -23,15 +23,15 @@ class API: ObservableObject {
     func GetData ( ) async {
         do {
             if self.CacheExists ( ) && CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" {
-                let ordo: OrdoData = try self.Decode ( data: Data ( contentsOf: self.GetURL ( ) ), type: OrdoData.self ),
+                let ordo: ReducedOrdoData = try self.Decode ( data: Data ( contentsOf: self.GetURL ( ) ), type: ReducedOrdoData.self ),
                 cal: Calendar = .current, next_month = cal.monthSymbols [ cal.component ( .month, from: .now ) ],
-                months_to_show: [ CelebrationData ] =  ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
+                months_to_show: [ ReducedCelebrationData ] =  ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
                 
                 DispatchQueue.main.async {
                     self.res = .success ( Array ( months_to_show [ CurrentDay ( ) - 1...CurrentDay ( ) + 5 ] ) )
                 }
             }
-            let data = try self.Decode ( data: try await self.HTTP ( ), type: [ CelebrationData ].self )
+            let data = try self.Decode ( data: try await self.HTTP ( ), type: [ ReducedCelebrationData ].self )
             DispatchQueue.main.async {
                 self.res = .success ( data )
             }

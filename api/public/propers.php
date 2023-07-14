@@ -3,7 +3,9 @@
   header ( 'Content-Type: application/json; charset=utf-8' );
 
   require __DIR__.'/vendor/autoload.php';
+  require_once  __DIR__ . '/db-functions.php';
 
+  $operations = new Functions ( );
   use Kreait\Firebase\Factory;
 
   if ( isset ( $_POST [ 'user_id' ] ) && isset ( $_POST [ 'year' ] ) ) {
@@ -22,20 +24,9 @@
 
         try {
 
-          $user = $auth->getUser ( $_POST [ 'user_id' ] );
+          $auth->getUser ( $_POST [ 'user_id' ] );
 
-          $path = dirname ( __DIR__ ) . '/../private/ordo-1962/propers/' . $_POST [ 'year' ] . '.json';
-
-          if ( file_exists ( $path ) && filesize ( $path ) > 0 ) {
-            
-            echo file_get_contents ( $path );
-          
-          } else {
-            
-            http_response_code ( 400 );
-            echo 'API Corrupted';
-          
-          }
+          echo json_encode ( $operations->GetPropers ( $_POST [ 'year' ] ) ); 
 
         } catch ( \Kreait\Firebase\Exception\Auth\UserNotFound $e ) {
 
