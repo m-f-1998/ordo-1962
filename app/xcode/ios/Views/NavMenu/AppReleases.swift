@@ -39,7 +39,7 @@ struct AppReleases: View {
                     "Home Screen Widgets",
                     "Basic Prayers",
                     "Options Information for Feasts",
-                    "Changable Years",
+                    "Changeable Years",
                     "Propers of the Mass"
                 ] )
                 DataParagraphs ( subtitle: "Future Updates", points: [

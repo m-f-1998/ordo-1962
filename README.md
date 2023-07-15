@@ -4,17 +4,21 @@
 
 A Traditional Catholic Liturgical Calendar for the Holy Sacrifice of the Mass according to the 1962 Missale Romanum issued by Pope St. John XXIII. This App is designed for the easy accessibility of the faithful and an increase of awareness regarding the Traditional Mass. Features include:
 
-- Feasts and Commemorations of the Day
-- Classes and Liturgical Colour
-- Seasonal Information
-- Basic Prayers for Common Use
+- Ordo Implementation
+- Lock Screen Widgets
+- Home Screen Widgets
+- Basic Prayers
+- Options Information for Feasts
 - Changeable Years
-- Home Screen and Lock Screen Widget
+- Propers of the Mass
 
 We also have plans for a rolling updates:
 
-- A Wider Variety of Prayers
+- Android Implementation
 - Localization Support
+- Votive Masses
+- An Increased Quantity of Prayers
+- A Wider Variety of Languages
 
 <div>
 <img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-1.png" width="200">
@@ -22,5 +26,3 @@ We also have plans for a rolling updates:
 <img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-3.png" width="200">
 <img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-4.png" width="200">
 </div>
-
-If you are able to offer support for localisation of the ordo, please get in touch.
