@@ -80,12 +80,12 @@ let DUMMY_ORDO: OrdoData = Calendar.current.monthSymbols.reduce ( into: OrdoData
             id: UUID ( ).uuidString,
             date: FormatDate ( ).string ( from: .now ),
             celebration: [
-                FeastData.init ( title: "", rank: 1, colors: [ "g" ] )
+                FeastData.init ( title: "", rank: 1, colors: "g" )
             ],
             commemoration: [
-                FeastData.init ( title: "", rank: 1, colors: [ "g" ] )
+                FeastData.init ( title: "", rank: 1, colors: "g" )
             ],
-            season: SeasonData ( title: "", colors: [ "g" ] ),
+            season: SeasonData ( title: "", colors: "g" ),
             options: ""
         )
     ]

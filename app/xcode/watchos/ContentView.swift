@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Ordo: View {
-    let ordo: [ CelebrationData ]
+    let ordo: [ ReducedCelebrationData ]
 
     var body: some View {
         List ( self.ordo, id: \.self ) { feast in

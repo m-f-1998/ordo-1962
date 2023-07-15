@@ -23,7 +23,7 @@ struct Feast: View { // Information row on the feast of the day
                     .strokeBorder ( .black, lineWidth: 1 )
                     .background (
                         Circle ( )
-                            .foregroundColor ( Color ( word: feast.colors [ 0 ] ) )
+                            .foregroundColor ( Color ( word: feast.colors.components ( separatedBy: "," ) [ 0 ] ) )
                     )
                     .frame ( width: 15, height: 15 )
             }

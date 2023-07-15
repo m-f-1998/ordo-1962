@@ -12,7 +12,6 @@ import Foundation
 typealias PropersData = [ String: [ FeastPropers ] ]
 struct FeastPropers: Codable, Hashable, Identifiable {
     let id: String
-    let date: String
     let introit: PropersLanguage?
     let collect: PropersLanguage?
     let epistle: PropersLanguage?
@@ -48,7 +47,6 @@ struct CelebrationData: Codable, Hashable, Identifiable {
     let season: SeasonData
     let options: String
 }
-
 struct ReducedCelebrationData: Codable, Hashable, Identifiable {
     let id: String
     let date: String
@@ -57,14 +55,14 @@ struct ReducedCelebrationData: Codable, Hashable, Identifiable {
 
 struct SeasonData: Codable, Hashable {
     let title: String
-    let colors: [ String ]
+    let colors: String
 }
 
 struct FeastData: Codable, Hashable, Identifiable {
     let id: String = UUID ( ).uuidString
     let title: String
     let rank: Int
-    let colors: [ String ]
+    let colors: String
     
     private enum CodingKeys: String, CodingKey { case title, rank, colors }
 }

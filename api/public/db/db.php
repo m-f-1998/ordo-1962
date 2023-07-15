@@ -8,7 +8,7 @@ class DB {
 
     function connect ( ) {
 
-        require_once dirname ( __DIR__ ) . '/../private/ordo-1962/db-constants.php';
+        require_once dirname ( __DIR__ ) . '/../../private/ordo-1962/db-constants.php';
 
         $this->conn = new mysqli ( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
 

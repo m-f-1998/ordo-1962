@@ -34,7 +34,7 @@ struct Row: View { // Entire Row for a given Feat Day
                         HStack {
                             Tag (
                                 title: self.feast.season.title,
-                                colors: self.feast.season.colors.map {
+                                colors: self.feast.season.colors.components ( separatedBy: "," ).map {
                                     Color ( word: $0 )!.opacity ( 0.5 )
                                 }
                             )

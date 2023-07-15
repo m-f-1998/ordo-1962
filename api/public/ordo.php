@@ -3,7 +3,7 @@
   header ( 'Content-Type: application/json; charset=utf-8' );
 
   require __DIR__.'/vendor/autoload.php';
-  require_once  __DIR__ . '/db-functions.php';
+  require_once  __DIR__ . '/db/functions.php';
 
   $operations = new Functions ( );
   use Kreait\Firebase\Factory;

@@ -75,6 +75,7 @@ class API {
             }
             return try self.Decode ( data: data, type: T.self )
         } catch {
+            print ( String ( describing: error ) )
             throw ErrorAPI.saving
         }
     }
