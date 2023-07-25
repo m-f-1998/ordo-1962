@@ -15,9 +15,12 @@ struct Provider: TimelineProvider {
         await api.GetData ( )
         switch api.res {
         case .success ( let data ):
-            let json = data [ 0 ].celebration [ 0 ]
+            let json = data [ 0 ].celebrations [ 0 ]
             let entry = SimpleEntry ( date: .now, feast: json, loading: false )
             return [ entry ]
+        case .failure ( let error ):
+            print ( String ( describing: error ) )
+            fatalError ( "No Data Retrieved" )
         default:
             fatalError ( "No Data Retrieved" )
         }
@@ -27,7 +30,7 @@ struct Provider: TimelineProvider {
      Provides a timeline entry representing a placeholder version of the widget.
      */
     func placeholder ( in context: Context ) -> SimpleEntry {
-        SimpleEntry ( date: .now, feast: FeastData ( title: "", rank: 1, colors: "r" ), loading: true )
+        SimpleEntry ( date: .now, feast: FeastData ( id: UUID().uuidString, title: "", rank: 1, colors: "r", options: "", commemorations: [] ), loading: true )
     }
 
     /*

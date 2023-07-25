@@ -56,7 +56,7 @@ extension Color {
         case "g":
             self = .green
         case "v":
-            self = Color ( red: 1.43, green: 0, blue: 2.55 )
+            self = .purple
         case "p":
             self = Color ( red: 2.55, green: 0, blue: 1.27 )
         default:
@@ -79,14 +79,10 @@ let DUMMY_ORDO: OrdoData = Calendar.current.monthSymbols.reduce ( into: OrdoData
         CelebrationData.init (
             id: UUID ( ).uuidString,
             date: FormatDate ( ).string ( from: .now ),
-            celebration: [
-                FeastData.init ( title: "", rank: 1, colors: "g" )
+            celebrations: [
+                FeastData.init ( id: UUID().uuidString, title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", commemorations: [] )
             ],
-            commemoration: [
-                FeastData.init ( title: "", rank: 1, colors: "g" )
-            ],
-            season: SeasonData ( title: "", colors: "g" ),
-            options: ""
+            season: SeasonData ( title: "Dummy Season", colors: "g" )
         )
     ]
 }

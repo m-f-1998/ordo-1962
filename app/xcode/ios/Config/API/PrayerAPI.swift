@@ -11,7 +11,11 @@ import FirebaseAuth
 class PrayerAPI: ObservableObject {
     private let file: String = "prayer.data", url = "prayers.php"
     @Published private ( set ) var res: ResultAPI <PrayerCategoryData> = .loading ( [ : ] as PrayerCategoryData )
-    private var api: API = API ( )
+    private var api: API
+    
+    init ( config: FirebaseConfig ) {
+        self.api = API ( config: config )
+    }
 
     // Update The Status Of The Sheet Containing Prayers
     func Update ( ignore_cache: Bool = false, lang: String ) async {

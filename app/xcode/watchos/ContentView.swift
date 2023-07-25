@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct Ordo: View {
-    let ordo: [ ReducedCelebrationData ]
+    let ordo: [ CelebrationData ]
 
     var body: some View {
         List ( self.ordo, id: \.self ) { feast in
             VStack ( alignment: .leading, spacing: 3 ) {
                 Text ( feast.date ).bold ( )
-                Text ( feast.celebration [ 0 ].title )
-                Text ( "Class \(feast.celebration [ 0 ].rank)" )
-                    .italic ( )
-                    .font ( .system ( size: 14 ) )
+                ForEach ( feast.celebrations, id: \.id ) { celebration in
+                    Text ( celebration.title )
+                    Text ( "Class \(celebration.rank)" )
+                        .italic ( )
+                        .font ( .system ( size: 14 ) )
+                }
             }
                 .frame ( maxHeight: .infinity )
                 .padding ( )

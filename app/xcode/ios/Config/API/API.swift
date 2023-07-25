@@ -10,18 +10,26 @@ import FirebaseAuth
 
 class API {
     private let manager: FileManager = FileManager.default
-    private let config: FirebaseConfig = FirebaseConfig ( )
+    private let config: FirebaseConfig
     @ObservedObject private var net: NetworkMonitor = NetworkMonitor ( )
+    
+    init ( config: FirebaseConfig ) {
+        self.config = config
+    }
 
     // Get Data From Local Device Or From API
     func GetData <T:Decodable> ( ignore_cache: Bool = false, just_cache: Bool = false, new_year: Bool = false, wait: Bool, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
         do {
-            if !ignore_cache && UseCache ( is_new_year: new_year, only_cache: just_cache ) {
+            if false && !ignore_cache && UseCache ( is_new_year: new_year, only_cache: just_cache ) {
                 if ( wait ) {
                     try await Task.sleep ( nanoseconds: UInt64 ( 1 * Double ( NSEC_PER_SEC ) ) )
                 }
                 if self.CacheExists ( name: file ) {
-                    return try .success ( self.Decode ( data: Data ( contentsOf: self.GetURL ( file_name: file ) ), type: type.self ) )
+                    do {
+                        return try .success ( self.Decode ( data: Data ( contentsOf: self.GetURL ( file_name: file ) ), type: type.self ) )
+                    } catch {
+                        try self.manager.removeItem ( atPath: self.GetURL ( file_name: file ).path )
+                    }
                 }
             }
             if !just_cache && self.net.connected {
@@ -75,7 +83,6 @@ class API {
             }
             return try self.Decode ( data: data, type: T.self )
         } catch {
-            print ( String ( describing: error ) )
             throw ErrorAPI.saving
         }
     }

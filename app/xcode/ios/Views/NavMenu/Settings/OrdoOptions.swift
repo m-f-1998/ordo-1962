@@ -13,7 +13,7 @@ struct Options: View {
     @Binding var selected: String
 
     var body: some View {
-        Picker ( title, selection: $selected ) {
+        Picker ( selection: $selected, label: Text ( title ) ) {
             ForEach ( self.data, id: \.self ) {
                 Text ( $0 )
             }
@@ -24,6 +24,7 @@ struct Options: View {
 
 struct OrdoOptions: View {
     @EnvironmentObject var ordo: OrdoAPI
+    @EnvironmentObject var propers: PropersAPI
 
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
     @Binding var settings_open: Bool
@@ -47,6 +48,7 @@ struct OrdoOptions: View {
                             }
                             ordo.SetLoading ( )
                             self.settings_open = false
+                            await propers.Update ( ignore_cache: true )
                             await ordo.Update ( ignore_cache: true )
                         }
                     }

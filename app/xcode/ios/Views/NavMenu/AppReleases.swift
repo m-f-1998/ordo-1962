@@ -14,52 +14,39 @@ private struct DataParagraphs: View {
     var body: some View {
         VStack ( alignment: .leading, spacing: 10 ) {
             Text ( self.subtitle )
-                .font ( .title3 )
-            VStack ( alignment: .leading, spacing: 10 ) {
-                ForEach ( self.points.map ( { "•\t\($0)" } ), id: \.self) { data in
-                    Text ( data )
-                        .scaledFont ( size: 15 )
-                }
-            }.padding ( [ .leading ], 20 )
-        }.padding ( [ .leading ], 20 )
+                .font ( .title )
+                .bold ( )
+            VStack ( alignment: .leading ) {
+                Text ( self.points.map ( { "\t•\t\($0)" } ).joined ( separator: "\n" ) )
+                    .font ( .system ( size: 17, design: .monospaced ) )
+                    .lineSpacing ( 10 )
+            }
+        }.padding ( [ .trailing, .leading, .bottom ], 20 )
     }
 }
 
 // Display Information Related To App Releases
 struct AppReleases: View {
-    @Binding var open_tab: Bool
-
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack ( alignment: .leading, spacing: 20 ) {
-                Text ( "Release Information" ).font ( .title )
                 DataParagraphs ( subtitle: "v1.0", points: [
-                    "Ordo Implementation",
-                    "Lock Screen Widgets",
-                    "Home Screen Widgets",
-                    "Basic Prayers",
-                    "Options Information for Feasts",
-                    "Changeable Years",
+                    "Liturgical Ordo",
+                    "watchOS & Widget Support",
+                    "Prayers",
                     "Propers of the Mass"
                 ] )
-                DataParagraphs ( subtitle: "Future Updates", points: [
-                    "Android Implementation",
-                    "Localization Suport",
+                DataParagraphs ( subtitle: "Upcoming Features", points: [
+                    "Localization",
                     "Votive Masses",
-                    "An Increased Quantity of Prayers",
-                    "A Wider Variety of Languages"
+                    "More Prayers",
+                    "Languages Options"
                 ] )
                 Text ( "†JMJ†" )
                     .frame ( maxWidth: .infinity, alignment: .center )
                     .italic ( )
             }
-                .frame ( maxHeight: .infinity, alignment: .topLeading )
-                .padding ( )
-                .navigationBarItems ( trailing: Button {
-                    self.open_tab = false
-                } label: {
-                    Text ( "Done" ).bold ( )
-                } )
+                .navigationTitle ( "App Updates" )
         }
     }
 }

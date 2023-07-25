@@ -10,7 +10,11 @@ import Foundation
 class PropersAPI: ObservableObject {
     private let file: String = "propers.data", url = "propers.php"
     @Published private ( set ) var res: ResultAPI <PropersData> = .loading ( [ : ] )
-    private var api: API = API ( )
+    private var api: API
+    
+    init ( config: FirebaseConfig ) {
+        self.api = API ( config: config )
+    }
 
     // Update The Status Of The Ordo Calendar Data
     func Update ( ignore_cache: Bool = false ) async {
@@ -27,4 +31,5 @@ class PropersAPI: ObservableObject {
     func SetLoading ( ) {
         res = .loading ( [ : ] )
     }
+
 }

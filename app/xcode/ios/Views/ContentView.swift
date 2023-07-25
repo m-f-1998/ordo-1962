@@ -12,15 +12,22 @@ struct ContentView: View {
     private let config: FirebaseConfig = FirebaseConfig ( )
 
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
-    @ObservedObject var ordo: OrdoAPI = OrdoAPI ( )
-    @ObservedObject var prayers: PrayerAPI = PrayerAPI ( )
-    @ObservedObject var propers: PropersAPI = PropersAPI ( )
+    @ObservedObject var ordo: OrdoAPI
+    @ObservedObject var prayers: PrayerAPI
+    @ObservedObject var propers: PropersAPI
+    
+    @State var search_text: String = ""
 
     init ( ) {
+        self.ordo = OrdoAPI ( config: self.config )
+        self.prayers = PrayerAPI ( config: self.config )
+        self.propers = PropersAPI ( config: self.config )
+        
         UserDefaults.standard.set ( CurrentYear ( ), forKey: "year" )
         if UserDefaults.standard.string ( forKey: "prayers-lang" ) == nil {
             UserDefaults.standard.set ( "English", forKey: "prayers-lang" )
         }
+
     }
 
     var body: some View {
@@ -28,8 +35,8 @@ struct ContentView: View {
             switch ordo.res {
             case .failure ( let error ):
                 ErrorView ( description: error )
-            case .loading ( let data ), .success ( let data ):
-                Ordo ( data: data )
+            case .loading ( _ ), .success ( _ ):
+                Ordo ( data: ordo.GetResult ( search: search_text ), search_text: $search_text )
                 if ( !self.net.connected ) {
                     VStack ( alignment: .center ) {
                         Text ( "No Internet Connection" )
@@ -47,6 +54,13 @@ struct ContentView: View {
             .environmentObject ( propers )
             .task {
                 await ordo.Update ( )
+            }
+            .onChange ( of: net.connected ) { change in
+                Task {
+                    if ( !change && UserDefaults.standard.string ( forKey: "year" )! != CurrentYear ( ) ) {
+                        await ordo.BackToCurrentYear ( )
+                    }
+                }
             }
             .onReceive ( NotificationCenter.default.publisher ( for: UIApplication.didBecomeActiveNotification ) ) { _ in
                 UIApplication.shared.applicationIconBadgeNumber = 0

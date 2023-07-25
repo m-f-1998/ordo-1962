@@ -21,7 +21,7 @@ struct ToolBarButton<Content: View>: View {
         }.sheet ( isPresented: $showing_sheet ) {
             content ( $showing_sheet )
         }
-            .frame ( width: 44, height: 44 )
+            .frame ( maxWidth: .infinity )
     }
 }
 
@@ -33,34 +33,28 @@ struct ToolBar: View { // The top navigation bar with settings buttons
 
     var body: some View {
         if case .success = ordo.res {
-            HStack {
-                ToolBarButton ( image: "book" ) { _ in
-                    Prayer ( )
-                }
-                Divider ( )
-                if ( year == CurrentYear ( ) ) {
-                    Button {
-//                        withAnimation {
-                            proxy.scrollTo ( data [ CurrentMonth ( ) ]! [ CurrentDay ( ) - 1 ].id, anchor: .top )
-//                        }
-                    } label: {
-                        HStack {
-                            Image ( systemName: "arrow.up.arrow.down" )
-                            Text ( "Go To Today" )
-                                .scaledFont ( size: 14 )
+            ToolBarButton ( image: "book" ) { _ in
+                Prayer ( )
+            }
+            if ( year == CurrentYear ( ) ) {
+                Button {
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            proxy.scrollTo ( data [ CurrentMonth ( ) ]! [ CurrentDay ( ) ].id, anchor: .top )
                         }
                     }
-                    Divider ( )
+                } label: {
+                    Image ( systemName: "arrow.up.arrow.down" )
+                        .frame ( width: 44, height: 44 )
                 }
-                ToolBarButton ( image: "gear" ) { sheet_showing in
-                    Settings ( open_tab: sheet_showing, proxy: proxy )
-                }
-                Divider ( )
-                ToolBarButton ( image: "info.circle" ) { _ in
-                    AppReleases ( )
-                }
+                .frame ( maxWidth: .infinity )
             }
-            .frame ( maxWidth: .infinity, maxHeight: 44 )
+            ToolBarButton ( image: "gear" ) { sheet_showing in
+                Settings ( open_tab: sheet_showing, proxy: proxy )
+            }
+        }
+        ToolBarButton ( image: "info.circle" ) { _ in
+            AppReleases ( )
         }
     }
 }

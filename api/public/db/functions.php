@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 class Functions {
 
     private $conn;
@@ -29,10 +33,11 @@ class Functions {
       foreach ( $res as $month => $value ) {
 
         $days = $this->conn->execute_query (
-          "SELECT c.`date`, DATE_FORMAT(c.`date`, '%a %d') as `formatted_date`, c.`options`, s.`title` as `season_title`, s.`colors` as `season_colors`
+          "SELECT c.`date`, DATE_FORMAT(c.`date`, '%a %d') as `formatted_date`, s.`title` as `season_title`, s.`colors` as `season_colors`
             FROM `Celebrations` c
             JOIN `Season` s ON c.`season`=s.`id`
-            WHERE YEAR(c.`date`)=? AND MONTHNAME(c.`date`)=?
+            WHERE YEAR(c.`date`)=? AND MONTHNAME(c.`date`)=? 
+            GROUP BY c.`date`
             ORDER BY `c`.`date`
             ASC",
           [ $_POST [ 'year' ], $month ]
@@ -40,28 +45,36 @@ class Functions {
         
         foreach ( $days as $day ) {
 
+          $celebrations = array ( );
+
+          $celebrations_query = $this->conn->execute_query (
+            "SELECT BIN_TO_UUID(c.`id`) as `id`, f.`rank`, f.`title`, f.`colors`, c.`options`
+              FROM `Celebrations` c
+              JOIN `Feast` f ON c.`feast`=f.`id`
+              WHERE c.`date`=?",
+            [ $day [ 'date' ] ]
+          );
+
+          foreach ( $celebrations_query as $row ) {
+            $row [ "commemorations" ] = $this->conn->execute_query (
+              "SELECT BIN_TO_UUID(f.`id`) as `id`, f.`rank`, f.`title`, f.`colors`
+                FROM `Commemorations` c
+                JOIN `Feast` f ON c.`feast`=f.`id`
+                WHERE c.`celebration`=UUID_TO_BIN(?)",
+              [ $row [ 'id' ] ]
+            )->fetch_all ( MYSQLI_ASSOC );
+            
+            array_push ( $celebrations, $row );
+          }
+
           array_push ( $res [ $month ], array (
             "id" => bin2hex ( openssl_random_pseudo_bytes ( 16 ) ),
             "date" => $day [ "formatted_date" ],
-            "celebration" => $this->conn->execute_query (
-                "SELECT BIN_TO_UUID(c.`id`) as `id`, f.`rank`, f.`title`, f.`colors`
-                  FROM `Celebrations` c
-                  JOIN `Feast` f ON c.`feast`=f.`id`
-                  WHERE c.`date`=?",
-                [ $day [ 'date' ] ]
-              )->fetch_all ( MYSQLI_ASSOC ),
-            "commemoration" => $this->conn->execute_query (
-                "SELECT BIN_TO_UUID(f.`id`) as `id`, f.`rank`, f.`title`, f.`colors`
-                  FROM `Commemorations` c
-                  JOIN `Feast` f ON c.`feast`=f.`id`
-                  WHERE c.`date`=?",
-                [ $day [ 'date' ] ]
-              )->fetch_all ( MYSQLI_ASSOC ),
+            "celebrations" => $celebrations,
             "season" => array (
               "title" => $day [ "season_title" ],
               "colors" => $day [ "season_colors" ]
-            ),
-            "options" => $day [ "options" ]
+            )
           ) );
         
         }
@@ -100,7 +113,7 @@ class Functions {
         array_push ( $res, array (
           "id" => bin2hex ( openssl_random_pseudo_bytes ( 16 ) ),
           "date" => $celebration [ "date" ],
-          "celebration" => array (
+          "celebrations" => array (
             array (
               "id" => $celebration [ "id" ],
               "rank" => $celebration [ "rank" ],
@@ -159,38 +172,16 @@ class Functions {
         'September' => [], 'October' => [], 'November' => [], 'December' => []
       );
 
-      foreach ( $res as $month => $value ) {
+      for ( $month = 1; $month <= 12; $month++ ) {
 
-        $introit = $this->GetProperText ( "introit", $year, $month );
-        $collect = $this->GetProperText ( "collect", $year, $month, TRUE );
-        $epistle = $this->GetProperText ( "epistle", $year, $month, TRUE );
-        $gradual = $this->GetProperText ( "gradual", $year, $month, TRUE );
-        $gospel = $this->GetProperText ( "gospel", $year, $month, TRUE );
-        $offertory = $this->GetProperText ( "offertory", $year, $month, TRUE );
-        $secret = $this->GetProperText ( "secret", $year, $month, TRUE );
-        $preface = $this->GetProperText ( "preface", $year, $month, TRUE );
-        $communion = $this->GetProperText ( "communion", $year, $month, TRUE );
-        $postcommunion = $this->GetProperText ( "postcommunion", $year, $month, TRUE );
+        for ( $day = 1; $day <= cal_days_in_month ( CAL_GREGORIAN, $month, $year ); $day++ ) {
 
-        for ( $index = 0; $index < count ( $introit ); $index++ ) {
-
-          array_push ( $res [ $month ], array (
-            "id" => $introit [ $index ] [ "id" ],
-            "date" => $introit [ $index ] [ "date" ],
-            "introit" => array (
-              "english" => $introit [ $index ] [ "english" ],
-              "latin" => $introit [ $index ] [ "latin" ]
-            ),
-            "collect" => $collect [ $index ],
-            "epistle" => $epistle [ $index ],
-            "gradual" => $gradual [ $index ],
-            "gospel" => $gospel [ $index ],
-            "offertory" => $offertory [ $index ],
-            "secret" => $secret [ $index ],
-            "preface" => $preface [ $index ],
-            "communion" => $communion [ $index ],
-            "postcommunion" => $postcommunion [ $index ]
-          ) );
+          $id = vsprintf ( '%s%s-%s-%s-%s-%s%s%s', str_split ( bin2hex ( random_bytes ( 16 ) ), 4 ) );
+          $date =  $year . "-" . strval ( $month ) . "-" . strval ( $day );
+          
+          array_push ( $res [ array_keys ( $res ) [ $month - 1 ] ],
+            $this->GetProperText ( $id, $date )
+          );
 
         }
 
@@ -200,17 +191,37 @@ class Functions {
     
     }
 
-    private function GetProperText ( $category, $year, $month, $include_id = FALSE ) {
+    private function GetProperText ( $id, $date ) {
 
-      $optional_fields = $include_id ? "" : "BIN_TO_UUID(p.`id`) as `id`, DATE_FORMAT(p.`date`, '%a %d') as `date`, ";
-      $query = "SELECT " . $optional_fields . "pt.`english`, pt.`latin`
-        FROM `ProperText` pt
-        JOIN `Propers` p ON p.`" . $category . "`=pt.`id`
-        WHERE YEAR(p.`date`)=? AND MONTHNAME(p.`date`) = ?
-        ORDER BY p.`date`
-        ASC";
-      
-      return $this->conn->execute_query ( $query, [ $year, $month ] )->fetch_all ( MYSQLI_ASSOC );
+      $query = "SELECT pt.`category`, pt.`english`, pt.`latin`
+      FROM `ProperText` pt, `Propers` p
+        WHERE p.`date`=? AND (
+              p.`introit`=pt.`id`
+              OR p.`collect`=pt.`id`
+              OR p.`collect`=pt.`id`
+              OR p.`epistle`=pt.`id`
+              OR p.`gradual`=pt.`id`
+              OR p.`gospel`=pt.`id`
+              OR p.`offertory`=pt.`id`
+              OR p.`secret`=pt.`id`
+              OR p.`preface`=pt.`id`
+              OR p.`communion`=pt.`id`
+              OR p.`postcommunion`=pt.`id`
+          )";
+      $res = $this->conn->execute_query ( $query, [ $date ] )->fetch_all ( MYSQLI_ASSOC );
+
+      $column = array_column ( $res, 'category' );
+      array_walk ( $res, function ( &$v ) {
+        unset ( $v [ 'category' ] );
+      } );
+      $result = array_combine ( $column, $res );
+
+      return array_merge ( 
+        array (
+          "id" => $id,
+          "date" => date ( 'D d', strtotime ( $date ) )
+        ), $result
+      );
 
     }
 

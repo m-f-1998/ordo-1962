@@ -10,40 +10,26 @@ import SwiftUI
 struct PrayerView: View {
     var text: String
     var title: String
-    @Binding var open_tab: Bool
+    var top_padding: Bool = true
     @State var show_latin: Bool = false
     
     var body: some View {
-        VStack ( spacing: 0 ) {
-            Text ( title )
-                .font ( .title2 )
-                .bold ( )
-                .multilineTextAlignment ( .center )
-                .frame ( maxWidth: .infinity )
-                .padding ( [ .bottom, .top ], 20 )
-                .padding ( [ .trailing, .leading ], 20 )
-                .background ( LinearGradient ( ).overlay ( .ultraThinMaterial ) )
-            
-            GeometryReader { proxy in
-                VStack {
-                    ScrollView ( .vertical, showsIndicators: false ) {
-                        Text ( try! AttributedString ( markdown: text, options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace ) ) )
-                            .bold ( )
-                            .lineSpacing ( 10 )
-                            .frame ( maxWidth: .infinity, minHeight: proxy.size.height )
-                            .font ( .system ( .body, design: .monospaced ) )
-                            .padding ( [ .top, .bottom ], 20 )
-                    }
-                }
-                    .padding ( [ .leading, .trailing ], 20 )
-                    .multilineTextAlignment ( .center )
+        GeometryReader { proxy in
+            ScrollView ( .vertical, showsIndicators: false ) {
+                Text ( try! AttributedString ( markdown: text, options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace ) ) )
+                    .bold ( )
+                    .lineSpacing ( 10 )
+                    .frame ( minHeight: proxy.size.height )
+                    .font ( .system ( .body, design: .monospaced ) )
+                    .padding ( [ .leading, .trailing, .top ], 20 )
             }
+                .multilineTextAlignment ( .center )
         }
+        .navigationBarTitleDisplayMode ( .inline )
     }
 }
 
 struct Prayer: View {
-    @Binding var open_tab: Bool
     @EnvironmentObject var prayers: PrayerAPI
     
     var languages: [ String ] = [ "English", "Latin" ]
@@ -51,46 +37,56 @@ struct Prayer: View {
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
 
     var body: some View {
-        NavigationView {
-            VStack {
-                if case let .success ( res ) = prayers.res {
-                    if ( net.connected ) {
-                        Options ( data: self.languages, title: "Prayer Language", selected: self.$lang )
-                            .onChange ( of: lang ) { change in
-                                prayers.SetLoading ( )
-                                UserDefaults.standard.set ( change, forKey: "prayers-lang" )
-                                Task {
-                                    await prayers.Update ( ignore_cache: true, lang: change )
-                                }
-                            }
-                    }
+        VStack {
+            if case let .failure ( res ) = prayers.res {
+                VStack ( alignment: .center ) {
+                    Text ( res )
+                        .multilineTextAlignment ( .center )
+                        .padding ( )
+                }
+            } else {
+                NavigationStack {
                     List {
-                        ForEach ( Array ( res.keys ).sorted ( by: < ), id: \.self ) { category in
-                            Section ( header: Text ( category ) ) {
-                                ForEach ( Array ( ( res [ category ]! as PrayerData ).keys ).sorted ( by: < ), id: \.self ) { index in
-                                    NavigationLink ( destination: PrayerView ( text: ( res [ category ]! as PrayerData ) [ index ]!, title: index, open_tab: $open_tab ) ) {
-                                        Text ( index )
+                        if case let .success ( res ) = prayers.res {
+                            ForEach ( Array ( res.keys ).sorted ( by: < ), id: \.self ) { category in
+                                Section ( header: Text ( category ) ) {
+                                    ForEach ( Array ( ( res [ category ]! as PrayerData ).keys ).sorted ( by: < ), id: \.self ) { index in
+                                        NavigationLink ( destination: PrayerView ( text: ( res [ category ]! as PrayerData ) [ index ]!, title: index, top_padding: false ) ) {
+                                            Text ( index )
+                                        }
                                     }
                                 }
                             }
+                        } else if case .loading = prayers.res {
+                            HStack ( alignment: .center, spacing: 10 ) {
+                                Text ( "Loading..." )
+                            }
                         }
                     }
-                } else if case let .failure ( res ) = prayers.res {
-                    VStack ( alignment: .center ) {
-                        Text ( res )
-                            .multilineTextAlignment ( .center )
-                            .padding ( )
+                    .navigationTitle ( "Prayers" )
+                    .toolbar {
+                        if ( net.connected ) {
+                            Menu ( content: {
+                                Options ( data: self.languages, title: "Prayer Language", selected: self.$lang )
+                                    .onChange ( of: lang ) { change in
+                                        prayers.SetLoading ( )
+                                        UserDefaults.standard.set ( change, forKey: "prayers-lang" )
+                                        Task {
+                                            await prayers.Update ( ignore_cache: true, lang: change )
+                                        }
+                                    }
+                            }, label: { Label ( "Prayer Language", systemImage: "character.bubble" ) } )
+                        }
                     }
-                } else if case .loading = prayers.res {
-                    ProgressView ( )
+                    .frame ( maxWidth: .infinity )
+                    .safeAreaInset ( edge: .top ) {
+                        EmptyView ( ).frame ( height: 13 )
+                    }
                 }
-            }.navigationBarItems ( trailing: Button {
-                self.open_tab = false
-            } label: {
-                Text ( "Done" ).bold ( )
-            } )
-        }.task {
-            await prayers.Update ( lang: self.lang )
+            }
         }
+            .task {
+                await prayers.Update ( lang: self.lang )
+            }
     }
 }

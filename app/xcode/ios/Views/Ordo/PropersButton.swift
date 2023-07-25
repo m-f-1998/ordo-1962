@@ -30,16 +30,22 @@ struct PropersButton: View {
                 .bold ( )
         }
             .sheet ( isPresented: $showing_sheet ) {
-                VStack ( spacing: 0 ) {
-                    Options ( data: self.languages, title: "Prayer Language", selected: self.$lang )
-                        .frame ( maxWidth: .infinity )
-                        .padding ( [ .top, .bottom ], 10 )
-                        .background ( LinearGradient ( ) )
-                    switch self.lang {
-                    case "English":
-                        PrayerView ( text: self.content.english, title: self.title, open_tab: self.$showing_sheet )
-                    default:
-                        PrayerView ( text: self.content.latin, title: self.title, open_tab: self.$showing_sheet )
+                NavigationStack {
+                    VStack {
+                        switch self.lang {
+                            case "English":
+                                PrayerView ( text: self.content.english, title: self.title )
+                            default:
+                                PrayerView ( text: self.content.latin, title: self.title )
+                        }
+                    }
+                    .navigationTitle ( self.title )
+                    .toolbar {
+                        Menu ( content: {
+                            Options ( data: self.languages, title: "Propers Language", selected: self.$lang )
+                                .frame ( maxWidth: .infinity )
+                                .padding ( [ .top, .bottom ], 10 )
+                        }, label: { Label ( "Propers Language", systemImage: "character.bubble" ) } )
                     }
                 }
             }
