@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Send An Email In Default Mail Application
 struct Mail: View {
     @Binding var settings_open: Bool
 
@@ -21,8 +22,7 @@ struct Mail: View {
         }
     }
     
-    // Send An Email In Default Mail Application
-    func mail ( ) {
+    private func mail ( ) {
         let to = "ordo62@matthewfrankland.co.uk", subject = "Customer Feedback - 1962 Liturgical Ordo".addingPercentEncoding ( withAllowedCharacters: .urlQueryAllowed )
         guard let url = URL ( string: "mailto:\(to)?subject=\(subject ?? "")" ) else {
             fatalError ( "URL Invalid" )

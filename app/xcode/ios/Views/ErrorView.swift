@@ -1,5 +1,5 @@
 //
-//  ErrorView.swift
+//  Error.swift
 //  ordo-1962
 //
 //  Created by Matthew Frankland on 19/04/2023.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct ErrorView: View {
+struct Error: View {
     let description: String
     @EnvironmentObject var ordo: OrdoAPI
 
     var body: some View {
         VStack ( alignment: .center ) {
-            Text ( description )
+            Text ( self.description )
                 .multilineTextAlignment ( .center )
                 .padding ( )
             Button ( action: {

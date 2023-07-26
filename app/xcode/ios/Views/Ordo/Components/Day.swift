@@ -7,15 +7,13 @@
 
 import SwiftUI
 
-struct Day: View { // Text (of the date) displayed in a circle clip shape
-    let date: String
-    let month: Substring
-    let day: String
-    
+struct Day: View {
+    let day, date, month: String
+
     init ( date: String, month: String ) {
         let date_split = date.components ( separatedBy: " " )
         self.date = date_split [ 1 ]
-        self.month = month.prefix ( 3 )
+        self.month = String ( month.prefix ( 3 ) )
         self.day = date_split [ 0 ]
     }
 
@@ -27,11 +25,10 @@ struct Day: View { // Text (of the date) displayed in a circle clip shape
                 .bold ( )
             Text ( self.month )
         }
-            .frame ( maxWidth: 60, maxHeight: .infinity, alignment: .center )
+            .frame ( maxWidth: 60, maxHeight: .infinity )
             .font ( .system ( size: 14 ) )
             .multilineTextAlignment( .center )
             .background ( LinearGradient ( ) )
             .clipShape ( RoundedRectangle ( cornerRadius: 8 ) )
-
     }
 }

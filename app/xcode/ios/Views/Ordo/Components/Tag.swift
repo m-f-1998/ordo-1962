@@ -7,20 +7,21 @@
 
 import SwiftUI
 
-struct Tag: View { // A capsule shape, used as a tag element on screen
+struct Tag: View {
     var title: String
     var colors: [ Color ]
 
     var body: some View {
         Text ( self.title )
             .font ( .system ( size: 12 ) )
-            .padding ( 6 )
             .bold ( )
+            .padding ( 5 )
             .background ( LinearGradient ( colors: self.colors ) )
-            .clipShape ( Capsule ( ) )
-            .overlay ( Capsule ( )
-                .stroke ( lineWidth: 1 )
-                .foregroundColor ( .black )
+            .cornerRadius ( 7 )
+            .overlay (
+                RoundedRectangle ( cornerRadius: 7 )
+                    .stroke ( .black, lineWidth: 1 )
+                    .padding ( [ .top, .bottom ], 0.5 )
             )
     }
 }

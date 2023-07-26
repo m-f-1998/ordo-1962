@@ -20,7 +20,7 @@ struct PropersButton: View {
         } label: {
             Text ( self.title )
                 .padding ( )
-                .frame ( maxWidth: .infinity )
+//                .frame ( maxWidth: .infinity )
                 .background ( LinearGradient ( ) )
                 .clipShape ( Rectangle ( ) )
                 .scaledFont ( size: 14 )
@@ -34,15 +34,15 @@ struct PropersButton: View {
                     VStack {
                         switch self.lang {
                             case "English":
-                                PrayerView ( text: self.content.english, title: self.title )
+                                TextDisplay ( text: self.content.english )
                             default:
-                                PrayerView ( text: self.content.latin, title: self.title )
+                                TextDisplay ( text: self.content.latin )
                         }
                     }
                     .navigationTitle ( self.title )
                     .toolbar {
                         Menu ( content: {
-                            Options ( data: self.languages, title: "Propers Language", selected: self.$lang )
+                            CustomPicker ( data: self.languages, title: "Propers Language", selected: self.$lang )
                                 .frame ( maxWidth: .infinity )
                                 .padding ( [ .top, .bottom ], 10 )
                         }, label: { Label ( "Propers Language", systemImage: "character.bubble" ) } )

@@ -17,14 +17,15 @@ enum iCalResult {
 }
 
 struct DeviceCalendar: View {
+    var store: EKEventStore = EKEventStore ( )
+    
+    @EnvironmentObject var ordo: OrdoAPI
+    @EnvironmentObject var net: NetworkMonitor
+    
+    @State var permissions: Bool = false
     @Binding var ical_success: Bool
     @Binding var ical_loading: Bool
     @Binding var save_ical_res: iCalResult
-
-    @State var permissions: Bool = false
-    var store: EKEventStore = EKEventStore ( )
-    @EnvironmentObject var ordo: OrdoAPI
-    @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
 
     var title: String = "Liturgical Ordo (1962)"
 

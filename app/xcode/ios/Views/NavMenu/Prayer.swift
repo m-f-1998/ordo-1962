@@ -7,34 +7,13 @@
 
 import SwiftUI
 
-struct PrayerView: View {
-    var text: String
-    var title: String
-    var top_padding: Bool = true
-    @State var show_latin: Bool = false
-    
-    var body: some View {
-        GeometryReader { proxy in
-            ScrollView ( .vertical, showsIndicators: false ) {
-                Text ( try! AttributedString ( markdown: text, options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace ) ) )
-                    .bold ( )
-                    .lineSpacing ( 10 )
-                    .frame ( minHeight: proxy.size.height )
-                    .font ( .system ( .body, design: .monospaced ) )
-                    .padding ( [ .leading, .trailing, .top ], 20 )
-            }
-                .multilineTextAlignment ( .center )
-        }
-        .navigationBarTitleDisplayMode ( .inline )
-    }
-}
-
+// Display The Prayer In PopUp Sheet, Change Language From Button In NavBar
 struct Prayer: View {
     @EnvironmentObject var prayers: PrayerAPI
-    
+    @EnvironmentObject var net: NetworkMonitor
+
     var languages: [ String ] = [ "English", "Latin" ]
     @State var lang: String = UserDefaults.standard.string ( forKey: "prayers-lang" )!
-    @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
 
     var body: some View {
         VStack {
@@ -48,11 +27,11 @@ struct Prayer: View {
                 NavigationStack {
                     List {
                         if case let .success ( res ) = prayers.res {
-                            ForEach ( Array ( res.keys ).sorted ( by: < ), id: \.self ) { category in
+                            ForEach ( res.keys.sorted ( by: < ), id: \.self ) { category in
                                 Section ( header: Text ( category ) ) {
-                                    ForEach ( Array ( ( res [ category ]! as PrayerData ).keys ).sorted ( by: < ), id: \.self ) { index in
-                                        NavigationLink ( destination: PrayerView ( text: ( res [ category ]! as PrayerData ) [ index ]!, title: index, top_padding: false ) ) {
-                                            Text ( index )
+                                    ForEach ( res [ category ]!.keys.sorted ( by: < ), id: \.self ) { prayer in
+                                        NavigationLink ( destination: TextDisplay ( text: res [ category ]! [ prayer ]! ) ) {
+                                            Text ( prayer )
                                         }
                                     }
                                 }
@@ -75,13 +54,12 @@ struct Prayer: View {
                                             await prayers.Update ( ignore_cache: true, lang: change )
                                         }
                                     }
-                            }, label: { Label ( "Prayer Language", systemImage: "character.bubble" ) } )
+                            }, label: {
+                                Label ( "Prayer Language", systemImage: "character.bubble" )
+                            } )
                         }
                     }
-                    .frame ( maxWidth: .infinity )
-                    .safeAreaInset ( edge: .top ) {
-                        EmptyView ( ).frame ( height: 13 )
-                    }
+                        .frame ( maxWidth: .infinity )
                 }
             }
         }
