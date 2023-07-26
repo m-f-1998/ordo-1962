@@ -1,5 +1,4 @@
 <?php
-
   header ( 'Content-Type: application/json; charset=utf-8' );
 
   require __DIR__.'/vendor/autoload.php';
@@ -19,7 +18,7 @@
 
       if ( ctype_alnum ( $_POST [ 'user_id' ] ) && $_POST [ 'user_id' ] !== "" ) {
 
-        $factory = ( new Factory )->withServiceAccount ( dirname ( __DIR__ ) . '/../private/ordo-1962/ordo-1962-firebase-adminsdk-fy1k4-2db9663aea.json' );
+        $factory = ( new Factory )->withServiceAccount ( dirname ( __DIR__ ) . '/../../private/ordo-1962/v1.0/ordo-1962-firebase-adminsdk-fy1k4-2db9663aea.json' );
         $auth = $factory->createAuth ( );
 
         try {
