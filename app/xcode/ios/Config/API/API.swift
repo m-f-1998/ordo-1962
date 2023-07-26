@@ -89,7 +89,7 @@ class API {
 
     // Run a URL Request To API
     private func HTTP ( url: String, request_params: [ URLQueryItem ] ) async throws -> Data {
-        guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/\(url)" ) else { throw ErrorAPI.fetching ( "URL Invalid" ) }
+        guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.0/\(url)" ) else { throw ErrorAPI.fetching ( "URL Invalid" ) }
 
         var url_request: URLRequest = URLRequest ( url: address )
         url_request.httpMethod = "POST"

@@ -71,7 +71,7 @@ class API: ObservableObject {
 
     // Run a URL Request To API
     private func HTTP ( ) async throws -> Data {
-        guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
+        guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.0/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
 
         var url_request = URLRequest ( url: address )
         url_request.httpMethod = "POST"

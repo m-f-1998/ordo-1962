@@ -21,7 +21,7 @@ struct Settings: View {
                 Options ( settings_open: self.$open_tab, proxy: proxy )
                 iCal ( res: self.$ical_res )
                 Mail ( settings_open: self.$open_tab )
-                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/support/privacy.html" )! )
+                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.0/support/privacy.html" )! )
             }
                 .navigationTitle ( "Settings" )
                 .toast ( isPresenting: .constant ( self.ical_res.state == .loading ) ) {
