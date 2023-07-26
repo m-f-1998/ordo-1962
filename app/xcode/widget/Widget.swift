@@ -18,8 +18,7 @@ struct Provider: TimelineProvider {
             let json = data [ 0 ].celebrations [ 0 ]
             let entry = SimpleEntry ( date: .now, feast: json, loading: false )
             return [ entry ]
-        case .failure ( let error ):
-            print ( String ( describing: error ) )
+        case .failure ( _ ):
             fatalError ( "No Data Retrieved" )
         default:
             fatalError ( "No Data Retrieved" )

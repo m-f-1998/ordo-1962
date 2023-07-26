@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let app_url = "itms-apps://itunes.apple.com/app/6450934181"
+    private let app_url: String = "itms-apps://itunes.apple.com/app/6450934181"
     private let config: FirebaseConfig = FirebaseConfig ( )
 
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
@@ -36,29 +36,30 @@ struct ContentView: View {
             case .failure ( let error ):
                 ErrorView ( description: error )
             case .loading ( _ ), .success ( _ ):
-                Ordo ( data: ordo.GetResult ( search: search_text ), search_text: $search_text )
+                Ordo ( search_text: self.$search_text, data: ordo.GetResult ( search: self.search_text ) )
                 if ( !self.net.connected ) {
                     VStack ( alignment: .center ) {
                         Text ( "No Internet Connection" )
                             .bold ( )
                             .foregroundColor ( .white )
                             .frame ( maxWidth: .infinity )
-                            .padding ( [ .top ], 10 )
+                            .padding ( [ .top, .bottom ], 10 )
                     }
                         .background ( .red )
                 }
             }
         }
-            .environmentObject ( ordo )
-            .environmentObject ( prayers )
-            .environmentObject ( propers )
+            .environmentObject ( self.net )
+            .environmentObject ( self.ordo )
+            .environmentObject ( self.prayers )
+            .environmentObject ( self.propers )
             .task {
-                await ordo.Update ( )
+                await self.ordo.Update ( )
             }
-            .onChange ( of: net.connected ) { change in
+            .onChange ( of: self.net.connected ) { change in
                 Task {
                     if ( !change && UserDefaults.standard.string ( forKey: "year" )! != CurrentYear ( ) ) {
-                        await ordo.BackToCurrentYear ( )
+                        await self.ordo.BackToCurrentYear ( )
                     }
                 }
             }

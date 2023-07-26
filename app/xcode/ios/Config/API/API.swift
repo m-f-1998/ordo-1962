@@ -20,7 +20,7 @@ class API {
     // Get Data From Local Device Or From API
     func GetData <T:Decodable> ( ignore_cache: Bool = false, just_cache: Bool = false, new_year: Bool = false, wait: Bool, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
         do {
-            if false && !ignore_cache && UseCache ( is_new_year: new_year, only_cache: just_cache ) {
+            if !ignore_cache && UseCache ( is_new_year: new_year, only_cache: just_cache ) {
                 if ( wait ) {
                     try await Task.sleep ( nanoseconds: UInt64 ( 1 * Double ( NSEC_PER_SEC ) ) )
                 }
@@ -76,7 +76,7 @@ class API {
     // Save a cache file which is accessible only while the device is unlocked
     private func SaveCache <T:Decodable> ( url: String, file: String, type: T.Type, url_query: [ URLQueryItem ] ) async throws -> T {
         do {
-            let year: String = UserDefaults.standard.string ( forKey: "year" ) ?? "2023"
+            let year: String = UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( )
             let data = try await self.HTTP ( url: url, request_params: url_query )
             if year == CurrentYear ( ) {
                 try data.write ( to: self.GetURL ( file_name: file ), options: .completeFileProtection )

@@ -8,34 +8,31 @@
 import SwiftUI
 import AlertToast
 
+// 1962 Ordo Settings
 struct Settings: View {
+    @State private var ical_res: iCalResult = iCalResult ( state: .not_showing )
     @Binding var open_tab: Bool
-    @State private var ical_loading: Bool = false
-    @State var save_ical_res: iCalResult = .success ( "" )
-    @State private var ical_success: Bool = false
+
     let proxy: ScrollViewProxy
 
     var body: some View {
         NavigationStack {
             List {
-                OrdoOptions ( settings_open: self.$open_tab, proxy: proxy )
-                DeviceCalendar ( ical_success: self.$ical_success, ical_loading: self.$ical_loading, save_ical_res: self.$save_ical_res )
+                Options ( settings_open: self.$open_tab, proxy: proxy )
+                iCal ( res: self.$ical_res )
                 Mail ( settings_open: self.$open_tab )
-                
                 Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/support/privacy.html" )! )
             }
-            .navigationTitle ( "Settings" )
-            .toast ( isPresenting: self.$ical_loading ) {
-                AlertToast ( type: .loading )
-            }
-            .toast ( isPresenting: self.$ical_success ) {
-                switch ( self.save_ical_res ) {
-                case .success ( let res ):
-                    return AlertToast ( type: .complete ( .green ), title: res )
-                case .failure ( let res ):
-                    return AlertToast ( type: .error ( .red ), title: res )
+                .navigationTitle ( "Settings" )
+                .toast ( isPresenting: .constant ( self.ical_res.state == .loading ) ) {
+                    return AlertToast ( type: .loading )
                 }
-            }
+                .toast ( isPresenting: .constant ( self.ical_res.state == .success ) ) {
+                    return AlertToast ( type: .complete ( .green ), title: self.ical_res.data )
+                }
+                .toast ( isPresenting: .constant ( self.ical_res.state == .failure ) ) {
+                    return AlertToast ( type: .error ( .red ), title: self.ical_res.data )
+                }
         }
     }
 }

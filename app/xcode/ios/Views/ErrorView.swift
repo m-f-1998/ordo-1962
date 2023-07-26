@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Error: View {
+struct ErrorView: View {
     let description: String
     @EnvironmentObject var ordo: OrdoAPI
 

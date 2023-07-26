@@ -12,35 +12,32 @@ enum iCalError: Error {
     case calendar, duplicate
 }
 
-enum iCalResult {
-    case success ( String ), failure ( String )
+enum iCalState {
+    case success, failure, loading, not_showing
 }
 
-struct DeviceCalendar: View {
-    var store: EKEventStore = EKEventStore ( )
-    
+struct iCalResult {
+    var data: String = ""
+    var state: iCalState
+}
+
+struct iCal: View {
     @EnvironmentObject var ordo: OrdoAPI
     @EnvironmentObject var net: NetworkMonitor
-    
-    @State var permissions: Bool = false
-    @Binding var ical_success: Bool
-    @Binding var ical_loading: Bool
-    @Binding var save_ical_res: iCalResult
+    @State private var permissions: Bool = false
+    @Binding var res: iCalResult
 
-    var title: String = "Liturgical Ordo (1962)"
+    private let title: String = "Liturgical Ordo (1962)"
+    private let store: EKEventStore = EKEventStore ( )
 
     var body: some View {
         if ( net.connected ) {
             Section {
                 Button {
-                    self.ical_loading.toggle ( )
                     Task {
-                        try await Task.sleep ( nanoseconds: UInt64 ( 1.5 * Double ( NSEC_PER_SEC ) ) )
-                        await self.ical ( ) { res in
-                            self.ical_loading.toggle ( )
-                            self.save_ical_res = res
-                            self.ical_success.toggle ( )
-                        }
+                        try await self.Loading ( )
+                        await self.GenerateCalendar ( )
+                        try await self.NotShowing ( )
                     }
                 } label: {
                     Text ( "Create \( CurrentYear ( ) ) Liturgical Ordo iCal" )
@@ -48,16 +45,36 @@ struct DeviceCalendar: View {
             } header: {
                 Text ( "Calendar" )
             }.task {
-                await self.CalendarPermissions ( )
+                await self.Permissions ( )
             }
         }
     }
+    
+    // Show Loading AlertToast Widget, Delay For n Seconds After
+    private func Loading ( seconds: Double = 2.0 ) async throws {
+        self.res = iCalResult ( state: .loading )
+        try await Task.sleep ( nanoseconds: UInt64 ( seconds * Double ( NSEC_PER_SEC ) ) )
+    }
+    
+    // Hide All AlertToast Widgets, Delay n Seconds Before Hiding
+    private func NotShowing ( seconds: Double = 2.0 ) async throws {
+        try await Task.sleep ( nanoseconds: UInt64 ( seconds * Double ( NSEC_PER_SEC ) ) )
+        self.res = iCalResult ( state: .not_showing )
+    }
+    
+    // Are Calendar Permissions Turned On?
+    private func Permissions ( ) async {
+        do {
+            self.permissions = try await self.store.requestAccess ( to: .event )
+        } catch {
+            self.permissions = false
+        }
+    }
 
-    func getEKCalendar ( title: String ) throws -> EKCalendar {
-        let identifier_exists = UserDefaults.standard.string ( forKey: "calendar_id" ) != nil
-        
-        if identifier_exists {
-            if self.store.calendar ( withIdentifier: UserDefaults.standard.string ( forKey: "calendar_id" )! ) != nil {
+    // Get The EKCalendar Object, Check If Duplicates Exist
+    private func GetCalendar ( title: String ) throws -> EKCalendar {
+        if let id = UserDefaults.standard.string ( forKey: "calendar_id" ) {
+            if self.store.calendar ( withIdentifier: id ) != nil {
                 throw iCalError.duplicate
             }
             UserDefaults.standard.removeObject ( forKey: "calendar_id" )
@@ -66,6 +83,7 @@ struct DeviceCalendar: View {
         let calendar = EKCalendar ( for: .event, eventStore: self.store )
         calendar.title = title
         calendar.source = self.store.defaultCalendarForNewEvents!.source
+        
         do {
             try self.store.saveCalendar ( calendar, commit: true )
         } catch {
@@ -76,20 +94,13 @@ struct DeviceCalendar: View {
         return calendar
     }
     
-    func CalendarPermissions ( ) async {
-        do {
-            self.permissions = try await self.store.requestAccess ( to: .event )
-        } catch {
-            self.permissions = false
-        }
-
-    }
-    
-    func ical ( completion: @escaping ( ( iCalResult ) -> Void ) ) async {
+    // Generate Calendar
+    func GenerateCalendar ( ) async {
         if ( self.permissions ) {
             do {
-                let calendar = try getEKCalendar ( title: self.title )
-                let data = await self.ordo.GetCache ( )
+                let calendar = try GetCalendar ( title: self.title )
+                let data: ResultAPI <OrdoData> = await self.ordo.GetCache ( )
+                
                 if case let .success ( res ) = data {
                     for month in Calendar.current.monthSymbols {
                         for day in res [ month ]! {
@@ -111,17 +122,17 @@ struct DeviceCalendar: View {
                             }
                         }
                     }
-                    completion ( .success ( "Calendar Successfully Created" ) )
+                    self.res = iCalResult ( data: "iCal Successfully Created", state: .success )
                 } else if case let .failure ( error ) = data {
-                    completion ( .failure ( error ) )
+                    self.res = iCalResult ( data: error, state: .failure )
                 }
             } catch iCalError.duplicate {
-                completion ( .failure ( "Calendar Already Exists" ) )
+                self.res = iCalResult ( data: "iCal Already Exists", state: .failure )
             } catch {
-                completion ( .failure ( "1962 Liturgical Ordo could not be Saved" ) )
+                self.res = iCalResult ( data: "iCal Could Not Be Saved", state: .failure )
             }
         } else {
-            completion ( .failure ( "Permissions Failed" ) )
+            self.res = iCalResult ( data: "Calendar Permissions Failed", state: .failure )
         }
     }
 }

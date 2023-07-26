@@ -14,11 +14,11 @@ class NetworkMonitor: ObservableObject {
     @Published var connected: Bool = true
 
     init ( ) {
-        monitor.pathUpdateHandler = { path in // Monitor the network status and present a banner if not available
+        self.monitor.pathUpdateHandler = { path in // Monitor the network status, banner if not connected
             DispatchQueue.main.async {
                 self.connected = path.status == .satisfied
             }
         }
-        monitor.start ( queue: worker )
+        self.monitor.start ( queue: self.worker )
     }
 }

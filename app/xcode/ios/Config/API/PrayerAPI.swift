@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class PrayerAPI: ObservableObject {
     private let file: String = "prayer.data", url = "prayers.php"
-    @Published private ( set ) var res: ResultAPI <PrayerCategoryData> = .loading ( [ : ] as PrayerCategoryData )
+    @Published private ( set ) var res: ResultAPI <PrayerCategoryData> = .loading ( [ : ] )
     private var api: API
     
     init ( config: FirebaseConfig ) {
@@ -23,7 +23,7 @@ class PrayerAPI: ObservableObject {
             URLQueryItem ( name: "lang", value: lang )
         ]
 
-        let data =  await api.GetData ( ignore_cache: ignore_cache, wait: false, file: file, url: url, type: PrayerCategoryData.self, queries: queries )
+        let data =  await self.api.GetData ( ignore_cache: ignore_cache, wait: false, file: self.file, url: self.url, type: PrayerCategoryData.self, queries: queries )
         DispatchQueue.main.async { self.res = data }
     }
     

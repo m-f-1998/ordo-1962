@@ -43,7 +43,6 @@ class API: ObservableObject {
                 self.res = .failure ( message )
             }
         } catch {
-            print ( String ( describing: error ) )
             DispatchQueue.main.async {
                 self.res = .failure ( "An Unkown Error Occured" )
             }

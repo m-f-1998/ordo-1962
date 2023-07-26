@@ -39,6 +39,22 @@ func CurrentYear ( ) -> String {
     return "\( Calendar.current.component ( .year, from: .now ) )"
 }
 
+// MARK: Dummy Data
+
+// Ordo Data For When List Loading
+let DUMMY_ORDO: OrdoData = Calendar.current.monthSymbols.reduce ( into: OrdoData () ) { // Displayed in redacted format when loading
+    $0 [ $1 ] = [
+        CelebrationData.init (
+            id: UUID ( ).uuidString,
+            date: FormatDate ( ).string ( from: .now ),
+            celebrations: [
+                FeastData.init ( id: UUID().uuidString, title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", commemorations: [] )
+            ],
+            season: SeasonData ( title: "Dummy Season", colors: "g" )
+        )
+    ]
+}
+
 // Colours by Tags
 extension Color {
     init? ( word: String ) {
@@ -70,19 +86,4 @@ extension LinearGradient {
     init? ( colors: [ Color ] = [ .green.opacity ( 0.3 ), .blue.opacity ( 0.5 ) ] ) {
         self = LinearGradient ( colors: colors, startPoint: .topLeading, endPoint: .bottomTrailing )
     }
-}
-
-// MARK: Dummy Data
-
-let DUMMY_ORDO: OrdoData = Calendar.current.monthSymbols.reduce ( into: OrdoData () ) { // Displayed in redacted format when loading
-    $0 [ $1 ] = [
-        CelebrationData.init (
-            id: UUID ( ).uuidString,
-            date: FormatDate ( ).string ( from: .now ),
-            celebrations: [
-                FeastData.init ( id: UUID().uuidString, title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", commemorations: [] )
-            ],
-            season: SeasonData ( title: "Dummy Season", colors: "g" )
-        )
-    ]
 }

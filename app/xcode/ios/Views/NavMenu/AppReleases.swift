@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-private struct DataParagraphs: View {
+// Show App Release Information In Bullet Point Paragraphs
+private struct AppReleaseData: View {
     var subtitle: String
     var points: [ String ]
 
@@ -21,7 +22,8 @@ private struct DataParagraphs: View {
                     .font ( .system ( size: 17, design: .monospaced ) )
                     .lineSpacing ( 10 )
             }
-        }.padding ( [ .trailing, .leading, .bottom ], 20 )
+        }
+            .padding ( [ .trailing, .leading, .bottom ], 20 )
     }
 }
 
@@ -30,13 +32,13 @@ struct AppReleases: View {
     var body: some View {
         NavigationStack {
             VStack ( alignment: .leading, spacing: 20 ) {
-                DataParagraphs ( subtitle: "v1.0", points: [
+                AppReleaseData ( subtitle: "v1.0", points: [
                     "Liturgical Ordo",
                     "watchOS & Widget Support",
                     "Prayers",
                     "Propers of the Mass"
                 ] )
-                DataParagraphs ( subtitle: "Upcoming Features", points: [
+                AppReleaseData ( subtitle: "Upcoming Features", points: [
                     "Localization",
                     "Votive Masses",
                     "More Prayers",

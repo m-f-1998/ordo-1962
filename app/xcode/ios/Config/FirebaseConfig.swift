@@ -39,14 +39,14 @@ class FirebaseConfig { // Get configuration From Firebase
     // An Update To The Client Is Available On The App Store
     func UpdateAvailable ( ) -> Binding<Bool> {
         let current_version = Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as! String
-        return .constant ( Double ( current_version ) ?? 0.0 < latest_app_version )
+        return .constant ( Double ( current_version ) ?? 0.0 < self.latest_app_version )
     }
     
     // Data From API Is Stale - Delete Cache
     func DataStale ( ) -> Bool { // Is cached data up to date?
         let last_api_fetch = UserDefaults.standard.string ( forKey: "lastUpdate" )
         if ( last_api_fetch != nil ) {
-            return api_update_time > FormatDate ( time: true ).date ( from: last_api_fetch! )!
+            return self.api_update_time > FormatDate ( time: true ).date ( from: last_api_fetch! )!
         }
         return false
     }

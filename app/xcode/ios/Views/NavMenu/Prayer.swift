@@ -12,8 +12,11 @@ struct Prayer: View {
     @EnvironmentObject var prayers: PrayerAPI
     @EnvironmentObject var net: NetworkMonitor
 
-    var languages: [ String ] = [ "English", "Latin" ]
-    @State var lang: String = UserDefaults.standard.string ( forKey: "prayers-lang" )!
+    private var languages: [ String ] = [
+        "English",
+        "Latin"
+    ]
+    @State private  var lang: String = UserDefaults.standard.string ( forKey: "prayers-lang" )!
 
     var body: some View {
         VStack {
@@ -46,7 +49,7 @@ struct Prayer: View {
                     .toolbar {
                         if ( net.connected ) {
                             Menu ( content: {
-                                Options ( data: self.languages, title: "Prayer Language", selected: self.$lang )
+                                CustomPicker ( data: self.languages, title: "Prayer Language", selected: self.$lang )
                                     .onChange ( of: lang ) { change in
                                         prayers.SetLoading ( )
                                         UserDefaults.standard.set ( change, forKey: "prayers-lang" )

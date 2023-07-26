@@ -7,53 +7,65 @@
 
 import SwiftUI
 
-struct ToolBarButton<Content: View>: View {
+// Button Row Shown At Bottom Of Screen
+struct ToolBarButton <Content: View>: View {
+    var image: String = ""
+    var systemImage: String = ""
     @State private var showing_sheet = false
-    let image: String
     let content: ( Binding<Bool> ) -> Content
 
     var body: some View {
         Button {
             self.showing_sheet.toggle ( )
         } label: {
-            Image ( systemName: image )
-                .frame ( width: 44, height: 44 )
-        }.sheet ( isPresented: $showing_sheet ) {
-            content ( $showing_sheet )
+            if image != "" {
+                Image ( image )
+                    .resizable ( )
+                    .scaledToFit ( )
+                    .frame ( width: 22, height: 22 )
+            } else if systemImage != "" {
+                Image ( systemName: systemImage )
+            }
         }
+            .sheet ( isPresented: $showing_sheet ) {
+                content ( $showing_sheet )
+            }
             .frame ( maxWidth: .infinity )
+            .tint ( .blue )
     }
 }
 
-struct ToolBar: View { // The top navigation bar with settings buttons
-    let year: String = UserDefaults.standard.string ( forKey: "year" )! // TODO: Move To NavBar
+// ToolBar Button Row With Background
+struct ToolBar: View {
+    @EnvironmentObject var ordo: OrdoAPI
+
+    private let year: String = UserDefaults.standard.string ( forKey: "year" )!
     let data: OrdoData
     let proxy: ScrollViewProxy
-    @EnvironmentObject var ordo: OrdoAPI
+    let search: Bool
 
     var body: some View {
         if case .success = ordo.res {
-            ToolBarButton ( image: "book" ) { _ in
+            ToolBarButton ( image: "pray" ) { _ in
                 Prayer ( )
             }
-            if ( year == CurrentYear ( ) ) {
+            if ( self.year == CurrentYear ( ) && !self.search ) {
                 Button {
                     DispatchQueue.main.async {
                         withAnimation {
-                            proxy.scrollTo ( data [ CurrentMonth ( ) ]! [ CurrentDay ( ) ].id, anchor: .top )
+                            self.proxy.scrollTo ( self.data [ CurrentMonth ( ) ]! [ CurrentDay ( ) - 1 ].id, anchor: .top )
                         }
                     }
                 } label: {
                     Image ( systemName: "arrow.up.arrow.down" )
-                        .frame ( width: 44, height: 44 )
                 }
                 .frame ( maxWidth: .infinity )
             }
-            ToolBarButton ( image: "gear" ) { sheet_showing in
-                Settings ( open_tab: sheet_showing, proxy: proxy )
+            ToolBarButton ( systemImage: "gear" ) { sheet_showing in
+                Settings ( open_tab: sheet_showing, proxy: self.proxy )
             }
         }
-        ToolBarButton ( image: "info.circle" ) { _ in
+        ToolBarButton ( systemImage: "info.circle" ) { _ in
             AppReleases ( )
         }
     }

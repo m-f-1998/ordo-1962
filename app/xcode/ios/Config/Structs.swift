@@ -10,7 +10,6 @@ import Foundation
 // MARK: Propers
 
 typealias PropersData = [ String: [ FeastPropers ] ]
-
 struct FeastPropers: Codable, Hashable, Identifiable {
     let id: String
     let date: String
@@ -25,12 +24,10 @@ struct FeastPropers: Codable, Hashable, Identifiable {
     let communion: PropersLanguage?
     let postcommunion: PropersLanguage?
 }
-
 struct PropersLanguage: Codable, Hashable {
     let english: String
     let latin: String
 }
-
 
 // MARK: Prayers
 
@@ -40,19 +37,16 @@ typealias PrayerData = [ String : String ]
 // MARK: Liturgical Ordo
 
 typealias OrdoData = [ String: [ CelebrationData ] ]
-
 struct CelebrationData: Codable, Hashable, Identifiable {
     let id: String
     let date: String
     let celebrations: [ FeastData ]
     let season: SeasonData?
 }
-
 struct SeasonData: Codable, Hashable {
     let title: String
     let colors: String
 }
-
 struct FeastData: Codable, Hashable, Identifiable {
     let id: String
     let title: String

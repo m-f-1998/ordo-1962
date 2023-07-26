@@ -17,9 +17,9 @@ struct Tag: View {
             .bold ( )
             .padding ( 5 )
             .background ( LinearGradient ( colors: self.colors ) )
-            .cornerRadius ( 7 )
+            .cornerRadius ( 8 )
             .overlay (
-                RoundedRectangle ( cornerRadius: 7 )
+                RoundedRectangle ( cornerRadius: 8 )
                     .stroke ( .black, lineWidth: 1 )
                     .padding ( [ .top, .bottom ], 0.5 )
             )
