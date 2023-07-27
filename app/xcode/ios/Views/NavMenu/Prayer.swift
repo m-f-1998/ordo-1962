@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// Display The Prayer In PopUp Sheet, Change Language From Button In NavBar
 struct Prayer: View {
     @EnvironmentObject var prayers: PrayerAPI
     @EnvironmentObject var net: NetworkMonitor
@@ -40,7 +39,7 @@ struct Prayer: View {
                                 }
                             }
                         } else if case .loading = prayers.res {
-                            HStack ( alignment: .center, spacing: 10 ) {
+                            Section ( header: Text ( "" ) ) {
                                 Text ( "Loading..." )
                             }
                         }

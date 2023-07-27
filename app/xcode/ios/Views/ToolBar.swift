@@ -37,15 +37,13 @@ struct ToolBarButton <Content: View>: View {
 
 // ToolBar Button Row With Background
 struct ToolBar: View {
-    @EnvironmentObject var ordo: OrdoAPI
-
     private let year: String = UserDefaults.standard.string ( forKey: "year" )!
     let data: OrdoData
     let proxy: ScrollViewProxy
     let search: Bool
 
     var body: some View {
-        if case .success = ordo.res {
+        if self.data != DUMMY_ORDO {
             ToolBarButton ( image: "pray" ) { _ in
                 Prayer ( )
             }

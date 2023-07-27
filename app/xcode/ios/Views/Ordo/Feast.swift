@@ -10,6 +10,7 @@ import SwiftUI
 private struct FeastInfo: View {
     var title, colors: String
     var title_size: Double
+    @Environment ( \.colorScheme ) var colorScheme
 
     var body: some View {
         HStack {
@@ -18,7 +19,7 @@ private struct FeastInfo: View {
                 .scaledFont ( size: self.title_size )
                 .bold ( )
             Circle ( )
-                .strokeBorder ( .black, lineWidth: 1 )
+                .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
                 .background (
                     Circle ( )
                         .foregroundColor ( Color ( word: self.colors.components ( separatedBy: "," ) [ 0 ] ) )

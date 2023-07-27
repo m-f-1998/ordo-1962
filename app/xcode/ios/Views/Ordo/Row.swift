@@ -10,14 +10,14 @@ import SwiftUI
 struct Row: View {
     let feast: CelebrationData
     let index: Int
-    let date, month: String
+    let month: String
 
     @State private var menu_expanded: Bool = false
     @EnvironmentObject var propers: PropersAPI
 
     var body: some View {
         HStack {
-            Day ( feast_date: feast.date, month: self.month )
+            Day ( feast_date: self.feast.date, month: self.month )
             LazyVStack ( alignment: .leading ) {
                 Feast ( data: self.feast.celebrations )
                 if let season = self.feast.season {
@@ -32,18 +32,18 @@ struct Row: View {
                     }
                 }
             }
-            if case let .success ( res ) = propers.res {
+            if case let .success ( res ) = self.propers.res {
                 if res [ self.month ]! [ self.index ].introit != nil {
-                    Image ( systemName: menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
+                    Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
                         .frame ( width: 24, height: 24 )
                         .onTapGesture {
-                            menu_expanded.toggle ( )
+                            self.menu_expanded.toggle ( )
                         }
                 }
             }
         }
-        if menu_expanded {
-            if case let .success ( res ) = propers.res {
+        if self.menu_expanded {
+            if case let .success ( res ) = self.propers.res {
                 HStack {
                     VStack {
                         PropersButton ( title: "INTROIT", content: res [ self.month ]! [ self.index ].introit )
