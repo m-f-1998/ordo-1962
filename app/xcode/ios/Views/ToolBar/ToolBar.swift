@@ -43,28 +43,34 @@ struct ToolBar: View {
     let search: Bool
 
     var body: some View {
-        if self.data != DUMMY_ORDO {
-            ToolBarButton ( image: "pray" ) { _ in
-                Prayer ( )
-            }
-            if ( self.year == CurrentYear ( ) && !self.search ) {
-                Button {
-                    DispatchQueue.main.async {
-                        withAnimation {
-                            self.proxy.scrollTo ( self.data [ CurrentMonth ( ) ]! [ CurrentDay ( ) - 1 ].id, anchor: .top )
-                        }
-                    }
-                } label: {
-                    Image ( systemName: "arrow.up.arrow.down" )
+        HStack ( spacing: 30 ) {
+            if self.data != DUMMY_ORDO {
+                ToolBarButton ( image: "pray" ) { _ in
+                    Prayer ( )
                 }
-                .frame ( maxWidth: .infinity )
+                ToolBarButton ( image: "calendar" ) { _ in
+                    GoTo ( )
+                }
+//                if ( self.year == CurrentYear ( ) && !self.search ) {
+//                    Button {
+//                        DispatchQueue.main.async {
+//                            withAnimation {
+//                                self.proxy.scrollTo ( self.data [ CurrentMonth ( ) ]! [ CurrentDay ( ) - 1 ].id, anchor: .top )
+//                            }
+//                        }
+//                    } label: {
+//                        Image ( systemName: "arrow.up.arrow.down" )
+//                    }
+//                    .frame ( maxWidth: .infinity )
+//                }
+                ToolBarButton ( systemImage: "gear" ) { sheet_showing in
+                    Settings ( open_tab: sheet_showing, proxy: self.proxy )
+                }
             }
-            ToolBarButton ( systemImage: "gear" ) { sheet_showing in
-                Settings ( open_tab: sheet_showing, proxy: self.proxy )
+            ToolBarButton ( systemImage: "info.circle" ) { _ in
+                AppReleases ( )
             }
         }
-        ToolBarButton ( systemImage: "info.circle" ) { _ in
-            AppReleases ( )
-        }
+            .padding ( )
     }
 }
