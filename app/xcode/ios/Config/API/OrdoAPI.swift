@@ -30,6 +30,14 @@ class OrdoAPI: ObservableObject {
         let data = await self.api.GetData ( ignore_cache: ignore_cache, new_year: new_year, wait: true, file: self.file, url: self.url, type: OrdoData.self, queries: queries )
         DispatchQueue.main.async { self.res = data }
     }
+    
+    // Get ID Of Today's Feast
+    func GetIDToday ( ) -> String? {
+        if case let .success ( res ) = self.res {
+            return res [ CurrentMonth ( ) ]! [ CurrentDay ( ) - 1 ].id
+        }
+        return nil
+    }
 
     // Get Data, Filtered If Search
     func GetResult ( search: String = "" ) -> OrdoData {

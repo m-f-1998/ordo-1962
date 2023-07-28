@@ -48,21 +48,9 @@ struct ToolBar: View {
                 ToolBarButton ( image: "pray" ) { _ in
                     Prayer ( )
                 }
-                ToolBarButton ( image: "calendar" ) { _ in
-                    GoTo ( )
+                ToolBarButton ( systemImage: "calendar" ) { sheet_showing in
+                    GoTo ( showDatePicker: sheet_showing, data: self.data, proxy: self.proxy )
                 }
-//                if ( self.year == CurrentYear ( ) && !self.search ) {
-//                    Button {
-//                        DispatchQueue.main.async {
-//                            withAnimation {
-//                                self.proxy.scrollTo ( self.data [ CurrentMonth ( ) ]! [ CurrentDay ( ) - 1 ].id, anchor: .top )
-//                            }
-//                        }
-//                    } label: {
-//                        Image ( systemName: "arrow.up.arrow.down" )
-//                    }
-//                    .frame ( maxWidth: .infinity )
-//                }
                 ToolBarButton ( systemImage: "gear" ) { sheet_showing in
                     Settings ( open_tab: sheet_showing, proxy: self.proxy )
                 }

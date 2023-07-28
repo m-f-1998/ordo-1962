@@ -27,7 +27,7 @@ struct PropersButton: View {
                     .scaledFont ( size: 14 )
                     .cornerRadius ( 10 )
                     .lineLimit ( 1 )
-                    .minimumScaleFactor ( 0.85 )
+                    .minimumScaleFactor ( 0.8 )
                     .bold ( )
             }
                 .sheet ( isPresented: $showing_sheet ) {

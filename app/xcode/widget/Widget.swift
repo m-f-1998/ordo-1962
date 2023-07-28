@@ -16,7 +16,7 @@ struct Provider: TimelineProvider {
         switch api.res {
         case .success ( let data ):
             let json = data [ 0 ].celebrations [ 0 ]
-            let entry = SimpleEntry ( date: .now, feast: json, loading: false )
+            let entry = SimpleEntry ( date: .now, feast: json, loading: false, alternative: data [ 0 ].celebrations.count > 1 )
             return [ entry ]
         case .failure ( _ ):
             fatalError ( "No Data Retrieved" )
@@ -29,7 +29,7 @@ struct Provider: TimelineProvider {
      Provides a timeline entry representing a placeholder version of the widget.
      */
     func placeholder ( in context: Context ) -> SimpleEntry {
-        SimpleEntry ( date: .now, feast: FeastData ( id: UUID().uuidString, title: "", rank: 1, colors: "r", options: "", commemorations: [] ), loading: true )
+        SimpleEntry ( date: .now, feast: FeastData ( id: UUID().uuidString, title: "", rank: 1, colors: "r", options: "", commemorations: [] ), loading: true, alternative: false )
     }
 
     /*
@@ -55,6 +55,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
     let feast: FeastData
     let loading: Bool
+    let alternative: Bool
 }
 
 struct SystemWidget : View {
@@ -64,16 +65,20 @@ struct SystemWidget : View {
         VStack {
             Text ( entry.feast.title )
                 .padding ( [ .bottom ], 1 )
+                .font ( .system ( size: 15 ) )
                 .redacted ( reason: entry.loading ? .placeholder : [ ] )
-            Text ( "Class \(entry.feast.rank)" )
+            if ( entry.alternative ) {
+                Text ( "Alternatives Available" )
+                    .italic ( )
+                    .padding ( [ .bottom ], 1 )
+            }
+            Text ( "Class \( entry.feast.rank )" )
                 .padding ( [ .bottom ], 1 )
-                .redacted ( reason: entry.loading ? .placeholder : [ ] )
             Text ( .now, style: .date )
-                .italic ( )
         }
-            .font ( .system ( size: 16 ) )
+            .font ( .system ( size: 12 ) )
             .padding ( )
-            .frame ( maxWidth: .infinity, maxHeight: .infinity, alignment: .center )
+            .frame ( maxWidth: .infinity, maxHeight: .infinity )
             .bold ( )
             .multilineTextAlignment ( .center )
             .foregroundColor ( entry.feast.colors.components ( separatedBy: "," ) [ 0 ] == "b" ? .white : .black )
@@ -86,7 +91,7 @@ struct RectangularWidgetView : View {
 
     var body: some View {
         Text ( "\(entry.feast.title) (Class \(entry.feast.rank))" )
-            .font ( .system ( size: 16 ) )
+            .font ( .system ( size: 13 ) )
             .redacted ( reason: entry.loading ? .placeholder : [ ] )
             .multilineTextAlignment ( .center )
             .bold ( )

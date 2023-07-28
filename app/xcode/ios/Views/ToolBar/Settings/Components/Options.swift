@@ -31,6 +31,10 @@ struct Options: View {
                         UserDefaults.standard.set ( change, forKey: "year" )
                         if change != CurrentYear ( ) {
                             proxy.scrollTo ( "January", anchor: .top )
+                        } else {
+                            if let id = self.ordo.GetIDToday ( ) {
+                                proxy.scrollTo ( id, anchor: .top )
+                            }
                         }
                         
                         ordo.SetLoading ( )
