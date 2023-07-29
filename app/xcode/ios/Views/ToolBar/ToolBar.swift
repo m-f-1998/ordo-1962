@@ -52,7 +52,7 @@ struct ToolBar: View {
                     GoTo ( showDatePicker: sheet_showing, data: self.data, proxy: self.proxy )
                 }
                 ToolBarButton ( systemImage: "gear" ) { sheet_showing in
-                    Settings ( open_tab: sheet_showing, proxy: self.proxy )
+                    Settings ( open_tab: sheet_showing )
                 }
             }
             ToolBarButton ( systemImage: "info.circle" ) { _ in

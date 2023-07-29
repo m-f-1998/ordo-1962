@@ -13,12 +13,10 @@ struct Settings: View {
     @State private var ical_res: iCalResult = iCalResult ( state: .not_showing )
     @Binding var open_tab: Bool
 
-    let proxy: ScrollViewProxy
-
     var body: some View {
         NavigationStack {
             List {
-                Options ( settings_open: self.$open_tab, proxy: proxy )
+                Options ( settings_open: self.$open_tab )
                 iCal ( res: self.$ical_res )
                 Mail ( settings_open: self.$open_tab )
                 Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.0/support/privacy.html" )! )

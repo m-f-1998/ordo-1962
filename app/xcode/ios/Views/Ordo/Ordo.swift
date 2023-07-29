@@ -10,8 +10,6 @@ import SwiftUI
 struct Ordo: View {
     @EnvironmentObject var propers: PropersAPI
     @EnvironmentObject var ordo: OrdoAPI
-
-    @State private var id: Int = Calendar.current.dateComponents ( [ .month ], from: .now ).month! - 1
     @Binding var search_text: String
 
     var data: OrdoData = DUMMY_ORDO
@@ -36,13 +34,19 @@ struct Ordo: View {
                     }
                         .scrollIndicators ( .hidden )
                         .onChange ( of: self.data ) { _ in
-                            if self.search_text == "" {
-                                if let id = self.ordo.GetIDToday ( ) {
-                                    proxy.scrollTo ( id, anchor: .top )
+                            if case .success ( _ ) = self.ordo.res {
+                                if self.search_text == "" {
+                                    if self.year == CurrentYear ( ) {
+                                        if let id = self.ordo.GetIDToday ( ) {
+                                            proxy.scrollTo ( id, anchor: .top )
+                                        }
+                                    } else {
+                                        proxy.scrollTo ( "January", anchor: .top )
+                                    }
                                 }
                             }
                         }
-                        .searchable ( text: self.$search_text )
+                        .searchable ( text: self.$search_text, placement: .navigationBarDrawer(displayMode: .always) )
                         .navigationTitle ( "1962 Liturgical Ordo" )
                         .NavBarGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
                         

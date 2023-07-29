@@ -17,7 +17,6 @@ struct Options: View {
     @State private var year: String = UserDefaults.standard.string ( forKey: "year" )!
     @Binding var settings_open: Bool
 
-    let proxy: ScrollViewProxy
     private let years: [ String ] = ( Int ( CurrentYear ( ) )!...Int ( CurrentYear ( ) )! + 10 ).map { "\($0)" }
     private let locations: [ String ] = [
         "General"
@@ -27,22 +26,15 @@ struct Options: View {
         if ( self.net.connected ) {
             Section {
                 CustomPicker ( data: self.years, title: "Year", selected: self.$year )
-                    .onChange ( of: year ) { change in
+                    .onChange ( of: self.year ) { change in
                         UserDefaults.standard.set ( change, forKey: "year" )
-                        if change != CurrentYear ( ) {
-                            proxy.scrollTo ( "January", anchor: .top )
-                        } else {
-                            if let id = self.ordo.GetIDToday ( ) {
-                                proxy.scrollTo ( id, anchor: .top )
-                            }
-                        }
-                        
-                        ordo.SetLoading ( )
+
+                        self.ordo.SetLoading ( )
                         self.settings_open = false
 
                         Task {
-                            await propers.Update ( ignore_cache: true )
-                            await ordo.Update ( ignore_cache: true )
+                            await self.propers.Update ( ignore_cache: true )
+                            await self.ordo.Update ( ignore_cache: true )
                         }
                     }
                 CustomPicker ( data: self.locations, title: "Calendar", selected: self.$locale )
