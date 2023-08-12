@@ -9,26 +9,41 @@ import Foundation
 
 class OrdoAPI: ObservableObject {
     private let file: String = "ordo.data", url = "ordo.php"
-    @Published private ( set ) var res: ResultAPI <OrdoData> = .loading ( DUMMY_ORDO )
-    private var api: API
+    @Published private ( set ) var res: ResultAPI <OrdoData>!
+    private var api: API = API ( )
     
-    init ( config: FirebaseConfig ) {
-        self.api = API ( config: config )
+    init ( ) {
+        self.res = self.GetCache ( ) // Go To Loading If Cache Does Not Exist
+        if case .success ( _ ) = self.res {
+            UserDefaults.standard.set ( 2, forKey: "go-to-today" )
+        }
     }
     
     // Update The Status Of The Ordo Calendar Data
-    func Update ( ignore_cache: Bool = false ) async {
-        let now: String = FormatDate ( time: true ).string ( from: .now )
-        UserDefaults.standard.set ( now, forKey: "lastUpdate" )
+    func Update ( use_cache: Bool = true ) async {
+        if use_cache {
+            if case .success ( _ ) = self.res {
+                print ( "Ordo Data Already At Status Successful" )
+                return
+            }
+        }
+        
+        if UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( ) == CurrentYear ( ) {
+            UserDefaults.standard.set ( 3, forKey: "go-to-today" )
+        }
 
-        let new_year: Bool = CurrentDay ( ) == 1 && CurrentMonth ( ) == "January"
+        let now: String = FormatDate ( time: true ).string ( from: .now )
+        UserDefaults.standard.set ( now, forKey: "last-update" )
+        
         let queries: [ URLQueryItem ] = [
             URLQueryItem ( name: "year", value: UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( ) ),
             URLQueryItem ( name: "timezone", value: TimeZone.current.identifier )
         ]
-
-        let data = await self.api.GetData ( ignore_cache: ignore_cache, new_year: new_year, wait: true, file: self.file, url: self.url, type: OrdoData.self, queries: queries )
-        DispatchQueue.main.async { self.res = data }
+        
+        let data = await self.api.GetAPI ( file: self.file, url: self.url, type: OrdoData.self, queries: queries )
+        DispatchQueue.main.async {
+            self.res = data
+        }
     }
     
     // Get ID Of Today's Feast
@@ -54,15 +69,21 @@ class OrdoAPI: ObservableObject {
     }
     
     // Go Back To Current Year
-    func BackToCurrentYear ( ) async {
+    func BackToCurrentYear ( ) {
         UserDefaults.standard.set ( CurrentYear ( ), forKey: "year" )
-        let data: ResultAPI <OrdoData> = await self.GetCache ( )
-        DispatchQueue.main.async { self.res = data }
+        self.res = self.GetCache ( )
     }
 
     // Get Cache Data, Ignore Internet
-    func GetCache ( ) async -> ResultAPI <OrdoData> {
-        return await self.api.GetData ( just_cache: true, wait: false, file: self.file, url: self.url, type: OrdoData.self )
+    func GetCache ( ) -> ResultAPI <OrdoData> {
+        do {
+            return .success ( try self.api.GetCache ( file: self.file, type: OrdoData.self ) )
+        } catch ErrorAPI.fetching {
+            UserDefaults.standard.set ( 1, forKey: "go-to-today" )
+            return .loading ( DUMMY_ORDO )
+        } catch {
+            return .failure ( error.localizedDescription )
+        }
     }
     
     // Reset Ordo to Progress View

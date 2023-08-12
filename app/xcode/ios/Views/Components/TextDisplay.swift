@@ -18,9 +18,10 @@ struct TextDisplay: View {
                     .lineSpacing ( 10 )
                     .frame ( minHeight: proxy.size.height )
                     .font ( .system ( .body, design: .monospaced ) )
-                    .padding ( [ .leading, .trailing, .top ], 20 )
+                    .padding ( [ .leading, .trailing, .top, .bottom ], 20 )
             }
                 .multilineTextAlignment ( .center )
+                .frame ( maxWidth: .infinity )
         }
             .navigationBarTitleDisplayMode ( .inline )
     }

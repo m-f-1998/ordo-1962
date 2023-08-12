@@ -6,25 +6,43 @@
 //
 
 import Foundation
-import FirebaseAuth
 
 class PrayerAPI: ObservableObject {
     private let file: String = "prayer.data", url = "prayers.php"
-    @Published private ( set ) var res: ResultAPI <PrayerCategoryData> = .loading ( [ : ] )
-    private var api: API
+    @Published private ( set ) var res: ResultAPI <PrayerCategoryData>!
+    private var api: API = API ( )
     
-    init ( config: FirebaseConfig ) {
-        self.api = API ( config: config )
+    init ( ) {
+        self.res = self.GetCache ( )
     }
 
-    // Update The Status Of The Sheet Containing Prayers
-    func Update ( ignore_cache: Bool = false, lang: String ) async {
-        let queries = [
-            URLQueryItem ( name: "lang", value: lang )
-        ]
-
-        let data =  await self.api.GetData ( ignore_cache: ignore_cache, wait: false, file: self.file, url: self.url, type: PrayerCategoryData.self, queries: queries )
-        DispatchQueue.main.async { self.res = data }
+    // Update The Status Of The View Containing Prayers
+    func Update ( lang: String ) async {
+        switch self.res {
+        case .success ( _ ):
+            print ( "Prayer Data Already At Status Successful" )
+        default:
+            // MARK: Return Languages Together
+            let queries = [
+                URLQueryItem ( name: "lang", value: lang )
+            ]
+            
+            let data =  await self.api.GetAPI ( cache: false, file: self.file, url: self.url, type: PrayerCategoryData.self, queries: queries )
+            DispatchQueue.main.async {
+                self.res = data
+            }
+        }
+    }
+    
+    // Get Cache Data, Ignore Internet
+    func GetCache ( ) -> ResultAPI <PrayerCategoryData> {
+        do {
+            return .success ( try self.api.GetCache ( file: self.file, type: PrayerCategoryData.self ) )
+        } catch ErrorAPI.fetching {
+            return .loading ( [ : ] )
+        } catch {
+            return .failure ( error.localizedDescription )
+        }
     }
     
     // Reset to Progress View

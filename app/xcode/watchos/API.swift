@@ -17,21 +17,32 @@ enum ErrorAPI: Error {
 
 class API: ObservableObject {
     private let manager: FileManager = FileManager.default
-    @Published private ( set ) var res: ResultAPI = .loading
+    @Published private ( set ) var res: ResultAPI!
+    
+    init ( ) {
+        DispatchQueue.main.async {
+            do {
+                self.res = try self.GetCache ( )
+            } catch ErrorAPI.fetching {
+                self.res = .loading
+            } catch {
+                self.res = .failure ( error.localizedDescription )
+            }
+        }
+    }
 
-    // Get Data From Local Device Or From API
+    // Get Data From API
     func GetData ( ) async {
         do {
-            if self.CacheExists ( ) && CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" {
-                let next_month: String = Calendar.current.monthSymbols [ Calendar.current.component ( .month, from: .now ) ]
+            if false && self.CacheExists ( ) && CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" {
                 do {
-                    let ordo: OrdoData = try self.Decode ( data: Data ( contentsOf: self.GetURL ( ) ), type: OrdoData.self )
-                    let months_to_show: [ CelebrationData ] = ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
+                    let cache = try self.GetCache ( )
                     DispatchQueue.main.async {
-                        self.res = .success ( Array ( months_to_show [ CurrentDay ( ) - 1...CurrentDay ( ) + 5 ] ) )
+                        self.res = cache
+                        return
                     }
                 } catch {
-                    try self.manager.removeItem ( atPath: self.GetURL ( ).path )
+                    print ( "Cache Could Not Be Used" )
                 }
             }
             let data = try self.Decode ( data: try await self.HTTP ( ), type: [ CelebrationData ].self )
@@ -43,10 +54,26 @@ class API: ObservableObject {
                 self.res = .failure ( message )
             }
         } catch {
+            print ( error.localizedDescription )
             DispatchQueue.main.async {
-                self.res = .failure ( "An Unkown Error Occured" )
+                self.res = .failure ( "The Operation Couldn't Be Completed" )
             }
         }
+    }
+    
+    // Get Data From Local Device
+    func GetCache ( ) throws -> ResultAPI {
+        if self.CacheExists ( ) && CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" {
+            let next_month: String = Calendar.current.monthSymbols [ Calendar.current.component ( .month, from: .now ) ]
+            do {
+                let ordo: OrdoData = try self.Decode ( data: Data ( contentsOf: self.GetURL ( ) ), type: OrdoData.self )
+                let months_to_show: [ CelebrationData ] = ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
+                return .success ( Array ( months_to_show [ CurrentDay ( ) - 1...CurrentDay ( ) + 5 ] ) )
+            } catch {
+                try self.manager.removeItem ( atPath: self.GetURL ( ).path )
+            }
+        }
+        throw ErrorAPI.fetching ( "Cache Data Could Not Be Retrieved" )
     }
     
     // Cache data in document directory
@@ -71,7 +98,7 @@ class API: ObservableObject {
 
     // Run a URL Request To API
     private func HTTP ( ) async throws -> Data {
-        guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.0/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
+        guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
 
         var url_request = URLRequest ( url: address )
         url_request.httpMethod = "POST"

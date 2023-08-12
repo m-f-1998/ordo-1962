@@ -1,15 +1,16 @@
 //
-//  iOSOnlyExtensions.swift
+//  TabBarGradient.swift
 //  ordo-1962
 //
-//  Created by Matthew Frankland on 26/07/2023.
+//  Created by Matthew Frankland on 08/08/2023.
 //
 
 import SwiftUI
 
-struct NavGradient: ViewModifier {
+// Set Tab Bar (Bottom) To Linear Gradient
+struct TabGradient: ViewModifier {
     init ( from: UIColor, to: UIColor ) {
-        let appearance = UINavigationBarAppearance ( )
+        let appearance = UITabBarAppearance ( )
         appearance.backgroundColor = .clear
         
         let imageRenderer = UIGraphicsImageRenderer ( size: .init ( width: 1, height: 1 ) )
@@ -24,9 +25,8 @@ struct NavGradient: ViewModifier {
         }
         appearance.backgroundImage = gradientImage
         
-        UINavigationBar.appearance ( ).standardAppearance = appearance
-        UINavigationBar.appearance ( ).compactAppearance = appearance
-        UINavigationBar.appearance ( ).scrollEdgeAppearance = appearance
+        UITabBar.appearance ( ).standardAppearance = appearance
+        UITabBar.appearance ( ).scrollEdgeAppearance = appearance
     }
     
     func body ( content: Content ) -> some View {
@@ -36,7 +36,7 @@ struct NavGradient: ViewModifier {
 }
 
 extension View {
-    func NavBarGradient ( from: Color, to: Color ) -> some View {
-        modifier ( NavGradient ( from: UIColor ( from ), to: UIColor ( to ) ) )
+    func TabBarGradient ( from: Color, to: Color ) -> some View {
+        modifier ( TabGradient ( from: UIColor ( from ), to: UIColor ( to ) ) )
     }
 }

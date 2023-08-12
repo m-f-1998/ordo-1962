@@ -8,17 +8,29 @@
 import SwiftUI
 
 struct Ordo: View {
-    @EnvironmentObject var propers: PropersAPI
     @EnvironmentObject var ordo: OrdoAPI
+    
+    @State private var lang: String = UserDefaults.standard.string ( forKey: "propers-lang" )!
+    @State private var go_to_open: Bool = false
     @Binding var search_text: String
+    @Binding var selected_tab: Int
 
     var data: OrdoData = DUMMY_ORDO
-    var year: String? = UserDefaults.standard.string ( forKey: "year" )
+    var languages: [ String ] = [ "English", "Latin" ]
 
     var body: some View {
         ScrollViewReader { proxy in
             NavigationStack {
                 VStack ( spacing: 0 ) {
+                    HStack ( spacing: 0 ) {
+                        Text ( "Year: \(UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( ))" )
+                            .bold ( )
+                            .italic ( )
+                            .padding ( [ .top, .bottom ], 7 )
+                            .padding ( [ .leading ], 20 )
+                    }
+                        .frame ( maxWidth: .infinity, alignment: .leading )
+                        .background ( LinearGradient ( colors: [ .orange, .red ] ) )
                     List ( Calendar.current.monthSymbols, id: \.self ) { month in
                         if self.data [ month ]!.count > 0 {
                             Section ( header: Spacer ( minLength: 0 ) ) {
@@ -32,37 +44,61 @@ struct Ordo: View {
                             }
                         }
                     }
-                        .scrollIndicators ( .hidden )
-                        .onChange ( of: self.data ) { _ in
-                            if case .success ( _ ) = self.ordo.res {
-                                if self.search_text == "" {
-                                    if self.year == CurrentYear ( ) {
-                                        if let id = self.ordo.GetIDToday ( ) {
-                                            proxy.scrollTo ( id, anchor: .top )
-                                        }
-                                    } else {
-                                        proxy.scrollTo ( "January", anchor: .top )
+                    .scrollDisabled ( data == DUMMY_ORDO )
+                    .scrollIndicators ( .hidden )
+                    .navigationTitle ( "1962 Liturgical Ordo" )
+                    .toolbar {
+                        ToolbarItem ( placement: .automatic ) {
+                            HStack {
+                                Menu ( content: {
+                                    CustomPicker ( data: self.languages, title: "Propers Language", selected: self.$lang ).onChange ( of: lang ) { change in
+                                        UserDefaults.standard.set ( change, forKey: "propers-lang" )
+                                    }
+                                }, label: { Label ( "Propers Language", systemImage: "character.bubble" ) } )
+                                NavigationStack {
+                                    Button {
+                                        self.go_to_open.toggle ( )
+                                    } label: {
+                                        Image ( systemName: "calendar" )
+                                    }
+                                    .navigationDestination ( isPresented: self.$go_to_open ) {
+                                        GoTo ( data: self.data, proxy: proxy, view_open: self.$go_to_open )
                                     }
                                 }
                             }
                         }
-                        .searchable ( text: self.$search_text, placement: .navigationBarDrawer(displayMode: .always) )
-                        .navigationTitle ( "1962 Liturgical Ordo" )
-                        .NavBarGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
-                        
-                    VStack ( spacing: 0 ) {
-                        ToolBar ( data: self.data, proxy: proxy, search: self.search_text != "" )
-                        Text ( "Year: \( UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( ) )" )
-                            .font ( .system ( .caption ) )
-                            .padding ( [ .bottom ], 10 )
                     }
-                        .background ( LinearGradient ( ).overlay ( .ultraThinMaterial ) )
+                    .searchable ( text: self.$search_text, placement: .navigationBarDrawer ( displayMode: .always ) )
+                    .NavBarGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
                 }
             }
-        }
-            .task {
-                await self.propers.Update ( )
+            .onChange ( of: self.data ) { change in
+                // Required for API as On Loading State When Appears
+                self.ScrollView ( proxy: proxy, change: change )
             }
+            .onAppear {
+                // Required for Cache to Run on Load
+                self.ScrollView ( proxy: proxy, change: data, onAppear: true )
+            }
+        }
     }
-
+    
+    func ScrollView ( proxy: ScrollViewProxy, change: OrdoData, onAppear: Bool = false ) {
+        if self.selected_tab == 0 && change != DUMMY_ORDO {
+            if UserDefaults.standard.string ( forKey: "year" ) == CurrentYear ( ) {
+                let go_to_today = UserDefaults.standard.integer ( forKey: "go-to-today" )
+                if go_to_today != 1 {
+                    if let id = self.ordo.GetIDToday ( ) {
+                        let queue = go_to_today == 2 ? DispatchQueue.main : DispatchQueue.global ( qos: .default )
+                        UserDefaults.standard.set ( 1, forKey: "go-to-today" )
+                        queue.async {
+                            proxy.scrollTo ( id, anchor: .top )
+                        }
+                    }
+                }
+            } else if !onAppear {
+                proxy.scrollTo ( "January", anchor: .top )
+            }
+        }
+    }
 }

@@ -8,14 +8,15 @@
 import SwiftUI
 import FirebaseRemoteConfig
 
-class FirebaseConfig { // Get configuration From Firebase
-    private var config: RemoteConfig
+let config: FirebaseConfig = FirebaseConfig ( ) // Singelton
+
+// Get configuration From Firebase
+class FirebaseConfig {
+    private var config: RemoteConfig = RemoteConfig.remoteConfig ( )
     private var api_update_time: Date = .now // Time of last update
     private var latest_app_version: Double = 0.0 // Up-to-date app version, to notify of updates
 
     init ( ) {
-        self.config = RemoteConfig.remoteConfig ( )
-
         #if DEBUG
             /*
              A lower 'minimumFetchInterval' refreshes the cache more times per hour to allow rapid iteration of development builds. Real-time Remote Config bypass the cache when the config is updated on the server.
@@ -26,14 +27,10 @@ class FirebaseConfig { // Get configuration From Firebase
             self.config.configSettings = settings
         #endif
         
-        self.config.fetch { ( status, error ) in
-            if status == .success {
-                self.config.activate { changed, error in
-                    self.latest_app_version = self.config.configValue ( forKey: "app_version" ).numberValue.doubleValue
-                    self.api_update_time = FormatDate ( time: true ).date ( from: self.config.configValue ( forKey: "last_data_update" ).stringValue! ) ?? .now
-                }
-            }
-        }
+        self.config.fetchAndActivate ( )
+
+        self.latest_app_version = self.config.configValue ( forKey: "app_version" ).numberValue.doubleValue
+        self.api_update_time = FormatDate ( time: true ).date ( from: self.config.configValue ( forKey: "last_data_update" ).stringValue! ) ?? .now
     }
 
     // An Update To The Client Is Available On The App Store
@@ -44,7 +41,7 @@ class FirebaseConfig { // Get configuration From Firebase
     
     // Data From API Is Stale - Delete Cache
     func DataStale ( ) -> Bool { // Is cached data up to date?
-        let last_api_fetch = UserDefaults.standard.string ( forKey: "lastUpdate" )
+        let last_api_fetch = UserDefaults.standard.string ( forKey: "last-update" )
         if ( last_api_fetch != nil ) {
             return self.api_update_time > FormatDate ( time: true ).date ( from: last_api_fetch! )!
         }

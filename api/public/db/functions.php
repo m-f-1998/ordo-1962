@@ -6,7 +6,7 @@ class Functions {
 
     function __construct () {
 
-      require_once  __DIR__ . '/db.php';
+      require_once  __DIR__ . '/init.php';
       
       $db = new DB ();
       $this->conn = $db->connect ();

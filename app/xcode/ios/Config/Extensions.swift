@@ -39,14 +39,12 @@ func CurrentYear ( ) -> String {
     return "\( Calendar.current.component ( .year, from: .now ) )"
 }
 
-// MARK: Dummy Data
-
 // Ordo Data For When List Loading
 let DUMMY_ORDO: OrdoData = Calendar.current.monthSymbols.reduce ( into: OrdoData () ) { // Displayed in redacted format when loading
     $0 [ $1 ] = [
         CelebrationData.init (
             id: UUID ( ).uuidString,
-            date: FormatDate ( ).string ( from: .now ),
+            date: FormatDate ( ).string ( from: .distantPast ),
             celebrations: [
                 FeastData.init ( id: UUID().uuidString, title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", commemorations: [] )
             ],

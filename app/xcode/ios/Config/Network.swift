@@ -8,6 +8,7 @@
 import Network
 import SwiftUI
 
+// Monitor If Network Connected
 class NetworkMonitor: ObservableObject {
     private let monitor = NWPathMonitor ( )
     private let worker = DispatchQueue ( label: "NetMonitor" )

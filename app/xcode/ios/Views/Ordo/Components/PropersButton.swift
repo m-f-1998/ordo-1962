@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct PropersButton: View {
-    @State private var showing_sheet = false
+    @State private var showing_text = false
     let title: String, content: PropersLanguage?
-    
-    var languages: [ String ] = [ "English", "Latin" ]
-    @State var lang: String = "English"
+    @State var langague: String = UserDefaults.standard.string ( forKey: "propers-lang" )!
 
     var body: some View {
         if let proper = self.content {
             Button {
-                self.showing_sheet.toggle ( )
+                self.langague = UserDefaults.standard.string ( forKey: "propers-lang" )!
+                self.showing_text.toggle ( )
             } label: {
                 Text ( self.title )
                     .padding ( )
@@ -30,26 +29,17 @@ struct PropersButton: View {
                     .minimumScaleFactor ( 0.8 )
                     .bold ( )
             }
-                .sheet ( isPresented: $showing_sheet ) {
-                    NavigationStack {
-                        VStack {
-                            switch self.lang {
-                                case "English":
-                                    TextDisplay ( text: proper.english )
-                                default:
-                                    TextDisplay ( text: proper.latin )
-                            }
-                        }
-                            .navigationTitle ( self.title )
-                            .toolbar {
-                                Menu ( content: {
-                                    CustomPicker ( data: self.languages, title: "Propers Language", selected: self.$lang )
-                                        .frame ( maxWidth: .infinity )
-                                        .padding ( [ .top, .bottom ], 10 )
-                                }, label: { Label ( "Propers Language", systemImage: "character.bubble" ) } )
-                            }
+            .navigationDestination ( isPresented: $showing_text, destination: {
+                VStack {
+                    switch self.langague {
+                    case "English":
+                        TextDisplay ( text: proper.english )
+                    default:
+                        TextDisplay ( text: proper.latin )
                     }
                 }
+                    .navigationTitle ( self.title )
+            } )
         } else {
             fatalError ( "\(self.title) Did Not Appear. Content: \(self.content?.english ?? "Unknown")" )
         }

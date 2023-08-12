@@ -15,16 +15,12 @@ struct Prayer: View {
         "English",
         "Latin"
     ]
-    @State private  var lang: String = UserDefaults.standard.string ( forKey: "prayers-lang" )!
+    @State private var lang: String = UserDefaults.standard.string ( forKey: "prayers-lang" )!
 
     var body: some View {
         VStack {
             if case let .failure ( res ) = prayers.res {
-                VStack ( alignment: .center ) {
-                    Text ( res )
-                        .multilineTextAlignment ( .center )
-                        .padding ( )
-                }
+                Text ( res )
             } else {
                 NavigationStack {
                     List {
@@ -44,7 +40,7 @@ struct Prayer: View {
                             }
                         }
                     }
-                    .navigationTitle ( "Prayers" )
+                    .navigationTitle ( "Prayer" )
                     .toolbar {
                         if ( net.connected ) {
                             Menu ( content: {
@@ -53,7 +49,7 @@ struct Prayer: View {
                                         prayers.SetLoading ( )
                                         UserDefaults.standard.set ( change, forKey: "prayers-lang" )
                                         Task {
-                                            await prayers.Update ( ignore_cache: true, lang: change )
+                                            await prayers.Update ( lang: change )
                                         }
                                     }
                             }, label: {
@@ -65,8 +61,5 @@ struct Prayer: View {
                 }
             }
         }
-            .task {
-                await prayers.Update ( lang: self.lang )
-            }
     }
 }

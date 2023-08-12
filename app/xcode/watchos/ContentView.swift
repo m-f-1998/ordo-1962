@@ -57,6 +57,8 @@ struct ContentView: View {
                 ErrorView ( error: desc, api: api )
             case .loading:
                 ProgressView ( )
+            case .none:
+                ErrorView ( error: "An Unkown Error Occured", api: api )
             }
         }
         .padding ( )

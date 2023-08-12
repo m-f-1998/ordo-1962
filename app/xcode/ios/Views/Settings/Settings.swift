@@ -8,18 +8,23 @@
 import SwiftUI
 import AlertToast
 
-// 1962 Ordo Settings
 struct Settings: View {
-    @State private var ical_res: iCalResult = iCalResult ( state: .not_showing )
-    @Binding var open_tab: Bool
+    @State private var ical_res: iCalResult = iCalResult ( state: .not_showing ) // Result of Exporting Calendar
+    @Binding var selected_tab: Int
+    @EnvironmentObject var net: NetworkMonitor
 
     var body: some View {
         NavigationStack {
             List {
-                Options ( settings_open: self.$open_tab )
-                iCal ( res: self.$ical_res )
-                Mail ( settings_open: self.$open_tab )
-                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.0/support/privacy.html" )! )
+                if self.net.connected {
+                    Options ( selected_tab: self.$selected_tab )
+                    iCal ( res: self.$ical_res )
+                }
+                Mail ( )
+                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1/support/privacy.html" )! )
+                NavigationLink ( destination:  AppReleases ( ) ) {
+                    Text ( "App Release Information" )
+                }
             }
                 .navigationTitle ( "Settings" )
                 .toast ( isPresenting: .constant ( self.ical_res.state == .loading ) ) {

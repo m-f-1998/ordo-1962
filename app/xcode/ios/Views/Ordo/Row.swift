@@ -32,37 +32,50 @@ struct Row: View {
                     }
                 }
             }
-            if case let .success ( res ) = self.propers.res {
-                if res [ self.month ]! [ self.index ].introit != nil {
-                    Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
-                        .frame ( width: 24, height: 24 )
-                        .onTapGesture {
-                            self.menu_expanded.toggle ( )
-                        }
-                }
+            VStack {
+                Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
             }
+                .frame ( maxWidth: 24, maxHeight: .infinity )
+                .contentShape ( Rectangle ( ) )
+                .onTapGesture {
+                    self.menu_expanded.toggle ( )
+                }
         }
         if self.menu_expanded {
             if case let .success ( res ) = self.propers.res {
-                HStack {
-                    VStack {
-                        PropersButton ( title: "INTROIT", content: res [ self.month ]! [ self.index ].introit )
-                        PropersButton ( title: "COLLECT", content: res [ self.month ]! [ self.index ].collect )
-                        PropersButton ( title: "EPISTLE", content: res [ self.month ]! [ self.index ].epistle )
-                        PropersButton ( title: "GRADUAL", content: res [ self.month ]! [ self.index ].gradual )
-                        PropersButton ( title: "GOSPEL", content: res [ self.month ]! [ self.index ].gospel )
+                let propers = res [ self.month ]! [ self.index ]
+                if propers.introit != nil {
+                    HStack {
+                        LazyVStack {
+                            PropersButton ( title: "INTROIT", content: propers.introit )
+                            PropersButton ( title: "COLLECT", content: propers.collect )
+                            PropersButton ( title: "EPISTLE", content: propers.epistle )
+                            PropersButton ( title: "GRADUAL", content: propers.gradual )
+                            PropersButton ( title: "GOSPEL", content: propers.gospel )
+                        }
+
+                        LazyVStack {
+                            PropersButton ( title: "OFFERTORY", content: propers.offertory )
+                            PropersButton ( title: "SECRET", content: propers.secret )
+                            PropersButton ( title: "PREFACE", content: propers.preface )
+                            PropersButton ( title: "COMMUNION", content: propers.communion )
+                            PropersButton ( title: "POSTCOMMUNION", content: propers.postcommunion )
+                        }
                     }
-                    
-                    VStack {
-                        PropersButton ( title: "OFFERTORY", content: res [ self.month ]! [ self.index ].offertory )
-                        PropersButton ( title: "SECRET", content: res [ self.month ]! [ self.index ].secret )
-                        PropersButton ( title: "PREFACE", content: res [ self.month ]! [ self.index ].preface )
-                        PropersButton ( title: "COMMUNION", content: res [ self.month ]! [ self.index ].communion )
-                        PropersButton ( title: "POSTCOMMUNION", content: res [ self.month ]! [ self.index ].postcommunion )
-                    }
-                }
                     .frame ( maxWidth: .infinity, alignment: .center )
                     .buttonStyle ( PlainButtonStyle ( ) )
+                } else {
+                    HStack {
+                        Text ( "Mass Propers are Unavailable Today" )
+                            .multilineTextAlignment ( .center )
+                    }
+                        .frame ( maxWidth: .infinity, alignment: .center )
+                }
+            } else if case .loading = self.propers.res {
+                HStack {
+                    ProgressView ( )
+                }
+                    .frame ( maxWidth: .infinity, alignment: .center )
             }
         }
     }

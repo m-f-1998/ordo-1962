@@ -34,14 +34,14 @@ struct Feast: View {
 
     var body: some View {
         ForEach ( self.data, id: \.self ) { feast in
-            VStack ( alignment: .leading ) {
+            LazyVStack ( alignment: .leading ) {
                 FeastInfo ( title: feast.title, colors: feast.colors, title_size: 18.0 )
                 if feast.commemorations != nil {
                     ForEach ( feast.commemorations!, id: \.self ) {
                         FeastInfo ( title: $0.title + " (Commem)", colors: $0.colors, title_size: 14.0 )
                     }
                 }
-                VStack ( alignment: .leading ) {
+                LazyVStack ( alignment: .leading ) {
                     Text ( "Class \(feast.rank)" )
                         .padding ( [ .top ], 2 )
                     if let options = feast.options {

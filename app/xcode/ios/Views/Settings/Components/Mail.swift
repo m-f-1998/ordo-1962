@@ -9,12 +9,9 @@ import SwiftUI
 
 // Send An Email In Default Mail Application
 struct Mail: View {
-    @Binding var settings_open: Bool
-
     var body: some View {
         Section ( "Contact Us" ) {
             Button {
-                self.settings_open = false
                 self.mail ( )
             } label: {
                 Text ( "Report an Error or Make a Comment" )

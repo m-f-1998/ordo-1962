@@ -9,25 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     private let app_url: String = "itms-apps://itunes.apple.com/app/6450934181"
-    private let config: FirebaseConfig = FirebaseConfig ( )
 
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
-    @ObservedObject var ordo: OrdoAPI
-    @ObservedObject var prayers: PrayerAPI
-    @ObservedObject var propers: PropersAPI
+    @ObservedObject var ordo: OrdoAPI = OrdoAPI ( )
+    @ObservedObject var prayers: PrayerAPI = PrayerAPI ( )
+    @ObservedObject var propers: PropersAPI = PropersAPI ( )
     
     @State var search_text: String = ""
+    @State private var tab_selection: Int = 0
 
     init ( ) {
-        self.ordo = OrdoAPI ( config: self.config )
-        self.prayers = PrayerAPI ( config: self.config )
-        self.propers = PropersAPI ( config: self.config )
-        
         UserDefaults.standard.set ( CurrentYear ( ), forKey: "year" )
+        
         if UserDefaults.standard.string ( forKey: "prayers-lang" ) == nil {
             UserDefaults.standard.set ( "English", forKey: "prayers-lang" )
         }
-
+        
+        if UserDefaults.standard.string ( forKey: "propers-lang" ) == nil {
+            UserDefaults.standard.set ( "English", forKey: "propers-lang" )
+        }
     }
 
     var body: some View {
@@ -36,17 +36,39 @@ struct ContentView: View {
             case .failure ( let error ):
                 ErrorView ( description: error )
             case .loading ( _ ), .success ( _ ):
-                Ordo ( search_text: self.$search_text, data: ordo.GetResult ( search: self.search_text ) )
-                if ( !self.net.connected ) {
-                    VStack ( alignment: .center ) {
-                        Text ( "No Internet Connection" )
-                            .bold ( )
-                            .foregroundColor ( .white )
-                            .frame ( maxWidth: .infinity )
-                            .padding ( [ .top, .bottom ], 10 )
+                TabView ( selection: $tab_selection ) {
+                    VStack ( spacing: 0 ) {
+                        Ordo ( search_text: self.$search_text, selected_tab: $tab_selection, data: ordo.GetResult ( search: self.search_text ) )
+                        if ( !self.net.connected ) {
+                            VStack ( alignment: .center ) {
+                                Text ( "No Internet Connection" )
+                                    .bold ( )
+                                    .foregroundColor ( .white )
+                                    .frame ( maxWidth: .infinity )
+                                    .padding ( [ .top, .bottom ], 10 )
+                            }
+                                .background ( .red )
+                        }
                     }
-                        .background ( .red )
+                        .tabItem {
+                            Label ( "Ordo", systemImage: "calendar" )
+                        }
+                        .tag ( 0 )
+                    Prayer ( )
+                        .tabItem {
+                            Image ( "pray" )
+                            Text ( "Prayer" )
+                        }
+                        .tag ( 1 )
+                    Settings ( selected_tab: $tab_selection )
+                        .tabItem {
+                            Label ( "Settings", systemImage: "gear" )
+                        }
+                        .tag ( 2 )
                 }
+                    .TabBarGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
+            case .none:
+                ErrorView ( description: "Data Status Unkown" )
             }
         }
             .environmentObject ( self.net )
@@ -54,19 +76,24 @@ struct ContentView: View {
             .environmentObject ( self.prayers )
             .environmentObject ( self.propers )
             .task {
-                await self.ordo.Update ( )
+                DispatchQueue.main.async {
+                    Task {
+                        await self.ordo.Update ( )
+                        await self.propers.Update ( )
+                        await prayers.Update ( lang: UserDefaults.standard.string ( forKey: "prayers-lang" )! )
+                    }
+                }
             }
             .onChange ( of: self.net.connected ) { change in
-                Task {
-                    if ( !change && UserDefaults.standard.string ( forKey: "year" )! != CurrentYear ( ) ) {
-                        await self.ordo.BackToCurrentYear ( )
-                    }
+                if ( !change && UserDefaults.standard.string ( forKey: "year" )! != CurrentYear ( ) ) {
+                    self.ordo.BackToCurrentYear ( )
+                    self.propers.BackToCurrentYear ( )
                 }
             }
             .onReceive ( NotificationCenter.default.publisher ( for: UIApplication.didBecomeActiveNotification ) ) { _ in
                 UIApplication.shared.applicationIconBadgeNumber = 0
             }
-            .alert ( "A New Version of this Application is Available", isPresented: self.config.UpdateAvailable ( ) ) {
+            .alert ( "A New Version of this Application is Available", isPresented: config.UpdateAvailable ( ) ) {
                 Button ( "Update" ) {
                     if let url = URL ( string: self.app_url ), UIApplication.shared.canOpenURL ( url ) {
                         UIApplication.shared.open ( url )
