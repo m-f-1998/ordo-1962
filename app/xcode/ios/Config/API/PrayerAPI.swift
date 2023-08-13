@@ -17,20 +17,22 @@ class PrayerAPI: ObservableObject {
     }
 
     // Update The Status Of The View Containing Prayers
-    func Update ( lang: String ) async {
-        switch self.res {
-        case .success ( _ ):
-            print ( "Prayer Data Already At Status Successful" )
-        default:
-            // MARK: Return Languages Together
-            let queries = [
-                URLQueryItem ( name: "lang", value: lang )
-            ]
-            
-            let data =  await self.api.GetAPI ( cache: false, file: self.file, url: self.url, type: PrayerCategoryData.self, queries: queries )
-            DispatchQueue.main.async {
-                self.res = data
+    func Update ( lang: String, use_cache: Bool = true ) async {
+        if use_cache {
+            if case .success ( _ ) = self.res {
+                print ( "Prayer Data Already At Status Successful" )
+                return
             }
+        }
+        
+        // MARK: Return Languages Together
+        let queries = [
+            URLQueryItem ( name: "lang", value: lang )
+        ]
+        
+        let data =  await self.api.GetAPI ( use_cache: false, file: self.file, url: self.url, type: PrayerCategoryData.self, queries: queries )
+        DispatchQueue.main.async {
+            self.res = data
         }
     }
     

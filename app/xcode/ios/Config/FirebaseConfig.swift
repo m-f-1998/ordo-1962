@@ -13,8 +13,6 @@ let config: FirebaseConfig = FirebaseConfig ( ) // Singelton
 // Get configuration From Firebase
 class FirebaseConfig {
     private var config: RemoteConfig = RemoteConfig.remoteConfig ( )
-    private var api_update_time: Date = .now // Time of last update
-    private var latest_app_version: Double = 0.0 // Up-to-date app version, to notify of updates
 
     init ( ) {
         #if DEBUG
@@ -28,22 +26,23 @@ class FirebaseConfig {
         #endif
         
         self.config.fetchAndActivate ( )
-
-        self.latest_app_version = self.config.configValue ( forKey: "app_version" ).numberValue.doubleValue
-        self.api_update_time = FormatDate ( time: true ).date ( from: self.config.configValue ( forKey: "last_data_update" ).stringValue! ) ?? .now
     }
 
     // An Update To The Client Is Available On The App Store
     func UpdateAvailable ( ) -> Binding<Bool> {
         let current_version = Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as! String
-        return .constant ( Double ( current_version ) ?? 0.0 < self.latest_app_version )
+        let latest_app_version = self.config.configValue ( forKey: "app_version" ).numberValue.doubleValue
+        return .constant ( Double ( current_version ) ?? 0.0 < latest_app_version )
     }
     
     // Data From API Is Stale - Delete Cache
     func DataStale ( ) -> Bool { // Is cached data up to date?
-        let last_api_fetch = UserDefaults.standard.string ( forKey: "last-update" )
-        if ( last_api_fetch != nil ) {
-            return self.api_update_time > FormatDate ( time: true ).date ( from: last_api_fetch! )!
+        let last_fetch = UserDefaults.standard.string ( forKey: "last-update" )
+        if last_fetch != nil {
+            let api_update_time =  self.config.configValue ( forKey: "last_data_update" ).stringValue
+            if api_update_time != nil {
+                return FormatDate ( time: true ).date ( from: api_update_time! )! > FormatDate ( time: true ).date ( from: last_fetch! )!
+            }
         }
         return false
     }

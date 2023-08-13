@@ -80,7 +80,7 @@ struct iCal: View {
     func GenerateCalendar ( ) async {
         self.Permissions ( ) { permissions in
             print ( "EventKit Permissions: \(permissions)" )
-            if ( permissions ) {
+            if permissions {
                 do {
                     let calendar = try GetCalendar ( title: self.title )
                     let data: ResultAPI <OrdoData> = self.ordo.GetCache ( )

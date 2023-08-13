@@ -27,8 +27,8 @@ class OrdoAPI: ObservableObject {
                 return
             }
         }
-        
-        if UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( ) == CurrentYear ( ) {
+
+        if use_cache {
             UserDefaults.standard.set ( 3, forKey: "go-to-today" )
         }
 
@@ -40,7 +40,7 @@ class OrdoAPI: ObservableObject {
             URLQueryItem ( name: "timezone", value: TimeZone.current.identifier )
         ]
         
-        let data = await self.api.GetAPI ( file: self.file, url: self.url, type: OrdoData.self, queries: queries )
+        let data = await self.api.GetAPI ( use_cache: use_cache, save_cache: use_cache, file: self.file, url: self.url, type: OrdoData.self, queries: queries )
         DispatchQueue.main.async {
             self.res = data
         }
@@ -59,7 +59,7 @@ class OrdoAPI: ObservableObject {
         var result = DUMMY_ORDO
         if case let .success ( res ) = self.res {
             result = res
-            if ( search != "" ) {
+            if search != "" {
                 for month in Calendar.current.monthSymbols {
                     result [ month ] = self.Filter ( search: search, data: result [ month ]! )
                 }
@@ -71,13 +71,13 @@ class OrdoAPI: ObservableObject {
     // Go Back To Current Year
     func BackToCurrentYear ( ) {
         UserDefaults.standard.set ( CurrentYear ( ), forKey: "year" )
-        self.res = self.GetCache ( )
+        self.res = self.GetCache ( delete_cache: false )
     }
 
     // Get Cache Data, Ignore Internet
-    func GetCache ( ) -> ResultAPI <OrdoData> {
+    func GetCache ( delete_cache: Bool = true ) -> ResultAPI <OrdoData> {
         do {
-            return .success ( try self.api.GetCache ( file: self.file, type: OrdoData.self ) )
+            return .success ( try self.api.GetCache ( delete_cache: delete_cache, file: self.file, type: OrdoData.self ) )
         } catch ErrorAPI.fetching {
             UserDefaults.standard.set ( 1, forKey: "go-to-today" )
             return .loading ( DUMMY_ORDO )

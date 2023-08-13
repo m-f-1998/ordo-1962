@@ -25,20 +25,21 @@ struct Options: View {
         Section {
             CustomPicker ( data: self.years, title: "Year", selected: self.$year )
                 .onChange ( of: self.year ) { change in
-                    if ( change == CurrentYear ( ) ) {
-                        UserDefaults.standard.set ( 3, forKey: "go-to-today" )
-                        self.ordo.BackToCurrentYear ( )
-                        self.propers.BackToCurrentYear ( )
-                    } else {
-                        UserDefaults.standard.set ( change, forKey: "year" )
-                        self.ordo.SetLoading ( )
-                        Task {
-                            await self.propers.Update ( use_cache: change == CurrentYear ( ) )
-                            await self.ordo.Update ( use_cache: change == CurrentYear ( )  )
+                    if change != UserDefaults.standard.string ( forKey: "year" )! {
+                        if change == CurrentYear ( ) {
+                            UserDefaults.standard.set ( 3, forKey: "go-to-today" )
+                            self.ordo.BackToCurrentYear ( )
+                            self.propers.BackToCurrentYear ( )
+                        } else {
+                            UserDefaults.standard.set ( change, forKey: "year" )
+                            self.ordo.SetLoading ( )
+                            Task {
+                                await self.propers.Update ( use_cache: change == CurrentYear ( ) )
+                                await self.ordo.Update ( use_cache: change == CurrentYear ( )  )
+                            }
                         }
+                        self.selected_tab = 0
                     }
-                    
-                    self.selected_tab = 0
                 }
                 .onAppear {
                     year = UserDefaults.standard.string ( forKey: "year" )!

@@ -67,7 +67,7 @@ struct SystemWidget : View {
                 .padding ( [ .bottom ], 1 )
                 .font ( .system ( size: 15 ) )
                 .redacted ( reason: entry.loading ? .placeholder : [ ] )
-            if ( entry.alternative ) {
+            if entry.alternative {
                 Text ( "Alternatives Available" )
                     .italic ( )
                     .padding ( [ .bottom ], 1 )

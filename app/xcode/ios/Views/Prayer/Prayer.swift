@@ -42,14 +42,14 @@ struct Prayer: View {
                     }
                     .navigationTitle ( "Prayer" )
                     .toolbar {
-                        if ( net.connected ) {
+                        if net.connected {
                             Menu ( content: {
                                 CustomPicker ( data: self.languages, title: "Prayer Language", selected: self.$lang )
                                     .onChange ( of: lang ) { change in
                                         prayers.SetLoading ( )
-                                        UserDefaults.standard.set ( change, forKey: "prayers-lang" )
                                         Task {
-                                            await prayers.Update ( lang: change )
+                                            await self.prayers.Update ( lang: change, use_cache: false )
+                                            UserDefaults.standard.set ( change, forKey: "prayers-lang" )
                                         }
                                     }
                             }, label: {

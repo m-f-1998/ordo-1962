@@ -35,11 +35,11 @@ struct Row: View {
             VStack {
                 Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
             }
-                .frame ( maxWidth: 24, maxHeight: .infinity )
-                .contentShape ( Rectangle ( ) )
-                .onTapGesture {
-                    self.menu_expanded.toggle ( )
-                }
+                .frame ( maxWidth: 36, maxHeight: .infinity )
+        }
+        .contentShape ( Rectangle ( ) )
+        .onTapGesture {
+            self.menu_expanded.toggle ( )
         }
         if self.menu_expanded {
             if case let .success ( res ) = self.propers.res {

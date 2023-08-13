@@ -55,6 +55,7 @@ struct Ordo: View {
                                         UserDefaults.standard.set ( change, forKey: "propers-lang" )
                                     }
                                 }, label: { Label ( "Propers Language", systemImage: "character.bubble" ) } )
+                                    .disabled ( data == DUMMY_ORDO )
                                 NavigationStack {
                                     Button {
                                         self.go_to_open.toggle ( )
@@ -65,6 +66,7 @@ struct Ordo: View {
                                         GoTo ( data: self.data, proxy: proxy, view_open: self.$go_to_open )
                                     }
                                 }
+                                    .disabled ( data == DUMMY_ORDO )
                             }
                         }
                     }
@@ -84,7 +86,7 @@ struct Ordo: View {
     }
     
     func ScrollView ( proxy: ScrollViewProxy, change: OrdoData, onAppear: Bool = false ) {
-        if self.selected_tab == 0 && change != DUMMY_ORDO {
+        if change != DUMMY_ORDO {
             if UserDefaults.standard.string ( forKey: "year" ) == CurrentYear ( ) {
                 let go_to_today = UserDefaults.standard.integer ( forKey: "go-to-today" )
                 if go_to_today != 1 {

@@ -12,18 +12,17 @@ class API {
     @ObservedObject private var net: NetworkMonitor = NetworkMonitor ( )
 
     // Get Data From Local Device Or From API
-    func GetAPI <T:Decodable> ( cache: Bool = true, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
+    func GetAPI <T:Decodable> ( use_cache: Bool = true, save_cache: Bool = true, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
         do {
-            let year: String = UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( )
-            if cache && year == CurrentYear ( ) {
+            if use_cache {
                 do {
-                    return try .success ( self.GetCache ( file: file, type: type ) )
+                    return try .success ( self.GetCache ( delete_cache: self.net.connected, file: file, type: type ) )
                 } catch {
                     print ( "Cache Could Not Be Used" )
                 }
             }
             if self.net.connected {
-                return .success ( try await self.SaveCache ( url: url, file: file, type: T.self, url_query: queries, cache: cache ) )
+                return .success ( try await self.SaveCache ( url: url, file: file, type: T.self, url_query: queries, cache: save_cache ) )
             }
             return .failure ( "Data Could Not Be Fetched" )
         } catch ErrorAPI.fetching ( let message ) {
@@ -36,10 +35,10 @@ class API {
     }
     
     // Retrieve Cache Data
-    func GetCache <T:Decodable> ( file: String, type: T.Type ) throws -> T {
+    func GetCache <T:Decodable> ( delete_cache: Bool = true, file: String, type: T.Type ) throws -> T {
         if self.CacheExists ( name: file ) {
             let new_year: Bool = CurrentDay ( ) == 1 && CurrentMonth ( ) == "January"
-            if new_year || ( self.net.connected && config.DataStale ( ) ) {
+            if delete_cache && ( new_year || ( self.net.connected && config.DataStale ( ) ) ) {
                 print ( "Cache Deleted" )
                 try self.manager.removeItem ( atPath: self.GetURL ( file_name: file ).path )
             } else {
@@ -67,9 +66,9 @@ class API {
     // Save a cache file which is accessible only while the device is unlocked
     private func SaveCache <T:Decodable> ( url: String, file: String, type: T.Type, url_query: [ URLQueryItem ], cache: Bool ) async throws -> T {
         do {
-            let year: String = UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( )
             let data = try await self.HTTP ( url: url, request_params: url_query )
-            if year == CurrentYear ( ) {
+            if cache {
+                print ( "Writing New Cache for \(file)" )
                 try data.write ( to: self.GetURL ( file_name: file ), options: .completeFileProtection )
             }
             return try self.Decode ( data: data, type: T.self )
