@@ -36,7 +36,7 @@ class FirebaseConfig {
     }
     
     // Data From API Is Stale - Delete Cache
-    func DataStale ( ) -> Bool { // Is cached data up to date?
+    func DataStale ( ) -> Bool {
         let last_fetch = UserDefaults.standard.string ( forKey: "last-update" )
         if ( last_fetch ?? "" ).isEmpty {
             let api_update_time =  self.config.configValue ( forKey: "last_data_update" ).stringValue

@@ -43,6 +43,7 @@ struct ContentView: View {
     
     @State var search_text: String = ""
     @State private var tab_selection: Int = 0
+    @State private var data_stale_alert_shown: Bool = false
 
     init ( ) {
         UserDefaults.standard.set ( CurrentYear ( ), forKey: "year" )
@@ -109,12 +110,14 @@ struct ContentView: View {
             .onReceive ( NotificationCenter.default.publisher ( for: UIApplication.didBecomeActiveNotification ) ) { _ in
                 UIApplication.shared.applicationIconBadgeNumber = 0
             }
-            .alert ( "A New Version of this Application is Available", isPresented: config.UpdateAvailable ( ) ) {
+            .alert ( "A New Version of this Application is Available", isPresented: .constant ( !self.data_stale_alert_shown && config.UpdateAvailable ( ).wrappedValue ) ) {
                 Button ( "Update" ) {
                     if let url = URL ( string: self.app_url ), UIApplication.shared.canOpenURL ( url ) {
+                        data_stale_alert_shown = true
                         UIApplication.shared.open ( url )
                     }
                 }
+                Button ( "Dismiss", role: .cancel, action: { } )
             }
     }
 }
