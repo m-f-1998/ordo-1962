@@ -50,5 +50,19 @@ class PropersAPI: ObservableObject {
             return .failure ( error.localizedDescription )
         }
     }
+    
+    // Reset to Progress View
+    func SetLoading ( ) {
+        self.res = .loading ( [ : ] )
+    }
+    
+    // Reload on Error
+    func ErrorRetry ( ) {
+        self.SetLoading ( )
+        Task {
+            try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
+            await self.Update ( )
+        }
+    }
 
 }

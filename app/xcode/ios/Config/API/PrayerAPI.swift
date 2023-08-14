@@ -51,4 +51,21 @@ class PrayerAPI: ObservableObject {
     func SetLoading ( ) {
         res = .loading ( [ : ] )
     }
+    
+    // Get Is Loading ?
+    func GetLoading ( ) -> Bool {
+        if case .loading = self.res {
+            return true
+        }
+        return false
+    }
+    
+    // Reload on Error
+    func ErrorRetry ( ) {
+        Task {
+            self.SetLoading ( )
+            try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
+            await self.Update ( lang: UserDefaults.standard.string ( forKey: "prayers-lang" )! )
+        }
+    }
 }

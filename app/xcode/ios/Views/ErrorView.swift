@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ErrorView: View {
     let description: String
-    @EnvironmentObject var ordo: OrdoAPI
+    
+    var Callback: () -> ()
 
     var body: some View {
         VStack ( alignment: .center ) {
@@ -20,13 +21,7 @@ struct ErrorView: View {
             Text ( self.description )
                 .multilineTextAlignment ( .center )
                 .padding ( )
-            Button ( action: {
-                Task {
-                    self.ordo.SetLoading ( )
-                    try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
-                    await self.ordo.Update ( )
-                }
-            } ) {
+            Button ( action: self.Callback ) {
                 Label ( "Try Again", systemImage: "arrow.clockwise" )
             }
         }

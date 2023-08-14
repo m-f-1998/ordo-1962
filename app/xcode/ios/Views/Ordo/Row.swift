@@ -75,6 +75,11 @@ struct Row: View {
                     ProgressView ( )
                 }
                     .frame ( maxWidth: .infinity, alignment: .center )
+            } else if case .failure = self.propers.res {
+                Button ( action: self.propers.ErrorRetry ) {
+                    Label ( "Try Again", systemImage: "arrow.clockwise" )
+                }
+                    .frame ( maxWidth: .infinity, alignment: .center )
             }
         }
     }

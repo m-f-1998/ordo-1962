@@ -91,6 +91,15 @@ class OrdoAPI: ObservableObject {
         self.res = .loading ( DUMMY_ORDO )
     }
     
+    // Reload on Error
+    func ErrorRetry ( ) {
+        Task {
+            self.SetLoading ( )
+            try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
+            await self.Update ( )
+        }
+    }
+    
     // Filter Celebration Data If Search Contained In Title(s)
     private func Filter ( search: String = "", data: [ CelebrationData ] ) -> [ CelebrationData ] {
         return data.filter {

@@ -20,7 +20,7 @@ struct Prayer: View {
     var body: some View {
         VStack {
             if case let .failure ( res ) = prayers.res {
-                Text ( res )
+                ErrorView ( description: res, Callback: self.prayers.ErrorRetry )
             } else {
                 NavigationStack {
                     List {
@@ -46,12 +46,13 @@ struct Prayer: View {
                             Menu ( content: {
                                 CustomPicker ( data: self.languages, title: "Prayer Language", selected: self.$lang )
                                     .onChange ( of: lang ) { change in
-                                        prayers.SetLoading ( )
+                                        self.prayers.SetLoading ( )
                                         Task {
                                             await self.prayers.Update ( lang: change, use_cache: false )
                                             UserDefaults.standard.set ( change, forKey: "prayers-lang" )
                                         }
                                     }
+                                    .disabled ( self.prayers.GetLoading ( ) )
                             }, label: {
                                 Label ( "Prayer Language", systemImage: "character.bubble" )
                             } )

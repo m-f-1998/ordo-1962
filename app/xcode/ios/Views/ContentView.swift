@@ -61,7 +61,7 @@ struct ContentView: View {
         VStack ( spacing: 0 ) {
             switch ordo.res {
             case .failure ( let error ):
-                ErrorView ( description: error )
+                ErrorView ( description: error, Callback: self.ordo.ErrorRetry )
             case .success ( _ ), .loading ( _ ):
                 let data = ordo.GetResult ( search: self.search_text )
                 TabView ( selection: $tab_selection ) {
@@ -85,7 +85,7 @@ struct ContentView: View {
                     .disabled ( data == DUMMY_ORDO )
                     .TabBarGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
             case .none:
-                ErrorView ( description: "Data Status Unkown" )
+                ErrorView ( description: "Data Status Unkown", Callback: self.ordo.ErrorRetry )
             }
         }
             .environmentObject ( self.net )
