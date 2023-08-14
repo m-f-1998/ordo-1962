@@ -32,10 +32,9 @@ struct Row: View {
                     }
                 }
             }
-            VStack {
-                Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
-            }
-                .frame ( maxWidth: 36, maxHeight: .infinity )
+            Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
+                .resizable ( )
+                .frame ( maxWidth: 20, maxHeight: 20 )
         }
         .contentShape ( Rectangle ( ) )
         .onTapGesture {
@@ -47,19 +46,19 @@ struct Row: View {
                 if propers.introit != nil {
                     HStack {
                         LazyVStack {
-                            PropersButton ( title: "INTROIT", content: propers.introit )
-                            PropersButton ( title: "COLLECT", content: propers.collect )
-                            PropersButton ( title: "EPISTLE", content: propers.epistle )
-                            PropersButton ( title: "GRADUAL", content: propers.gradual )
-                            PropersButton ( title: "GOSPEL", content: propers.gospel )
+                            PropersButton ( content: propers, index: 0 )
+                            PropersButton ( content: propers, index: 1 )
+                            PropersButton ( content: propers, index: 2 )
+                            PropersButton ( content: propers, index: 3 )
+                            PropersButton ( content: propers, index: 4 )
                         }
 
                         LazyVStack {
-                            PropersButton ( title: "OFFERTORY", content: propers.offertory )
-                            PropersButton ( title: "SECRET", content: propers.secret )
-                            PropersButton ( title: "PREFACE", content: propers.preface )
-                            PropersButton ( title: "COMMUNION", content: propers.communion )
-                            PropersButton ( title: "POSTCOMMUNION", content: propers.postcommunion )
+                            PropersButton ( content: propers, index: 5 )
+                            PropersButton ( content: propers, index: 6 )
+                            PropersButton ( content: propers, index: 7 )
+                            PropersButton ( content: propers, index: 8 )
+                            PropersButton ( content: propers, index: 9 )
                         }
                     }
                     .frame ( maxWidth: .infinity, alignment: .center )

@@ -24,7 +24,7 @@ class API {
             if self.net.connected {
                 return .success ( try await self.SaveCache ( url: url, file: file, type: T.self, url_query: queries, cache: save_cache ) )
             }
-            return .failure ( "Data Could Not Be Fetched" )
+            return .failure ( "Update Could Not Be Fetched" )
         } catch ErrorAPI.fetching ( let message ) {
             return .failure ( message )
         } catch ErrorAPI.saving {

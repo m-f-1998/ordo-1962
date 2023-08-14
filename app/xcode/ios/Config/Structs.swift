@@ -23,6 +23,21 @@ struct FeastPropers: Codable, Hashable, Identifiable {
     let preface: PropersLanguage?
     let communion: PropersLanguage?
     let postcommunion: PropersLanguage?
+    
+    var dictionary: [ String: PropersLanguage? ] {
+        return [
+            "introit": introit,
+            "collect": collect,
+            "epistle": epistle,
+            "gradual": gradual,
+            "gospel": gospel,
+            "offertory": offertory,
+            "secret": secret,
+            "preface": preface,
+            "communion": communion,
+            "postcommunion": postcommunion
+        ]
+    }
 }
 struct PropersLanguage: Codable, Hashable {
     let english: String

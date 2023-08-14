@@ -13,6 +13,10 @@ struct ErrorView: View {
 
     var body: some View {
         VStack ( alignment: .center ) {
+            Text ( "Something Went Wrong" )
+                .multilineTextAlignment ( .center )
+                .font ( .largeTitle )
+                .bold ( )
             Text ( self.description )
                 .multilineTextAlignment ( .center )
                 .padding ( )
@@ -26,5 +30,6 @@ struct ErrorView: View {
                 Label ( "Try Again", systemImage: "arrow.clockwise" )
             }
         }
+            .padding ( [ .leading, .trailing ], 8 )
     }
 }
