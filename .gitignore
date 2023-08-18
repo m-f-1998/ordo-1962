@@ -188,6 +188,5 @@ api/private/
 **/.vscode/
 **/vendor/*
 composer.lock
-*.xcodeproj/
 DerivedData/
 GoogleService-Info.plist
