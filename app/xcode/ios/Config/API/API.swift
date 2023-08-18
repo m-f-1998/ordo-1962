@@ -12,7 +12,7 @@ class API {
     @ObservedObject private var net: NetworkMonitor = NetworkMonitor ( )
 
     // Get Data From Local Device Or From API
-    func GetAPI <T:Decodable> ( use_cache: Bool = true, save_cache: Bool = true, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
+    func GetAPI <T:Decodable> ( use_cache: Bool = true, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
         do {
             if use_cache {
                 do {
@@ -22,7 +22,7 @@ class API {
                 }
             }
             if self.net.connected {
-                return .success ( try await self.SaveCache ( url: url, file: file, type: T.self, url_query: queries, cache: save_cache ) )
+                return .success ( try await self.SaveCache ( url: url, file: file, type: T.self, url_query: queries ) )
             }
             return .failure ( "Update Could Not Be Fetched" )
         } catch ErrorAPI.fetching ( let message ) {
@@ -39,7 +39,6 @@ class API {
         if self.CacheExists ( name: file ) {
             let new_year: Bool = CurrentDay ( ) == 1 && CurrentMonth ( ) == "January"
             if delete_cache && ( new_year || ( self.net.connected && config.DataStale ( ) ) ) {
-                print ( "Cache Deleted" )
                 try self.manager.removeItem ( atPath: self.GetURL ( file_name: file ).path )
             } else {
                 return try self.Decode ( data: Data ( contentsOf: self.GetURL ( file_name: file ) ), type: type )
@@ -51,7 +50,7 @@ class API {
     // Cache data in document directory
     private func GetURL ( file_name: String ) throws -> URL {
         let container = self.manager.containerURL ( forSecurityApplicationGroupIdentifier: "group.mfrankland.ordo-62.contents" )!
-        return container.appendingPathComponent ( file_name )
+        return container.appending ( path: file_name, directoryHint: .notDirectory )
     }
     
     // Check Cache File Exists
@@ -64,10 +63,11 @@ class API {
     }
 
     // Save a cache file which is accessible only while the device is unlocked
-    private func SaveCache <T:Decodable> ( url: String, file: String, type: T.Type, url_query: [ URLQueryItem ], cache: Bool ) async throws -> T {
+    private func SaveCache <T:Decodable> ( url: String, file: String, type: T.Type, url_query: [ URLQueryItem ] ) async throws -> T {
         do {
             let data = try await self.HTTP ( url: url, request_params: url_query )
-            if cache {
+            let year: String = UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( )
+            if year == CurrentYear ( ) {
                 print ( "Writing New Cache for \(file)" )
                 try data.write ( to: self.GetURL ( file_name: file ), options: .completeFileProtection )
             }
@@ -84,7 +84,7 @@ class API {
 
     // Run a URL Request To API
     private func HTTP ( url: String, request_params: [ URLQueryItem ] ) async throws -> Data {
-        guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1/\(url)" ) else { throw ErrorAPI.fetching ( "URL Invalid" ) }
+        guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1.1/\(url)" ) else { throw ErrorAPI.fetching ( "URL Invalid" ) }
 
         var url_request: URLRequest = URLRequest ( url: address )
         url_request.httpMethod = "POST"

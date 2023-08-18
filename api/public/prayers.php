@@ -6,15 +6,6 @@
 
   $operations = new Functions ( );
 
-  if ( !empty ( $_POST [ 'lang' ] ) ) {
-
-    echo json_encode ( $operations->GetPrayers ( $_POST [ 'lang' ] ) );
-  
-  } else {
-
-    http_response_code ( 400 );
-    echo 'Missing Parameters';
-
-  }
+  echo json_encode ( $operations->GetPrayers ( ) );
 
 ?>

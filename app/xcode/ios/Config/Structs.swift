@@ -46,6 +46,7 @@ struct PropersLanguage: Codable, Hashable {
 
 // MARK: Prayers
 
+typealias PrayerLanguageData = [ String : PrayerCategoryData ]
 typealias PrayerCategoryData = [ String : PrayerData ]
 typealias PrayerData = [ String : String ]
 

@@ -9,7 +9,7 @@ import Foundation
 
 class PrayerAPI: ObservableObject {
     private let file: String = "prayer.data", url = "prayers.php"
-    @Published private ( set ) var res: ResultAPI <PrayerCategoryData>!
+    @Published private ( set ) var res: ResultAPI <PrayerLanguageData>!
     private var api: API = API ( )
     
     init ( ) {
@@ -17,29 +17,24 @@ class PrayerAPI: ObservableObject {
     }
 
     // Update The Status Of The View Containing Prayers
-    func Update ( lang: String, use_cache: Bool = true ) async {
+    func Update ( use_cache: Bool = true ) async {
         if use_cache {
             if case .success ( _ ) = self.res {
                 print ( "Prayer Data Already At Status Successful" )
                 return
             }
         }
-        
-        // MARK: Return Languages Together
-        let queries = [
-            URLQueryItem ( name: "lang", value: lang )
-        ]
-        
-        let data =  await self.api.GetAPI ( use_cache: false, file: self.file, url: self.url, type: PrayerCategoryData.self, queries: queries )
+
+        let data =  await self.api.GetAPI ( use_cache: false, file: self.file, url: self.url, type: PrayerLanguageData.self, queries: [ ] )
         DispatchQueue.main.async {
             self.res = data
         }
     }
     
     // Get Cache Data, Ignore Internet
-    func GetCache ( ) -> ResultAPI <PrayerCategoryData> {
+    func GetCache ( ) -> ResultAPI <PrayerLanguageData> {
         do {
-            return .success ( try self.api.GetCache ( file: self.file, type: PrayerCategoryData.self ) )
+            return .success ( try self.api.GetCache ( file: self.file, type: PrayerLanguageData.self ) )
         } catch ErrorAPI.fetching {
             return .loading ( [ : ] )
         } catch {
@@ -62,10 +57,12 @@ class PrayerAPI: ObservableObject {
     
     // Reload on Error
     func ErrorRetry ( ) {
-        Task {
-            self.SetLoading ( )
-            try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
-            await self.Update ( lang: UserDefaults.standard.string ( forKey: "prayers-lang" )! )
+        DispatchQueue.main.async {
+            Task {
+                self.SetLoading ( )
+                try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
+                await self.Update ( )
+            }
         }
     }
 }

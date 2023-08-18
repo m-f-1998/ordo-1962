@@ -56,12 +56,18 @@ struct ContentView: View {
             UserDefaults.standard.set ( "English", forKey: "propers-lang" )
         }
     }
+    
+    func reload ( ) {
+        self.prayers.ErrorRetry ( )
+        self.propers.ErrorRetry ( )
+        self.ordo.ErrorRetry ( )
+    }
 
     var body: some View {
         VStack ( spacing: 0 ) {
-            switch ordo.res {
+            switch ordo.res { // MARK: Future Update, All Errors Should Be Handled Here
             case .failure ( let error ):
-                ErrorView ( description: error, Callback: self.ordo.ErrorRetry )
+                ErrorView ( description: error, Callback: self.reload )
             case .success ( _ ), .loading ( _ ):
                 let data = ordo.GetResult ( search: self.search_text )
                 TabView ( selection: $tab_selection ) {
@@ -85,7 +91,7 @@ struct ContentView: View {
                     .disabled ( data == DUMMY_ORDO )
                     .TabBarGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
             case .none:
-                ErrorView ( description: "Data Status Unkown", Callback: self.ordo.ErrorRetry )
+                ErrorView ( description: "Data Status Unkown", Callback: self.reload )
             }
         }
             .environmentObject ( self.net )
@@ -95,9 +101,9 @@ struct ContentView: View {
             .task {
                 DispatchQueue.main.async {
                     Task {
-                        await self.ordo.Update ( )
+                        await self.prayers.Update ( )
                         await self.propers.Update ( )
-                        await self.prayers.Update ( lang: UserDefaults.standard.string ( forKey: "prayers-lang" )! )
+                        await self.ordo.Update ( )
                     }
                 }
             }

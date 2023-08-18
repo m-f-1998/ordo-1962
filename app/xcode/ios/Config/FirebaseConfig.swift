@@ -38,9 +38,9 @@ class FirebaseConfig {
     // Data From API Is Stale - Delete Cache
     func DataStale ( ) -> Bool {
         let last_fetch = UserDefaults.standard.string ( forKey: "last-update" )
-        if ( last_fetch ?? "" ).isEmpty {
+        if !( last_fetch ?? "" ).isEmpty {
             let api_update_time =  self.config.configValue ( forKey: "last_data_update" ).stringValue
-            if ( api_update_time ?? "" ).isEmpty {
+            if !( api_update_time ?? "" ).isEmpty {
                 return FormatDate ( time: true ).date ( from: api_update_time! )! > FormatDate ( time: true ).date ( from: last_fetch! )!
             }
         }

@@ -21,12 +21,13 @@ struct Settings: View {
                     iCal ( res: self.$ical_res )
                 }
                 Mail ( )
-                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1/support/privacy.html" )! )
+                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1.1/support/privacy.html" )! )
                 NavigationLink ( destination:  AppReleases ( ) ) {
                     Text ( "App Release Information" )
                 }
             }
                 .navigationTitle ( "Settings" )
+                .navigationBarTitleDisplayMode ( .inline )
                 .toast ( isPresenting: .constant ( self.ical_res.state == .loading ) ) {
                     return AlertToast ( type: .loading )
                 }

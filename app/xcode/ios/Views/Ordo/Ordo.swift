@@ -46,7 +46,7 @@ struct Ordo: View {
                     }
                     .scrollDisabled ( data == DUMMY_ORDO )
                     .scrollIndicators ( .hidden )
-                    .navigationTitle ( "1962 Liturgical Ordo" )
+                    .navigationTitle ( "1962 Ordo" )
                     .toolbar {
                         ToolbarItem ( placement: .automatic ) {
                             HStack {

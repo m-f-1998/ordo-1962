@@ -28,7 +28,7 @@ class PropersAPI: ObservableObject {
             URLQueryItem ( name: "year", value: UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( ) )
         ]
 
-        let data = await self.api.GetAPI ( use_cache: use_cache, save_cache: use_cache, file: self.file, url: self.url, type: PropersData.self, queries: queries )
+        let data = await self.api.GetAPI ( use_cache: use_cache, file: self.file, url: self.url, type: PropersData.self, queries: queries )
         DispatchQueue.main.async {
             self.res = data
         }
@@ -37,6 +37,9 @@ class PropersAPI: ObservableObject {
     // Go Back To Current Year
     func BackToCurrentYear ( ) {
         self.res = self.GetCache ( delete_cache: false )
+        if case .loading ( _ ) = self.res {
+            self.res = .failure ( "Could Not Return To The Current Year" )
+        }
     }
     
     // Get Cache Data, Ignore Internet
@@ -58,10 +61,12 @@ class PropersAPI: ObservableObject {
     
     // Reload on Error
     func ErrorRetry ( ) {
-        self.SetLoading ( )
-        Task {
-            try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
-            await self.Update ( )
+        DispatchQueue.main.async {
+            self.SetLoading ( )
+            Task {
+                try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
+                await self.Update ( )
+            }
         }
     }
 

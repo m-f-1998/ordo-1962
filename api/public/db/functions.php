@@ -36,7 +36,7 @@ class Functions {
             GROUP BY c.`date`
             ORDER BY `c`.`date`
             ASC",
-          [ $_POST [ 'year' ], $month ]
+          [ $year, $month ]
         );
         
         foreach ( $days as $day ) {
@@ -90,7 +90,7 @@ class Functions {
 
       $res = array ( );
       
-      date_default_timezone_set ( $_POST [ 'timezone' ] );
+      date_default_timezone_set ( $timestamp );
       
       $today = date ( 'Y-m-d' );
       $next_week = date ( 'Y-m-d', strtotime ( '+1 week' ) );
@@ -130,25 +130,27 @@ class Functions {
    * Get Prayers Catalogue In HTML Encoded Format
    *
    */
-    public function GetPrayers ( $language ) {
+    public function GetPrayers ( ) {
 
-      $res = array ( );
-      
-      $prayers = $this->conn->execute_query (
-        "SELECT `category`, `title`, `body` FROM `Prayers` WHERE `language`=?",
-        [ $language ]
-      );
-        
-      foreach ( $prayers as $prayer ) {
+      $res = array ( "English" => [ ], "Latin" => [ ] );
 
-        if ( !array_key_exists ( $prayer [ "category" ], $res ) ) {
+      foreach ( array_keys ( $res ) as $lang ) {
+        $prayers = $this->conn->execute_query (
+          "SELECT `category`, `title`, `body` FROM `Prayers` WHERE `language`=?",
+          [ $lang ]
+        );
 
-          $res [ $prayer [ "category" ] ] = array ( );
+        foreach ( $prayers as $prayer ) {
 
+          if ( !array_key_exists ( $prayer [ "category" ], $res [ $lang ] ) ) {
+  
+            $res [ $lang ] [ $prayer [ "category" ] ] = array ( );
+  
+          }
+  
+          $res [ $lang ] [ $prayer [ "category" ] ] [ $prayer [ "title" ] ] = $prayer [ "body" ];
+  
         }
-
-        $res [ $prayer [ "category" ] ] [ $prayer [ "title" ] ] = $prayer [ "body" ];
-
       }
 
       return $res;

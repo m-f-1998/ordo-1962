@@ -34,7 +34,7 @@ class API: ObservableObject {
     // Get Data From API
     func GetData ( ) async {
         do {
-            if false && self.CacheExists ( ) && CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" {
+            if self.CacheExists ( ) && CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" {
                 do {
                     let cache = try self.GetCache ( )
                     DispatchQueue.main.async {
@@ -70,7 +70,7 @@ class API: ObservableObject {
                 let months_to_show: [ CelebrationData ] = ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
                 return .success ( Array ( months_to_show [ CurrentDay ( ) - 1...CurrentDay ( ) + 5 ] ) )
             } catch {
-                try self.manager.removeItem ( atPath: self.GetURL ( ).path )
+                print ( "An error occured fetching cache data \(error)" )
             }
         }
         throw ErrorAPI.fetching ( "Cache Data Could Not Be Retrieved" )
@@ -98,7 +98,7 @@ class API: ObservableObject {
 
     // Run a URL Request To API
     private func HTTP ( ) async throws -> Data {
-        guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
+        guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1.1/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
 
         var url_request = URLRequest ( url: address )
         url_request.httpMethod = "POST"

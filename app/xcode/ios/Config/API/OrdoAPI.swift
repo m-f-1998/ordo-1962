@@ -26,9 +26,6 @@ class OrdoAPI: ObservableObject {
                 print ( "Ordo Data Already At Status Successful" )
                 return
             }
-        }
-
-        if use_cache {
             UserDefaults.standard.set ( 3, forKey: "go-to-today" )
         }
 
@@ -40,7 +37,7 @@ class OrdoAPI: ObservableObject {
             URLQueryItem ( name: "timezone", value: TimeZone.current.identifier )
         ]
         
-        let data = await self.api.GetAPI ( use_cache: use_cache, save_cache: use_cache, file: self.file, url: self.url, type: OrdoData.self, queries: queries )
+        let data = await self.api.GetAPI ( use_cache: use_cache, file: self.file, url: self.url, type: OrdoData.self, queries: queries )
         DispatchQueue.main.async {
             self.res = data
         }
@@ -93,10 +90,12 @@ class OrdoAPI: ObservableObject {
     
     // Reload on Error
     func ErrorRetry ( ) {
-        Task {
-            self.SetLoading ( )
-            try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
-            await self.Update ( )
+        DispatchQueue.main.async {
+            Task {
+                self.SetLoading ( )
+                try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
+                await self.Update ( )
+            }
         }
     }
     

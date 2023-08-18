@@ -43,7 +43,8 @@ struct PropersButton: View {
                             .frame ( maxWidth: 20, maxHeight: 20 )
                     }
                         .disabled ( index == 0 )
-                        .padding ( [ .trailing ], 10 )
+                        .padding ( [ .top ], 10 )
+                        .padding ( [ .trailing ], 20 )
                     Button {
                         self.index += 1
                     } label: {
@@ -52,7 +53,8 @@ struct PropersButton: View {
                             .frame ( maxWidth: 20, maxHeight: 20 )
                     }
                         .disabled ( index == titles.count - 1 )
-                        .padding ( [ .leading ], 10 )
+                        .padding ( [ .top ], 10 )
+                        .padding ( [ .leading ], 20 )
                 }
                     .padding ( [ .top ], 10 )
                 switch self.langague {
