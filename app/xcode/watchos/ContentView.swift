@@ -63,7 +63,11 @@ struct ContentView: View {
         }
         .padding ( )
         .task {
-            await api.GetData ( )
+            if case .success ( _ ) = self.api.res {
+                print ( "Ordo Already At Status Successful" )
+            } else {
+                await self.api.GetData ( )
+            }
         }
     }
 }
