@@ -33,18 +33,26 @@ class API: ObservableObject {
     func GetData ( ) async {
         do {
             do {
-                self.res = .success ( try self.GetCache ( ) )
-                return
+                let cache = try self.GetCache ( )
+                DispatchQueue.main.async {
+                    self.res = .success ( cache )
+                }
             } catch {
                 print ( "Cache Could Not Be Used" )
+                let http = try await self.HTTP ( )
+                DispatchQueue.main.async {
+                    self.res = .success ( http )
+                }
             }
-            let data = try await self.HTTP ( )
-            self.res = .success ( data )
         } catch ErrorAPI.fetching ( let message ) {
-            self.res = .failure ( message )
+            DispatchQueue.main.async {
+                self.res = .failure ( message )
+            }
         } catch {
             print ( error.localizedDescription )
-            self.res = .failure ( "The Operation Couldn't Be Completed" )
+            DispatchQueue.main.async {
+                self.res = .failure ( "The Operation Could Not Be Completed" )
+            }
         }
     }
     

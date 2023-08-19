@@ -16,10 +16,9 @@ struct Settings: View {
     var body: some View {
         NavigationStack {
             List {
-                if self.net.connected {
-                    Options ( selected_tab: self.$selected_tab )
-                    iCal ( res: self.$ical_res )
-                }
+                Options ( selected_tab: self.$selected_tab )
+                    .disabled ( !self.net.connected )
+                iCal ( res: self.$ical_res )
                 Mail ( )
                 Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1.1/support/privacy.html" )! )
                 NavigationLink ( destination:  AppReleases ( ) ) {

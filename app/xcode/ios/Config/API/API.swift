@@ -28,9 +28,9 @@ class API {
         } catch ErrorAPI.fetching ( let message ) {
             return .failure ( message )
         } catch ErrorAPI.saving {
-            return .failure ( "An Unkown Error Occured While Saving" )
+            return .failure ( "An Unknown Error Occured While Saving" )
         } catch {
-            return .failure ( "An Unkown Error Occured" )
+            return .failure ( "An Unknown Error Occured" )
         }
     }
     

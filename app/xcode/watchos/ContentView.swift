@@ -20,9 +20,9 @@ struct Ordo: View {
                         .italic ( )
                         .font ( .system ( size: 14 ) )
                 }
-            }
-                .frame ( maxHeight: .infinity )
-                .padding ( )
+            }.padding ( )
+        }.safeAreaInset ( edge: .bottom ) {
+            EmptyView ( ).frame ( height: 8 )
         }
     }
 }
@@ -58,7 +58,7 @@ struct ContentView: View {
             case .loading:
                 ProgressView ( )
             case .none:
-                ErrorView ( error: "An Unkown Error Occured", api: api )
+                ErrorView ( error: "An Unknown Error Occured", api: api )
             }
         }
         .padding ( )

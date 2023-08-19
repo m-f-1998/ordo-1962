@@ -13,16 +13,13 @@ struct Provider: TimelineProvider {
     
     func getEntry ( ) async -> [ SimpleEntry ] {
         await api.GetData ( )
-        switch api.res {
-        case .success ( let data ):
-            let json = data [ 0 ].celebrations [ 0 ]
-            let entry = SimpleEntry ( date: .now, feast: json, loading: false, alternative: data [ 0 ].celebrations.count > 1 )
+        if case let .success ( data ) = self.api.res {
+            let entry = SimpleEntry ( date: .now, feast: data [ 0 ].celebrations [ 0 ], loading: false, alternative: data [ 0 ].celebrations.count > 1 )
             return [ entry ]
-        case .failure ( _ ):
-            fatalError ( "No Data Retrieved" )
-        default:
+        } else if case .failure ( _ ) = self.api.res {
             fatalError ( "No Data Retrieved" )
         }
+        return [ SimpleEntry ( date: .now, feast: FeastData ( id: UUID().uuidString, title: "", rank: 1, colors: "r", options: "", commemorations: [] ), loading: true, alternative: false ) ]
     }
 
     /*
