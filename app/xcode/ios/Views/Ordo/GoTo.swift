@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct GoTo: View {
-    private let year: String = UserDefaults.standard.string ( forKey: "year" )!
     var date_range: ClosedRange <Date> {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        return formatter.date ( from: self.year + "/01/01" )!...formatter.date ( from: self.year + "/12/31" )!
+        return formatter.date ( from: CurrentYear ( ) + "/01/01" )!...formatter.date ( from: String ( Int ( CurrentYear ( ) )! + 10 ) + "/12/31" )!
     }
-    var data: OrdoData
+    var data: OrdoMonth
     var proxy: ScrollViewProxy
     
-    @State private var date: Date = .now
     @Binding var view_open: Bool
+    @Binding var year: String
+    @Binding var date: Date
 
     var body: some View {
         NavigationStack {
@@ -26,40 +26,36 @@ struct GoTo: View {
                 DatePicker ( "Select Date", selection: $date, in: date_range, displayedComponents: [ .date ] )
                     .datePickerStyle ( .graphical )
                     .frame ( width: 320 )
-                VStack ( spacing: 20 ) {
+                HStack {
                     Button ( action: {
-                        self.GoToDate ( date: self.date )
+                        let components = Calendar.current.dateComponents ( [ .day, .month, .year ], from: self.date )
+                        self.year = String ( components.year! )
+                        self.GoToDate ( month: Calendar.current.monthSymbols [ components.month! - 1 ], day: components.day! )
                     }, label: {
                         Text ( "Select Date" ).bold ( )
                     } )
-                        .padding ( )
-                        .background ( LinearGradient ( ) )
-                        .clipShape ( Rectangle ( ) )
-                        .cornerRadius ( 10 )
-                    if year == CurrentYear ( ) {
-                        Button ( action: {
-                            self.GoToDate ( date: .now )
-                        }, label: {
-                            Text ( "Go To Today" ).bold ( )
-                        } )
-                    }
+                    Divider ( ).frame ( height: 30 )
+                    Button ( action: {
+                        self.year = CurrentYear ( )
+                        self.GoToDate ( month: CurrentMonth ( ), day: CurrentDay ( ) )
+                    }, label: {
+                        Text ( "Go To Today" ).bold ( )
+                    } )
                 }
             }
             .navigationTitle ( "Go To..." )
         }
     }
 
-    func GoToDate ( date: Date ) {
-        if self.data != DUMMY_ORDO {
-            if self.view_open {
-                self.view_open = false
-            }
-            let components = Calendar.current.dateComponents ( [ .day, .month ], from: date ),
-                id = self.data [ Calendar.current.monthSymbols [ components.month! - 1 ] ]! [ components.day! - 1 ].id
+    func GoToDate ( month: String, day: Int ) {
+        let id = self.data [ month ]! [ day - 1 ].id
 
-            DispatchQueue.main.async {
-                self.proxy.scrollTo ( id, anchor: .top )
-            }
+        DispatchQueue.global ( qos: .background ).asyncAfter ( deadline: .now ( ) + 0.1 ) {
+            self.proxy.scrollTo ( id, anchor: .top )
+        }
+        
+        if self.view_open {
+            self.view_open = false
         }
     }
 }

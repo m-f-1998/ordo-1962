@@ -15,15 +15,18 @@ struct Ordo: View {
     @Binding var search_text: String
     @Binding var selected_tab: Int
 
-    var data: OrdoData = DUMMY_ORDO
+    var data: OrdoMonth = DUMMY_ORDO
     var languages: [ String ] = [ "English", "Latin" ]
+    @State var year: String = CurrentYear ( )
+    @State var go_to_date: Date = .now
+    @Binding var tappedTwice: Bool
 
     var body: some View {
         ScrollViewReader { proxy in
             NavigationStack {
                 VStack ( spacing: 0 ) {
                     HStack ( spacing: 0 ) {
-                        Text ( "Year: \(UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( ))" )
+                        Text ( "Year: \(self.year)" )
                             .bold ( )
                             .italic ( )
                             .padding ( [ .top, .bottom ], 7 )
@@ -41,12 +44,19 @@ struct Ordo: View {
                                         .redacted ( reason: self.data == DUMMY_ORDO ? .placeholder : [] )
                                         .id ( self.data [ month ]![ index ].id )
                                 }
+                            }.onAppear {
+                                DispatchQueue.global ( qos: .background ).async {
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "dd MMMM yyyy"
+                                    self.go_to_date = formatter.date ( from: "1 \(month) \(year)")!
+                                }
                             }
                         }
                     }
                     .scrollDisabled ( data == DUMMY_ORDO )
                     .scrollIndicators ( .hidden )
                     .navigationTitle ( "1962 Ordo" )
+                    .searchable ( text: self.$search_text, placement: .navigationBarDrawer ( displayMode: .always ) )
                     .toolbar {
                         ToolbarItem ( placement: .automatic ) {
                             HStack {
@@ -63,43 +73,46 @@ struct Ordo: View {
                                         Image ( systemName: "calendar" )
                                     }
                                     .navigationDestination ( isPresented: self.$go_to_open ) {
-                                        GoTo ( data: self.data, proxy: proxy, view_open: self.$go_to_open )
+                                        GoTo ( data: self.data, proxy: proxy, view_open: self.$go_to_open, year: self.$year, date: self.$go_to_date )
                                     }
                                 }
                                     .disabled ( data == DUMMY_ORDO )
                             }
                         }
                     }
-                    .searchable ( text: self.$search_text, placement: .navigationBarDrawer ( displayMode: .always ) )
                     .NavBarGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
                 }
             }
+            .onChange ( of: self.tappedTwice, perform: { tapped in
+                if tapped {
+                    withAnimation {
+                        proxy.scrollTo ( self.data [ "January" ]?.first!.id, anchor: .top )
+                        self.tappedTwice = false
+                    }
+                }
+            } )
             .onChange ( of: self.data ) { change in
                 // Required for API as On Loading State When Appears
                 self.ScrollView ( proxy: proxy, change: change )
             }
             .onAppear {
                 // Required for Cache to Run on Load
-                self.ScrollView ( proxy: proxy, change: data, onAppear: true )
+                self.ScrollView ( proxy: proxy, change: data )
             }
         }
     }
     
-    func ScrollView ( proxy: ScrollViewProxy, change: OrdoData, onAppear: Bool = false ) {
+    func ScrollView ( proxy: ScrollViewProxy, change: OrdoMonth ) {
         if change != DUMMY_ORDO {
-            if UserDefaults.standard.string ( forKey: "year" ) == CurrentYear ( ) {
-                let go_to_today = UserDefaults.standard.integer ( forKey: "go-to-today" )
-                if go_to_today != 1 {
-                    if let id = self.ordo.GetIDToday ( ) {
-                        let queue = go_to_today == 2 ? DispatchQueue.main : DispatchQueue.global ( qos: .default )
-                        UserDefaults.standard.set ( 1, forKey: "go-to-today" )
-                        queue.async {
-                            proxy.scrollTo ( id, anchor: .top )
-                        }
+            let go_to_today = UserDefaults.standard.integer ( forKey: "go-to-today" )
+            if go_to_today != 1 {
+                if let id = self.ordo.GetIDToday ( ) {
+                    let queue = go_to_today == 2 ? DispatchQueue.main : DispatchQueue.global ( qos: .default )
+                    UserDefaults.standard.set ( 1, forKey: "go-to-today" )
+                    queue.async {
+                        proxy.scrollTo ( id, anchor: .top )
                     }
                 }
-            } else if !onAppear {
-                proxy.scrollTo ( "January", anchor: .top )
             }
         }
     }

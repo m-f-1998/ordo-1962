@@ -58,9 +58,10 @@ class API: ObservableObject {
     
     // Reduce Data to a Week of Celebrations
     func GetCelebrations ( data: Data ) throws -> [ CelebrationData ] {
-        let next_month: String = Calendar.current.monthSymbols [ Calendar.current.component ( .month, from: .now ) ]
+        let month = Calendar.current.component ( .month, from: .now )
+        let next_month: String = Calendar.current.monthSymbols [ month == 12 ? 0 : month ]
         do {
-            let ordo: OrdoData = try self.Decode ( data: data, type: OrdoData.self )
+            let ordo: OrdoMonth = try self.Decode ( data: data, type: OrdoMonth.self )
             let months_to_show: [ CelebrationData ] = ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
             return Array ( months_to_show [ CurrentDay ( ) - 1...CurrentDay ( ) + 5 ] )
         } catch {
@@ -105,7 +106,7 @@ class API: ObservableObject {
 
     // Run a URL Request To API
     private func HTTP ( ) async throws -> [ CelebrationData ] {
-        guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1.1/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
+        guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
 
         var url_request = URLRequest ( url: address )
         url_request.httpMethod = "POST"

@@ -9,10 +9,7 @@ import Foundation
 
 // MARK: Propers
 
-typealias PropersData = [ String: [ FeastPropers ] ]
-struct FeastPropers: Codable, Hashable, Identifiable {
-    let id: String
-    let date: String
+struct FeastPropers: Codable, Hashable {
     let introit: PropersLanguage?
     let collect: PropersLanguage?
     let epistle: PropersLanguage?
@@ -52,22 +49,31 @@ typealias PrayerData = [ String : String ]
 
 // MARK: Liturgical Ordo
 
-typealias OrdoData = [ String: [ CelebrationData ] ]
+typealias OrdoMonth = [ String: [ CelebrationData ] ]
 struct CelebrationData: Codable, Hashable, Identifiable {
-    let id: String
+    let id = UUID ( ).uuidString
     let date: String
     let celebrations: [ FeastData ]
     let season: SeasonData?
+    let propers: FeastPropers?
+    
+    enum CodingKeys: String, CodingKey {
+        case date, celebrations, season, propers
+    }
 }
 struct SeasonData: Codable, Hashable {
     let title: String
     let colors: String
 }
 struct FeastData: Codable, Hashable, Identifiable {
-    let id: String
+    let id: String = UUID ( ).uuidString
     let title: String
     let rank: Int
     let colors: String
     let options: String?
     let commemorations: [ FeastData ]?
+    
+    enum CodingKeys: String, CodingKey {
+        case title, rank, colors, options, commemorations
+    }
 }

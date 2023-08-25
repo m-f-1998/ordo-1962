@@ -5,13 +5,14 @@
 //  Created by Matthew Frankland on 02/07/2023.
 //
 
-import Foundation
+import SwiftUI
 
 class OrdoAPI: ObservableObject {
     private let file: String = "ordo.data", url = "ordo.php"
-    @Published private ( set ) var res: ResultAPI <OrdoData>!
+    @Published private ( set ) var res: ResultAPI <OrdoMonth>!
     private var api: API = API ( )
-    
+    @ObservedObject private var net: NetworkMonitor = NetworkMonitor ( )
+
     init ( ) {
         self.res = self.GetCache ( ) // Go To Loading If Cache Does Not Exist
         if case .success ( _ ) = self.res {
@@ -21,25 +22,37 @@ class OrdoAPI: ObservableObject {
     
     // Update The Status Of The Ordo Calendar Data
     func Update ( use_cache: Bool = true ) async {
-        if use_cache {
-            if case .success ( _ ) = self.res {
-                print ( "Ordo Data Already At Status Successful" )
-                return
-            }
-            UserDefaults.standard.set ( 3, forKey: "go-to-today" )
-        }
+        for i in Int ( CurrentYear ( ) )!...Int ( CurrentYear ( ) )! + 10 {
+            let file = "ordo-\(i).data"
 
-        let now: String = FormatDate ( time: true ).string ( from: .now )
-        UserDefaults.standard.set ( now, forKey: "last-update" )
-        
-        let queries: [ URLQueryItem ] = [
-            URLQueryItem ( name: "year", value: UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( ) ),
-            URLQueryItem ( name: "timezone", value: TimeZone.current.identifier )
-        ]
-        
-        let data = await self.api.GetAPI ( use_cache: use_cache, file: self.file, url: self.url, type: OrdoData.self, queries: queries )
-        DispatchQueue.main.async {
-            self.res = data
+            if i == Int ( CurrentYear ( ) ) && use_cache {
+                if case .success ( _ ) = self.res {
+                    print ( "Ordo Data Already At Status Successful" )
+                    continue
+                }
+                UserDefaults.standard.set ( 3, forKey: "go-to-today" )
+            } else if use_cache {
+                if self.api.CacheExists ( name: file ) {
+                    continue
+                }
+            }
+
+            let now: String = FormatDate ( time: true ).string ( from: .now )
+            UserDefaults.standard.set ( now, forKey: "last-update" )
+            let queries = [
+                URLQueryItem ( name: "year", value: String ( i ) )
+            ]
+           
+            if i == Int ( CurrentYear ( ) ) {
+                let data = await self.api.GetAPI ( use_cache: use_cache, file: file, url: self.url, type: OrdoMonth.self, queries: queries )
+                DispatchQueue.main.async {
+                    self.res = data
+                }
+            } else {
+                Task {
+                    await self.api.GetAPI ( use_cache: use_cache, file: file, url: self.url, type: OrdoMonth.self, queries: queries )
+                }
+            }
         }
     }
     
@@ -52,7 +65,7 @@ class OrdoAPI: ObservableObject {
     }
 
     // Get Data, Filtered If Search
-    func GetResult ( search: String = "" ) -> OrdoData {
+    func GetResult ( search: String = "" ) -> OrdoMonth {
         var result = DUMMY_ORDO
         if case let .success ( res ) = self.res {
             result = res
@@ -64,23 +77,31 @@ class OrdoAPI: ObservableObject {
         }
         return result
     }
-    
-    // Go Back To Current Year
-    func BackToCurrentYear ( ) {
-        UserDefaults.standard.set ( CurrentYear ( ), forKey: "year" )
-        self.res = self.GetCache ( delete_cache: false )
-    }
 
     // Get Cache Data, Ignore Internet
-    func GetCache ( delete_cache: Bool = true ) -> ResultAPI <OrdoData> {
+    func GetCache ( ) -> ResultAPI <OrdoMonth> {
         do {
-            return .success ( try self.api.GetCache ( delete_cache: delete_cache, file: self.file, type: OrdoData.self ) )
+            if CurrentDay ( ) == 1 && CurrentMonth ( ) == "January" {
+                try self.DeleteCache ( file: "ordo-" + String ( Int ( CurrentYear ( ) )! - 1 ) + ".data" )
+            } else if self.net.connected && config.DataStale ( ) {
+                for i in Int ( CurrentYear ( ) )!...Int ( CurrentYear ( ) )! + 10 {
+                    let file = "ordo-\(String(i)).data"
+                    try self.DeleteCache ( file: file )
+                }
+            }
+            let file: String = "ordo-\( CurrentYear ( ) ).data"
+            return .success ( try self.api.GetCache ( file: file, type: OrdoMonth.self ) )
         } catch ErrorAPI.fetching {
             UserDefaults.standard.set ( 1, forKey: "go-to-today" )
             return .loading ( DUMMY_ORDO )
         } catch {
             return .failure ( error.localizedDescription )
         }
+    }
+    
+    func DeleteCache ( file: String ) throws {
+        let container = FileManager.default.containerURL ( forSecurityApplicationGroupIdentifier: "group.mfrankland.ordo-62.contents" )!
+        try FileManager.default.removeItem ( atPath: container.appending ( path: file, directoryHint: .notDirectory ).path )
     }
     
     // Reset Ordo to Progress View

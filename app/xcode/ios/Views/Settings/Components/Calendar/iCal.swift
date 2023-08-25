@@ -83,7 +83,7 @@ struct iCal: View {
             if permissions {
                 do {
                     let calendar = try GetCalendar ( title: self.title )
-                    let data: ResultAPI <OrdoData> = self.ordo.GetCache ( )
+                    let data: ResultAPI <OrdoMonth> = self.ordo.GetCache ( )
                     
                     if case let .success ( res ) = data {
                         for month in Calendar.current.monthSymbols {

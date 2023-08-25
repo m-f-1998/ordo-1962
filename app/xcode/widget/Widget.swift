@@ -19,14 +19,14 @@ struct Provider: TimelineProvider {
         } else if case .failure ( _ ) = self.api.res {
             fatalError ( "No Data Retrieved" )
         }
-        return [ SimpleEntry ( date: .now, feast: FeastData ( id: UUID().uuidString, title: "", rank: 1, colors: "r", options: "", commemorations: [] ), loading: true, alternative: false ) ]
+        return [ SimpleEntry ( date: .now, feast: FeastData ( title: "", rank: 1, colors: "r", options: "", commemorations: [] ), loading: true, alternative: false ) ]
     }
 
     /*
      Provides a timeline entry representing a placeholder version of the widget.
      */
     func placeholder ( in context: Context ) -> SimpleEntry {
-        SimpleEntry ( date: .now, feast: FeastData ( id: UUID().uuidString, title: "", rank: 1, colors: "r", options: "", commemorations: [] ), loading: true, alternative: false )
+        SimpleEntry ( date: .now, feast: FeastData ( title: "", rank: 1, colors: "r", options: "", commemorations: [] ), loading: true, alternative: false )
     }
 
     /*

@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 class Functions {
 
     private $conn;
@@ -15,114 +19,96 @@ class Functions {
 
   /**
    *
-   * Get Ordo Dates For A Given Year
+   * Get Ordo Dates For A Decade
    *
    */
-    public function GetOrdoYear ( $year ) {
-      
+    public function GetOrdo ( $year ) {
+
       $res = array (
         'January' => [], 'February' => [], 'March' => [], 'April' => [],
         'May' => [], 'June' => [], 'July' => [], 'August' => [],
         'September' => [], 'October' => [], 'November' => [], 'December' => []
       );
 
-      foreach ( $res as $month => $value ) {
+      $days = $this->conn->execute_query (
+        "SELECT f.`rank`, f.`title`, f.`colors`,
+            c.`options`, c.`date`, DATE_FORMAT(c.`date`, '%a %d') as `formatted_date`,
+            s.`title` as `season_title`, s.`colors` as `season_colors`,
+            (SELECT feast.`rank` FROM `Feast` feast WHERE comm.`feast`=feast.`id`) as `comm_rank`,
+            (SELECT feast.`title` FROM `Feast` feast WHERE comm.`feast`=feast.`id`) as `comm_title`,
+            (SELECT feast.`colors` FROM `Feast` feast WHERE comm.`feast`=feast.`id`) as `comm_colors`
+          FROM `Celebrations` c
+          LEFT JOIN `Season` s ON c.`season`=s.`id`
+          LEFT JOIN `Feast` f ON c.`feast`=f.`id`
+          LEFT JOIN `Commemorations` comm ON comm.`celebration`=c.`id`
+          WHERE YEAR(c.`date`)=?
+          ORDER BY `c`.`date`
+          ASC",
+        [ $year ]
+      );
 
-        $days = $this->conn->execute_query (
-          "SELECT c.`date`, DATE_FORMAT(c.`date`, '%a %d') as `formatted_date`, s.`title` as `season_title`, s.`colors` as `season_colors`
-            FROM `Celebrations` c
-            JOIN `Season` s ON c.`season`=s.`id`
-            WHERE YEAR(c.`date`)=? AND MONTHNAME(c.`date`)=? 
-            GROUP BY c.`date`
-            ORDER BY `c`.`date`
-            ASC",
-          [ $year, $month ]
-        );
-        
-        foreach ( $days as $day ) {
+      foreach ( $days as $day ) {
 
-          $celebrations = array ( );
+        $month = date ( "F", strtotime ( $day [ "date" ] ) );
 
-          $celebrations_query = $this->conn->execute_query (
-            "SELECT BIN_TO_UUID(c.`id`) as `id`, f.`rank`, f.`title`, f.`colors`, c.`options`
-              FROM `Celebrations` c
-              JOIN `Feast` f ON c.`feast`=f.`id`
-              WHERE c.`date`=?",
-            [ $day [ 'date' ] ]
-          );
+        $last_key = array_key_last ( $res [ $month ] );
 
-          foreach ( $celebrations_query as $row ) {
-            $row [ "commemorations" ] = $this->conn->execute_query (
-              "SELECT BIN_TO_UUID(f.`id`) as `id`, f.`rank`, f.`title`, f.`colors`
-                FROM `Commemorations` c
-                JOIN `Feast` f ON c.`feast`=f.`id`
-                WHERE c.`celebration`=UUID_TO_BIN(?)",
-              [ $row [ 'id' ] ]
-            )->fetch_all ( MYSQLI_ASSOC );
-            
-            array_push ( $celebrations, $row );
+        if ( !is_null ( $last_key ) &&  $res [ $month ] [ $last_key ] [ "date" ] == $day [ "formatted_date" ] ) {
+
+          $last_celeb_key = array_key_last ( $res [ $month ] [ $last_key ] [ "celebrations" ] );
+          
+          if ( $res [ $month ] [ $last_key ] [ "celebrations" ] [ $last_celeb_key ] [ "title" ] == $day [ "title" ] ) {
+
+            array_push ( $res [ $month ] [ $last_key ] [ "celebrations" ] [ $last_celeb_key ] [ "commemorations" ], array (
+              "rank" => $day [ "comm_rank" ],
+              "title" => $day [ "comm_title" ],
+              "colors" => $day [ "comm_colors" ]
+            ) );
+
+          } else {
+
+            array_push ( $res [ $month ] [ $last_key ] [ "celebrations" ], array (
+              "rank" => $day [ "rank" ],
+              "title" => $day [ "title" ],
+              "colors" => $day [ "colors" ],
+              "options" => $day [ "options" ],
+              "commemorations" => is_null ( $day [ "comm_title" ] ) ? array ( ) : array ( array (
+                "rank" => $day [ "comm_rank" ],
+                "title" => $day [ "comm_title" ],
+                "colors" => $day [ "comm_colors" ]
+              ) )
+            ) );
+
           }
 
+        } else {
+
           array_push ( $res [ $month ], array (
-            "id" => bin2hex ( openssl_random_pseudo_bytes ( 16 ) ),
             "date" => $day [ "formatted_date" ],
-            "celebrations" => $celebrations,
+            "celebrations" => array ( array (
+              "rank" => $day [ "rank" ],
+              "title" => $day [ "title" ],
+              "colors" => $day [ "colors" ],
+              "options" => $day [ "options" ],
+              "commemorations" => is_null ( $day [ "comm_title" ] ) ? array ( ) : array ( array (
+                "rank" => $day [ "comm_rank" ],
+                "title" => $day [ "comm_title" ],
+                "colors" => $day [ "comm_colors" ]
+              ) )
+            ) ),
+            "propers" => $this->GetProperText ( $day [ "date" ] ),
             "season" => array (
               "title" => $day [ "season_title" ],
               "colors" => $day [ "season_colors" ]
             )
           ) );
-        
-        }
 
+        }
+      
       }
 
       return $res;
     
-    }
-
-  /**
-   *
-   * Get Next 7 Liturgical Days
-   *
-   */
-    public function GetOrdoWeek ( $timestamp ) {
-
-      $res = array ( );
-      
-      date_default_timezone_set ( $timestamp );
-      
-      $today = date ( 'Y-m-d' );
-      $next_week = date ( 'Y-m-d', strtotime ( '+1 week' ) );
-
-      $celebrations = $this->conn->execute_query (
-        "SELECT BIN_TO_UUID(c.`id`) as `id`, DATE_FORMAT(c.`date`, '%a %d') as `date`, f.`rank`, f.`title`, f.`colors`
-          FROM `Celebrations` c, `Feast` f
-          WHERE c.`feast`=f.`id` AND c.`date` BETWEEN ? AND ?
-          ORDER BY `c`.`date`
-          ASC",
-        [ $today, $next_week ]
-      );
-        
-      foreach ( $celebrations as $celebration ) {
-
-        array_push ( $res, array (
-          "id" => bin2hex ( openssl_random_pseudo_bytes ( 16 ) ),
-          "date" => $celebration [ "date" ],
-          "celebrations" => array (
-            array (
-              "id" => $celebration [ "id" ],
-              "rank" => $celebration [ "rank" ],
-              "title" => $celebration [ "title" ],
-              "colors" => $celebration [ "colors" ]
-            )
-          )
-        ) );
-
-      }
-
-      return $res;
-
     }
 
   /**
@@ -162,66 +148,36 @@ class Functions {
    * Get The Propers For The Holy Masses In A Given Year
    *
    */
-    public function GetPropers ( $year ) {
+  private function GetProperText ( $date ) {
 
-      $res = array (
-        'January' => [], 'February' => [], 'March' => [], 'April' => [],
-        'May' => [], 'June' => [], 'July' => [], 'August' => [],
-        'September' => [], 'October' => [], 'November' => [], 'December' => []
+    $query = $this->conn->execute_query ( "SELECT pt.`category`, pt.`english`, pt.`latin`
+    FROM `ProperText` pt
+    LEFT JOIN `Propers` p ON
+      (
+            p.`introit`=pt.`id`
+            OR p.`collect`=pt.`id`
+            OR p.`collect`=pt.`id`
+            OR p.`epistle`=pt.`id`
+            OR p.`gradual`=pt.`id`
+            OR p.`gospel`=pt.`id`
+            OR p.`offertory`=pt.`id`
+            OR p.`secret`=pt.`id`
+            OR p.`preface`=pt.`id`
+            OR p.`communion`=pt.`id`
+            OR p.`postcommunion`=pt.`id`
+        ) WHERE p.`date`=?", [ $date ] );
+    $res = array ( );
+
+    foreach ( $query as $row ) {
+      $res [ $row [ "category" ] ] = array (
+        "english" => $row [ "english" ],
+        "latin" => $row [ "latin" ]
       );
-
-      for ( $month = 1; $month <= 12; $month++ ) {
-
-        for ( $day = 1; $day <= cal_days_in_month ( CAL_GREGORIAN, $month, $year ); $day++ ) {
-
-          $id = vsprintf ( '%s%s-%s-%s-%s-%s%s%s', str_split ( bin2hex ( random_bytes ( 16 ) ), 4 ) );
-          $date =  $year . "-" . strval ( $month ) . "-" . strval ( $day );
-          
-          array_push ( $res [ array_keys ( $res ) [ $month - 1 ] ],
-            $this->GetProperText ( $id, $date )
-          );
-
-        }
-
-      }
-
-      return $res;
-    
     }
 
-    private function GetProperText ( $id, $date ) {
+    return count ( $res ) > 0 ? $res : NULL;
 
-      $query = "SELECT pt.`category`, pt.`english`, pt.`latin`
-      FROM `ProperText` pt, `Propers` p
-        WHERE p.`date`=? AND (
-              p.`introit`=pt.`id`
-              OR p.`collect`=pt.`id`
-              OR p.`collect`=pt.`id`
-              OR p.`epistle`=pt.`id`
-              OR p.`gradual`=pt.`id`
-              OR p.`gospel`=pt.`id`
-              OR p.`offertory`=pt.`id`
-              OR p.`secret`=pt.`id`
-              OR p.`preface`=pt.`id`
-              OR p.`communion`=pt.`id`
-              OR p.`postcommunion`=pt.`id`
-          )";
-      $res = $this->conn->execute_query ( $query, [ $date ] )->fetch_all ( MYSQLI_ASSOC );
-
-      $column = array_column ( $res, 'category' );
-      array_walk ( $res, function ( &$v ) {
-        unset ( $v [ 'category' ] );
-      } );
-      $result = array_combine ( $column, $res );
-
-      return array_merge ( 
-        array (
-          "id" => $id,
-          "date" => date ( 'D d', strtotime ( $date ) )
-        ), $result
-      );
-
-    }
+  }
 
 }
 

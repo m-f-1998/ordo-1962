@@ -16,10 +16,8 @@ class API {
         do {
             if use_cache {
                 do {
-                    return try .success ( self.GetCache ( delete_cache: self.net.connected, file: file, type: type ) )
-                } catch {
-                    print ( "Cache Could Not Be Used" )
-                }
+                    return try .success ( self.GetCache ( file: file, type: type ) )
+                } catch { }
             }
             if self.net.connected {
                 return .success ( try await self.SaveCache ( url: url, file: file, type: T.self, url_query: queries ) )
@@ -35,14 +33,9 @@ class API {
     }
     
     // Retrieve Cache Data
-    func GetCache <T:Decodable> ( delete_cache: Bool = true, file: String, type: T.Type ) throws -> T {
+    func GetCache <T:Decodable> ( file: String, type: T.Type ) throws -> T {
         if self.CacheExists ( name: file ) {
-            let new_year: Bool = CurrentDay ( ) == 1 && CurrentMonth ( ) == "January"
-            if delete_cache && ( new_year || ( self.net.connected && config.DataStale ( ) ) ) {
-                try self.manager.removeItem ( atPath: self.GetURL ( file_name: file ).path )
-            } else {
-                return try self.Decode ( data: Data ( contentsOf: self.GetURL ( file_name: file ) ), type: type )
-            }
+            return try self.Decode ( data: Data ( contentsOf: self.GetURL ( file_name: file ) ), type: type )
         }
         throw ErrorAPI.fetching ( "Cache Data Could Not Be Retrieved" )
     }
@@ -54,7 +47,7 @@ class API {
     }
     
     // Check Cache File Exists
-    private func CacheExists ( name: String ) -> Bool {
+    func CacheExists ( name: String ) -> Bool {
         do {
             return self.manager.fileExists ( atPath: try self.GetURL ( file_name: name ).path ( ) )
         } catch {
@@ -66,13 +59,11 @@ class API {
     private func SaveCache <T:Decodable> ( url: String, file: String, type: T.Type, url_query: [ URLQueryItem ] ) async throws -> T {
         do {
             let data = try await self.HTTP ( url: url, request_params: url_query )
-            let year: String = UserDefaults.standard.string ( forKey: "year" ) ?? CurrentYear ( )
-            if year == CurrentYear ( ) {
-                print ( "Writing New Cache for \(file)" )
-                try data.write ( to: self.GetURL ( file_name: file ), options: .completeFileProtection )
-            }
+            print ( "Writing New Cache for \(file)" )
+            try data.write ( to: self.GetURL ( file_name: file ), options: .completeFileProtection )
             return try self.Decode ( data: data, type: T.self )
         } catch {
+            print ( error )
             throw ErrorAPI.saving
         }
     }
@@ -84,7 +75,7 @@ class API {
 
     // Run a URL Request To API
     private func HTTP ( url: String, request_params: [ URLQueryItem ] ) async throws -> Data {
-        guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.1.1/\(url)" ) else { throw ErrorAPI.fetching ( "URL Invalid" ) }
+        guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2/\(url)" ) else { throw ErrorAPI.fetching ( "URL Invalid" ) }
 
         var url_request: URLRequest = URLRequest ( url: address )
         url_request.httpMethod = "POST"

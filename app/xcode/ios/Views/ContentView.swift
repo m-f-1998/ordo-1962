@@ -13,15 +13,23 @@ struct ContentView: View {
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
     @ObservedObject var ordo: OrdoAPI = OrdoAPI ( )
     @ObservedObject var prayers: PrayerAPI = PrayerAPI ( )
-    @ObservedObject var propers: PropersAPI = PropersAPI ( )
     
     @State var search_text: String = ""
     @State private var tab_selection: Int = 0
     @State private var data_stale_alert_shown: Bool = false
+    
+    @State private var tappedTwice: Bool = false
+    var handler: Binding<Int> { Binding (
+        get: { self.tab_selection },
+        set: {
+            if $0 == self.tab_selection {
+                self.tappedTwice = true
+            }
+            self.tab_selection = $0
+        }
+    ) }
 
-    init ( ) {
-        UserDefaults.standard.set ( CurrentYear ( ), forKey: "year" )
-        
+    init ( ) {        
         if UserDefaults.standard.string ( forKey: "prayers-lang" ) == nil {
             UserDefaults.standard.set ( "English", forKey: "prayers-lang" )
         }
@@ -33,19 +41,18 @@ struct ContentView: View {
     
     func reload ( ) {
         self.prayers.ErrorRetry ( )
-        self.propers.ErrorRetry ( )
         self.ordo.ErrorRetry ( )
     }
 
     var body: some View {
         VStack ( spacing: 0 ) {
-            switch ordo.res { // MARK: Future Update, All Errors Should Be Handled Here
+            switch ordo.res { // TODO: Future Update, All Errors Should Be Handled Here
             case .failure ( let error ):
                 ErrorView ( description: error, Callback: self.reload )
             case .success ( _ ), .loading ( _ ):
                 let data = ordo.GetResult ( search: self.search_text )
-                TabView ( selection: $tab_selection ) {
-                    Ordo ( search_text: self.$search_text, selected_tab: self.$tab_selection, data: data )
+                TabView ( selection: handler ) {
+                    Ordo ( search_text: self.$search_text, selected_tab: self.$tab_selection, data: data, tappedTwice: self.$tappedTwice  )
                         .tabItem {
                             Label ( "Ordo", systemImage: "calendar" )
                         }
@@ -56,7 +63,7 @@ struct ContentView: View {
                             Text ( "Prayer" )
                         }
                         .tag ( 1 )
-                    Settings ( selected_tab: $tab_selection )
+                    Settings ( )
                         .tabItem {
                             Label ( "Settings", systemImage: "gear" )
                         }
@@ -71,27 +78,14 @@ struct ContentView: View {
             .environmentObject ( self.net )
             .environmentObject ( self.ordo )
             .environmentObject ( self.prayers )
-            .environmentObject ( self.propers )
             .task {
-                DispatchQueue.main.async {
-                    Task {
-                        await self.prayers.Update ( )
-                        await self.propers.Update ( )
-                        await self.ordo.Update ( )
-                    }
-                }
-            }
-            .onChange ( of: self.net.connected ) { change in
-                if !change && UserDefaults.standard.string ( forKey: "year" )! != CurrentYear ( ) {
-                    self.ordo.BackToCurrentYear ( )
-                    self.propers.BackToCurrentYear ( )
-                    self.tab_selection = 0
-                }
+                await self.prayers.Update ( )
+                await self.ordo.Update ( )
             }
             .onReceive ( NotificationCenter.default.publisher ( for: UIApplication.didBecomeActiveNotification ) ) { _ in
                 UIApplication.shared.applicationIconBadgeNumber = 0
             }
-            .alert ( "A New Version of this Application is Available", isPresented: .constant ( !self.data_stale_alert_shown && config.UpdateAvailable ( ).wrappedValue ) ) {
+            .alert ( "A New Version of this Application is Available", isPresented: .constant ( !self.data_stale_alert_shown && self.net.connected && config.UpdateAvailable ( ).wrappedValue ) ) {
                 Button ( "Update" ) {
                     if let url = URL ( string: self.app_url ), UIApplication.shared.canOpenURL ( url ) {
                         data_stale_alert_shown = true

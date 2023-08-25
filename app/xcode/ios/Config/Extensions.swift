@@ -40,15 +40,15 @@ func CurrentYear ( ) -> String {
 }
 
 // Ordo Data For When List Loading
-let DUMMY_ORDO: OrdoData = Calendar.current.monthSymbols.reduce ( into: OrdoData () ) { // Displayed in redacted format when loading
+let DUMMY_ORDO: OrdoMonth = Calendar.current.monthSymbols.reduce ( into: OrdoMonth () ) { // Displayed in redacted format when loading
     $0 [ $1 ] = [
         CelebrationData.init (
-            id: UUID ( ).uuidString,
             date: FormatDate ( ).string ( from: .distantPast ),
             celebrations: [
-                FeastData.init ( id: UUID().uuidString, title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", commemorations: [] )
+                FeastData.init ( title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", commemorations: [] )
             ],
-            season: SeasonData ( title: "Dummy Season", colors: "g" )
+            season: SeasonData ( title: "Dummy Season", colors: "g" ),
+            propers: nil
         )
     ]
 }

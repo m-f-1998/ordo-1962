@@ -15,14 +15,10 @@
 
     } else {
 
-      echo json_encode ( $operations->GetOrdoYear ( $_POST [ 'year' ] ) );
+      echo json_encode ( $operations->GetOrdo ( $_POST [ 'year' ] ) );
 
     }
   
-  } else if ( isset ( $_POST [ 'timezone' ] ) && in_array ( $_POST [ 'timezone' ], DateTimeZone::listIdentifiers ( ) ) ) {
-
-    echo json_encode ( $operations->GetOrdoWeek ( $_POST [ 'timezone' ] ) );
-
   } else {
 
     http_response_code ( 400 );

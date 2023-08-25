@@ -13,7 +13,6 @@
 		C803BB4A2A52EAF500EA2F98 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
 		C803BB4B2A52EAFE00EA2F98 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A6DB012A45F8FF008B1B92 /* API.swift */; };
 		C80649EE29FACE7D00CF218D /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80649ED29FACE7D00CF218D /* FirebaseConfig.swift */; };
-		C80883082A5D8AF3001AC6E5 /* PropersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80883072A5D8AF3001AC6E5 /* PropersAPI.swift */; };
 		C808830B2A5D9167001AC6E5 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808830A2A5D9167001AC6E5 /* Structs.swift */; };
 		C808830C2A5D917E001AC6E5 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808830A2A5D9167001AC6E5 /* Structs.swift */; };
 		C808830D2A5D918F001AC6E5 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808830A2A5D9167001AC6E5 /* Structs.swift */; };
@@ -124,7 +123,6 @@
 		C803BB442A520D9800EA2F98 /* OrdoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoAPI.swift; sourceTree = "<group>"; };
 		C803BB472A520DB200EA2F98 /* PrayerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerAPI.swift; sourceTree = "<group>"; };
 		C80649ED29FACE7D00CF218D /* FirebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
-		C80883072A5D8AF3001AC6E5 /* PropersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropersAPI.swift; sourceTree = "<group>"; };
 		C808830A2A5D9167001AC6E5 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		C808830F2A5DAE90001AC6E5 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		C80883112A5DAEB1001AC6E5 /* PropersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropersButton.swift; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 				C8428D2729F582A4001462FF /* API.swift */,
 				C803BB442A520D9800EA2F98 /* OrdoAPI.swift */,
 				C803BB472A520DB200EA2F98 /* PrayerAPI.swift */,
-				C80883072A5D8AF3001AC6E5 /* PropersAPI.swift */,
 				C803BB412A520D7400EA2F98 /* StructsAPI.swift */,
 			);
 			path = API;
@@ -557,7 +554,6 @@
 				C8186FBB2A2A544D0072AB13 /* Prayer.swift in Sources */,
 				C8AE1DDB2A21260500B36A2C /* Day.swift in Sources */,
 				C8AE1DE82A214B7D00B36A2C /* iCal.swift in Sources */,
-				C80883082A5D8AF3001AC6E5 /* PropersAPI.swift in Sources */,
 				C8C6CEFD2A8260610010EEDE /* TabBarGradient.swift in Sources */,
 				C8AE1DDD2A21265200B36A2C /* Feast.swift in Sources */,
 				C871588529F0433400E1F02D /* Ordo.swift in Sources */,

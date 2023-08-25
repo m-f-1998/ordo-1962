@@ -13,7 +13,6 @@ struct Row: View {
     let month: String
 
     @State private var menu_expanded: Bool = false
-    @EnvironmentObject var propers: PropersAPI
 
     var body: some View {
         HStack {
@@ -41,43 +40,30 @@ struct Row: View {
             self.menu_expanded.toggle ( )
         }
         if self.menu_expanded {
-            if case let .success ( res ) = self.propers.res {
-                let propers = res [ self.month ]! [ self.index ]
-                if propers.introit != nil {
-                    HStack {
-                        LazyVStack {
-                            PropersButton ( content: propers, index: 0 )
-                            PropersButton ( content: propers, index: 1 )
-                            PropersButton ( content: propers, index: 2 )
-                            PropersButton ( content: propers, index: 3 )
-                            PropersButton ( content: propers, index: 4 )
-                        }
-
-                        LazyVStack {
-                            PropersButton ( content: propers, index: 5 )
-                            PropersButton ( content: propers, index: 6 )
-                            PropersButton ( content: propers, index: 7 )
-                            PropersButton ( content: propers, index: 8 )
-                            PropersButton ( content: propers, index: 9 )
-                        }
-                    }
-                    .frame ( maxWidth: .infinity, alignment: .center )
-                    .buttonStyle ( PlainButtonStyle ( ) )
-                } else {
-                    HStack {
-                        Text ( "Mass Propers are Unavailable Today" )
-                            .multilineTextAlignment ( .center )
-                    }
-                        .frame ( maxWidth: .infinity, alignment: .center )
-                }
-            } else if case .loading = self.propers.res {
+            if let propers = self.feast.propers {
                 HStack {
-                    ProgressView ( )
+                    LazyVStack {
+                        PropersButton ( content: propers, index: 0 )
+                        PropersButton ( content: propers, index: 1 )
+                        PropersButton ( content: propers, index: 2 )
+                        PropersButton ( content: propers, index: 3 )
+                        PropersButton ( content: propers, index: 4 )
+                    }
+
+                    LazyVStack {
+                        PropersButton ( content: propers, index: 5 )
+                        PropersButton ( content: propers, index: 6 )
+                        PropersButton ( content: propers, index: 7 )
+                        PropersButton ( content: propers, index: 8 )
+                        PropersButton ( content: propers, index: 9 )
+                    }
                 }
-                    .frame ( maxWidth: .infinity, alignment: .center )
-            } else if case .failure = self.propers.res {
-                Button ( action: self.propers.ErrorRetry ) {
-                    Label ( "Try Again", systemImage: "arrow.clockwise" )
+                .frame ( maxWidth: .infinity, alignment: .center )
+                .buttonStyle ( PlainButtonStyle ( ) )
+            } else {
+                HStack {
+                    Text ( "Mass Propers are Unavailable Today" )
+                        .multilineTextAlignment ( .center )
                 }
                     .frame ( maxWidth: .infinity, alignment: .center )
             }
