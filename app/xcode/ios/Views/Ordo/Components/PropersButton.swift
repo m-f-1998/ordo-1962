@@ -8,63 +8,45 @@
 import SwiftUI
 
 struct PropersButton: View {
-    @State private var showing_text = false
-
     let content: FeastPropers
-    @State var index: Int
-    let titles: [ String ] = [ "Introit", "Collect", "Epistle", "Gradual", "Gospel", "Offertory", "Secret", "Preface", "Communion", "Postcommunion" ]
+    let season: String
+    let feast_title: String
+    var titles: [ String ] = [ "Introit", "Collect", "First Lesson", "First Gradual", "First Collect", "Second Lesson", "Second Gradual", "Second Collect", "Third Lesson", "Third Gradual", "Third Collect", "Fourth Lesson", "Fourth Gradual", "Fourth Collect", "Fifth Lesson", "Fifth Collect", "Epistle", "Gradual", "Sequence", "Gospel", "Offertory", "Secret", "Preface", "Communion", "Postcommunion", "Prayer Over The People" ]
 
-    @State var langague: String = UserDefaults.standard.string ( forKey: "propers-lang" )!
+    @State private var langague: String = UserDefaults.standard.string ( forKey: "propers-lang" )!
+    @State private var selection = "Introit"
+    @State private var showing_text = false
 
     var body: some View {
         Button {
             self.langague = UserDefaults.standard.string ( forKey: "propers-lang" )!
             self.showing_text.toggle ( )
         } label: {
-            Text ( self.titles [ self.index ].uppercased ( ) )
+            Text ( self.feast_title.uppercased ( ) )
                 .padding ( )
                 .frame ( maxWidth: .infinity )
+                .multilineTextAlignment ( .center )
                 .background ( LinearGradient ( ) )
                 .clipShape ( Rectangle ( ) )
                 .scaledFont ( size: 14 )
                 .cornerRadius ( 10 )
-                .lineLimit ( 1 )
+                .lineLimit ( 3 )
                 .minimumScaleFactor ( 0.8 )
                 .bold ( )
         }
         .navigationDestination ( isPresented: $showing_text, destination: {
-            VStack {
-                HStack {
-                    Button {
-                        self.index -= 1
-                    } label: {
-                        Image ( systemName: "chevron.backward.circle" )
-                            .resizable ( )
-                            .frame ( maxWidth: 20, maxHeight: 20 )
+            TextDisplay ( text: self.content.dictionary [ self.selection.lowercased ( ) ]!!.dictionary [ self.langague.lowercased() ]! )
+                .toolbar {
+                    ToolbarItem ( placement: .automatic ) {
+                        Picker ( selection: $selection, label: Label ( "Proper", systemImage: "book" ) ) {
+                            ForEach ( self.titles, id: \.self ) {
+                                if self.content.dictionary [ $0.lowercased ( ) ]! != nil {
+                                    Text ( $0 )
+                                }
+                            }
+                        }
                     }
-                        .disabled ( index == 0 )
-                        .padding ( [ .top ], 10 )
-                        .padding ( [ .trailing ], 20 )
-                    Button {
-                        self.index += 1
-                    } label: {
-                        Image ( systemName: "chevron.forward.circle" )
-                            .resizable ( )
-                            .frame ( maxWidth: 20, maxHeight: 20 )
-                    }
-                        .disabled ( index == titles.count - 1 )
-                        .padding ( [ .top ], 10 )
-                        .padding ( [ .leading ], 20 )
                 }
-                    .padding ( [ .top ], 10 )
-                switch self.langague {
-                case "English":
-                    TextDisplay ( text: self.content.dictionary [ self.titles [ self.index ].lowercased ( ) ]!!.english )
-                default:
-                    TextDisplay ( text: self.content.dictionary [ self.titles [ self.index ].lowercased ( ) ]!!.latin )
-                }
-            }
-            .navigationTitle ( self.titles [ self.index ].uppercased ( ) )
         } )
     }
 }

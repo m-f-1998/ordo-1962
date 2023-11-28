@@ -43,7 +43,6 @@
 		C8AE1DE42A21275F00B36A2C /* Mail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DE32A21275F00B36A2C /* Mail.swift */; };
 		C8AE1DE82A214B7D00B36A2C /* iCal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DE72A214B7D00B36A2C /* iCal.swift */; };
 		C8B374602A23A2040024E930 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B3745F2A23A2040024E930 /* LaunchScreen.storyboard */; };
-		C8B3E9B12A73D343004C021A /* GoTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B3E9B02A73D343004C021A /* GoTo.swift */; };
 		C8B7FBC02A715BDE0026107C /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBBF2A715BDE0026107C /* TextDisplay.swift */; };
 		C8B7FBC22A71627E0026107C /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBC12A71627E0026107C /* CustomPicker.swift */; };
 		C8B7FBC72A71B46D0026107C /* NavBarGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBC62A71B46D0026107C /* NavBarGradient.swift */; };
@@ -154,7 +153,6 @@
 		C8AE1DE32A21275F00B36A2C /* Mail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mail.swift; sourceTree = "<group>"; };
 		C8AE1DE72A214B7D00B36A2C /* iCal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCal.swift; sourceTree = "<group>"; };
 		C8B3745F2A23A2040024E930 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C8B3E9B02A73D343004C021A /* GoTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoTo.swift; sourceTree = "<group>"; };
 		C8B7FBBF2A715BDE0026107C /* TextDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.swift; sourceTree = "<group>"; };
 		C8B7FBC12A71627E0026107C /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
 		C8B7FBC62A71B46D0026107C /* NavBarGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarGradient.swift; sourceTree = "<group>"; };
@@ -306,7 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				C8B7FBC52A718C200026107C /* Components */,
-				C8B3E9B02A73D343004C021A /* GoTo.swift */,
 				C8AE1DDC2A21265200B36A2C /* Feast.swift */,
 				C871588429F0433400E1F02D /* Ordo.swift */,
 				C808830F2A5DAE90001AC6E5 /* Row.swift */,
@@ -487,6 +484,8 @@
 			packageReferences = (
 				C8BAA13B29F3FEDD00D167E8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C8C904B12A377EF100BB6872 /* XCRemoteSwiftPackageReference "AlertToast" */,
+				C8FF169B2A9E4A5500F3F7F2 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				C81F0EA22AB0CF0F00B45946 /* XCRemoteSwiftPackageReference "swiftui-date-picker-dialog" */,
 			);
 			productRefGroup = C8A3595F29EF06220018F6B7;
 			projectDirPath = "";
@@ -575,7 +574,6 @@
 				C8C6E6762A5DE70E0009B375 /* ScalableFont.swift in Sources */,
 				C80883102A5DAE90001AC6E5 /* Row.swift in Sources */,
 				C8A3596C29EF06220018F6B7 /* App.swift in Sources */,
-				C8B3E9B12A73D343004C021A /* GoTo.swift in Sources */,
 				C8B7FBC22A71627E0026107C /* CustomPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -986,6 +984,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C81F0EA22AB0CF0F00B45946 /* XCRemoteSwiftPackageReference "swiftui-date-picker-dialog" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/globulus/swiftui-date-picker-dialog";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		C8BAA13B29F3FEDD00D167E8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1000,6 +1006,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		C8FF169B2A9E4A5500F3F7F2 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/swiftui-introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.12.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

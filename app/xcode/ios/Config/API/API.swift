@@ -8,11 +8,10 @@
 import SwiftUI
 
 class API {
-    private let manager: FileManager = FileManager.default
     @ObservedObject private var net: NetworkMonitor = NetworkMonitor ( )
 
     // Get Data From Local Device Or From API
-    func GetAPI <T:Decodable> ( use_cache: Bool = true, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
+    func GetAPI <T:Decodable> ( use_cache: Bool = false, file: String, url: String, type: T.Type, queries: [ URLQueryItem ] = [ ] ) async -> ResultAPI <T> {
         do {
             if use_cache {
                 do {
@@ -41,15 +40,15 @@ class API {
     }
 
     // Cache data in document directory
-    private func GetURL ( file_name: String ) throws -> URL {
-        let container = self.manager.containerURL ( forSecurityApplicationGroupIdentifier: "group.mfrankland.ordo-62.contents" )!
+    func GetURL ( file_name: String ) throws -> URL {
+        let container = FileManager.default.containerURL ( forSecurityApplicationGroupIdentifier: "group.mfrankland.ordo-62.contents" )!
         return container.appending ( path: file_name, directoryHint: .notDirectory )
     }
     
     // Check Cache File Exists
     func CacheExists ( name: String ) -> Bool {
         do {
-            return self.manager.fileExists ( atPath: try self.GetURL ( file_name: name ).path ( ) )
+            return FileManager.default.fileExists ( atPath: try self.GetURL ( file_name: name ).path ( ) )
         } catch {
             return false
         }

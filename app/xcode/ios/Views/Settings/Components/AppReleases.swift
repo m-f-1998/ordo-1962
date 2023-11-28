@@ -13,15 +13,13 @@ private struct AppReleaseData: View {
     var points: [ String ]
 
     var body: some View {
-        VStack ( alignment: .leading, spacing: 10 ) {
+        LazyVStack ( alignment: .leading, spacing: 10 ) {
             Text ( self.subtitle )
                 .font ( .title )
                 .bold ( )
-            VStack ( alignment: .leading ) {
-                Text ( self.points.map ( { "\t•\t\($0)" } ).joined ( separator: "\n" ) )
-                    .font ( .system ( size: 17, design: .monospaced ) )
-                    .lineSpacing ( 10 )
-            }
+            Text ( self.points.map ( { "\t•\t\($0)" } ).joined ( separator: "\n" ) )
+                .font ( .system ( size: 17, design: .monospaced ) )
+                .lineSpacing ( 10 )
         }
             .padding ( [ .trailing, .leading, .bottom ], 20 )
     }
@@ -31,7 +29,7 @@ private struct AppReleaseData: View {
 struct AppReleases: View {
     var body: some View {
         NavigationStack {
-            VStack ( alignment: .leading, spacing: 20 ) {
+            LazyVStack ( alignment: .leading, spacing: 20 ) {
                 AppReleaseData ( subtitle: "v1.1", points: [
                     "Liturgical Ordo",
                     "watchOS & Widget Support",

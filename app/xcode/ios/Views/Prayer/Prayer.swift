@@ -13,13 +13,11 @@ struct Prayer: View {
 
     var body: some View {
         VStack {
-            if self.prayers.GetLoading ( ) {
+            if case .loading = prayers.res {
                 ProgressView {
                     Text ( "Loading..." )
                 }
-            } else if case let .failure ( error ) = prayers.res {
-                ErrorView ( description: error, Callback: self.prayers.ErrorRetry )
-            } else if case let .success ( res ) = prayers.res {
+           } else if case let .success ( res ) = prayers.res {
                 NavigationStack {
                     List ( res [ self.lang ]!.sorted ( by: { $0.0 < $1.0 } ), id: \.key ) { category, prayer in
                         Section ( category ) {
@@ -33,15 +31,24 @@ struct Prayer: View {
                         .navigationBarTitleDisplayMode ( .inline )
                         .navigationTitle ( "Prayer" )
                         .toolbar {
-                            Menu ( content: {
-                                CustomPicker ( data: Array ( res.keys ).sorted ( by: < ), title: "Prayer Language", selected: self.$lang )
-                                    .onChange ( of: lang ) { change in
-                                        UserDefaults.standard.set ( change, forKey: "prayers-lang" )
+                            Menu {
+                                Section ( "Language in Prayers" ) {
+                                    ForEach ( Array ( res.keys ).sorted ( by: < ), id: \.self ) { prayer in
+                                        Button {
+                                            self.lang = prayer
+                                            UserDefaults.standard.set ( prayer, forKey: "prayers-lang" )
+                                        } label: {
+                                            if prayer == self.lang {
+                                                Label ( prayer, systemImage: "checkmark" )
+                                            } else {
+                                                Text ( prayer )
+                                            }
+                                        }
                                     }
-                                    .disabled ( self.prayers.GetLoading ( ) )
-                            }, label: {
-                                Label ( "Prayer Language", systemImage: "character.bubble" )
-                            } )
+                                }
+                            } label: {
+                                Label ( "Propers Language", systemImage: "character.bubble" )
+                            }.disabled ( self.prayers.GetLoading ( ) )
                         }
                 }
             }

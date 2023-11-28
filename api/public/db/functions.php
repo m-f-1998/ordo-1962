@@ -27,7 +27,7 @@ class Functions {
       );
 
       $days = $this->conn->execute_query (
-        "SELECT f.`rank`, f.`title`, f.`colors`,
+        "SELECT BIN_TO_UUID(f.`id`) as `feast_id`, f.`rank`, f.`title`, f.`colors`,
             c.`options`, c.`date`, DATE_FORMAT(c.`date`, '%a %d') as `formatted_date`,
             s.`title` as `season_title`, s.`colors` as `season_colors`,
             (SELECT feast.`rank` FROM `Feast` feast WHERE comm.`feast`=feast.`id`) as `comm_rank`,
@@ -46,6 +46,11 @@ class Functions {
       foreach ( $days as $day ) {
 
         $month = date ( "F", strtotime ( $day [ "date" ] ) );
+
+        $date = new DateTime( $day [ "date" ] );
+        if ( ( $date->format('M') == "Nov" || $date->format('M') == "Dec" ) && str_contains ( $day [ "title" ], "Epiphany" ) ) {
+          $day [ "title" ] = "(Resumed) " . $day [ "title" ];
+        }
 
         $last_key = array_key_last ( $res [ $month ] );
 
@@ -68,6 +73,7 @@ class Functions {
               "title" => $day [ "title" ],
               "colors" => $day [ "colors" ],
               "options" => $day [ "options" ],
+              "propers" => $this->GetProperText ( $day [ "feast_id" ], $day [ "date" ] ),
               "commemorations" => is_null ( $day [ "comm_title" ] ) ? array ( ) : array ( array (
                 "rank" => $day [ "comm_rank" ],
                 "title" => $day [ "comm_title" ],
@@ -86,13 +92,13 @@ class Functions {
               "title" => $day [ "title" ],
               "colors" => $day [ "colors" ],
               "options" => $day [ "options" ],
+              "propers" => $this->GetProperText ( $day [ "feast_id" ], $day [ "date" ] ),
               "commemorations" => is_null ( $day [ "comm_title" ] ) ? array ( ) : array ( array (
                 "rank" => $day [ "comm_rank" ],
                 "title" => $day [ "comm_title" ],
                 "colors" => $day [ "comm_colors" ]
               ) )
             ) ),
-            "propers" => $this->GetProperText ( $day [ "date" ] ),
             "season" => array (
               "title" => $day [ "season_title" ],
               "colors" => $day [ "season_colors" ]
@@ -144,7 +150,7 @@ class Functions {
    * Get The Propers For The Holy Masses In A Given Year
    *
    */
-  private function GetProperText ( $date ) {
+  private function GetProperText ( $feast_id, $date ) {
 
     $query = $this->conn->execute_query ( "SELECT pt.`category`, pt.`english`, pt.`latin`
     FROM `ProperText` pt
@@ -152,16 +158,31 @@ class Functions {
       (
             p.`introit`=pt.`id`
             OR p.`collect`=pt.`id`
-            OR p.`collect`=pt.`id`
             OR p.`epistle`=pt.`id`
             OR p.`gradual`=pt.`id`
+            OR p.`sequentia`=pt.`id`
             OR p.`gospel`=pt.`id`
             OR p.`offertory`=pt.`id`
             OR p.`secret`=pt.`id`
             OR p.`preface`=pt.`id`
             OR p.`communion`=pt.`id`
             OR p.`postcommunion`=pt.`id`
-        ) WHERE p.`date`=?", [ $date ] );
+            OR p.`lectio_l1`=pt.`id`
+            OR p.`graduale_l1`=pt.`id`
+            OR p.`oratio_l1`=pt.`id`
+            OR p.`lectio_l2`=pt.`id`
+            OR p.`graduale_l2`=pt.`id`
+            OR p.`oratio_l2`=pt.`id`
+            OR p.`lectio_l3`=pt.`id`
+            OR p.`graduale_l3`=pt.`id`
+            OR p.`oratio_l3`=pt.`id`
+            OR p.`lectio_l4`=pt.`id`
+            OR p.`graduale_l4`=pt.`id`
+            OR p.`oratio_l4`=pt.`id`
+            OR p.`lectio_l5`=pt.`id`
+            OR p.`oratio_l5`=pt.`id`
+            OR p.`super_populum`=pt.`id`
+        ) AND p.`feast_id`=UUID_TO_BIN(?) WHERE p.`date`=?", [ $feast_id, $date ] );
     $res = array ( );
 
     foreach ( $query as $row ) {

@@ -6,7 +6,7 @@
 //
 
 enum ResultAPI <T:Equatable>: Equatable {
-    case loading ( T ), success ( T ), failure ( String )
+    case loading, success ( T ), failure ( String )
 }
 
 enum ErrorAPI: Error {

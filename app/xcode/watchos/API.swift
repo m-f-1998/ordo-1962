@@ -115,7 +115,7 @@ class API: ObservableObject {
 
         var body: URLComponents = URLComponents ( )
         body.queryItems = [
-            URLQueryItem ( name: "year", value: CurrentYear ( ) )
+            URLQueryItem ( name: "year", value: String ( CurrentYear ( ) ) )
         ]
         url_request.httpBody = body.query?.data ( using: .utf8 )
 

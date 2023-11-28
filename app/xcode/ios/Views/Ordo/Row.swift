@@ -9,63 +9,51 @@ import SwiftUI
 
 struct Row: View {
     let feast: CelebrationData
-    let index: Int
     let month: String
 
     @State private var menu_expanded: Bool = false
 
     var body: some View {
-        HStack {
-            Day ( feast_date: self.feast.date, month: self.month )
-            LazyVStack ( alignment: .leading ) {
-                Feast ( data: self.feast.celebrations )
-                if let season = self.feast.season {
+        LazyVStack {
+            HStack {
+                Day ( feast_date: self.feast.date, month: self.month )
+                LazyVStack ( alignment: .leading ) {
+                    Feast ( data: self.feast.celebrations )
                     ScrollView ( .horizontal, showsIndicators: false ) {
                         Tag (
-                            title: season.title,
-                            colors: season.colors.components ( separatedBy: "," ).map {
+                            title: self.feast.season.title,
+                            colors: self.feast.season.colors.components ( separatedBy: "," ).map {
                                 Color ( word: $0 )!.opacity ( 0.5 )
                             }
                         )
-                            .padding ( [ .trailing, .leading ], 2 )
+                        .padding ( [ .trailing, .leading ], 2 )
                     }
                 }
+                Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
+                    .frame ( maxWidth: 20, maxHeight: 20 )
             }
-            Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
-                .resizable ( )
-                .frame ( maxWidth: 20, maxHeight: 20 )
-        }
-        .contentShape ( Rectangle ( ) )
-        .onTapGesture {
-            self.menu_expanded.toggle ( )
-        }
-        if self.menu_expanded {
-            if let propers = self.feast.propers {
-                HStack {
-                    LazyVStack {
-                        PropersButton ( content: propers, index: 0 )
-                        PropersButton ( content: propers, index: 1 )
-                        PropersButton ( content: propers, index: 2 )
-                        PropersButton ( content: propers, index: 3 )
-                        PropersButton ( content: propers, index: 4 )
+            .contentShape ( Rectangle ( ) )
+            .onTapGesture {
+                self.menu_expanded.toggle ( )
+            }
+            if self.menu_expanded {
+                    let columns: [ GridItem ] = Array ( repeating: .init ( .flexible ( ) ), count: 2 )
+                    LazyVGrid ( columns: columns ) {
+                            ForEach ( self.feast.celebrations, id: \.id ) {
+                                if let propers = $0.propers {
+                                    PropersButton ( content: propers, season: self.feast.season.title, feast_title: $0.title )
+                                } else {
+                                    HStack {
+                                        Text ( "Mass Propers are Unavailable Today" )
+                                            .multilineTextAlignment ( .center )
+                                    }
+                                    .frame ( maxWidth: .infinity, alignment: .center )
+                                }
+                            }
                     }
-
-                    LazyVStack {
-                        PropersButton ( content: propers, index: 5 )
-                        PropersButton ( content: propers, index: 6 )
-                        PropersButton ( content: propers, index: 7 )
-                        PropersButton ( content: propers, index: 8 )
-                        PropersButton ( content: propers, index: 9 )
-                    }
-                }
-                .frame ( maxWidth: .infinity, alignment: .center )
-                .buttonStyle ( PlainButtonStyle ( ) )
-            } else {
-                HStack {
-                    Text ( "Mass Propers are Unavailable Today" )
-                        .multilineTextAlignment ( .center )
-                }
                     .frame ( maxWidth: .infinity, alignment: .center )
+                    .padding ( [ .top ], 10 )
+                    .buttonStyle ( PlainButtonStyle ( ) )
             }
         }
     }

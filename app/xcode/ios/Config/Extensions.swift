@@ -35,8 +35,8 @@ func CurrentDay ( add: Int = 0 ) -> Int {
 }
 
 // Current Year As A String
-func CurrentYear ( ) -> String {
-    return "\( Calendar.current.component ( .year, from: .now ) )"
+func CurrentYear ( ) -> Int {
+    return Calendar.current.component ( .year, from: .now )
 }
 
 // Ordo Data For When List Loading
@@ -45,10 +45,9 @@ let DUMMY_ORDO: OrdoMonth = Calendar.current.monthSymbols.reduce ( into: OrdoMon
         CelebrationData.init (
             date: FormatDate ( ).string ( from: .distantPast ),
             celebrations: [
-                FeastData.init ( title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", commemorations: [] )
+                FeastData.init ( title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", propers: nil, commemorations: [] )
             ],
-            season: SeasonData ( title: "Dummy Season", colors: "g" ),
-            propers: nil
+            season: SeasonData ( title: "Dummy Season", colors: "g" )
         )
     ]
 }

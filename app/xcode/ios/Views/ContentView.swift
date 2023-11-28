@@ -14,16 +14,15 @@ struct ContentView: View {
     @ObservedObject var ordo: OrdoAPI = OrdoAPI ( )
     @ObservedObject var prayers: PrayerAPI = PrayerAPI ( )
     
-    @State var search_text: String = ""
     @State private var tab_selection: Int = 0
     @State private var data_stale_alert_shown: Bool = false
     
-    @State private var tappedTwice: Bool = false
+    @State private var second_tap: Bool = false
     var handler: Binding<Int> { Binding (
         get: { self.tab_selection },
         set: {
             if $0 == self.tab_selection {
-                self.tappedTwice = true
+                self.second_tap = true
             }
             self.tab_selection = $0
         }
@@ -46,13 +45,13 @@ struct ContentView: View {
 
     var body: some View {
         VStack ( spacing: 0 ) {
-            switch ordo.res { // TODO: Future Update, All Errors Should Be Handled Here
-            case .failure ( let error ):
+            if case let .failure ( error ) = ordo.res {
                 ErrorView ( description: error, Callback: self.reload )
-            case .success ( _ ), .loading ( _ ):
-                let data = ordo.GetResult ( search: self.search_text )
+            } else if case let .failure ( error ) = prayers.res {
+                ErrorView ( description: error, Callback: self.reload )
+            } else {
                 TabView ( selection: handler ) {
-                    Ordo ( search_text: self.$search_text, selected_tab: self.$tab_selection, data: data, tappedTwice: self.$tappedTwice  )
+                    Ordo ( second_tap: self.$second_tap  )
                         .tabItem {
                             Label ( "Ordo", systemImage: "calendar" )
                         }
@@ -69,10 +68,8 @@ struct ContentView: View {
                         }
                         .tag ( 2 )
                 }
-                    .disabled ( data == DUMMY_ORDO )
+                    .disabled ( self.ordo.GetLoading ( ) || self.prayers.GetLoading ( ) )
                     .TabBarGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
-            case .none:
-                ErrorView ( description: "Data Status Unknown", Callback: self.reload )
             }
         }
             .environmentObject ( self.net )

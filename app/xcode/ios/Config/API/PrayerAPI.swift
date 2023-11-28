@@ -18,44 +18,35 @@ class PrayerAPI: ObservableObject {
     }
 
     // Update The Status Of The View Containing Prayers
-    func Update ( use_cache: Bool = true ) async {
-        if use_cache {
-            if case .success ( _ ) = self.res {
-                print ( "Prayer Data Already At Status Successful" )
-                return
-            }
-        }
-
-        let data =  await self.api.GetAPI ( use_cache: false, file: self.file, url: self.url, type: PrayerLanguageData.self, queries: [ ] )
-        DispatchQueue.main.async {
-            self.res = data
-        }
+    func Update ( ) async {
+//        if case .success ( _ ) = self.res {
+//            print ( "Prayer Data Already At Status Successful" )
+//        } else {
+            self.res = await self.api.GetAPI ( use_cache: false, file: self.file, url: self.url, type: PrayerLanguageData.self )
+//        }
     }
     
     // Get Cache Data, Ignore Internet
     func GetCache ( ) -> ResultAPI <PrayerLanguageData> {
         do {
+            print ( self.net.connected, config.DataStale ( ) )
             if self.net.connected && config.DataStale ( ) {
                 try self.DeleteCache ( file: self.file )
             }
             return .success ( try self.api.GetCache ( file: self.file, type: PrayerLanguageData.self ) )
         } catch ErrorAPI.fetching {
-            return .loading ( [ : ] )
+            return .loading
         } catch {
             return .failure ( error.localizedDescription )
         }
     }
     
-    func DeleteCache ( file: String ) throws {
+    // Delete Cache From Default App Group
+    private func DeleteCache ( file: String ) throws {
         let container = FileManager.default.containerURL ( forSecurityApplicationGroupIdentifier: "group.mfrankland.ordo-62.contents" )!
         try FileManager.default.removeItem ( atPath: container.appending ( path: file, directoryHint: .notDirectory ).path )
     }
-    
-    // Reset to Progress View
-    func SetLoading ( ) {
-        res = .loading ( [ : ] )
-    }
-    
+
     // Get Is Loading ?
     func GetLoading ( ) -> Bool {
         if case .loading = self.res {
@@ -68,7 +59,7 @@ class PrayerAPI: ObservableObject {
     func ErrorRetry ( ) {
         DispatchQueue.main.async {
             Task {
-                self.SetLoading ( )
+                self.res = .loading
                 try await Task.sleep ( nanoseconds: UInt64 ( 2 * Double ( NSEC_PER_SEC ) ) )
                 await self.Update ( )
             }

@@ -24,7 +24,7 @@ struct iCal: View {
                     try await self.NotShowing ( )
                 }
             } label: {
-                Text ( "Create \( CurrentYear ( ) ) Liturgical Ordo iCal" )
+                Text ( "Create \( String ( CurrentYear ( ) ) ) Liturgical Ordo iCal" )
             }
         } header: {
             Text ( "Calendar" )
@@ -83,7 +83,7 @@ struct iCal: View {
             if permissions {
                 do {
                     let calendar = try GetCalendar ( title: self.title )
-                    let data: ResultAPI <OrdoMonth> = self.ordo.GetCache ( )
+                    let data: ResultAPI <OrdoMonth> = self.ordo.GetCache ( year: CurrentYear ( ) )
                     
                     if case let .success ( res ) = data {
                         for month in Calendar.current.monthSymbols {

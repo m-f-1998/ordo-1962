@@ -13,7 +13,7 @@ struct CustomPicker: View {
     @Binding var selected: String
 
     var body: some View {
-        Picker ( selection: $selected, label: Text ( title ) ) {
+        Picker ( title, selection: $selected ) {
             ForEach ( self.data, id: \.self ) {
                 Text ( $0 )
             }

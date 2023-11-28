@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-// A Simple Screen To Show Some Text
+// A Simple Screen To Show Some Markdown Text
 struct TextDisplay: View {
     var text: String
     
     var body: some View {
         GeometryReader { proxy in
             ScrollView ( .vertical, showsIndicators: false ) {
-                Text ( try! AttributedString ( markdown: self.text, options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace ) ) )
+                Text ( try! AttributedString ( markdown: "\n" + self.text + "\n", options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace ) ) )
                     .lineSpacing ( 10 )
-                    .frame ( minHeight: proxy.size.height )
                     .font ( .system ( .body, design: .monospaced ) )
+                    .frame(minHeight: proxy.size.height)
             }
                 .multilineTextAlignment ( .center )
-                .frame ( maxWidth: .infinity )
+                .frame ( maxWidth: .infinity, maxHeight: proxy.size.height )
         }
             .navigationBarTitleDisplayMode ( .inline )
-            .padding ( [ .leading, .trailing, .top, .bottom ], 20 )
+            .padding ( [ .leading, .trailing ], 15 )
     }
 }
