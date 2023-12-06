@@ -14,7 +14,9 @@ class PrayerAPI: ObservableObject {
     @ObservedObject private var net: NetworkMonitor = NetworkMonitor ( )
     
     init ( ) {
-        self.res = self.GetCache ( )
+        Task {
+            self.res = await self.GetCache ( )
+        }
     }
 
     // Update The Status Of The View Containing Prayers
@@ -27,9 +29,11 @@ class PrayerAPI: ObservableObject {
     }
     
     // Get Cache Data, Ignore Internet
-    func GetCache ( ) -> ResultAPI <PrayerLanguageData> {
+    func GetCache ( ) async -> ResultAPI <PrayerLanguageData> {
         do {
-            print ( self.net.connected, config.DataStale ( ) )
+            if config.settings == nil && self.net.connected {
+                await config.GetSettings()
+            }
             if self.net.connected && config.DataStale ( ) {
                 try self.DeleteCache ( file: self.file )
             }

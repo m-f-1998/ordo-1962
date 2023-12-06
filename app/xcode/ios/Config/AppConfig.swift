@@ -7,42 +7,49 @@
 
 import SwiftUI
 
+let config: AppConfig = AppConfig ( ) // Singelton
+
 // Get configuration From Firebase
 class AppConfig {
-    private var config: RemoteConfig = RemoteConfig.remoteConfig ( )
 
-    init ( ) {
-        #if DEBUG
-            /*
-             A lower 'minimumFetchInterval' refreshes the cache more times per hour to allow rapid iteration of development builds. Real-time Remote Config bypass the cache when the config is updated on the server.
-             The default and recommended production fetch interval for Remote Config is 12 hours, which means that configs won't be fetched from the backend more than once in a 12 hour window, regardless of how many fetch calls are actually made.
-             */
-            let settings = RemoteConfigSettings ( )
-            settings.minimumFetchInterval = 0
-            self.config.configSettings = settings
-        #endif
-        
-        self.config.fetchAndActivate ( )
+    var settings: AppSettings!
+
+    func GetSettings ( ) async {
+        guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/settings" ) else {
+            print ( "ERROR: Settings Could Not Be Fetched" )
+            return
+        }
+
+        let url_request: URLRequest = URLRequest ( url: address )
+
+        do {
+            let ( data, response ) = try await URLSession.shared.data ( for: url_request )
+            let status_code: Int? = ( response as? HTTPURLResponse )?.statusCode
+            
+            guard status_code == 200 else {
+                print ( "1 HTTP Status Code \(status_code ?? -1)" )
+                return
+            }
+
+            self.settings = try JSONDecoder ( ).decode ( AppSettings.self, from: data )
+        } catch {
+            print ( "URLSession didnt work" )
+        }
     }
 
     // An Update To The Client Is Available On The App Store
     func UpdateAvailable ( ) -> Binding<Bool> {
+        let latest_version: Double = self.settings == nil ? 0.0 : self.settings.latest_version
         let current_version = ( Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as! String ).components ( separatedBy: "." )
-        let latest_app_version = self.config.configValue ( forKey: "app_version" ).numberValue.doubleValue
-        return .constant ( Double ( "\(current_version [ 0 ]).\(current_version [ 1 ] )" ) ?? .infinity < latest_app_version )
+        return .constant ( Double ( "\(current_version [ 0 ]).\(current_version [ 1 ] )" ) ?? .infinity < latest_version )
     }
     
     // Data From API Is Stale - Delete Cache
     func DataStale ( ) -> Bool {
         let last_fetch = UserDefaults.standard.string ( forKey: "last-update" )
-        print ( last_fetch )
         if !( last_fetch ?? "" ).isEmpty {
-            let api_update_time =  self.config.configValue ( forKey: "last_data_update" ).stringValue
-            print ( api_update_time )
-            if !( api_update_time ?? "" ).isEmpty {
-                print ( FormatDate ( time: true ).date ( from: api_update_time! )!, FormatDate ( time: true ).date ( from: last_fetch! )! )
-                return FormatDate ( time: true ).date ( from: api_update_time! )! > FormatDate ( time: true ).date ( from: last_fetch! )!
-            }
+            let api_update = self.settings == nil ? Date.distantPast as NSDate : NSDate ( timeIntervalSince1970: TimeInterval ( self.settings.api_updated ) )
+            return ( api_update as Date ) > FormatDate ( time: true ).date ( from: last_fetch! )!
         }
         return false
     }

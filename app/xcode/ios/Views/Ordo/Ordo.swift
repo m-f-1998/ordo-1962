@@ -25,7 +25,7 @@ struct Ordo: View {
     var body: some View {
             NavigationStack {
                 ScrollViewReader { proxy in
-                    List ( Calendar.current.monthSymbols, id: \.self ) { month in
+                    List ( Calendar.current.shortMonthSymbols, id: \.self ) { month in
                         if self.data [ month ]!.count > 0 {
                             Section ( header: Spacer ( minLength: 0 ) ) {
                                 ForEach ( 0...self.data [ month ]!.count-1, id: \.self ) { index in
@@ -71,7 +71,7 @@ struct Ordo: View {
                                 Menu {
                                     ForEach ( CurrentYear ( )...CurrentYear ( ) + 10, id: \.self ) { year in
                                         Menu {
-                                            ForEach ( Calendar.current.monthSymbols, id: \.self ) { month in
+                                            ForEach ( Calendar.current.shortMonthSymbols, id: \.self ) { month in
                                                 Button {
                                                     self.GoToDate ( month: month, year: year, proxy: proxy )
                                                 } label: {
@@ -101,7 +101,7 @@ struct Ordo: View {
                     .onChange ( of: self.change_date_position, perform: { change in
                         if change != .distantPast && self.data != DUMMY_ORDO {
                             let components = Calendar.current.dateComponents ( [ .day, .month, .year ], from: change )
-                            let id = self.data [ Calendar.current.monthSymbols [ components.month! - 1 ] ]! [ components.day! - 1 ].id
+                            let id = self.data [ Calendar.current.shortMonthSymbols [ components.month! - 1 ] ]! [ components.day! - 1 ].id
                             proxy.scrollTo ( id, anchor: .top )
                             self.change_date_position = .distantPast
                         }
@@ -109,7 +109,7 @@ struct Ordo: View {
                     .onChange ( of: self.second_tap, perform: { tapped in
                         if tapped {
                             withAnimation {
-                                proxy.scrollTo ( self.data [ "January" ]?.first!.id, anchor: .top )
+                                proxy.scrollTo ( self.data [ "Jan" ]?.first!.id, anchor: .top )
                                 self.second_tap = false
                             }
                         }
@@ -145,8 +145,10 @@ struct Ordo: View {
         if year != self.year {
             self.data = DUMMY_ORDO
             self.year = year
-            if case let .success ( res ) = self.ordo.GetCache ( year: year ) {
-                self.data = res
+            Task {
+                if case let .success ( res ) = await self.ordo.GetCache ( year: year ) {
+                    self.data = res
+                }
             }
         }
             

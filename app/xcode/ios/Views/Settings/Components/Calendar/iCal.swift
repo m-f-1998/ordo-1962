@@ -83,30 +83,30 @@ struct iCal: View {
             if permissions {
                 do {
                     let calendar = try GetCalendar ( title: self.title )
-                    let data: ResultAPI <OrdoMonth> = self.ordo.GetCache ( year: CurrentYear ( ) )
-                    
-                    if case let .success ( res ) = data {
-                        for month in Calendar.current.monthSymbols {
-                            for day in res [ month ]! {
-                                for feast in day.celebrations {
-                                    let event = EKEvent ( eventStore: self.store )
-                                    event.title = feast.title + " (Class \(String(feast.rank)))"
-                                    event.isAllDay = true
-                                    event.startDate = FormatDate ( ).date ( from: "\(day.date) \(month) \(CurrentYear ( ))" )
-                                    event.endDate = event.startDate
-                                    if let commemoration = feast.commemorations {
-                                        event.notes = commemoration.map { ( x ) -> String in
+                    Task {
+                        let data: ResultAPI <OrdoMonth> = await self.ordo.GetCache ( year: CurrentYear ( ) )
+                        
+                        if case let .success ( res ) = data {
+                            for month in Calendar.current.monthSymbols {
+                                for day in res [ month ]! {
+                                    for feast in day.celebrations {
+                                        let event = EKEvent ( eventStore: self.store )
+                                        event.title = feast.title + " (Class \(String(feast.rank)))"
+                                        event.isAllDay = true
+                                        event.startDate = FormatDate ( ).date ( from: "\(day.date) \(month) \(CurrentYear ( ))" )
+                                        event.endDate = event.startDate
+                                        event.notes = feast.commemorations.map { ( x ) -> String in
                                             return "Commemoration Today: " + x.title
                                         }.joined ( separator: "\n" )
+                                        event.calendar = calendar
+                                        try self.store.save ( event, span: .futureEvents )
                                     }
-                                    event.calendar = calendar
-                                    try self.store.save ( event, span: .futureEvents )
                                 }
                             }
+                            self.res = iCalResult ( data: "iCal Successfully Created", state: .success )
+                        } else if case let .failure ( error ) = data {
+                            self.res = iCalResult ( data: error, state: .failure )
                         }
-                        self.res = iCalResult ( data: "iCal Successfully Created", state: .success )
-                    } else if case let .failure ( error ) = data {
-                        self.res = iCalResult ( data: error, state: .failure )
                     }
                 } catch iCalError.duplicate {
                     self.res = iCalResult ( data: "iCal Already Exists", state: .failure )

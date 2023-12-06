@@ -15,7 +15,9 @@ class OrdoAPI: ObservableObject {
 
     init ( ) {
         self.res = .loading
-        //self.res = self.GetCache ( year: CurrentYear ( ) ) // Go To Loading If Cache Does Not Exist
+//        Task {
+//            self.res = await self.GetCache ( year: CurrentYear ( ) ) // Go To Loading If Cache Does Not Exist
+//        }
     }
     
     // Update The Status Of The Ordo Calendar Data
@@ -71,12 +73,15 @@ class OrdoAPI: ObservableObject {
     }
 
     // Get Cache Data, Ignore Internet
-    func GetCache ( year: Int ) -> ResultAPI <OrdoMonth> {
+    func GetCache ( year: Int ) async -> ResultAPI <OrdoMonth> {
         do {
+            if config.settings == nil && self.net.connected {
+                await config.GetSettings ( )
+            }
             if self.api.CacheExists ( name: "ordo.data" ) {
                 try self.DeleteCache ( file: "ordo.data" )
             }
-            if CurrentDay ( ) == 1 && CurrentMonth ( ) == "January" {
+            if CurrentDay ( ) == 1 && CurrentMonth ( ) == "Jan" {
                 try self.DeleteCache ( file: "ordo-\( CurrentYear ( ) - 1 ).data" )
             } else if self.net.connected && config.DataStale ( ) {
                 for i in CurrentYear ( )...CurrentYear ( ) + 10 {
@@ -119,7 +124,7 @@ class OrdoAPI: ObservableObject {
     }
     
     // Filter Celebration Data If Search Contained In Title(s)
-    private func Filter ( search: String = "", data: [ CelebrationData ] ) -> [ CelebrationData ] {
+    private func Filter ( search: String = "", data: [ OrdoDay ] ) -> [ OrdoDay ] {
         return data.filter {
             if $0.season.title.localizedCaseInsensitiveContains ( search ) {
                 return true
@@ -129,10 +134,8 @@ class OrdoAPI: ObservableObject {
                     return true
                 }
                 
-                if let commemorations = celebration.commemorations {
-                    if commemorations.contains ( where: { $0.title.localizedCaseInsensitiveContains ( search ) } ) {
-                        return true
-                    }
+                if celebration.commemorations.contains ( where: { $0.title.localizedCaseInsensitiveContains ( search ) } ) {
+                    return true
                 }
             }
             return false

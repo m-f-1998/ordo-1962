@@ -23,7 +23,7 @@ func FormatDate ( time: Bool = false, short: Bool = false ) -> DateFormatter {
 // Current Month - Full Name
 func CurrentMonth ( ) -> String {
     let today = Calendar.current.dateComponents ( [ .month ], from: .now )
-    return Calendar.current.monthSymbols [ today.month! - 1 ]
+    return Calendar.current.shortMonthSymbols [ today.month! - 1 ]
 }
 
 // Current Day In Int (Array Index Is -1)
@@ -40,12 +40,12 @@ func CurrentYear ( ) -> Int {
 }
 
 // Ordo Data For When List Loading
-let DUMMY_ORDO: OrdoMonth = Calendar.current.monthSymbols.reduce ( into: OrdoMonth () ) { // Displayed in redacted format when loading
+let DUMMY_ORDO: OrdoMonth = Calendar.current.shortMonthSymbols.reduce ( into: OrdoMonth () ) { // Displayed in redacted format when loading
     $0 [ $1 ] = [
-        CelebrationData.init (
+        OrdoDay.init (
             date: FormatDate ( ).string ( from: .distantPast ),
             celebrations: [
-                FeastData.init ( title: "Dummy Title", rank: 1, colors: "g", options: "Dummy Options", propers: nil, commemorations: [] )
+                OrdoCelebration.init ( rank: 1, title: "Dummy Title", colors: "g", options: "Dummy Options", propers: [], commemorations: [] )
             ],
             season: SeasonData ( title: "Dummy Season", colors: "g" )
         )

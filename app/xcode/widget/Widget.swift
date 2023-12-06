@@ -19,14 +19,14 @@ struct Provider: TimelineProvider {
         } else if case .failure ( _ ) = self.api.res {
             fatalError ( "No Data Retrieved" )
         }
-        return [ SimpleEntry ( date: .now, feast: FeastData ( title: "", rank: 1, colors: "r", options: "", propers: nil, commemorations: [] ), loading: true, alternative: false ) ]
+        return [ SimpleEntry ( date: .now, feast: OrdoCelebration ( rank: 1, title: "", colors: "r", options: "", propers: [], commemorations: [] ), loading: true, alternative: false ) ]
     }
 
     /*
      Provides a timeline entry representing a placeholder version of the widget.
      */
     func placeholder ( in context: Context ) -> SimpleEntry {
-        SimpleEntry ( date: .now, feast: FeastData ( title: "", rank: 1, colors: "r", options: "", propers: nil, commemorations: [] ), loading: true, alternative: false )
+        SimpleEntry ( date: .now, feast: OrdoCelebration ( rank: 1, title: "", colors: "r", options: "", propers: [], commemorations: [] ), loading: true, alternative: false )
     }
 
     /*
@@ -50,7 +50,7 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let feast: FeastData
+    let feast: OrdoCelebration
     let loading: Bool
     let alternative: Bool
 }

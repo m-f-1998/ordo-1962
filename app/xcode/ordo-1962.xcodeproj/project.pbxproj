@@ -12,7 +12,7 @@
 		C803BB482A520DB300EA2F98 /* PrayerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803BB472A520DB200EA2F98 /* PrayerAPI.swift */; };
 		C803BB4A2A52EAF500EA2F98 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
 		C803BB4B2A52EAFE00EA2F98 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A6DB012A45F8FF008B1B92 /* API.swift */; };
-		C80649EE29FACE7D00CF218D /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80649ED29FACE7D00CF218D /* FirebaseConfig.swift */; };
+		C80649EE29FACE7D00CF218D /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80649ED29FACE7D00CF218D /* AppConfig.swift */; };
 		C808830B2A5D9167001AC6E5 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808830A2A5D9167001AC6E5 /* Structs.swift */; };
 		C808830C2A5D917E001AC6E5 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808830A2A5D9167001AC6E5 /* Structs.swift */; };
 		C808830D2A5D918F001AC6E5 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808830A2A5D9167001AC6E5 /* Structs.swift */; };
@@ -20,7 +20,6 @@
 		C80883122A5DAEB1001AC6E5 /* PropersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80883112A5DAEB1001AC6E5 /* PropersButton.swift */; };
 		C8186FBB2A2A544D0072AB13 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8186FBA2A2A544D0072AB13 /* Prayer.swift */; };
 		C837C76F2A3A569100178D00 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C837C76E2A3A569000178D00 /* Network.swift */; };
-		C8428D2629F52572001462FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8428D2529F52572001462FF /* AppDelegate.swift */; };
 		C8428D2829F582A4001462FF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8428D2729F582A4001462FF /* API.swift */; };
 		C844736F2A900184005E2E9D /* ordo-1962-widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C844736E2A9000A1005E2E9D /* ordo-1962-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C84C543F2A0C016E006CEB35 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C543E2A0C016E006CEB35 /* Settings.swift */; };
@@ -46,9 +45,6 @@
 		C8B7FBC02A715BDE0026107C /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBBF2A715BDE0026107C /* TextDisplay.swift */; };
 		C8B7FBC22A71627E0026107C /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBC12A71627E0026107C /* CustomPicker.swift */; };
 		C8B7FBC72A71B46D0026107C /* NavBarGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBC62A71B46D0026107C /* NavBarGradient.swift */; };
-		C8BAA14129F3FEDD00D167E8 /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C8BAA14029F3FEDD00D167E8 /* FirebaseInAppMessagingSwift-Beta */; };
-		C8BAA14329F3FEDD00D167E8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C8BAA14229F3FEDD00D167E8 /* FirebaseMessaging */; };
-		C8BAA14529F3FEDD00D167E8 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C8BAA14429F3FEDD00D167E8 /* FirebaseRemoteConfigSwift */; };
 		C8C427FB2A3767D000C4DDEA /* AppReleases.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C427FA2A3767D000C4DDEA /* AppReleases.swift */; };
 		C8C6CEFD2A8260610010EEDE /* TabBarGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C6CEFC2A8260610010EEDE /* TabBarGradient.swift */; };
 		C8C6E6762A5DE70E0009B375 /* ScalableFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C6E6752A5DE70E0009B375 /* ScalableFont.swift */; };
@@ -57,7 +53,6 @@
 		C8C904B32A377EF100BB6872 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C8C904B22A377EF100BB6872 /* AlertToast */; };
 		C8CB0D792A478EEA00B2CB95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
 		C8CB0D7B2A4792A300B2CB95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
-		C8CCEF6D2A901EDA00B74BDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8CCEF6C2A901EDA00B74BDE /* GoogleService-Info.plist */; };
 		C8D4DCC02A3610E50049C042 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D4DCBF2A3610E50049C042 /* App.swift */; };
 		C8D4DCC22A3610E50049C042 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D4DCC12A3610E50049C042 /* ContentView.swift */; };
 		C8D4DCC42A3610E70049C042 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D4DCC32A3610E70049C042 /* Assets.xcassets */; };
@@ -121,13 +116,12 @@
 		C803BB412A520D7400EA2F98 /* StructsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructsAPI.swift; sourceTree = "<group>"; };
 		C803BB442A520D9800EA2F98 /* OrdoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoAPI.swift; sourceTree = "<group>"; };
 		C803BB472A520DB200EA2F98 /* PrayerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerAPI.swift; sourceTree = "<group>"; };
-		C80649ED29FACE7D00CF218D /* FirebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
+		C80649ED29FACE7D00CF218D /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		C808830A2A5D9167001AC6E5 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		C808830F2A5DAE90001AC6E5 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		C80883112A5DAEB1001AC6E5 /* PropersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropersButton.swift; sourceTree = "<group>"; };
 		C8186FBA2A2A544D0072AB13 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
 		C837C76E2A3A569000178D00 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		C8428D2529F52572001462FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8428D2729F582A4001462FF /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		C844736E2A9000A1005E2E9D /* ordo-1962-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ordo-1962-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84C543E2A0C016E006CEB35 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -156,13 +150,11 @@
 		C8B7FBBF2A715BDE0026107C /* TextDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.swift; sourceTree = "<group>"; };
 		C8B7FBC12A71627E0026107C /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
 		C8B7FBC62A71B46D0026107C /* NavBarGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarGradient.swift; sourceTree = "<group>"; };
-		C8BAA13729F2ED0800D167E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.pliStxml; path = Info.plist; sourceTree = "<group>"; };
 		C8BAA13829F2F12200D167E8 /* app-ent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "app-ent.entitlements"; sourceTree = "<group>"; };
 		C8C427FA2A3767D000C4DDEA /* AppReleases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReleases.swift; sourceTree = "<group>"; };
 		C8C6CEFC2A8260610010EEDE /* TabBarGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarGradient.swift; sourceTree = "<group>"; };
 		C8C6E6752A5DE70E0009B375 /* ScalableFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalableFont.swift; sourceTree = "<group>"; };
 		C8CB0D782A478EEA00B2CB95 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		C8CCEF6C2A901EDA00B74BDE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C8D4DCBF2A3610E50049C042 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		C8D4DCC12A3610E50049C042 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C8D4DCC32A3610E70049C042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -186,9 +178,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8BAA14329F3FEDD00D167E8 /* FirebaseMessaging in Frameworks */,
-				C8BAA14529F3FEDD00D167E8 /* FirebaseRemoteConfigSwift in Frameworks */,
-				C8BAA14129F3FEDD00D167E8 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				C8C904B32A377EF100BB6872 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +209,7 @@
 			children = (
 				C803BB402A520D6400EA2F98 /* API */,
 				C8CB0D782A478EEA00B2CB95 /* Extensions.swift */,
-				C80649ED29FACE7D00CF218D /* FirebaseConfig.swift */,
+				C80649ED29FACE7D00CF218D /* AppConfig.swift */,
 				C837C76E2A3A569000178D00 /* Network.swift */,
 				C808830A2A5D9167001AC6E5 /* Structs.swift */,
 				C8C6E6752A5DE70E0009B375 /* ScalableFont.swift */,
@@ -288,10 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				C8BAA13829F2F12200D167E8 /* app-ent.entitlements */,
-				C8CCEF6C2A901EDA00B74BDE /* GoogleService-Info.plist */,
-				C8BAA13729F2ED0800D167E8 /* Info.plist */,
 				C8A3596B29EF06220018F6B7 /* App.swift */,
-				C8428D2529F52572001462FF /* AppDelegate.swift */,
 				C80649EF29FADAF000CF218D /* Config */,
 				C871588329F042F000E1F02D /* Views */,
 				C8A3596F29EF06240018F6B7 /* Assets.xcassets */,
@@ -422,9 +408,6 @@
 			);
 			name = "ordo-1962";
 			packageProductDependencies = (
-				C8BAA14029F3FEDD00D167E8 /* FirebaseInAppMessagingSwift-Beta */,
-				C8BAA14229F3FEDD00D167E8 /* FirebaseMessaging */,
-				C8BAA14429F3FEDD00D167E8 /* FirebaseRemoteConfigSwift */,
 				C8C904B22A377EF100BB6872 /* AlertToast */,
 			);
 			productName = "ordo-1962";
@@ -513,7 +496,6 @@
 			files = (
 				C8B374602A23A2040024E930 /* LaunchScreen.storyboard in Resources */,
 				C8A3597029EF06240018F6B7 /* Assets.xcassets in Resources */,
-				C8CCEF6D2A901EDA00B74BDE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,8 +548,7 @@
 				C8428D2829F582A4001462FF /* API.swift in Sources */,
 				C8CB0D792A478EEA00B2CB95 /* Extensions.swift in Sources */,
 				C8839F892A2267EB006348B5 /* Options.swift in Sources */,
-				C8428D2629F52572001462FF /* AppDelegate.swift in Sources */,
-				C80649EE29FACE7D00CF218D /* FirebaseConfig.swift in Sources */,
+				C80649EE29FACE7D00CF218D /* AppConfig.swift in Sources */,
 				C897C6F52A868F9300600131 /* iCalStructs.swift in Sources */,
 				C803BB452A520D9800EA2F98 /* OrdoAPI.swift in Sources */,
 				C8B7FBC72A71B46D0026107C /* NavBarGradient.swift in Sources */,
@@ -798,13 +779,13 @@
 				CODE_SIGN_ENTITLEMENTS = "ios/app-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ios/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = "1962 Ordo";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Store 'Ordo' dates on your device";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -822,7 +803,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -841,12 +822,12 @@
 				CODE_SIGN_ENTITLEMENTS = "ios/app-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ios/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = "1962 Ordo";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Store 'Ordo' dates on your device";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -864,7 +845,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -882,7 +863,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watchos/Preview Content\"";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
@@ -896,7 +877,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.Watch";
 				PRODUCT_NAME = "1962 Ordo";
 				SDKROOT = watchos;
@@ -916,7 +897,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watchos/Preview Content\"";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
@@ -930,7 +911,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.Watch";
 				PRODUCT_NAME = "1962 Ordo";
 				SDKROOT = watchos;
@@ -1019,21 +1000,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C8BAA14029F3FEDD00D167E8 /* FirebaseInAppMessagingSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C8BAA13B29F3FEDD00D167E8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseInAppMessagingSwift-Beta";
-		};
-		C8BAA14229F3FEDD00D167E8 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C8BAA13B29F3FEDD00D167E8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
-		C8BAA14429F3FEDD00D167E8 /* FirebaseRemoteConfigSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C8BAA13B29F3FEDD00D167E8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfigSwift;
-		};
 		C8C904B22A377EF100BB6872 /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C8C904B12A377EF100BB6872 /* XCRemoteSwiftPackageReference "AlertToast" */;

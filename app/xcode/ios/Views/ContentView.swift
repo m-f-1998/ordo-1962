@@ -28,7 +28,7 @@ struct ContentView: View {
         }
     ) }
 
-    init ( ) {        
+    init ( ) {
         if UserDefaults.standard.string ( forKey: "prayers-lang" ) == nil {
             UserDefaults.standard.set ( "English", forKey: "prayers-lang" )
         }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum ResultAPI: Equatable {
-    case loading, success ( [ CelebrationData ] ), failure ( String )
+    case loading, success ( [ OrdoDay ] ), failure ( String )
 }
 
 enum ErrorAPI: Error {
@@ -57,12 +57,12 @@ class API: ObservableObject {
     }
     
     // Reduce Data to a Week of Celebrations
-    func GetCelebrations ( data: Data ) throws -> [ CelebrationData ] {
+    func GetCelebrations ( data: Data ) throws -> [ OrdoDay ] {
         let month = Calendar.current.component ( .month, from: .now )
-        let next_month: String = Calendar.current.monthSymbols [ month == 12 ? 0 : month ]
+        let next_month: String = Calendar.current.shortMonthSymbols [ month == 12 ? 0 : month ]
         do {
             let ordo: OrdoMonth = try self.Decode ( data: data, type: OrdoMonth.self )
-            let months_to_show: [ CelebrationData ] = ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
+            let months_to_show: [ OrdoDay ] = ordo [ CurrentMonth ( ) ]! + ordo [ next_month ]!
             return Array ( months_to_show [ CurrentDay ( ) - 1...CurrentDay ( ) + 5 ] )
         } catch {
             throw ErrorAPI.fetching ( "An error occured reducing data to celebrations \(error)" )
@@ -70,7 +70,7 @@ class API: ObservableObject {
     }
 
     // Get Data From Local Device
-    func GetCache ( ) throws -> [ CelebrationData ] {
+    func GetCache ( ) throws -> [ OrdoDay ] {
         if self.CacheExists ( ) {
             return try self.GetCelebrations ( data: Data ( contentsOf: self.GetURL ( ) ) )
         }
@@ -90,7 +90,7 @@ class API: ObservableObject {
     // Check Cache File Exists
     private func CacheExists ( ) -> Bool {
         do {
-            return try CurrentDay ( ) != 1 && CurrentMonth ( ) != "January" && self.manager.fileExists ( atPath: self.GetURL ( ).path ( ) )
+            return try CurrentDay ( ) != 1 && CurrentMonth ( ) != "Jan" && self.manager.fileExists ( atPath: self.GetURL ( ).path ( ) )
         } catch {
             return false
         }
@@ -105,7 +105,7 @@ class API: ObservableObject {
     }
 
     // Run a URL Request To API
-    private func HTTP ( ) async throws -> [ CelebrationData ] {
+    private func HTTP ( ) async throws -> [ OrdoDay ] {
         guard let address = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2/ordo.php" ) else { throw ErrorAPI.fetching ( "URL Undefined" ) }
 
         var url_request = URLRequest ( url: address )

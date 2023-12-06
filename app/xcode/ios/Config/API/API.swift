@@ -74,18 +74,15 @@ class API {
 
     // Run a URL Request To API
     private func HTTP ( url: String, request_params: [ URLQueryItem ] ) async throws -> Data {
-        guard let address: URL = URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2/\(url)" ) else { throw ErrorAPI.fetching ( "URL Invalid" ) }
-
-        var url_request: URLRequest = URLRequest ( url: address )
-        url_request.httpMethod = "POST"
-        url_request.setValue ( "application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type" )
-        url_request.setValue ( "application/json", forHTTPHeaderField: "Accept" )
-
-        var body: URLComponents = URLComponents ( )
+        var body: URLComponents = URLComponents ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2/\(url)" )!
         body.queryItems = request_params
-        url_request.httpBody = body.query?.data ( using: .utf8 )
-
-        let ( data, response ) = try await URLSession.shared.data ( for: url_request )
+        body.percentEncodedQuery = body.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        
+        var request = URLRequest(url: body.url!)
+        request.setValue ( "application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type" )
+        request.setValue ( "application/json", forHTTPHeaderField: "Accept" )
+        
+        let ( data, response ) = try await URLSession.shared.data ( for: request )
         let status_code: Int? = ( response as? HTTPURLResponse )?.statusCode
 
         guard status_code == 200 else { throw ErrorAPI.fetching ( "HTTP Status Code \(status_code ?? -1)" ) }
