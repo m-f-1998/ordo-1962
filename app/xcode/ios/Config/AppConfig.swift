@@ -6,12 +6,9 @@
 //
 
 import SwiftUI
-import FirebaseRemoteConfig
-
-let config: FirebaseConfig = FirebaseConfig ( ) // Singelton
 
 // Get configuration From Firebase
-class FirebaseConfig {
+class AppConfig {
     private var config: RemoteConfig = RemoteConfig.remoteConfig ( )
 
     init ( ) {
