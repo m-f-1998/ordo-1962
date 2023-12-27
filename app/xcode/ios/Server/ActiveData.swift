@@ -7,67 +7,65 @@
 
 import SwiftUI
 
-class Data: ObservableObject {
+class ActiveData: ObservableObject {
+    @Published private(set) var loading: Bool = true
+    @Published private(set) var downloading: Bool = false
+    @Published private(set) var error: Bool = false
+    @Published private(set) var percentage = 0
 
-    private var data: OrdoYear? = nil
-    @State private var loading: Bool = true
-    @State private var downloading: Bool = false
+    public private(set) var last_err = ""
+    public private(set) var ordo: [ OrdoYear ] = []
+    public private(set) var prayers: PrayerLanguageData? = nil
 
-    // MARK: Setters
-    func SetLoading ( ) {
-        self.downloading = false
-        self.loading = true
+    func SetSuccess ( ordo: [ OrdoYear ], prayers: PrayerLanguageData ) {
+        DispatchQueue.main.async {
+            self.ordo = ordo
+            self.prayers = prayers
+            self.SetStatus ( )
+        }
     }
     
-    func SetDownloading ( ) {
-        self.downloading = true
-        self.loading = false
+    func SetDownload ( download: Int ) {
+        self.percentage = download
     }
     
-    func SetSuccess ( ) {
-        self.downloading = false
-        self.loading = false
+    func SetError ( error: String ) {
+        self.last_err = error
+        self.SetStatus ( error: true )
     }
     
-    func SetData ( data: OrdoYear ) {
-        self.data = data
+    func SetStatus ( error: Bool = false, downloading: Bool = false, loading: Bool = false ) {
+        self.error = error
+        self.downloading = downloading
+        self.loading = loading
     }
-    
-    // MARK: Getters
-    func GetDownloading ( ) -> Bool {
-        return self.downloading
-    }
-    
-    func GetLoading ( ) -> Bool {
-        return self.loading
-    }
-    
-    func GetData ( ) -> OrdoYear? {
-        return self.data
-    }
-    
-    // Get ID Of Today's Feast
-    func GetIDToday ( ) -> String? {
-        if let ordo = data {
-            return ordo.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) - 1 ).id
+
+    func GetIDToday ( ) -> String {
+        if self.ordo.count > 0 {
+            return "\(self.ordo [ 0 ].getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ).date) \( CurrentMonth ( ) )"
         }
         return ""
     }
-
-    // Get Data, Filtered If Search
-    func GetFilteredOrdo ( search: String = "" ) -> OrdoYear {
-        if let ordo = data {
-            if search != "" {
-                return OrdoYear ( dictionary: ordo.allMonths ( ).mapValues { value in
-                    return self.Filter ( data: value )
-                } )
-            }
-            return ordo
+    
+    func GetYear ( year: Int = CurrentYear ( ) ) -> OrdoYear? {
+        let index = year - CurrentYear ( )
+        if index < self.ordo.count {
+            return self.ordo [ index ]
         }
-        return OrdoYear ( )
+        return nil
+    }
+    
+    func GetFilteredOrdo ( search: String = "", year: Int = CurrentYear ( ) ) -> [ [ OrdoDay ] ] {
+        if let year = self.GetYear ( year: year ) {
+            return year.ordo.map {
+                return self.Filter ( search: search, data: $0 )
+            }.filter {
+                return !$0.isEmpty
+            }
+        }
+        return [ ]
     }
 
-    // Filter Celebration Data If Search Contained In Title(s)
     private func Filter ( search: String = "", data: [ OrdoDay ] ) -> [ OrdoDay ] {
         return data.filter {
             if $0.season.title.localizedCaseInsensitiveContains ( search ) {
@@ -85,5 +83,4 @@ class Data: ObservableObject {
             return false
         }
     }
-    
 }

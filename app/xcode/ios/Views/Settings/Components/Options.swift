@@ -16,7 +16,11 @@ struct Options: View {
 
     var body: some View {
         Section {
-            CustomPicker ( data: self.locations, title: "Calendar", selected: self.$locale )
+            Picker ( "Calendar", selection: $locale ) {
+                ForEach ( self.locations, id: \.self ) {
+                    Text ( $0 )
+                }
+            }
         } header: {
             Text ( "App Options" )
         } footer: {

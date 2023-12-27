@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Ordo: View {
+struct OrdoView: View {
     @EnvironmentObject var activeData: ActiveData
     @State var search: String = ""
     @State var first_load: Bool = true
@@ -34,29 +34,35 @@ struct Ordo: View {
                                     .id ( "\(day.date) \(day.month)" )
                                     .padding ( [ .top, .bottom ], 8 )
                             }
-                        }
+                        }.id ( month [ 0 ].month )
                     }
                 }
                 .scrollIndicators ( .hidden )
-                .navigationTitle ( "1962 Ordo" )
+                .navigationTitle ( "Liturgical Calendar" )
                 .toolbar {
                     ToolbarItem ( placement: .automatic ) {
                         HStack {
                             Menu {
                                 ForEach ( CurrentYear ( )...CurrentYear ( ) + 5, id: \.self ) { year in
-                                    Menu {
-                                        ForEach ( Array ( Calendar.current.shortMonthSymbols.enumerated ( ) ), id: \.offset ) { index, month in
-                                            Button {
-                                                if self.year != year {
-                                                    self.year = year
+                                    if year == self.year {
+                                        Menu {
+                                            ForEach ( Array ( Calendar.current.shortMonthSymbols.enumerated ( ) ), id: \.offset ) { index, month in
+                                                Button {
+                                                    proxy.scrollTo ( month, anchor: .top )
+                                                } label: {
+                                                    Text ( Calendar.current.monthSymbols [ index ] )
                                                 }
-                                                proxy.scrollTo ( month, anchor: .top )
-                                            } label: {
-                                                Text ( Calendar.current.monthSymbols [ index ] )
                                             }
+                                        } label: {
+                                            Label ( String ( year ), systemImage: "checkmark" )
                                         }
-                                    } label: {
-                                        Text ( String ( year ) )
+                                    } else {
+                                        Button {
+                                            self.year = year
+                                            proxy.scrollTo ( "Jan", anchor: .top )
+                                        } label: {
+                                            Text ( String ( year ) )
+                                        }
                                     }
                                 }
                             } label: {

@@ -8,44 +8,23 @@
 import SwiftUI
 import EventKitUI
 
-struct iCal: View {
-    @EnvironmentObject var ordo: OrdoAPI
-    @Binding var res: iCalResult
-
+class iCalStatus: ObservableObject {
+    var current_ordo: OrdoYear
     private let title: String = "Liturgical Ordo (1962)"
     private let store: EKEventStore = EKEventStore ( )
+    
+    @Published var error: Bool = false
+    @Published var loading: Bool = false
+    @Published var success: Bool = false
+    @Published var message: String = ""
+    
+    init ( current_ordo: OrdoYear ) {
+        self.current_ordo = current_ordo
+    }
 
-    var body: some View {
-        Section {
-            Button {
-                Task {
-                    try await self.Loading ( )
-                    await self.GenerateCalendar ( )
-                    try await self.NotShowing ( )
-                }
-            } label: {
-                Text ( "Create \( String ( CurrentYear ( ) ) ) Liturgical Ordo iCal" )
-            }
-        } header: {
-            Text ( "Calendar" )
-        }
-    }
-    
-    // Show Loading AlertToast Widget, Delay For n Seconds After
-    private func Loading ( seconds: Double = 2.0 ) async throws {
-        self.res = iCalResult ( state: .loading )
-        try await Task.sleep ( nanoseconds: UInt64 ( seconds * Double ( NSEC_PER_SEC ) ) )
-    }
-    
-    // Hide All AlertToast Widgets, Delay n Seconds Before Hiding
-    private func NotShowing ( seconds: Double = 2.0 ) async throws {
-        try await Task.sleep ( nanoseconds: UInt64 ( seconds * Double ( NSEC_PER_SEC ) ) )
-        self.res = iCalResult ( state: .not_showing )
-    }
-    
     // Are Calendar Permissions Turned On?
     private func Permissions ( completion: @escaping ( Bool ) -> Void ) {
-        self.store.requestAccess ( to: .event ) { ( granted, error ) in
+        self.store.requestFullAccessToEvents { ( granted, error ) in
             if let error = error {
                 print ( "EventKit Permissions Error: \( error.localizedDescription )" )
             }
@@ -76,45 +55,49 @@ struct iCal: View {
         return calendar
     }
     
+    private func SetStatus ( error: Bool = false, loading: Bool = false, success: Bool = false, message: String = "" ) {
+        DispatchQueue.main.async {
+            self.error = error
+            self.loading = loading
+            self.success = success
+            self.message = message
+        }
+    }
+    
     // Generate iCal from API
     func GenerateCalendar ( ) async {
         self.Permissions ( ) { permissions in
             print ( "EventKit Permissions: \(permissions)" )
             if permissions {
                 do {
-                    let calendar = try GetCalendar ( title: self.title )
+                    let calendar = try self.GetCalendar ( title: self.title )
                     Task {
-                        let data: ResultAPI <OrdoMonth> = await self.ordo.GetCache ( year: CurrentYear ( ) )
-                        
-                        if case let .success ( res ) = data {
-                            for month in Calendar.current.monthSymbols {
-                                for day in res [ month ]! {
-                                    for feast in day.celebrations {
-                                        let event = EKEvent ( eventStore: self.store )
-                                        event.title = feast.title + " (Class \(String(feast.rank)))"
-                                        event.isAllDay = true
-                                        event.startDate = FormatDate ( ).date ( from: "\(day.date) \(month) \(CurrentYear ( ))" )
-                                        event.endDate = event.startDate
-                                        event.notes = feast.commemorations.map { ( x ) -> String in
-                                            return "Commemoration Today: " + x.title
-                                        }.joined ( separator: "\n" )
-                                        event.calendar = calendar
-                                        try self.store.save ( event, span: .futureEvents )
-                                    }
+                        for MonthName in Calendar.current.shortMonthSymbols {
+                            let month = self.current_ordo.getMonth ( month: MonthName )
+                            for day in month {
+                                for feast in day.celebrations {
+                                    let event = EKEvent ( eventStore: self.store )
+                                    event.title = feast.title + " (Class \(String(feast.rank)))"
+                                    event.isAllDay = true
+                                    event.startDate = FormatDate ( ).date ( from: "\(day.date) \(MonthName) \(CurrentYear ( ))" )
+                                    event.endDate = event.startDate
+                                    event.notes = feast.commemorations.map { ( x ) -> String in
+                                        return "Commemoration Today: " + x.title
+                                    }.joined ( separator: "\n" )
+                                    event.calendar = calendar
+                                    try self.store.save ( event, span: .futureEvents )
                                 }
                             }
-                            self.res = iCalResult ( data: "iCal Successfully Created", state: .success )
-                        } else if case let .failure ( error ) = data {
-                            self.res = iCalResult ( data: error, state: .failure )
                         }
+                        self.SetStatus ( success: true, message: "iCal Successfully Created" )
                     }
                 } catch iCalError.duplicate {
-                    self.res = iCalResult ( data: "iCal Already Exists", state: .failure )
+                    self.SetStatus ( error: true, message: "iCal Already Exists" )
                 } catch {
-                    self.res = iCalResult ( data: "iCal Could Not Be Saved", state: .failure )
+                    self.SetStatus ( error: true, message: "iCal Could Not Be Saved" )
                 }
             } else {
-                self.res = iCalResult ( data: "Calendar Permissions Failed", state: .failure )
+                self.SetStatus ( error: true, message: "Calendar Permissions Failed" )
             }
         }
     }

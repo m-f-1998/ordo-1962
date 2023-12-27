@@ -16,7 +16,7 @@ struct DisplayPropers: View {
 
     var body: some View {
         VStack {
-            TextDisplay ( text: self.celebrations [ celebration_selection ].GetPropers ( lang: UserDefaults.standard.string ( forKey: "propers-lang" )! ) )
+            DisplayText ( text: self.celebrations [ celebration_selection ].GetPropers ( lang: UserDefaults.standard.string ( forKey: "propers-lang" )! ) )
             Picker ( "Select a Celebration", selection: $celebration_selection ) {
                 ForEach ( Array ( self.celebrations.enumerated ( ) ), id: \.offset ) { index, element in
                     Text ( element.title ).tag ( index )

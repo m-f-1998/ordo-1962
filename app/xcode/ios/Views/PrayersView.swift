@@ -14,21 +14,21 @@ struct Prayer: View {
     var body: some View {
         VStack {
             NavigationStack {
-                List ( activeData.prayers?.GetLanguage ( lang: self.lang )!, id: \.key ) { category, prayer in
-                    Section ( category ) {
-                        ForEach ( prayer.sorted ( by: { $0.0 < $1.0 } ), id: \.key ) { name, text in
-                            NavigationLink ( name ) {
-                                DisplayText ( text: text )
+                if let prayers = activeData.prayers {
+                    List ( prayers.GetCategories ( lang: self.lang ), id: \.self ) { category in
+                        Section ( category ) {
+                            ForEach ( prayers.GetPrayerNames ( lang: self.lang, cat: category ), id: \.self ) { name in
+                                NavigationLink ( name ) {
+                                    DisplayText ( text: prayers.GetPrayer ( lang: self.lang, category: category, name: name ) )
+                                }
                             }
                         }
                     }
-                }
-                    .navigationBarTitleDisplayMode ( .inline )
-                    .navigationTitle ( "Prayer" )
-                    .toolbar {
-                        Menu {
-                            Section ( "Language in Prayers" ) {
-                                ForEach ( self.activeData.prayers?.GetLanguageDetails ( )!, id: \.self ) { prayer in
+                        .navigationBarTitleDisplayMode ( .inline )
+                        .navigationTitle ( "Prayer" )
+                        .toolbar {
+                            Menu {
+                                ForEach ( (self.activeData.prayers?.GetLanguageDetails ( ))!, id: \.self ) { prayer in
                                     Button {
                                         self.lang = prayer
                                         UserDefaults.standard.set ( prayer, forKey: "prayers-lang" )
@@ -40,11 +40,11 @@ struct Prayer: View {
                                         }
                                     }
                                 }
-                            }
-                        } label: {
-                            Label ( "Propers Language", systemImage: "character.bubble" )
-                        }.disabled ( self.activeData.loading )
-                    }
+                            } label: {
+                                Label ( "Propers Language", systemImage: "character.bubble" )
+                            }.disabled ( self.activeData.loading )
+                        }
+                }
             }
         }
     }

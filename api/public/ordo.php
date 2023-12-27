@@ -25,6 +25,7 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" ) {
 function GetOrdo ( $year ) {
 
   $res = array (
+    "Year" => $year,
     "Jan" => [], "Feb" => [], "Mar" => [], "Apr" => [],
     "May" => [], "Jun" => [], "Jul" => [], "Aug" => [],
     "Sep" => [], "Oct" => [], "Nov" => [], "Dec" => []
@@ -70,6 +71,7 @@ function GetOrdo ( $year ) {
     if ( $previousDay != $formatted_date ) {
       array_push ( $res [ $short_month ], array (
         "date" => $formatted_date,
+        "month" => $short_month,
         "celebrations" => array ( ),
         "season" => array (
           "title" => $season [ "title" ],

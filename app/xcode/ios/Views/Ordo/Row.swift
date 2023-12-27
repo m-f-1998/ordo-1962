@@ -8,53 +8,33 @@
 import SwiftUI
 
 struct Row: View {
-    var feast: OrdoDay
+    let feast: OrdoDay
     let month: String
-
+    let year: String
     @State private var menu_expanded: Bool = false
 
     var body: some View {
-        LazyVStack {
-            HStack {
-                Day ( feast_date: self.feast.date, month: self.month )
-                LazyVStack ( alignment: .leading ) {
-                    Feast ( data: self.feast.celebrations )
-                    ScrollView ( .horizontal, showsIndicators: false ) {
-                        Tag (
-                            title: self.feast.season.title,
-                            colors: self.feast.season.colors.components ( separatedBy: "," ).map {
-                                Color ( word: $0 )!.opacity ( 0.5 )
-                            }
-                        )
-                        .padding ( [ .trailing, .leading ], 2 )
-                    }
-                }
-                Image ( systemName: self.menu_expanded ? "chevron.up.circle" : "chevron.down.circle" )
-                    .frame ( maxWidth: 20, maxHeight: 20 )
-            }
-            .contentShape ( Rectangle ( ) )
-            .onTapGesture {
-                self.menu_expanded.toggle ( )
-            }
-            if self.menu_expanded {
-                let columns: [ GridItem ] = Array ( repeating: .init ( .flexible ( ) ), count: 2 )
-                LazyVGrid ( columns: columns ) {
-                    ForEach ( self.feast.celebrations, id: \.self ) { celebration in
-                        if celebration.propers.count > 0 {
-                            PropersButton ( content: celebration.propers, season: self.feast.season.title, feast_title: celebration.title )
-                        } else {
-                            HStack {
-                                Text ( "Mass Propers are Unavailable Today" )
-                                    .multilineTextAlignment ( .center )
-                            }
-                            .frame ( maxWidth: .infinity, alignment: .center )
+        HStack {
+            let date = self.feast.date, components = date.components ( separatedBy: " " )
+            DisplayDate ( day: components [ 0 ], date: components [ 1 ], month: self.month, dateObj: FormatDate ( short: true ).date ( from: "\(date) \(self.month) \(year)" )! )
+            LazyVStack ( alignment: .leading ) {
+                Feast ( data: self.feast.celebrations )
+                ScrollView ( .horizontal, showsIndicators: false ) {
+                    Tag (
+                        title: self.feast.season.title,
+                        colors: self.feast.season.colors.components ( separatedBy: "," ).map {
+                            Color ( word: $0 )!.opacity ( 0.5 )
                         }
-                    }
+                    )
+                    .padding ( [ .trailing, .leading ], 2 )
                 }
-                .frame ( maxWidth: .infinity, alignment: .center )
-                .padding ( [ .top ], 10 )
-                .buttonStyle ( PlainButtonStyle ( ) )
             }
         }
+        .contentShape ( Rectangle ( ) )
+        .background (
+            NavigationLink ( "", destination: DisplayPropers ( celebrations: self.feast.celebrations ) )
+                .disabled (  self.feast.celebrations [ 0 ].propers.count == 0 )
+                .opacity ( self.feast.celebrations [ 0 ].propers.count == 0 ? 0 : 1 )
+        )
     }
 }

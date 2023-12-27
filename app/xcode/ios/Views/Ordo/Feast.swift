@@ -16,7 +16,7 @@ private struct FeastInfo: View {
         HStack {
             Text ( self.title )
                 .frame ( alignment: .leading )
-                .scaledFont ( size: self.title_size )
+                .font ( .system ( size: self.title_size ) )
                 .bold ( )
             Circle ( )
                 .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
@@ -30,11 +30,11 @@ private struct FeastInfo: View {
 }
 
 struct Feast: View {
-    var data: [ OrdoCelebration ]
+    var data: [ CelebrationData ]
 
     var body: some View {
-        ForEach ( self.data, id: \.self ) { feast in
-            LazyVStack ( alignment: .leading ) {
+        ForEach ( self.data, id: \.id ) { feast in
+            VStack ( alignment: .leading ) {
                 FeastInfo ( title: feast.title, colors: feast.colors, title_size: 16.0 )
                 ForEach ( feast.commemorations, id: \.self ) {
                     let title = $0.title.contains("Under One Conclusion") || $0.title == "Rogation Day" ? $0.title : $0.title + " (Commem)"
@@ -42,10 +42,10 @@ struct Feast: View {
                 }
                 Text ( "Class \(feast.rank)" )
                     .padding ( [ .top ], 1 )
-                    .scaledFont ( size: 12 )
+                    .font ( .system ( size: 12 ) )
                 Text ( feast.options )
                     .padding ( [ .top ], 0.5 )
-                    .scaledFont ( size: 12 )
+                    .font ( .system ( size: 12 ) )
             }
         }
     }

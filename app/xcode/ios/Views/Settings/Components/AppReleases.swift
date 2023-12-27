@@ -30,7 +30,7 @@ struct AppReleases: View {
     var body: some View {
         NavigationStack {
             LazyVStack ( alignment: .leading, spacing: 20 ) {
-                AppReleaseData ( subtitle: "v1.1", points: [
+                AppReleaseData ( subtitle: "v1.2", points: [
                     "Liturgical Ordo",
                     "watchOS & Widget Support",
                     "Prayers",

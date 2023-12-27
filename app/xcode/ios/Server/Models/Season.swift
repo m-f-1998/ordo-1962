@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct SeasonData: Codable {
+    let title: String
+    let colors: String
+}

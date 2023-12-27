@@ -29,11 +29,14 @@ struct Gradient: ViewModifier {
         navbar.backgroundImage = gradientImage
 
         UINavigationBar.appearance ( ).standardAppearance = navbar
-//        UINavigationBar.appearance ( ).compactAppearance = navbar
-//        UINavigationBar.appearance ( ).scrollEdgeAppearance = navbar
+        UINavigationBar.appearance ( ).compactAppearance = navbar
+        UINavigationBar.appearance ( ).scrollEdgeAppearance = navbar
+        if #available(iOS 15.0, *) {
+            UINavigationBar.appearance ( ).compactScrollEdgeAppearance = navbar
+        }
     
         UITabBar.appearance ( ).standardAppearance = tabbar
-//        UITabBar.appearance ( ).scrollEdgeAppearance = tabbar
+        UITabBar.appearance ( ).scrollEdgeAppearance = tabbar
     }
     
     func body ( content: Content ) -> some View {

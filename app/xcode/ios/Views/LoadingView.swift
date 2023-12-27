@@ -32,7 +32,7 @@ struct LoadingView: View {
                     .scrollDisabled ( true )
                 LoadingIndicator ( )
             }
-                .navigationTitle ( "Liturgical Ordo" )
+                .navigationTitle ( "Liturgical Calendar" )
         }
             .SetGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
     }
@@ -46,13 +46,14 @@ struct LoadingIndicator: View {
             ProgressView ( )
                 .progressViewStyle ( .circular )
             if self.activeData.downloading {
-                Text ( "Downloading Update..." )
+                Text ( "Downloading Update (" + String ( self.activeData.percentage ) + "%)..." )
             } else {
                 Text ( "Loading..." )
             }
         }
             .padding ( )
             .tint ( .white )
+            .foregroundStyle ( .white )
             .background ( .black )
             .cornerRadius ( 10 )
     }

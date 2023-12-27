@@ -13,7 +13,7 @@ struct Ordo: View {
     var body: some View {
         List ( self.ordo, id: \.self ) { feast in
             VStack ( alignment: .leading, spacing: 3 ) {
-                Text ( feast.date ).bold ( )
+                Text ( "\(feast.date) \(CurrentMonth())" ).bold ( )
                 ForEach ( feast.celebrations, id: \.id ) { celebration in
                     Text ( celebration.title )
                     Text ( "Class \(celebration.rank)" )
@@ -36,7 +36,11 @@ struct ErrorView: View {
             Text ( error ).multilineTextAlignment ( .center ).padding ( )
             Button ( action: {
                 Task {
-                    await self.api.GetData ( )
+                    do {
+                        try await self.api.UpdateCache ( )
+                    } catch {
+                        print ( "Can't Update Cache" )
+                    }
                 }
             } ) {
                 Label ( "Try Again", systemImage: "arrow.clockwise" )
@@ -46,28 +50,45 @@ struct ErrorView: View {
 }
 
 struct ContentView: View {
-    @ObservedObject var api: API = API ( )
+    @ObservedObject var activeData: ActiveData
+    @State var api: API
+
+    init ( ) {
+        let activeData = ActiveData ( )
+        self.activeData = activeData
+        self.api = API ( activeData: activeData )
+    }
 
     var body: some View {
         VStack {
-            switch api.res {
-            case .success ( let res ):
-                Ordo ( ordo: res )
-            case .failure ( let desc ):
-                ErrorView ( error: desc, api: api )
-            case .loading:
-                ProgressView ( )
-            case .none:
+            if self.activeData.loading {
+                ProgressView ( ).onAppear {
+                    do {
+                        if try self.api.cache.CacheExists ( ) {
+                            let data = try self.api.cache.GetOrdo ( )
+                            if data.count > 0 {
+                                if let prayers = try self.api.cache.GetPrayers ( ) {
+                                    self.activeData.SetSuccess ( ordo: data, prayers: prayers )
+                                }
+                            }
+                        }
+                        Task {
+                            try await self.api.UpdateCache ( )
+                        }
+                    } catch {
+                        print ( error )
+                    }
+                }
+            } else if self.activeData.error {
                 ErrorView ( error: "An Unknown Error Occured", api: api )
+            } else {
+                if self.activeData.ordo.count > 0 {
+                    Ordo ( ordo: self.activeData.ordo[ 0 ].getMonth ( month: CurrentMonth ( ) ) )
+                } else {
+                    ErrorView ( error: "No Data is Available", api: api )
+                }
             }
         }
         .padding ( )
-        .task {
-            if case .success ( _ ) = self.api.res {
-                print ( "Ordo Already At Status Successful" )
-            } else {
-                await self.api.GetData ( )
-            }
-        }
     }
 }

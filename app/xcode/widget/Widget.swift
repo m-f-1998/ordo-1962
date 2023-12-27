@@ -9,24 +9,37 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    @ObservedObject var api: API = API ( )
-    
+    @ObservedObject var activeData: ActiveData
+    @State var api: API
+    @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
+
+    init ( ) {
+        let activeData = ActiveData ( )
+        self.activeData = activeData
+        self.api = API ( activeData: activeData )
+    }
+        
     func getEntry ( ) async -> [ SimpleEntry ] {
-        await api.GetData ( )
-        if case let .success ( data ) = self.api.res {
-            let entry = SimpleEntry ( date: .now, feast: data [ 0 ].celebrations [ 0 ], loading: false, alternative: data [ 0 ].celebrations.count > 1 )
-            return [ entry ]
-        } else if case .failure ( _ ) = self.api.res {
-            fatalError ( "No Data Retrieved" )
+        do {
+            let current = CurrentYear ( )
+            let data = try self.api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { year in
+                year.year == current
+            } )
+            if data.count > 0 {
+                let entry = SimpleEntry ( date: .now, feast: data [ 0 ].getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ).celebrations [ 0 ], loading: false )
+                return [ entry ]
+            }
+        } catch {
+            print ( error )
         }
-        return [ SimpleEntry ( date: .now, feast: OrdoCelebration ( rank: 1, title: "", colors: "r", options: "", propers: [], commemorations: [] ), loading: true, alternative: false ) ]
+        return [ SimpleEntry ( date: .now, feast: CelebrationData ( ), loading: true ) ]
     }
 
     /*
      Provides a timeline entry representing a placeholder version of the widget.
      */
     func placeholder ( in context: Context ) -> SimpleEntry {
-        SimpleEntry ( date: .now, feast: OrdoCelebration ( rank: 1, title: "", colors: "r", options: "", propers: [], commemorations: [] ), loading: true, alternative: false )
+        SimpleEntry ( date: .now, feast: CelebrationData ( ), loading: true )
     }
 
     /*
@@ -43,16 +56,17 @@ struct Provider: TimelineProvider {
      */
     func getTimeline ( in context: Context, completion: @escaping ( Timeline<Entry> ) -> ( ) ) {
         Task {
-            completion ( Timeline ( entries: await getEntry ( ), policy: .atEnd ) )
+            let entry = await getEntry ( )
+            let entryDate = Calendar.current.date ( byAdding: .minute, value: 1, to: .now )!
+            completion ( Timeline ( entries: entry, policy: entry [ 0 ].loading ? .after ( entryDate ) : .atEnd ) )
         }
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let feast: OrdoCelebration
+    let feast: CelebrationData
     let loading: Bool
-    let alternative: Bool
 }
 
 struct SystemWidget : View {
@@ -62,24 +76,19 @@ struct SystemWidget : View {
         VStack {
             Text ( entry.feast.title )
                 .padding ( [ .bottom ], 1 )
-                .font ( .system ( size: 15 ) )
+                .font ( .system ( size: 14 ) )
                 .redacted ( reason: entry.loading ? .placeholder : [ ] )
-            if entry.alternative {
-                Text ( "Alternatives Available" )
-                    .italic ( )
-                    .padding ( [ .bottom ], 1 )
-            }
             Text ( "Class \( entry.feast.rank )" )
                 .padding ( [ .bottom ], 1 )
+                .redacted ( reason: entry.loading ? .placeholder : [ ] )
             Text ( .now, style: .date )
         }
             .font ( .system ( size: 12 ) )
-            .padding ( )
             .frame ( maxWidth: .infinity, maxHeight: .infinity )
             .bold ( )
             .multilineTextAlignment ( .center )
             .foregroundColor ( entry.feast.colors.components ( separatedBy: "," ) [ 0 ] == "b" ? .white : .black )
-            .background ( Color ( word: entry.feast.colors.components ( separatedBy: "," ) [ 0 ] ) )
+            .containerBackground ( Color ( word: entry.feast.colors.components ( separatedBy: "," ) [ 0 ] )!, for: .widget )
     }
 }
 
@@ -92,6 +101,7 @@ struct RectangularWidgetView : View {
             .redacted ( reason: entry.loading ? .placeholder : [ ] )
             .multilineTextAlignment ( .center )
             .bold ( )
+            .containerBackground ( Color ( word: entry.feast.colors.components ( separatedBy: "," ) [ 0 ] )!, for: .widget )
     }
 }
 
@@ -103,6 +113,7 @@ struct InlineWidgetView : View {
             .redacted ( reason: entry.loading ? .placeholder : [ ] )
             .bold ( )
             .multilineTextAlignment ( .center )
+            .containerBackground ( Color ( word: entry.feast.colors.components ( separatedBy: "," ) [ 0 ] )!, for: .widget )
     }
 }
 

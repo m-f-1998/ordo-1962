@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Day: View {
+struct DisplayDate: View {
     let day, date, month: String
     var today: Bool = false
 

@@ -9,22 +9,41 @@ import SwiftUI
 
 struct ErrorView: View {
     let description: String
-    
-    var Callback: () -> ()
 
     var body: some View {
-        VStack ( alignment: .center ) {
-            Text ( "Something Went Wrong" )
-                .multilineTextAlignment ( .center )
-                .font ( .largeTitle )
-                .bold ( )
-            Text ( self.description )
-                .multilineTextAlignment ( .center )
-                .padding ( )
-            Button ( action: self.Callback ) {
-                Label ( "Try Again", systemImage: "arrow.clockwise" )
+        NavigationStack {
+            ZStack {
+                List ( Calendar.current.shortMonthSymbols, id: \.self ) { month in
+                    Section {
+                        HStack ( spacing: 10 ) {
+                            DisplayDate ( day: "Mon", date: "1", month: month )
+                            LazyVStack ( alignment: .leading ) {
+                                Feast ( data: [ CelebrationData ( ) ] )
+                                Tag (
+                                    title: String ( repeating: "*", count: 10 ),
+                                    colors: [ Color.green.opacity ( 0.5 ) ]
+                                )
+                                    .padding ( [ .trailing, .leading ], 2 )
+                            }
+                        }
+                            .padding ( [ .top, .bottom ], 8 )
+                    }
+                }
+                    .redacted ( reason: .placeholder )
+                    .padding ( [ .top ], 20 )
+                    .scrollDisabled ( true )
+                VStack ( spacing: 10 ) {
+                    Text ( description )
+                }
+                    .padding ( )
+                    .tint ( .white )
+                    .foregroundStyle ( .white )
+                    .background ( .black )
+                    .cornerRadius ( 10 )
             }
+                .navigationTitle ( "Liturgical Calendar" )
         }
-            .padding ( [ .leading, .trailing ], 8 )
+            .SetGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
     }
+
 }

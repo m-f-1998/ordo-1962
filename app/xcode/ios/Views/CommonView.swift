@@ -1,5 +1,5 @@
 //
-//  OrdoView.swift
+//  CommonView.swift
 //  ordo-1962
 //
 //  Created by Matthew Frankland on 15/12/2023.
@@ -19,7 +19,7 @@ class TabStateHandler: ObservableObject {
 }
 
 
-struct OrdoView: View {
+struct CommonView: View {
     private let app_url: String = "itms-apps://itunes.apple.com/app/6450934181"
     @StateObject var tabStateHanlder: TabStateHandler = TabStateHandler ( )
     @EnvironmentObject var activeData: ActiveData
@@ -36,7 +36,7 @@ struct OrdoView: View {
 
     var body: some View {
         TabView ( selection: $tabStateHanlder.tabSelected ) {
-            Ordo ( second_tap: $tabStateHanlder.moveFirstTabToTop )
+            OrdoView ( second_tap: $tabStateHanlder.moveFirstTabToTop )
                 .tabItem {
                     Label ( "Ordo", systemImage: "calendar" )
                 }
