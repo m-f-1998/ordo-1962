@@ -39,19 +39,6 @@ func CurrentYear ( ) -> Int {
     return Calendar.current.component ( .year, from: .now )
 }
 
-// Ordo Data For When List Loading
-let DUMMY_ORDO: OrdoMonth = Calendar.current.shortMonthSymbols.reduce ( into: OrdoMonth () ) { // Displayed in redacted format when loading
-    $0 [ $1 ] = [
-        OrdoDay.init (
-            date: FormatDate ( ).string ( from: .distantPast ),
-            celebrations: [
-                OrdoCelebration.init ( rank: 1, title: "Dummy Title", colors: "g", options: "Dummy Options", propers: [], commemorations: [] )
-            ],
-            season: SeasonData ( title: "Dummy Season", colors: "g" )
-        )
-    ]
-}
-
 // Colours by Tags
 extension Color {
     init? ( word: String ) {

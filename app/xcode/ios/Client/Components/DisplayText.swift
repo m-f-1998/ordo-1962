@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-// A Simple Screen To Show Some Markdown Text
-struct TextDisplay: View {
+struct DisplayText: View {
     var text: String
-    
+
     var body: some View {
         GeometryReader { proxy in
             ScrollView ( .vertical, showsIndicators: false ) {

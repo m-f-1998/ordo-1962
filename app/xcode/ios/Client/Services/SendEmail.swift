@@ -7,19 +7,16 @@
 
 import SwiftUI
 
-// Send An Email In Default Mail Application
-struct Mail: View {
+struct SendEmail: View {
     var body: some View {
-        Section ( "Contact Us" ) {
-            Button {
-                self.mail ( )
-            } label: {
-                Text ( "Report an Error or Make a Comment" )
-            }
+        Button {
+            self.send_mail ( )
+        } label: {
+            Text ( "Report an Error or Make a Comment" )
         }
     }
     
-    private func mail ( ) {
+    private func send_mail ( ) {
         let to = "ordo62@matthewfrankland.co.uk", subject = "Customer Feedback - 1962 Liturgical Ordo".addingPercentEncoding ( withAllowedCharacters: .urlQueryAllowed )
         guard let url = URL ( string: "mailto:\(to)?subject=\(subject ?? "")" ) else {
             fatalError ( "URL Invalid" )

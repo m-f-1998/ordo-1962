@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Tag: View {
-    var title: String
-    var colors: [ Color ]
+    let title: String
+    let colors: [ Color ]
 
     var body: some View {
         Text ( self.title )
