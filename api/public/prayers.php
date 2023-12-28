@@ -1,22 +1,28 @@
 <?php
 
-require __DIR__ . "/vendor/autoload.php";
+header ( "Content-Type: application/json; charset=utf-8" );
 
 if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" ) {
 
-  require_once __DIR__ . "/../../../private/ordo-1962/db-constants.php";
-
-  db ( )->connect ( DB_HOST, DB_NAME, DB_USER, DB_PASSWORD );
+  require_once  __DIR__ . '/db.php';
+  $db = new DB ( );
+  $conn = $db->connect ( );
 
   $res = array ( );
-  foreach ( db ( )->select ( "Prayers", "language, category, title, body" )->all ( ) as $row ) {
+
+  $prayers = $conn->execute_query (
+    "SELECT `language`, `category`, `title`, `body` FROM `Prayers`"
+  );
+
+  foreach ( $prayers as $row ) {
     $res [ $row [ "language" ] ] [ $row [ "category" ] ] [ $row [ "title" ] ] = $row [ "body" ];
   }
 
-  response ( )->json ( $res );
+  echo json_encode ( $res );
 
 } else {
 
-  response ( )->json ( "Request Invalid", 422 );
+  http_response_code ( 422 );
+  echo ( "Request Invalid" );
 
 }
