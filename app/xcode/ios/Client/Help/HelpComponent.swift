@@ -22,7 +22,7 @@ struct HelpComponent: View {
                     }
                 }
                 
-                Section ( header: Text ( "Votive Mass Propers" ) ) {
+                Section ( header: Text ( "Votive Mass Propers (Not Exhaustive)" ) ) {
                     ForEach ( votive_propers.keys, id: \.self ) { key in
                         NavigationLink ( destination:
                             DisplayPropers ( celebrations: [ votive_propers [ key ]! ] )

@@ -33,7 +33,6 @@
 		C8839F892A2267EB006348B5 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8839F882A2267EB006348B5 /* Options.swift */; };
 		C897C6F52A868F9300600131 /* iCalStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897C6F42A868F9300600131 /* iCalStructs.swift */; };
 		C89E51AD2A8FDEE5006C88B3 /* 1962 Ordo.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C89213992A8FDCA2000ED8E1 /* 1962 Ordo.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C89F1BE82B40378B00073084 /* VotivePropers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89F1BE72B40378A00073084 /* VotivePropers.swift */; };
 		C89F1BEA2B4037FE00073084 /* CalendarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89F1BE92B4037FE00073084 /* CalendarInfo.swift */; };
 		C8A3596C29EF06220018F6B7 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3596B29EF06220018F6B7 /* App.swift */; };
 		C8A3596E29EF06220018F6B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3596D29EF06220018F6B7 /* ContentView.swift */; };
@@ -60,6 +59,7 @@
 		C8B61D142B3F71E000CF74CB /* HelpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D132B3F71E000CF74CB /* HelpComponent.swift */; };
 		C8B61D172B3F881E00CF74CB /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8B61D162B3F881E00CF74CB /* OrderedCollections */; };
 		C8B7FBC02A715BDE0026107C /* DisplayText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBBF2A715BDE0026107C /* DisplayText.swift */; };
+		C8BDCC7B2B49C9DD00A81131 /* VotivePropers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BDCC7A2B49C9DD00A81131 /* VotivePropers.swift */; };
 		C8C6CEFD2A8260610010EEDE /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C6CEFC2A8260610010EEDE /* Gradient.swift */; };
 		C8C904B32A377EF100BB6872 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C8C904B22A377EF100BB6872 /* AlertToast */; };
 		C8CB0D792A478EEA00B2CB95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
@@ -146,7 +146,6 @@
 		C89296252A45D21A0090871A /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS9.4.sdk/System/Library/Frameworks/WatchKit.framework; sourceTree = DEVELOPER_DIR; };
 		C89559CB2A3E24B7007F3882 /* widget-ent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "widget-ent.entitlements"; sourceTree = "<group>"; };
 		C897C6F42A868F9300600131 /* iCalStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCalStructs.swift; sourceTree = "<group>"; };
-		C89F1BE72B40378A00073084 /* VotivePropers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotivePropers.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.crashreport; };
 		C89F1BE92B4037FE00073084 /* CalendarInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfo.swift; sourceTree = "<group>"; };
 		C8A3596B29EF06220018F6B7 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		C8A3596D29EF06220018F6B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -165,6 +164,7 @@
 		C8B61D132B3F71E000CF74CB /* HelpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpComponent.swift; sourceTree = "<group>"; };
 		C8B7FBBF2A715BDE0026107C /* DisplayText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayText.swift; sourceTree = "<group>"; };
 		C8BAA13829F2F12200D167E8 /* app-ent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "app-ent.entitlements"; sourceTree = "<group>"; };
+		C8BDCC7A2B49C9DD00A81131 /* VotivePropers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotivePropers.swift; sourceTree = "<group>"; };
 		C8C6CEFC2A8260610010EEDE /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		C8CB0D782A478EEA00B2CB95 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C8D4DCBF2A3610E50049C042 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -246,7 +246,7 @@
 		C89F1BE62B40377100073084 /* Help */ = {
 			isa = PBXGroup;
 			children = (
-				C89F1BE72B40378A00073084 /* VotivePropers.swift */,
+				C8BDCC7A2B49C9DD00A81131 /* VotivePropers.swift */,
 				C89F1BE92B4037FE00073084 /* CalendarInfo.swift */,
 				C8B61D132B3F71E000CF74CB /* HelpComponent.swift */,
 			);
@@ -577,6 +577,7 @@
 				C8C6CEFD2A8260610010EEDE /* Gradient.swift in Sources */,
 				C8AE1DDD2A21265200B36A2C /* Feast.swift in Sources */,
 				C871588529F0433400E1F02D /* OrdoView.swift in Sources */,
+				C8BDCC7B2B49C9DD00A81131 /* VotivePropers.swift in Sources */,
 				C8AD1EB62B2CCC0B00631ACA /* CommonView.swift in Sources */,
 				C8AE1DE42A21275F00B36A2C /* SendEmail.swift in Sources */,
 				C8FE43902B2A359F000A68C6 /* ActiveData.swift in Sources */,
@@ -593,7 +594,6 @@
 				C872D32F2B2F3667006EE383 /* DisplayPropers.swift in Sources */,
 				C8AD1EAA2B2CB9E600631ACA /* Prayers.swift in Sources */,
 				C84A18E22B21B0FC00D55834 /* LoadingView.swift in Sources */,
-				C89F1BE82B40378B00073084 /* VotivePropers.swift in Sources */,
 				C8B61D142B3F71E000CF74CB /* HelpComponent.swift in Sources */,
 				C80883102A5DAE90001AC6E5 /* Row.swift in Sources */,
 				C8A3596C29EF06220018F6B7 /* App.swift in Sources */,

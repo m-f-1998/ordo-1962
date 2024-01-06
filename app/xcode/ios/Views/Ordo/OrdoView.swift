@@ -108,8 +108,10 @@ struct OrdoView: View {
                     }
                 }
                 .onAppear {
-                    if self.first_load && ( CurrentMonth ( ) != "Jan" && CurrentDay ( ) != 1 ) {
-                        proxy.scrollTo ( self.activeData.GetIDToday ( ), anchor: .top )
+                    if self.first_load {
+                        if !( CurrentMonth ( ) == "Jan" && CurrentDay ( ) == 1 ) {
+                            proxy.scrollTo ( self.activeData.GetIDToday ( ), anchor: .top )
+                        }
                         self.first_load = false
                     }
                 }
