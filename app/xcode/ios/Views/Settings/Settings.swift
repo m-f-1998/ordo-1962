@@ -34,10 +34,7 @@ struct Settings: View {
                 Section {
                     SendEmail ( )
                 }
-                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2/support/privacy.html" )! )
-                NavigationLink ( destination:  AppReleases ( ) ) {
-                    Text ( "App Release Information" )
-                }
+                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/support/privacy.html" )! )
             }
                 .navigationTitle ( "Settings" )
                 .navigationBarTitleDisplayMode ( .inline )

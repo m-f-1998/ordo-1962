@@ -12,7 +12,7 @@ struct LoadingView: View {
         NavigationStack {
             ZStack {
                 List ( Calendar.current.shortMonthSymbols, id: \.self ) { month in
-                    Section {
+                    Section ( header: Spacer ( minLength: 0 ) ) {
                         HStack ( spacing: 10 ) {
                             DisplayDate ( day: "Mon", date: "1", month: month )
                             LazyVStack ( alignment: .leading ) {
@@ -28,7 +28,6 @@ struct LoadingView: View {
                     }
                 }
                     .redacted ( reason: .placeholder )
-                    .padding ( [ .top ], 20 )
                     .scrollDisabled ( true )
                 LoadingIndicator ( )
             }

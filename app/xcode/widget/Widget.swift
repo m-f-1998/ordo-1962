@@ -96,7 +96,7 @@ struct RectangularWidgetView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text ( "\(entry.feast.title) (Class \(entry.feast.rank))" )
+        Text ( entry.feast.title )
             .font ( .system ( size: 15 ) )
             .redacted ( reason: entry.loading ? .placeholder : [ ] )
             .multilineTextAlignment ( .center )

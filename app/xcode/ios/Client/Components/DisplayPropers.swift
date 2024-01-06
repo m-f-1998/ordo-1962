@@ -17,31 +17,49 @@ struct DisplayPropers: View {
     var body: some View {
         VStack {
             DisplayText ( text: self.celebrations [ celebration_selection ].GetPropers ( lang: UserDefaults.standard.string ( forKey: "propers-lang" )! ) )
-            Picker ( "Select a Celebration", selection: $celebration_selection ) {
-                ForEach ( Array ( self.celebrations.enumerated ( ) ), id: \.offset ) { index, element in
-                    Text ( element.title ).tag ( index )
+        }.toolbar {
+            ToolbarItem {
+                Menu {
+                    ForEach ( self.languages, id: \.self ) { language in
+                        Button {
+                            self.lang = language
+                            UserDefaults.standard.set ( language, forKey: "propers-lang" )
+                        } label: {
+                            if language == self.lang {
+                                Label ( language, systemImage: "checkmark" )
+                            } else {
+                                Text ( language )
+                            }
+                        }
+                    }
+                } label: {
+                    Label ( "Propers Language", systemImage: "character.bubble" )
                 }
             }
-            .pickerStyle ( .menu )
-            .padding ( [ .bottom ], 10 )
-            .toolbar {
-                ToolbarItem {
+            ToolbarItem ( placement: .bottomBar ) {
+                VStack {
                     Menu {
-                        ForEach ( self.languages, id: \.self ) { language in
-                            Button {
-                                self.lang = language
-                                UserDefaults.standard.set ( language, forKey: "propers-lang" )
-                            } label: {
-                                if language == self.lang {
-                                    Label ( language, systemImage: "checkmark" )
+                        Picker ( selection: $celebration_selection, label: EmptyView ( ) ) {
+                            ForEach ( Array ( self.celebrations.enumerated ( ) ), id: \.offset ) { index, element in
+                                if element.title.count > 40 {
+                                    Text ( element.title.prefix ( 40 ) + "..." ).tag ( index )
                                 } else {
-                                    Text ( language )
+                                    Text ( element.title ).tag ( index )
                                 }
                             }
                         }
                     } label: {
-                        Label ( "Propers Language", systemImage: "character.bubble" )
+                        if self.celebrations [ celebration_selection ].title.count > 40 {
+                            Text ( self.celebrations [ celebration_selection ].title.prefix ( 40 ) + "..." )
+                                .bold ( )
+                                .font ( .footnote )
+                        } else {
+                            Text ( self.celebrations [ celebration_selection ].title )
+                                .bold ( )
+                                .font ( .footnote )
+                        }
                     }
+                    Spacer ( )
                 }
             }
         }

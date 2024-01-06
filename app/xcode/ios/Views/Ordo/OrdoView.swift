@@ -48,7 +48,9 @@ struct OrdoView: View {
                                         Menu {
                                             ForEach ( Array ( Calendar.current.shortMonthSymbols.enumerated ( ) ), id: \.offset ) { index, month in
                                                 Button {
-                                                    proxy.scrollTo ( month, anchor: .top )
+                                                    DispatchQueue.main.async {
+                                                        proxy.scrollTo ( month, anchor: .top )
+                                                    }
                                                 } label: {
                                                     Text ( Calendar.current.monthSymbols [ index ] )
                                                 }
@@ -68,9 +70,35 @@ struct OrdoView: View {
                             } label: {
                                 Label ( "Change Date", systemImage: "calendar")
                             }
-                            NavigationLink ( destination:  DisplayText ( text: "", display_ordo_info: true ) ) {
+                            NavigationLink ( destination:  HelpComponent ( ) ) {
                                 Label ( "Information", systemImage: "info.circle" )
                             }
+                        }
+                    }
+                    ToolbarItemGroup ( placement: .bottomBar ) {
+                        VStack {
+                            HStack {
+                                Text ( "App Version \( Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? "Not Found" )" )
+                                    .font ( .footnote )
+                                    .foregroundColor ( .secondary )
+                                if CurrentYear ( ) == self.year {
+                                    Text ( " |" )
+                                        .font ( .footnote )
+                                        .foregroundColor ( .secondary )
+                                        .padding ( [ .leading ], 5 )
+                                    Button {
+                                        let formatter = DateFormatter ( )
+                                        formatter.dateFormat = "E dd MMM"
+                                        DispatchQueue.main.async {
+                                            proxy.scrollTo ( formatter.string ( from: .now ), anchor: .top )
+                                        }
+                                    } label: {
+                                        Text ( "Go To Today" )
+                                            .font ( .footnote )
+                                    }
+                                }
+                            }
+                            Spacer ( )
                         }
                     }
                 }
@@ -80,7 +108,7 @@ struct OrdoView: View {
                     }
                 }
                 .onAppear {
-                    if self.first_load {
+                    if self.first_load && ( CurrentMonth ( ) != "Jan" && CurrentDay ( ) != 1 ) {
                         proxy.scrollTo ( self.activeData.GetIDToday ( ), anchor: .top )
                         self.first_load = false
                     }

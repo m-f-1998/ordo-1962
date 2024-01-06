@@ -21,7 +21,7 @@
         FROM `Celebrations` c
           LEFT JOIN `Season` s ON s.`id` = c.`season`
           LEFT JOIN `Feast` f ON f.`id` = c.`feast`
-        WHERE YEAR ( c.`date` )=? ORDER BY c.`date` ASC",
+        WHERE YEAR ( c.`date` )=? ORDER BY c.`date`, c.`time` ASC",
       [ $year ]
     );
 
@@ -45,7 +45,12 @@
         $celebration [ "title" ] = "(Resumed) " . $celebration [ "title" ];
       }
 
+      $options = $celebration [ "options" ];
+
       if ( $previousDay != $formatted_date ) {
+
+        $options = $options . GetFasting ( $conn, $celebration [ "season" ], $celebration [ "id" ], $celebration [ "title" ], $formatted_date, $short_month );
+
         array_push ( $res [ "Ordo" ] [ $index ], array (
           "date" => $formatted_date,
           "month" => $short_month,
@@ -55,7 +60,9 @@
             "colors" => $celebration [ "s_colors" ]
           )
         ) );
+        
         $previousDay = $formatted_date;
+      
       }
 
       array_push ( $res [ "Ordo" ] [ $index ] [ count ( $res [ "Ordo" ] [ $index ] ) - 1 ] [ "celebrations" ],
@@ -63,7 +70,7 @@
           "rank" => $celebration [ "rank" ],
           "title" => $celebration [ "title" ],
           "colors" => $celebration [ "colors" ],
-          "options" => $celebration [ "options" ],
+          "options" => $options,
           "propers" => GetProperTexts  ( $propers, $conn ),
           "commemorations" => GetCommemorations ( $celebration [ "id" ], $conn )
         )
@@ -92,7 +99,7 @@
       $propers = $conn->execute_query (
         "SELECT p.`category` as `title`, p.`english`, p.`latin`
         FROM `ProperText` p
-        WHERE p.`id`=? OR p.`id`=? OR p.`id`=?",
+        WHERE p.`id`=? OR p.`id`=? OR p.`id`=? ORDER BY FIELD ( `title`, 'collect', 'secret', 'postcommunion' )",
         [ $commemoration [ "collect" ], $commemoration [ "secret" ], $commemoration [ "postcommunion" ] ]
       )->fetch_all ( MYSQLI_ASSOC );
 
@@ -144,4 +151,89 @@
 
     return $res;
 
+  }
+
+  function GetFasting ( $conn, $season, $celebration_id, $celebration_title, $formatted_date, $short_month ) {
+    
+    $options = [];
+
+    $commemorations = $conn->execute_query (
+      "SELECT f.`title`
+      FROM `Commemorations` c
+      LEFT JOIN `Feast` f ON f.`id`=c.`feast`
+      WHERE c.`celebration`=?",
+      [ $celebration_id ]
+    );
+
+    $ember_day = false;
+    foreach ( $commemorations as $commemoration ) {
+
+      if ( str_contains ( $commemoration [ "title" ], "Ember " ) ) {
+
+        $ember_day = true;
+        break;
+
+      }
+
+    }
+
+    if (
+      ( $season == "Lent" && !str_contains ( $formatted_date, "Sun " ) ) ||
+      str_contains ( $celebration_title, "Ember " ) ||
+      $ember_day ||
+      ( $celebration_title == "Vigil of Pentecost" && !str_contains ( $formatted_date, "Sun " ) )
+    ) {
+
+      array_push ( $options, "Fast Day" );
+
+    }
+
+    $sat_wed_ember_day = $ember_day;
+
+    if ( $ember_day ) {
+
+      foreach ( $commemorations as $commemoration ) {
+
+        if ( str_contains ( $commemoration [ "title" ], "Ember Saturday " ) ) {
+  
+          $sat_wed_ember_day = true;
+          break;
+  
+        }
+
+        if ( str_contains ( $commemoration [ "title" ], "Ember Wednesday " ) ) {
+  
+          $sat_wed_ember_day = true;
+          break;
+  
+        }
+  
+      }
+
+    }
+
+    if (
+      str_contains ( $celebration_title, "Ember Wednesday " ) ||
+      str_contains ( $celebration_title, "Ember Saturday " ) ||
+      $sat_wed_ember_day ||
+      ( $celebration_title == "Vigil of Pentecost" && !str_contains ( $formatted_date, "Sun " ) )
+    ) {
+
+      array_push ( $options, "Partial Abstinence" );
+
+    }
+
+    if (
+      str_contains ( $formatted_date, "Fri " ) ||
+      $celebration_title == "Ash Wednesday" ||
+      ( $celebration_title == "Vigil of Christmas" && !str_contains ( $formatted_date, "Sun " ) ) ||
+      ( $short_month == "Dec" && str_contains ( $formatted_date, " 07" ) )
+    ) {
+
+      array_push ( $options, "Complete Abstinence" );
+
+    }
+
+    return count ( $options ) > 0 ? "\n\n" . implode ( " | ", $options ) : "";
+ 
   }
