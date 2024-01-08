@@ -16,7 +16,8 @@ struct Tag: View {
             .font ( .system ( size: 12 ) )
             .bold ( )
             .padding ( 5 )
-            .background ( LinearGradient ( colors: self.colors ) )
+            .background ( self.colors [ 0 ] )
+            .foregroundStyle ( self.colors [ 0 ] == .black ? .white : .black )
             .cornerRadius ( 8 )
             .overlay (
                 RoundedRectangle ( cornerRadius: 8 )

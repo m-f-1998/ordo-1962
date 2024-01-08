@@ -23,7 +23,7 @@ struct Row: View {
                     Tag (
                         title: self.feast.season.title,
                         colors: self.feast.season.colors.components ( separatedBy: "," ).map {
-                            Color ( word: $0 )!.opacity ( 0.5 )
+                            Color ( word: $0 )!
                         }
                     )
                     .padding ( [ .trailing, .leading ], 2 )

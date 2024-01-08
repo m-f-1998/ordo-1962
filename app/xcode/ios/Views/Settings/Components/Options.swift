@@ -16,7 +16,7 @@ struct Options: View {
 
     var body: some View {
         Section {
-            Picker ( "Calendar", selection: $locale ) {
+            Picker ( "Localization", selection: $locale ) {
                 ForEach ( self.locations, id: \.self ) {
                     Text ( $0 )
                 }
@@ -24,7 +24,7 @@ struct Options: View {
         } header: {
             Text ( "App Options" )
         } footer: {
-            Text ( "Localization Options Coming Soon" )
+            Text ( "Coming Soon" )
         }
     }
 }

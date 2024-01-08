@@ -1,5 +1,5 @@
 //
-//  PropersDisplay.swift
+//  DisplayPropers.swift
 //  ordo-1962
 //
 //  Created by Matthew Frankland on 17/12/2023.
@@ -15,8 +15,20 @@ struct DisplayPropers: View {
     @State private var lang: String = UserDefaults.standard.string ( forKey: "propers-lang" )!
 
     var body: some View {
-        VStack {
+        VStack ( spacing: 0 ) {
             DisplayText ( text: self.celebrations [ celebration_selection ].GetPropers ( lang: UserDefaults.standard.string ( forKey: "propers-lang" )! ) )
+            Picker ( selection: $celebration_selection, label: EmptyView ( ) ) {
+                ForEach ( Array ( self.celebrations.enumerated ( ) ), id: \.offset ) { index, element in
+                    Text ( element.title.count > 40 ? element.title.prefix ( 40 ) + "..." : element.title )
+                        .tag ( index )
+                        .font ( .footnote )
+                        .bold ( )
+                }
+            }
+            .pickerStyle ( .menu )
+            .frame ( maxWidth: .infinity, alignment: .center )
+            .padding ( [ .vertical ], 4 )
+            .background ( Color ( .systemGray6 ) )
         }.toolbar {
             ToolbarItem {
                 Menu {
@@ -34,32 +46,6 @@ struct DisplayPropers: View {
                     }
                 } label: {
                     Label ( "Propers Language", systemImage: "character.bubble" )
-                }
-            }
-            ToolbarItem ( placement: .bottomBar ) {
-                VStack {
-                    Menu {
-                        Picker ( selection: $celebration_selection, label: EmptyView ( ) ) {
-                            ForEach ( Array ( self.celebrations.enumerated ( ) ), id: \.offset ) { index, element in
-                                if element.title.count > 40 {
-                                    Text ( element.title.prefix ( 40 ) + "..." ).tag ( index )
-                                } else {
-                                    Text ( element.title ).tag ( index )
-                                }
-                            }
-                        }
-                    } label: {
-                        if self.celebrations [ celebration_selection ].title.count > 40 {
-                            Text ( self.celebrations [ celebration_selection ].title.prefix ( 40 ) + "..." )
-                                .bold ( )
-                                .font ( .footnote )
-                        } else {
-                            Text ( self.celebrations [ celebration_selection ].title )
-                                .bold ( )
-                                .font ( .footnote )
-                        }
-                    }
-                    Spacer ( )
                 }
             }
         }

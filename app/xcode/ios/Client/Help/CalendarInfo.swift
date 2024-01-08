@@ -92,24 +92,7 @@ var calendar_info = [
     """,
     
     "Votive Masses": """
-    Votive Masses are always optional and are generally of the 4th class. They should not be offered on a liturgical day of the 1st or 2nd class. The Missale Romanum recommends the most fitting choices for particular days of the week:
-    
-    *Monday*
-    Mass of the Most Holy Trinity
-    
-    *Tuesday*
-    Mass of the Holy Angels
-
-    *Wednesday*
-    Mass of St. Joseph, or Ss Peter and Paul, or All Holy Apostles
-
-    *Thursday*
-    Mass of the Holy Spirit, or the Most Holy Sacrament of the Eucharist, or Our Lord Jesus Christ, Supreme and Eternal Priest
-
-    *Friday*
-    Mass of the Holy Cross, or the Passion of the Lord, or the Most Sacred Heart of Jesus
-    
-    Votive Masses should not be offered on a liturgical day of the 3rd class unless there applies one of these exceptions:
+    Votive Masses are always optional and are generally of the 4th class. They should not be offered on a liturgical day of the 1st or 2nd class. Votive Masses should not be offered on a liturgical day of the 3rd class unless there applies one of these exceptions:
 
     *First Thursday or First Saturday*
     A Votive Mass of Our Lord Jesus Christ, Supreme and Eternal Priest may be offered of the 3rd class where special exercises for the Sanctification of the Clergy are held.
@@ -118,7 +101,7 @@ var calendar_info = [
     A Votive Mass of the Most Sacred Heart of Jesus may be offered of the 3rd class where special exercises in honor of the Sacred Heart are held.
     
     *First Saturday*
-    A Votive Mass of the Immaculate Heart of the B. V. M. may be offered of the 3rd class where special exercises for the honor of the Immaculate Heart are held.
+    A Votive Mass of the Immaculate Heart of the Mary may be offered of the 3rd class where special exercises for the honor of the Immaculate Heart are held.
     
     During Advent, by indult in some regions or institutes, the Mass Roráte cœli désuper is a Votive Mass of the 3rd class.
     

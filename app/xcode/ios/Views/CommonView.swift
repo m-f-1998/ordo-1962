@@ -7,15 +7,7 @@
 
 import SwiftUI
 class TabStateHandler: ObservableObject {
-    @Published var tabSelected: Int = 0 {
-        willSet {
-            if newValue == tabSelected && tabSelected == 0 {
-                moveFirstTabToTop.toggle ( )
-            }
-        }
-    }
-
-    @Published var moveFirstTabToTop: Bool = false
+    @Published var tabSelected: Int = 0
 }
 
 
@@ -35,24 +27,93 @@ struct CommonView: View {
     }
 
     var body: some View {
-        TabView ( selection: $tabStateHanlder.tabSelected ) {
-            OrdoView ( second_tap: $tabStateHanlder.moveFirstTabToTop )
-                .tabItem {
-                    Label ( "Ordo", systemImage: "calendar" )
+        VStack ( spacing: 0 ) {
+            TabView ( selection: $tabStateHanlder.tabSelected ) {
+                OrdoView ( )
+                    .tag ( 0 )
+                    .toolbar(.hidden, for: .tabBar)
+                Prayer ( )
+                    .tag ( 1 )
+                    .toolbar(.hidden, for: .tabBar)
+                Settings ( current_ordo: self.activeData.GetYear ( )! )
+                    .tag ( 2 )
+                    .toolbar(.hidden, for: .tabBar)
+            }
+            VStack {
+                HStack {
+                    ForEach( TabbedItems.allCases, id: \.self){ item in
+                        Button{
+                            tabStateHanlder.tabSelected = item.rawValue
+                        } label: {
+                            HStack ( spacing: 10 ) {
+                                if item.systemImage {
+                                    Image ( systemName: item.icon )
+                                        .resizable ( )
+                                        .renderingMode ( .template )
+                                        .foregroundColor ( tabStateHanlder.tabSelected == item.rawValue ? .black : .gray )
+                                        .frame ( width: 20, height: 20 )
+                                } else {
+                                    Image ( item.icon )
+                                        .resizable ( )
+                                        .renderingMode ( .template )
+                                        .foregroundColor ( tabStateHanlder.tabSelected == item.rawValue ? .black : .gray )
+                                        .frame ( width: 20, height: 20 )
+                                }
+                                if (tabStateHanlder.tabSelected == item.rawValue) {
+                                    Text ( item.title )
+                                        .font ( .system ( size: 14 ) )
+                                        .foregroundColor ( tabStateHanlder.tabSelected == item.rawValue ? .black : .gray )
+                                }
+                            }
+                            .frame ( maxWidth: tabStateHanlder.tabSelected == item.rawValue ? .infinity : 60, maxHeight: 40, alignment: .center )
+                            .background ( tabStateHanlder.tabSelected == item.rawValue ? .blue.opacity ( 0.5 ) : .clear )
+                            .cornerRadius ( 30 )
+                        }
+                    }
                 }
-                .tag ( 0 )
-            Prayer ( )
-                .tabItem {
-                    Image ( "pray" )
-                    Text ( "Prayer" )
-                }
-                .tag ( 1 )
-            Settings ( current_ordo: self.activeData.GetYear ( )! )
-                .tabItem {
-                    Label ( "Settings", systemImage: "gear" )
-                }
-                .tag ( 2 )
+                .frame ( maxWidth: .infinity, maxHeight: 50 )
+                .cornerRadius ( 35 )
+            }
+            .padding ( [ .bottom, .trailing, .leading ], 20 )
         }
-            .SetGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
+        .background ( LinearGradient ( colors: [ .green.opacity ( 0.5 ), .blue.opacity( 0.3 ) ] ) )
+        .ignoresSafeArea ( edges: [ .bottom ] )
+    }
+}
+
+enum TabbedItems: Int, CaseIterable {
+    case ordo = 0
+    case prayer
+    case settings
+    
+    var systemImage: Bool {
+        switch self {
+            case .prayer:
+                return false
+            default:
+                return true
+        }
+    }
+    
+    var title: String {
+        switch self {
+            case .ordo:
+                return "Ordo"
+            case .prayer:
+                return "Prayer"
+            case .settings:
+                return "Settings"
+        }
+    }
+    
+    var icon: String{
+        switch self {
+            case .ordo:
+                return "calendar"
+            case .prayer:
+                return "pray"
+            case .settings:
+                return "gear"
+        }
     }
 }

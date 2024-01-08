@@ -31,7 +31,7 @@ struct LoadingView: View {
                     .scrollDisabled ( true )
                 LoadingIndicator ( )
             }
-                .navigationTitle ( "Liturgical Calendar" )
+                .navigationTitle ( "1962 Liturgical Ordo" )
         }
             .SetGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
     }

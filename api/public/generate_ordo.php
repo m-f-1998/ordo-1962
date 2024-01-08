@@ -179,6 +179,7 @@
 
     if (
       ( $season == "Lent" && !str_contains ( $formatted_date, "Sun " ) ) ||
+      ( $season == "Passiontide" && !str_contains ( $formatted_date, "Sun " ) ) ||
       str_contains ( $celebration_title, "Ember " ) ||
       $ember_day ||
       ( $celebration_title == "Vigil of Pentecost" && !str_contains ( $formatted_date, "Sun " ) )

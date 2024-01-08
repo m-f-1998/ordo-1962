@@ -19,25 +19,19 @@ struct Settings: View {
         NavigationStack {
             List {
                 Options ( )
-                Section {
-                    Button {
-                        self.ical_status.loading = true
-                        Task {
-                            await self.ical_status.GenerateCalendar ( )
-                        }
-                    } label: {
-                        Text ( "Create \( String ( CurrentYear ( ) ) ) Liturgical Ordo iCal" )
+                Button {
+                    self.ical_status.loading = true
+                    Task {
+                        await self.ical_status.GenerateCalendar ( )
                     }
-                } header: {
-                    Text ( "Calendar" )
+                } label: {
+                    Text ( "Create an iCal with the \( String ( CurrentYear ( ) ) ) Ordo" )
                 }
                 Section {
                     SendEmail ( )
+                    Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/support/privacy.html" )! )
                 }
-                Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/support/privacy.html" )! )
             }
-                .navigationTitle ( "Settings" )
-                .navigationBarTitleDisplayMode ( .inline )
                 .toast ( isPresenting: self.$ical_status.loading ) {
                     return AlertToast ( type: .loading )
                 }
@@ -47,6 +41,8 @@ struct Settings: View {
                 .toast ( isPresenting: self.$ical_status.error ) {
                     return AlertToast ( type: .error ( .red ), title: self.ical_status.message )
                 }
+                .navigationTitle ( "1962 Liturgical Ordo" )
+                .navigationBarTitleDisplayMode ( .inline )
         }
     }
 }

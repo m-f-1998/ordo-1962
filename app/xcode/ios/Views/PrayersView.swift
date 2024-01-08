@@ -24,8 +24,6 @@ struct Prayer: View {
                             }
                         }
                     }
-                        .navigationBarTitleDisplayMode ( .inline )
-                        .navigationTitle ( "Prayer" )
                         .toolbar {
                             Menu {
                                 ForEach ( (self.activeData.prayers?.GetLanguageDetails ( ))!, id: \.self ) { prayer in

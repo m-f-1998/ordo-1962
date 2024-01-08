@@ -7,8 +7,9 @@
 
 import Foundation
 import OrderedCollections
-var votive_propers : OrderedDictionary = [
-    "Our Lord Jesus Christ, Supreme and Eternal Priest - 1st Thursday" : CelebrationData (
+
+var votive_piety : OrderedDictionary = [
+    "Our Lord Jesus Christ, Supreme and Eternal Priest" : CelebrationData (
         rank : 4,
         title : "Our Lord Jesus Christ, The High Priest",
         colors : "w",
@@ -77,15 +78,15 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "The Most Sacred Heart of Jesus - 1st Friday" : CelebrationData (
+    "The Most Sacred Heart of Jesus" : CelebrationData (
         rank : 4,
         title : "The Sacred Heart",
         colors : "w",
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Ps 32:11,19*\nThe thoughts of His Heart are from generation to generation: to save their souls from death, and to feed them in famine. Rejoice in the Lord, O ye just: praise becometh the upright.\nGlory be to the Father...\nThe thoughts of His Heart are from generation to generation: to save their souls from death, and to feed them in famine.",
-                latin : "*Ps 32:11,19*\nCogitatiónes Cordis ejus in generatiónes et generatiónem: ut éruat a morte ánimas eórum et alat eos in fame. Exsultáte, justi, in Dómino, rectos decet collaudátio.\nGlória Patri...\nCogitatiónes Cordis ejus in generatiónes et generatiónem: ut éruat a morte ánimas eórum et alat eos in fame."
+                english : "*Ps 32:11*\nThe thoughts of His Heart are from generation to generation: to save their souls from death, and to feed them in famine.\n*Ps 32:19*\nRejoice in the Lord, O ye just: praise becometh the upright.\nGlory be to the Father...\nThe thoughts of His Heart are from generation to generation: to save their souls from death, and to feed them in famine.",
+                latin : "*Ps 32:11*\nCogitatiónes Cordis ejus in generatiónes et generatiónem: ut éruat a morte ánimas eórum et alat eos in fame.\n*Ps 32:19*\nExsultáte, justi, in Dómino, rectos decet collaudátio.\nGlória Patri...\nCogitatiónes Cordis ejus in generatiónes et generatiónem: ut éruat a morte ánimas eórum et alat eos in fame."
             ),
             PropersData (
                 title : "Collect",
@@ -106,6 +107,16 @@ var votive_propers : OrderedDictionary = [
                 title : "Lesser Alleluia",
                 english : "*Matt 11:29*\nAlleluia, alleluia. Take my yoke upon you and learn from Me, because I am meek and humble of Heart: and you shall find rest to your souls. Alleluia.",
                 latin : "*Matt 11:29*\nAllelúja, allelúja. Tóllite iugum meum super vos, et díscite a me, quia mitis sum et húmilis Corde, et inveniétis réquiem animábus vestris. Allelúja."
+            ),
+            PropersData (
+                title : "Tract",
+                english : "*Ps 102:8-10*\nThe Lord is merciful and compassionate: long-suffering and plenteous in mercy. He will not always be angry: nor will He threaten for ever. He hath not dealt with us according to our sins: nor rewarded us according to our iniquities.",
+                latin : "*Ps 102:8-10*\nMiséricors et miserátor Dóminus, longánimis et multum miséricors. Non in perpétuum irascétur, neque in ætérnum comminábitur. Non secúndum peccáta nostra fecit nobis, neque secúndum iniquitátes nostras retríbuet nobis."
+            ),
+            PropersData (
+                title : "Greater Alleluia",
+                english : "*Matt 11:29*\nAlleluia, alleluia. Take my yoke upon you and learn of me, because I am meek and humble of heart: and you shall find rest to your souls. Alleluia.\n*Matt 11:28*\nCome to me, all you that labor and are burdened, and I will refresh you. Alleluia.",
+                latin : "*Matt 11:29*\nAllelúja, allelúja. Tóllite jugum meum super vos et díscite a me, quia mitis sum et húmilis Corde, et inveniétis réquiem animábus vestris. Allelúja.\n*Matt 11:28*\nVeníte ad me omnes qui laborátis et oneráti estis et ego refíciam vos. Allelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -140,14 +151,14 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "The Immaculate Heart of Our Lady - 1st Saturday" : CelebrationData (
+    "The Immaculate Heart of Mary" : CelebrationData (
         rank : 4,
         title : "The Immaculate Heart",
         colors : "w",
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Heb 4:16*\nLet us come with confidence to the throne of grace, that we may obtain mercy, and may find grace in seasonable aid. (P. T. Alleluia, alleluia.)\n*Ps 44:2*\nMy heart hath uttered a good word: I speak my works to the King.\nGlory be to the Father...\nLet us come with confidence to the throne of grace, that we may obtain mercy, and may find grace in seasonable aid. (P. T. Alleluia, alleluia.)",
+                english : "*Heb 4:16*\nLet us come with confidence to the throne of grace, that we may obtain mercy, and may find grace in seasonable aid. (P.T. Alleluia, alleluia.)\n*Ps 44:2*\nMy heart hath uttered a good word: I speak my works to the King.\nGlory be to the Father...\nLet us come with confidence to the throne of grace, that we may obtain mercy, and may find grace in seasonable aid. (P.T. Alleluia, alleluia.)",
                 latin : "*Heb 4:16*\nAdeámus cum fidúcia ad thronum grátiæ, ut misericórdiam consequámur, et grátiam inveniámus in auxílio opportúno. (T.P. Allelúia, allelúia.)\n*Ps 44:2*\nEructávit cor meum verbum bonum: dico ego ópera mea Regi.\nGlória Patri...\nAdeámus cum fidúcia ad thronum grátiæ, ut misericórdiam consequámur, et grátiam inveniámus in auxílio opportúno. (T.P. Allelúja, allelúja.)"
             ),
             PropersData (
@@ -166,14 +177,14 @@ var votive_propers : OrderedDictionary = [
                 latin : "*Ps 12:6*\nExsultabit cor meum insalutári tuo: cantábo Dómino qui bona tríbuit mihi: et psallam nómini Dómini altíssimi.\n*Ps 44:18*\nMémores erunt nóminis tui in omni generatióne et generatiónem: proptérea pópuli confitebúntur tibi in ætérnum."
             ),
             PropersData (
-                title : "Tract",
-                english : "*Prov 8:32,35*\nNow therefore, children, hear me: Blessed are they that keep my ways. Hear instruction and be wise, and refuse it not. Blessed is the man that heareth me, and that watcheth daily at my gates and waiteth at the posts of my door. He that shall find me shall find life, and shall have salvation from the Lord.",
-                latin : "*Prov 8:32,35*\nNunc ergo, fílii, audíte me Beáti, qui custódiunt via meas. Audíte disciplínam et estóte sapiéntes, et nolíte abícere eam. ℣. Beátus homo qui audit me, et qui vígilat ad fores meas quotídie, et obsérvat ad postes óstii mei. ℣. Qui me invénerit, invéniet vitam, et háuriet salútem a Dómino."
-            ),
-            PropersData (
                 title : "Lesser Alleluia",
                 english : "*Lk 1:46-47*\nAlleluia, alleluia. My soul doth magnify the Lord and my spirit hath rejoiced in God my Savior. Alleluia.",
                 latin : "*Lk 1:46-47*\nAllelúja, allelúja. Magníficat ánima mea Dóminum: et exsultávit spíritus meus in Deo salutári meo. Allelúja."
+            ),
+            PropersData (
+                title : "Tract",
+                english : "*Prov 8:32,35*\nNow therefore, children, hear me: Blessed are they that keep my ways. Hear instruction and be wise, and refuse it not. Blessed is the man that heareth me, and that watcheth daily at my gates and waiteth at the posts of my door. He that shall find me shall find life, and shall have salvation from the Lord.",
+                latin : "*Prov 8:32,35*\nNunc ergo, fílii, audíte me Beáti, qui custódiunt via meas. Audíte disciplínam et estóte sapiéntes, et nolíte abícere eam. ℣. Beátus homo qui audit me, et qui vígilat ad fores meas quotídie, et obsérvat ad postes óstii mei. ℣. Qui me invénerit, invéniet vitam, et háuriet salútem a Dómino."
             ),
             PropersData (
                 title : "Gospel",
@@ -182,7 +193,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Offertory",
-                english : "*Lk 1:46*\nMy spirit hath rejoiced in God my Savior: because He that is mighty hath done great things to me and holy is His Name. (P. T. Alleluia.)",
+                english : "*Lk 1:46*\nMy spirit hath rejoiced in God my Savior: because He that is mighty hath done great things to me and holy is His Name. (P.T. Alleluia.)",
                 latin : "*Lk 1:46*\nExultavit spíritus meus in Deo salutári meo: quia fecit mihi magna qui potens est et sanctum nomen ejus. (T.P. Allelúja.)"
             ),
             PropersData (
@@ -197,7 +208,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Communion",
-                english : "*Jn 19:27*\nJesus saith to His mother: Woman, behold thy son. After that, He saith to the disciple: Behold thy mother. And from that hour, the disciple took her to his own. (P. T. Alleluia.)",
+                english : "*Jn 19:27*\nJesus saith to His mother: Woman, behold thy son. After that, He saith to the disciple: Behold thy mother. And from that hour, the disciple took her to his own. (P.T. Alleluia.)",
                 latin : "*Jn 19:27*\nDixit Jesus matri suæ: Múlier, ecce fílius tuus: deinde dixit discípulo: Ecce Mater tua. Et ex illa hora accépit eam discípulus in sua. (T.P. Allelúia.)"
             ),
             PropersData (
@@ -208,14 +219,79 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "The Holy Trinity - Monday" : CelebrationData (
+    "Our Lady (Advent)" : CelebrationData (
+        rank : 4,
+        title : "Our Lady (Advent)",
+        colors : "w",
+        propers : [
+            PropersData (
+                title : "Introit",
+                english : "*Isa 45:8*\nDrop down dew, ye heavens, from above, and let the clouds rain the just: let the earth be opened and bud forth a Savior.\n*Ps 84:2*\nLord, Thou hast blessed Thy land: Thou hast turned away the captivity of Jacob.\nGlory be to the Father...\nDrop down dew, ye heavens, from above, and let the clouds rain the just: let the earth be opened and bud forth a Savior.",
+                latin : "*Isa 45:8*\nRoráte, cæli, désuper, et nubes pluant justum: aperiátur terra, et gérminet Salvatórem.\n*Ps 84:2*\nBenedixísti, Domine, terram tuam: avertísti captivitátem Jacob.\nGlória Patri...\nRoráte, cæli, désuper, et nubes pluant justum: aperiátur terra, et gérminet Salvatórem."
+            ),
+            PropersData (
+                title : "Collect",
+                english : "O God, Who didst will that at the message of an Angel, Thy Word should take flesh in the womb of the blessed Virgin Mary, grant that we, Thy suppliants, who believe her to be truly the Mother of God, may be helped by her intercession with Thee.\nThrough the same Jesus Christ, Thy Son, our Lord...",
+                latin : "Deus, qui de beátæ Maríæ Vírginis útero Verbum tuum, Angelo nuntiánte, carnem suscípere voluísti: præsta supplícibus tuis; ut, qui vere eam Genetrícem Dei crédimus, ejus apud te intercessiónibus adjuvémur.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
+            ),
+            PropersData (
+                title : "Lesson",
+                english : "*Isa 7:10-15*\nIn those days, the Lord spoke to Achaz, saying: Ask thee a sign of the Lord thy God, either unto the depth of hell, or unto the height above. And Achaz said: I will not ask, and I will not tempt the Lord. And He said: Hear ye therefore, O house of David: Is it a small thing for you to be grievous to men, that you are grievous to my God also? Therefore the Lord Himself shall give you a sign. Behold a Virgin shall conceive, and bear a Son, and His name shall be called Emmanuel. He shall eat butter and honey, that He may know to refuse the evil, and to choose the good.",
+                latin : "*Isa 7:10-15*\nIn diébus illis: Locútus est Dóminus ad Achaz, dicens: Pete tibi signum a Dómino Deo tuo, in profúndum inférni, sive in excélsum supra. Et dixit Achaz: Non petam et non tentábo Dóminum. Et dixit: Audíte ergo, domus David: Numquid parum vobis est, moléstos esse homínibus, quia molesti estis et Deo meo ? Propter hoc dabit Dóminus ipse vobis signum. Ecce, virgo concípiet, et páriet fílium, et vocábitur nomen ejus Emmánuel. Butýrum et mel cómedet, ut sciat reprobáre malum, et elígere bonum."
+            ),
+            PropersData (
+                title : "Gradual",
+                english : "*Ps 23:7*\nLift up your gates, O ye princes; and be ye lifted up, O eternal gates: and the King of glory shall enter in.\n*Ps 23:3-4*\nWho shall .ascend into the mountain of the Lord, or who shall stand in His holy place? The innocent in hands and clean of heart.",
+                latin : "*Ps 23:7*\nTóllite portas, príncipes, vestras: et elevámini, portæ æternáles: et introíbit Rex glóriæ.\n*Ps 23:3-4*\nQuis ascéndet in montem Dómini, aut quis stabit in loco sancto ejus? Innocens mánibus et mundo corde."
+            ),
+            PropersData (
+                title : "Lesser Alleluia",
+                english : "*Lk 1:28*\nAlleluia, alleluia. Hail Mary, full of grace, the Lord is with thee: blessed art thou among women. Alleluia.",
+                latin : "*Lk 1:28*\nAllelúja, allelúja. Ave, María, grátia plena: Dóminus tecum: benedícta tu in muliéribus. Allelúja."
+            ),
+            PropersData (
+                title : "Gospel",
+                english : "*Lk 1:26-38*\nAt that time the Angel Gabriel was sent from God into a city of Galilee, called Nazareth, to a virgin espoused to a man whose name was Joseph, of the house of David, and the virgin's name was Mary. And the Angel being come in, said unto her: Hail, full of grace: the Lord is with thee: blessed art thou among women. Who having heard, was troubled at his saying: and thought with herself what manner of salutation this should be. And the Angel said to her: Fear not, Mary, for thou hast found grace with God: behold thou shalt conceive in thy womb, and shall bring forth a son, and thou shalt call His name Jesus. He shall be great, and shall be called the Son of the Most High, and the Lord God shall give unto Him the throne of David His father; and He shall reign in the house of Jacob for ever, and of His kingdom there shall be no end. And Mary said to the Angel: How shall this be done, because I know not man? And the Angel answering, said to her: The Holy Spirit shall come upon thee, and the power of the Most High shall overshadow thee. And therefore also the Holy which shall be born of thee shall be called the Son of God. And behold thy cousin Elizabeth, she also hath conceived a son in her old age; and this is the sixth month with her that is called barren; because no work shall be impossible with God. And Mary said: Behold the handmaid of the Lord, be it done to me according to thy word.",
+                latin : "*Lk 1:26-38*\nIn illo témpore: Missus est Ángelus Gábriël a Deo in civitátem Galilǽæ, cui nomen Názareth, ad Vírginem desponsátam viro, cui nomen erat Joseph, de domo David, et nomen Vírginis María. Et ingréssus Ángelus ad eam, dixit: Ave grátia plena: Dóminus tecum: benedícta tu in muliéribus. Quæ cum audísset, turbáta est in sermóne ejus: et cogitábit qualis esset ista salutátio. Et ait Ángelus ei: Ne tímeas, María, invenísti enim grátiam apud Deum: ecce concípies in útero, et páries fílium, et vocábis nomen ejus Jesum. Hic erit magnus, et Fílius Altíssimi vocábitur, et dabit illi Dóminus Deus sedem David patris ejus: et regnábit in domo Jacob in ætérnum, et regni ejus non erit finis. Dixit autem María ad Angelum: Quómodo fiet istud, quóniam virum non cognósco? Et respóndens Ángelus, dixit ei: Spíritus Sanctus supervéniet in te, et virtus Altíssimi obumbrábit tibi. Ideóque et quod nascétur ex te Sanctum, vocábitur Fílius Dei. Et ecce, Elísabeth, cognáta tua, et ipsa concépit fílium in senectúte sua:et hic mensis sextus est illi, quæ vocátur stérilis: quia non erit impossíbile apud Deum omne verbum. Dixit autem María: Ecce ancílla Dómini, fiat mihi secúndum verbum tuum."
+            ),
+            PropersData (
+                title : "Offertory",
+                english : "*Lk 1:28,42*\nHail Mary, full of grace; the Lord is with thee. Blessed art thou among women, and blessed is the fruit of thy womb.",
+                latin : "*Lk 1:28,42*\nAve, María, grátia plena: Dóminus tecum: benedícta tu in muliéribus, et benedíctus fructus ventris tui."
+            ),
+            PropersData (
+                title : "Secret",
+                english : "Strengthen in our minds, O Lord, we beseech Thee, the mysteries of the true faith: that confessing Him Who was conceived of the Virgin to be true God and true man, we may deserve, through the power of His saving resurrection, to attain everlasting joy.\nThrough the same Jesus Christ, Thy Son, our Lord...",
+                latin : "In méntibus nostris, quǽsumus, Dómine, veræ fídei sacraménta confírma: ut, qui concéptum de Vírgine Deum verum et hóminem confitémur: per ejus salutíferæ resurrectiónis poténtiam, ad ætérnam mereámur perveníre lætítiam.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
+            ),
+            PropersData (
+                title : "Preface of the Blessed Virgin Mary",
+                english : "It is truly meet and just, right and for our salvation that we always and everywhere give thanks unto Thee, O holy Lord, Father almighty, everlasting God: and that we should praise and bless, and proclaim Thee, in veneration of the Blessed Mary, ever Virgin: Who also conceived Thine only-begotten Son by the overshadowing of the Holy Spirit, and the glory of her virginity still abiding, gave forth to the world the everlasting Light, Jesus Christ our Lord. Through Whom the Angels praise Thy Majesty, the Dominations adore it, the Powers tremble: the heavens and the hosts of heaven, and the blessed Seraphim, together celebrate in exultation. With whom, we pray Thee, command that our voices of supplication also be joined in acknowledging Thee saying:",
+                latin : "Vere dignum et justum est, æquum et salutáre, nos tibi semper et ubíque grátias ágere: Dómine sancte, Pater omnípotens, ætérne Deus: Et te in Veneratióne beátæ Maríæ semper Vírginis collaudáre, benedícere et prædicáre. Quæ et Unigénitum tuum Sancti Spíritus obumbratióne concépit: et, virginitátis glória permanénte, lumen ætérnum mundo effúdit, Jesum Christum, Dóminum nostrum. Per quem maiestátem tuam laudant Ángeli, adórant Dominatiónes, tremunt Potestátes. Cæli cælorúmque Virtútes ac beáta Séraphim sócia exsultatióne concélebrant. Cum quibus et nostras voces ut admítti júbeas, deprecámur, súpplici confessióne dicéntes:"
+            ),
+            PropersData (
+                title : "Communion",
+                english : "*Isa 7:14*\nBehold, a virgin shall conceive, and bring forth a son; and His name shall be called Emmanuel.",
+                latin : "*Isa 7:14*\nEcce Virgo concípiet et páriet fílium: et vocábitur nomen ejus Emmánuel."
+            ),
+            PropersData (
+                title : "Postcommunion",
+                english : "Pour forth, we beseech Thee, O Lord, Thy grace into our hearts: that we, to whom the incarnation of Christ Thy Son was made known by the message of an Angel, may, by His passion and cross, be brought to the glory of His Resurrection.\nThrough the same Jesus Christ, Thy Son, our Lord...",
+                latin : "Grátiam tuam, quǽsumus, Dómine, méntibus nostris infúnde: ut qui, Ángelo nuntiánte, Christi Fílii tui, incarnatiónem cognóvimus; per passiónem ejus et crucem, ad resurrectiónis glóriam perducámur.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
+            )
+        ],
+        commemorations : []
+    )
+]
+var votive_monday: OrderedDictionary = [
+    "The Holy Trinity" : CelebrationData (
         rank : 4,
         title : "The Holy Trinity",
         colors : "w",
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Tob 36:18*\nBlessed be the holy Trinity, and undivided unity: we will give glory to him, because he hath shown his mercy to us. (P. T. Aileluia, alleluia.)\n*Ps 8:2*\nO Lord, our Lord : how wonderful is thy name in the whole earth.\nGlory be to the Father...\nBlessed be the holy Trinity, and undivided unity: we will give glory to him, because he hath shown his mercy to us. (P.T. Alleluia, alleluia.)",
+                english : "*Tob 36:18*\nBlessed be the holy Trinity, and undivided unity: we will give glory to him, because he hath shown his mercy to us. (P.T. Alleluia, alleluia.)\n*Ps 8:2*\nO Lord, our Lord : how wonderful is thy name in the whole earth.\nGlory be to the Father...\nBlessed be the holy Trinity, and undivided unity: we will give glory to him, because he hath shown his mercy to us. (P.T. Alleluia, alleluia.)",
                 latin : "*Tob 36:18*\nBenedicta sit sancta Trinitas, atque indivisa Unitas: confitebimur ei, quia fecit nobiscum misericordiam suam. (T.P. Allelúja, allelúja.)\n*Ps 8:2*\nDomine Dominus noster: quam admirabile est nomen tuum in universa terra.\nGlória Patri...\nBenedicta sit sancta Trinitas, atque indivisa Unitas: confitebimur ei, quia fecit nobiscum misericordiam suam. (T.P. Allelúja, allelúja.)"
             ),
             PropersData (
@@ -255,7 +331,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Offertory",
-                english : "*cf. Tob 12:6, cf. Dan 3:55*\nBlessed be God the Father, and the only-begotten Son of God, and also the Holy Spirit: because he hath shown his mercy towards us, (P. T. Alleluia.) Let us bless the Father and the Son with the Holy Ghost: let us praise him and exalt him above all for ever. Because he hath. Blessed art thou, that beholdest the depth, and sittest upon the Cherubim: and worthy to be praised and exalted above all for ever. Because he hath.",
+                english : "*cf. Tob 12:6, cf. Dan 3:55*\nBlessed be God the Father, and the only-begotten Son of God, and also the Holy Spirit: because he hath shown his mercy towards us, (P.T. Alleluia.) Let us bless the Father and the Son with the Holy Ghost: let us praise him and exalt him above all for ever. Because he hath. Blessed art thou, that beholdest the depth, and sittest upon the Cherubim: and worthy to be praised and exalted above all for ever. Because he hath.",
                 latin : "*cf. Tob 12:6, cf. Dan 3:55*\nBenedictus sit Deus Pater, unigenitusque Dei Filius, sanctus quoque Spiritus: quia fecit nobiscum misericordiam suam. (T.P. Alleluia.) Benedicamus Patrem et Filium cum Sancto Spiritu: laudemus et superexaltemus eum in sæcula. Quia fecit nobiscum misericordiam suam. Benedictus es, qui intueris abyssos et sedes super Cherubim: et superlaudabilis et superexaltatus in sæcula. Quia fecit nobiscum misericordiam suam."
             ),
             PropersData (
@@ -270,7 +346,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Communion",
-                english : "*Tob 12:6*\nWe bless the God of heaven, and before all living we will praise him; because he hath shown his mercy to us. (P. T. Alleluia.)",
+                english : "*Tob 12:6*\nWe bless the God of heaven, and before all living we will praise him; because he hath shown his mercy to us. (P.T. Alleluia.)",
                 latin : "*Tob 12:6*\nBenedicimus Deum cæli, et coram omnibus viventibus confitebimur ei : quia fecit nobiscum misericordiam suam. (T.P. Allelúja.)"
             ),
             PropersData (
@@ -281,15 +357,17 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "The Holy Angels - Tuesday" : CelebrationData (
+]
+var votive_tuesday: OrderedDictionary = [
+    "The Holy Angels" : CelebrationData (
         rank : 4,
         title : "The Holy Angels",
         colors : "w",
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Ps 102:20*\nBless the Lord, all ye His Angels: you that are mighty in strength, and execute His word, hearkening to the voice of His orders. (P. T. Aileluia, alleluia.)\n*Ps ibid. 1*\nBless the Lord, O my soul: and let all that is within me bless His holy Name.\nGlory be to the Father...\nBless the Lord, all ye His Angels: you that are mighty in strength, and execute His word, hearkening to the voice of His orders. (P.T. Alleluia, alleluia.)",
-                latin : "*Ps 102:20*\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus, ad audiendam vocem sermonum ejus. (T.P. Allelúja, allelúja.)\n*Ps ibid. 1*\nBenedic, anima mea, Domino: et omnia, quae intra me sunt, nomini sancto ejus.\nGlória Patri...\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus, ad audiendam vocem sermonum ejus. (T.P. Allelúja, allelúja.)"
+                english : "*Ps 102:20*\nBless the Lord, all ye His Angels: you that are mighty in strength, and execute His word, hearkening to the voice of His orders. (P.T. Aileluia, alleluia.)\n*Ps 102:1*\nBless the Lord, O my soul: and let all that is within me bless His holy Name.\nGlory be to the Father...\nBless the Lord, all ye His Angels: you that are mighty in strength, and execute His word, hearkening to the voice of His orders. (P.T. Alleluia, alleluia.)",
+                latin : "*Ps 102:20*\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus, ad audiendam vocem sermonum ejus. (T.P. Allelúja, allelúja.)\n*Ps 102:1*\nBenedic, anima mea, Domino: et omnia, quae intra me sunt, nomini sancto ejus.\nGlória Patri...\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus, ad audiendam vocem sermonum ejus. (T.P. Allelúja, allelúja.)"
             ),
             PropersData (
                 title : "Collect",
@@ -328,7 +406,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Offertory",
-                english : "*Apoc 8:3-4*\nAn angel stood near the altar of the temple, having a golden censer in his hand: and there was given to him much incense, and the smoke of the perfumes ascended before God. (P. T. Alleluia.)",
+                english : "*Apoc 8:3-4*\nAn angel stood near the altar of the temple, having a golden censer in his hand: and there was given to him much incense, and the smoke of the perfumes ascended before God. (P.T. Alleluia.)",
                 latin : "*Apoc 8:3-4*\nStetit Angelus juxta aram templi, habens thuribulum aureum in manu sua: et data sunt ei incensa multa: et ascendit fumus aromatum in conspectu Dei. (T.P. Alleluia.)"
             ),
             PropersData (
@@ -339,7 +417,7 @@ var votive_propers : OrderedDictionary = [
             PropersData ( title: "Preface of the Season", english: "", latin: "" ),
             PropersData (
                 title : "Communion",
-                english : "Angels, Archangels, Thrones and Dominions, Principalities, and Powers, the Virtues of the heavens, Cherubim and Seraphim, bless ye the Lord for ever. (P. T. Alleluia.)",
+                english : "Angels, Archangels, Thrones and Dominions, Principalities, and Powers, the Virtues of the heavens, Cherubim and Seraphim, bless ye the Lord for ever. (P.T. Alleluia.)",
                 latin : "Angeli, Archangeli, Throni et Dominationes, Principatus et Potestates, Virtutes cœlorum, Cherubim atque Seraphim, Dominum benedicite in aeternum. (T.P. Allelúja.)"
             ),
             PropersData (
@@ -350,15 +428,17 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "St Joseph - Wednesday" : CelebrationData (
+]
+var votive_wednesday: OrderedDictionary = [
+    "St Joseph" : CelebrationData (
         rank : 4,
         title : "St Joseph",
         colors : "w",
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Ps 32:20,21; 79:2*\nThe Lord is our helper and protector: in Him our heart shall rejoice, and in His holy name we have trusted. (P. T. Aileluia, alleluia.)\n*Ps.*\nGive ear, O Thou that rulest Israel: Thou that leadest Joseph like a sheep.\nGlory be to the Father...\nThe Lord is our helper and protector: in Him our heart shall rejoice, and in His holy name we have trusted. (P.T. Alleluia, alleluia.)",
-                latin : "*Ps 32:20,21; 79:2*\nAdjutor et protector noster est Dóminus: in eo lætábitur cor nostrum, et in nómine sancto ejus sperávimus. (T.P. Allelúja, allelúja.)\n*Ps.*\nQui regis Israel, inténde: qui dedúcis, velut ovem, Joseph.\nGlória Patri...\nAdjutor et protector noster est Dóminus: in eo lætábitur cor nostrum, et in nómine sancto ejus sperávimus. (T.P. Allelúja, allelúja.)"
+                english : "*Ps 32:20,21*\nThe Lord is our helper and protector: in Him our heart shall rejoice, and in His holy name we have trusted. (P.T. Aileluia, alleluia.)\n*Ps 79:2*\nGive ear, O Thou that rulest Israel: Thou that leadest Joseph like a sheep.\nGlory be to the Father...\nThe Lord is our helper and protector: in Him our heart shall rejoice, and in His holy name we have trusted. (P.T. Alleluia, alleluia.)",
+                latin : "*Ps 32:20,21*\nAdjutor et protector noster est Dóminus: in eo lætábitur cor nostrum, et in nómine sancto ejus sperávimus. (T.P. Allelúja, allelúja.)\n*Ps 79:2*\nQui regis Israel, inténde: qui dedúcis, velut ovem, Joseph.\nGlória Patri...\nAdjutor et protector noster est Dóminus: in eo lætábitur cor nostrum, et in nómine sancto ejus sperávimus. (T.P. Allelúja, allelúja.)"
             ),
             PropersData (
                 title : "Collect",
@@ -397,7 +477,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Offertory",
-                english : "*Ps 147:12,13*\nPraise the Lord, O Jerusalem, because He hath strengthened the bolts of thy, gates: He hath blessed thy children within thee. (P. T. Alleluia.)",
+                english : "*Ps 147:12,13*\nPraise the Lord, O Jerusalem, because He hath strengthened the bolts of thy, gates: He hath blessed thy children within thee. (P.T. Alleluia.)",
                 latin : "*Ps 147:12,13*\nLauda, Jerusalem, Dóminum: quóniam confortávit seras portárum tuárum, benedíxit fíliis tuis in te. (T.P. Alleluia.)"
             ),
             PropersData (
@@ -412,7 +492,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Communion",
-                english : "*Matt 1:16*\nBut Jacob begot Joseph, the husband of Mary, of whom was born Jesus, who is called Christ. (P. T. Alleluia.)",
+                english : "*Matt 1:16*\nBut Jacob begot Joseph, the husband of Mary, of whom was born Jesus, who is called Christ. (P.T. Alleluia.)",
                 latin : "*Tob 12:6*\nJacob autem génuit Joseph, virum Maria, de qua natos est Jesus, qui vocátur Christus. (T.P. Allelúja.)"
             ),
             PropersData (
@@ -423,7 +503,7 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "Ss Peter & Paul - Wednesday" : CelebrationData (
+    "Ss Peter & Paul" : CelebrationData (
         rank : 4,
         title : "Ss Peter & Paul",
         colors : "r",
@@ -511,7 +591,7 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "All Holy Apostles - Wednesday" : CelebrationData (
+    "All Holy Apostles" : CelebrationData (
         rank : 4,
         title : "The Holy Apostles",
         colors : "w",
@@ -598,15 +678,17 @@ var votive_propers : OrderedDictionary = [
             )
         ],
         commemorations : []
-    ),
-    "The Holy Ghost - Thursday" : CelebrationData (
+    )
+]
+var votive_thursday: OrderedDictionary = [
+    "The Holy Ghost" : CelebrationData (
         rank : 4,
         title : "The Holy Ghost",
         colors : "r",
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Wis 1:7*\nThe Spirit of the Lord hath filled the whole world, alleluia; and that which containeth all things hath knowledge of the voice. (P. T. Aileluia, alleluia.)\n*Ps 67:2*\nLet God arise, and let His enemies be scattered: and let them that hate Him flee from before His face.\nGlory be to the Father...\nThe Spirit of the Lord hath filled the whole world, alleluia; and that which containeth all things hath knowledge of the voice. (P.T. Alleluia, alleluia.)",
+                english : "*Wis 1:7*\nThe Spirit of the Lord hath filled the whole world, alleluia; and that which containeth all things hath knowledge of the voice. (P.T. Aileluia, alleluia.)\n*Ps 67:2*\nLet God arise, and let His enemies be scattered: and let them that hate Him flee from before His face.\nGlory be to the Father...\nThe Spirit of the Lord hath filled the whole world, alleluia; and that which containeth all things hath knowledge of the voice. (P.T. Alleluia, alleluia.)",
                 latin : "*Wis 1:7*\nSpiritus Dómini replévit orbem terrárum, allelúia: et hoc quod cóntinet ómnia, sciéntiam habet vocis. (T.P. Allelúja, allelúja.)\n*Ps 67:2*\nExsúrgat Deus, et dissipéntur in imíci ejus: et fúgiant, qui odérunt eum, a fácie ejus.\nGlória Patri...\nSpiritus Dómini replévit orbem terrárum, allelúia: et hoc quod cóntinet ómnia, sciéntiam habet vocis. (T.P. Allelúja, allelúja.)"
             ),
             PropersData (
@@ -672,7 +754,7 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "The Most Holy Sacrament of the Eucharist - Thursday" : CelebrationData (
+    "The Most Holy Sacrament of the Eucharist" : CelebrationData (
         rank : 4,
         title : "The Blessed Sacrament",
         colors : "w",
@@ -740,8 +822,10 @@ var votive_propers : OrderedDictionary = [
             )
         ],
         commemorations : []
-    ),
-    "The Passion of the Lord - Friday" : CelebrationData (
+    )
+]
+var votive_friday : OrderedDictionary = [
+    "The Passion of the Lord" : CelebrationData (
         rank : 4,
         title : "The Passion",
         colors : "r",
@@ -763,8 +847,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Gradual",
-                english : "*Ps 68:21-22*\nMy heart hath expected reproach and misery: and I looked for one that would grieve together with Me, and there was none: I sought one that would comfort Me, and I found none. They gave Me gall for My food, and in My thirst they gave Me vinegar to drink.",
-                latin : "*Ps 68:21-22*\nImproperium exspectavit cor meum, et miseriam: et sustinui, qui simul mecum contristaretur, et non fuit: consolantem me quæsivi, et non inveni. Dederunt in escam meam fei, et in siti mea potaverunt me aceto."
+                english : "*Ps 68:21,22*\nMy heart hath expected reproach and misery: and I looked for one that would grieve together with Me, and there was none: I sought one that would comfort Me, and I found none. They gave Me gall for My food, and in My thirst they gave Me vinegar to drink.",
+                latin : "*Ps 68:21,22*\nImproperium exspectavit cor meum, et miseriam: et sustinui, qui simul mecum contristaretur, et non fuit: consolantem me quæsivi, et non inveni. Dederunt in escam meam fei, et in siti mea potaverunt me aceto."
             ),
             PropersData (
                 title : "Lesser Alleluia",
@@ -814,7 +898,7 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
-    "The Holy Cross - Friday" : CelebrationData (
+    "The Holy Cross" : CelebrationData (
         rank : 4,
         title : "The Holy Cross",
         colors : "r",
@@ -891,70 +975,9 @@ var votive_propers : OrderedDictionary = [
             )
         ],
         commemorations : []
-    ),
-    "Our Lady (Advent)" : CelebrationData (
-        rank : 4,
-        title : "Our Lady (Advent)",
-        colors : "w",
-        propers : [
-            PropersData (
-                title : "Introit",
-                english : "*Isa 45:8*\nDrop down dew, ye heavens, from above, and let the clouds rain the just: let the earth be opened and bud forth a Savior.\n*Ps 84:2*\nLord, Thou hast blessed Thy land: Thou hast turned away the captivity of Jacob.\nGlory be to the Father...\nDrop down dew, ye heavens, from above, and let the clouds rain the just: let the earth be opened and bud forth a Savior.",
-                latin : "*Isa 45:8*\nRoráte, cæli, désuper, et nubes pluant justum: aperiátur terra, et gérminet Salvatórem.\n*Ps 84:2*\nBenedixísti, Domine, terram tuam: avertísti captivitátem Jacob.\nGlória Patri...\nRoráte, cæli, désuper, et nubes pluant justum: aperiátur terra, et gérminet Salvatórem."
-            ),
-            PropersData (
-                title : "Collect",
-                english : "O God, Who didst will that at the message of an Angel, Thy Word should take flesh in the womb of the blessed Virgin Mary, grant that we, Thy suppliants, who believe her to be truly the Mother of God, may be helped by her intercession with Thee.\nThrough the same Jesus Christ, Thy Son, our Lord...",
-                latin : "Deus, qui de beátæ Maríæ Vírginis útero Verbum tuum, Angelo nuntiánte, carnem suscípere voluísti: præsta supplícibus tuis; ut, qui vere eam Genetrícem Dei crédimus, ejus apud te intercessiónibus adjuvémur.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
-            ),
-            PropersData (
-                title : "Lesson",
-                english : "*Isa 7:10-15*\nIn those days, the Lord spoke to Achaz, saying: Ask thee a sign of the Lord thy God, either unto the depth of hell, or unto the height above. And Achaz said: I will not ask, and I will not tempt the Lord. And He said: Hear ye therefore, O house of David: Is it a small thing for you to be grievous to men, that you are grievous to my God also? Therefore the Lord Himself shall give you a sign. Behold a Virgin shall conceive, and bear a Son, and His name shall be called Emmanuel. He shall eat butter and honey, that He may know to refuse the evil, and to choose the good.",
-                latin : "*Isa 7:10-15*\nIn diébus illis: Locútus est Dóminus ad Achaz, dicens: Pete tibi signum a Dómino Deo tuo, in profúndum inférni, sive in excélsum supra. Et dixit Achaz: Non petam et non tentábo Dóminum. Et dixit: Audíte ergo, domus David: Numquid parum vobis est, moléstos esse homínibus, quia molesti estis et Deo meo ? Propter hoc dabit Dóminus ipse vobis signum. Ecce, virgo concípiet, et páriet fílium, et vocábitur nomen ejus Emmánuel. Butýrum et mel cómedet, ut sciat reprobáre malum, et elígere bonum."
-            ),
-            PropersData (
-                title : "Gradual",
-                english : "*Ps 23:7*\nLift up your gates, O ye princes; and be ye lifted up, O eternal gates: and the King of glory shall enter in.\n*Ps 23:3-4*\nWho shall .ascend into the mountain of the Lord, or who shall stand in His holy place? The innocent in hands and clean of heart.",
-                latin : "*Ps 23:7*\nTóllite portas, príncipes, vestras: et elevámini, portæ æternáles: et introíbit Rex glóriæ.\n*Ps 23:3-4*\nQuis ascéndet in montem Dómini, aut quis stabit in loco sancto ejus? Innocens mánibus et mundo corde."
-            ),
-            PropersData (
-                title : "Lesser Alleluia",
-                english : "*Lk 1:28*\nAlleluia, alleluia. Hail Mary, full of grace, the Lord is with thee: blessed art thou among women. Alleluia.",
-                latin : "*Lk 1:28*\nAllelúja, allelúja. Ave, María, grátia plena: Dóminus tecum: benedícta tu in muliéribus. Allelúja."
-            ),
-            PropersData (
-                title : "Gospel",
-                english : "*Lk 1:26-38*\nAt that time the Angel Gabriel was sent from God into a city of Galilee, called Nazareth, to a virgin espoused to a man whose name was Joseph, of the house of David, and the virgin's name was Mary. And the Angel being come in, said unto her: Hail, full of grace: the Lord is with thee: blessed art thou among women. Who having heard, was troubled at his saying: and thought with herself what manner of salutation this should be. And the Angel said to her: Fear not, Mary, for thou hast found grace with God: behold thou shalt conceive in thy womb, and shall bring forth a son, and thou shalt call His name Jesus. He shall be great, and shall be called the Son of the Most High, and the Lord God shall give unto Him the throne of David His father; and He shall reign in the house of Jacob for ever, and of His kingdom there shall be no end. And Mary said to the Angel: How shall this be done, because I know not man? And the Angel answering, said to her: The Holy Spirit shall come upon thee, and the power of the Most High shall overshadow thee. And therefore also the Holy which shall be born of thee shall be called the Son of God. And behold thy cousin Elizabeth, she also hath conceived a son in her old age; and this is the sixth month with her that is called barren; because no work shall be impossible with God. And Mary said: Behold the handmaid of the Lord, be it done to me according to thy word.",
-                latin : "*Lk 1:26-38*\nIn illo témpore: Missus est Ángelus Gábriël a Deo in civitátem Galilǽæ, cui nomen Názareth, ad Vírginem desponsátam viro, cui nomen erat Joseph, de domo David, et nomen Vírginis María. Et ingréssus Ángelus ad eam, dixit: Ave grátia plena: Dóminus tecum: benedícta tu in muliéribus. Quæ cum audísset, turbáta est in sermóne ejus: et cogitábit qualis esset ista salutátio. Et ait Ángelus ei: Ne tímeas, María, invenísti enim grátiam apud Deum: ecce concípies in útero, et páries fílium, et vocábis nomen ejus Jesum. Hic erit magnus, et Fílius Altíssimi vocábitur, et dabit illi Dóminus Deus sedem David patris ejus: et regnábit in domo Jacob in ætérnum, et regni ejus non erit finis. Dixit autem María ad Angelum: Quómodo fiet istud, quóniam virum non cognósco? Et respóndens Ángelus, dixit ei: Spíritus Sanctus supervéniet in te, et virtus Altíssimi obumbrábit tibi. Ideóque et quod nascétur ex te Sanctum, vocábitur Fílius Dei. Et ecce, Elísabeth, cognáta tua, et ipsa concépit fílium in senectúte sua:et hic mensis sextus est illi, quæ vocátur stérilis: quia non erit impossíbile apud Deum omne verbum. Dixit autem María: Ecce ancílla Dómini, fiat mihi secúndum verbum tuum."
-            ),
-            PropersData (
-                title : "Offertory",
-                english : "*Lk 1:28,42*\nHail Mary, full of grace; the Lord is with thee. Blessed art thou among women, and blessed is the fruit of thy womb.",
-                latin : "*Lk 1:28,42*\nAve, María, grátia plena: Dóminus tecum: benedícta tu in muliéribus, et benedíctus fructus ventris tui."
-            ),
-            PropersData (
-                title : "Secret",
-                english : "Strengthen in our minds, O Lord, we beseech Thee, the mysteries of the true faith: that confessing Him Who was conceived of the Virgin to be true God and true man, we may deserve, through the power of His saving resurrection, to attain everlasting joy.\nThrough the same Jesus Christ, Thy Son, our Lord...",
-                latin : "In méntibus nostris, quǽsumus, Dómine, veræ fídei sacraménta confírma: ut, qui concéptum de Vírgine Deum verum et hóminem confitémur: per ejus salutíferæ resurrectiónis poténtiam, ad ætérnam mereámur perveníre lætítiam.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
-            ),
-            PropersData (
-                title : "Preface of the Blessed Virgin Mary",
-                english : "It is truly meet and just, right and for our salvation that we always and everywhere give thanks unto Thee, O holy Lord, Father almighty, everlasting God: and that we should praise and bless, and proclaim Thee, in veneration of the Blessed Mary, ever Virgin: Who also conceived Thine only-begotten Son by the overshadowing of the Holy Spirit, and the glory of her virginity still abiding, gave forth to the world the everlasting Light, Jesus Christ our Lord. Through Whom the Angels praise Thy Majesty, the Dominations adore it, the Powers tremble: the heavens and the hosts of heaven, and the blessed Seraphim, together celebrate in exultation. With whom, we pray Thee, command that our voices of supplication also be joined in acknowledging Thee saying:",
-                latin : "Vere dignum et justum est, æquum et salutáre, nos tibi semper et ubíque grátias ágere: Dómine sancte, Pater omnípotens, ætérne Deus: Et te in Veneratióne beátæ Maríæ semper Vírginis collaudáre, benedícere et prædicáre. Quæ et Unigénitum tuum Sancti Spíritus obumbratióne concépit: et, virginitátis glória permanénte, lumen ætérnum mundo effúdit, Jesum Christum, Dóminum nostrum. Per quem maiestátem tuam laudant Ángeli, adórant Dominatiónes, tremunt Potestátes. Cæli cælorúmque Virtútes ac beáta Séraphim sócia exsultatióne concélebrant. Cum quibus et nostras voces ut admítti júbeas, deprecámur, súpplici confessióne dicéntes:"
-            ),
-            PropersData (
-                title : "Communion",
-                english : "*Isa 7:14*\nBehold, a virgin shall conceive, and bring forth a son; and His name shall be called Emmanuel.",
-                latin : "*Isa 7:14*\nEcce Virgo concípiet et páriet fílium: et vocábitur nomen ejus Emmánuel."
-            ),
-            PropersData (
-                title : "Postcommunion",
-                english : "Pour forth, we beseech Thee, O Lord, Thy grace into our hearts: that we, to whom the incarnation of Christ Thy Son was made known by the message of an Angel, may, by His passion and cross, be brought to the glory of His Resurrection.\nThrough the same Jesus Christ, Thy Son, our Lord...",
-                latin : "Grátiam tuam, quǽsumus, Dómine, méntibus nostris infúnde: ut qui, Ángelo nuntiánte, Christi Fílii tui, incarnatiónem cognóvimus; per passiónem ejus et crucem, ad resurrectiónis glóriam perducámur.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
-            )
-        ],
-        commemorations : []
-    ),
+    )
+]
+var votive_our_lady : OrderedDictionary = [
     "Our Lady (Before the Purification)" : CelebrationData (
         rank : 4,
         title : "Our Lady (Before the Purification)",
@@ -1030,8 +1053,8 @@ var votive_propers : OrderedDictionary = [
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Sedulius; Ps 44:2*\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.\n*Ps 44: 2*\nMy heart hath uttered a good word: I speak my works to the King.\nGlory be to the Father...\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.",
-                latin : "*Sedulius; Ps 44:2*\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum.\n*Ps 44: 2*\nEructávit cor meum verbum bonum: dico ego ópera mea Regi.\nGlória Patri...\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum."
+                english : "*Sedulius*\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.\n*Ps 44:2*\nMy heart hath uttered a good word: I speak my works to the King.\nGlory be to the Father...\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.",
+                latin : "*Sedulius*\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum.\n*Ps 44:2*\nEructávit cor meum verbum bonum: dico ego ópera mea Regi.\nGlória Patri...\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum."
             ),
             PropersData (
                 title : "Collect",
@@ -1098,8 +1121,8 @@ var votive_propers : OrderedDictionary = [
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Sedulius; Ps 44:2*\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.\n*Ps 44: 2*\nMy heart hath uttered a good word: I speak my works to the King.\nGlory be to the Father...\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.",
-                latin : "*Sedulius; Ps 44:2*\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum.\n*Ps 44: 2*\nEructávit cor meum verbum bonum: dico ego ópera mea Regi.\nGlória Patri...\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum."
+                english : "*Sedulius*\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.\n*Ps 44: 2*\nMy heart hath uttered a good word: I speak my works to the King.\nGlory be to the Father...\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.",
+                latin : "*Sedulius*\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum.\n*Ps 44: 2*\nEructávit cor meum verbum bonum: dico ego ópera mea Regi.\nGlória Patri...\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum."
             ),
             PropersData (
                 title : "Collect",
@@ -1156,8 +1179,8 @@ var votive_propers : OrderedDictionary = [
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Sedulius; Ps 44:2*\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.\n*Ps 44:2*\nMy heart hath uttered a good word: I speak my works to the King.\nGlory be to the Father...\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.",
-                latin : "*Sedulius; Ps 44:2*\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum.\n*Ps 44:2*\nEructávit cor meum verbum bonum: dico ego ópera mea Regi.\nGlória Patri...\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum."
+                english : "*Sedulius*\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.\n*Ps 44:2*\nMy heart hath uttered a good word: I speak my works to the King.\nGlory be to the Father...\nHail, holy Mother, thou who didst bring forth the King who rules heaven and earth for ever and ever.",
+                latin : "*Sedulius*\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum.\n*Ps 44:2*\nEructávit cor meum verbum bonum: dico ego ópera mea Regi.\nGlória Patri...\nSalve, sancta Parens, eníxa puérpera Regem: qui cælum terrámque regit in sǽcula sæculórum."
             ),
             PropersData (
                 title : "Collect",
@@ -1212,6 +1235,8 @@ var votive_propers : OrderedDictionary = [
         ],
         commemorations : []
     ),
+]
+var votive_propers : OrderedDictionary = [
     "For Peace" : CelebrationData (
         rank : 4,
         title : "For Peace",
@@ -1219,7 +1244,7 @@ var votive_propers : OrderedDictionary = [
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Ecc 36:18*\nGive peace, O Lord, to them that patiently wait for Thee, that Thy prophets may be found faithful: hear the prayers of Thy servant, and of Thy people Israel. (P. T. Aileluia, alleluia.)\n*Ps 121:1*\nI rejoiced at the things that were said to me: We shall go into the house of the Lord.\nGlory be to the Father...\nGive peace, O Lord, to them that patiently wait for Thee, that Thy prophets may be found faithful: hear the prayers of Thy servant, and of Thy people Israel. (P.T. Alleluia, alleluia.)",
+                english : "*Ecc 36:18*\nGive peace, O Lord, to them that patiently wait for Thee, that Thy prophets may be found faithful: hear the prayers of Thy servant, and of Thy people Israel. (P.T. Aileluia, alleluia.)\n*Ps 121:1*\nI rejoiced at the things that were said to me: We shall go into the house of the Lord.\nGlory be to the Father...\nGive peace, O Lord, to them that patiently wait for Thee, that Thy prophets may be found faithful: hear the prayers of Thy servant, and of Thy people Israel. (P.T. Alleluia, alleluia.)",
                 latin : "*Ecc 36:18*\nDa pacem, Dómine, sustinéntibus te, ut prophétæ tui fidéles inveniántur: exáudi preces servi tui, et plebis tuæ Israël. (T.P. Allelúja, allelúja.)\n*Ps 121:1*\nLætátus sum in his, quæ dicta sunt mihi: in domum Dómini íbimus.\nGlória Patri...\nDa pacem, Dómine, sustinéntibus te, ut prophétæ tui fidéles inveniántur: exáudi preces servi tui, et plebis tuæ Israël. (T.P. Allelúja, allelúja.)"
             ),
             PropersData (
@@ -1259,7 +1284,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Offertory",
-                english : "*Ps 134:3,6*\nPraise ye the Lord, for He is good, sing ye to His name, for it is sweet: Whatsoever He pleased, He hath done in heaven and upon earth (P. T. Alleluia.)",
+                english : "*Ps 134:3,6*\nPraise ye the Lord, for He is good, sing ye to His name, for it is sweet: Whatsoever He pleased, He hath done in heaven and upon earth (P.T. Alleluia.)",
                 latin : "*Ps 134:3,6*\nLaudáte Dóminum, quia benígnus est: psállite nómini ejus, quóniam suávis est: ómnia quæcúmque vóluit, fecit in cœlo et in terra. (T.P. Allelúja.)"
             ),
             PropersData (
@@ -1270,7 +1295,7 @@ var votive_propers : OrderedDictionary = [
             PropersData ( title: "Preface of the Season", english: "", latin: "" ),
             PropersData (
                 title : "Communion",
-                english : "*Jn 14:27*\nMy peace I leave you: My peace I give to you, saith the Lord. (P. T. Alleluia.)",
+                english : "*Jn 14:27*\nMy peace I leave you: My peace I give to you, saith the Lord. (P.T. Alleluia.)",
                 latin : "*Jn 14:27*\nPacem relínquo vobis: pacem meam do vobis, dicit Dóminus. (T.P. Allelúja.)"
             ),
             PropersData (
@@ -1387,8 +1412,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 99:1-2*\nAlleluia, alleluia.\nO sing joyfully unto God, all the earth, serve ye the Lord with gladness: come into His presence with exceeding joy.\nAlleluia.\nKnow ye, that the Lord He is God: He made us, and not we ourselves.\nAlleluia.",
-                latin : "*Ps 99:1-2*\nAllelúja, allelúja.\nJubiláte Deo, omnis terra: servíte Dómino in lætítia: introíte in conspéctu ejus, in exsultatióne.\nAllelúja.\nScitóte quóniam Dóminus ipse est Deus: ipse fecit nos, et non ipsi nos.\nAllelúja."
+                english : "*Ps 99:1,2*\nAlleluia, alleluia.\nO sing joyfully unto God, all the earth, serve ye the Lord with gladness: come into His presence with exceeding joy.\nAlleluia.\nKnow ye, that the Lord He is God: He made us, and not we ourselves.\nAlleluia.",
+                latin : "*Ps 99:1,2*\nAllelúja, allelúja.\nJubiláte Deo, omnis terra: servíte Dómino in lætítia: introíte in conspéctu ejus, in exsultatióne.\nAllelúja.\nScitóte quóniam Dóminus ipse est Deus: ipse fecit nos, et non ipsi nos.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -1408,8 +1433,8 @@ var votive_propers : OrderedDictionary = [
             PropersData ( title: "Preface of the Season", english: "", latin: "" ),
             PropersData (
                 title : "Communion",
-                english : "*Ps 116:1-2*\nPraise the Lord all ye nations: praise Him all ye people: for His mercy is confirmed upon us; and the truth of the Lord remaineth for ever.",
-                latin : "*Ps 116:1-2*\nLaudáte Dóminum, omnes gentes: laudáte eum, omnes pópuli: quóniam confirmáta est super nos misericórdia ejus, et véritas Dómini manet in ætérnum."
+                english : "*Ps 116:1,2*\nPraise the Lord all ye nations: praise Him all ye people: for His mercy is confirmed upon us; and the truth of the Lord remaineth for ever.",
+                latin : "*Ps 116:1,2*\nLaudáte Dóminum, omnes gentes: laudáte eum, omnes pópuli: quóniam confirmáta est super nos misericórdia ejus, et véritas Dómini manet in ætérnum."
             ),
             PropersData (
                 title : "Postcommunion",
@@ -1494,7 +1519,7 @@ var votive_propers : OrderedDictionary = [
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*2 Kings 24:16*\nBe mindful, O Lord, of Thy covenant, and say to the destroying angel. Now hold thy hand, and let not the land be made desolate, and destroy not every living soul. (P. T. Alleluia, alleluia)\n*Ps 79:2*\nGive ear, O Thou that rulest Israel: Thou that leadest Joseph like a sheep.\nGlory be to the Father...\nBe mindful, O Lord, of Thy covenant, and say to the destroying angel. Now hold thy hand, and let not the land be made desolate, and destroy not every living soul. (P. T. Alleluia, alleluia)",
+                english : "*2 Kings 24:16*\nBe mindful, O Lord, of Thy covenant, and say to the destroying angel. Now hold thy hand, and let not the land be made desolate, and destroy not every living soul. (P.T. Alleluia, alleluia)\n*Ps 79:2*\nGive ear, O Thou that rulest Israel: Thou that leadest Joseph like a sheep.\nGlory be to the Father...\nBe mindful, O Lord, of Thy covenant, and say to the destroying angel. Now hold thy hand, and let not the land be made desolate, and destroy not every living soul. (P.T. Alleluia, alleluia)",
                 latin : "*2 Kings 24:16*\nRecordáre, Dómine, testaménti tui, et dic Angelo percutiénti: Cesset jam manus tua, et non desolétur terra, et ne perdas omnem ánimam vivéntem. (T.P. Allelúja, allelúja.)\n*Ps 79:2*\nQui regis Israël, inténde: qui dedúcis, velut ovem, Joseph.\nGlória Patri...\nRecordáre, Dómine, testaménti tui, et dic Angelo percutiénti: Cesset jam manus tua, et non desolétur terra, et ne perdas omnem ánimam vivéntem. (T.P. Allelúja, allelúja.)"
             ),
             PropersData (
@@ -1545,7 +1570,7 @@ var votive_propers : OrderedDictionary = [
             PropersData ( title: "Preface of the Season", english: "", latin: "" ),
             PropersData (
                 title : "Communion",
-                english : "*Lk 6:17-19*\nA multitude of sick, and they that were troubled with unclean spirits, came to Him: for virtue went out from Him, and healed all. (P. T. Alleluia.)",
+                english : "*Lk 6:17-19*\nA multitude of sick, and they that were troubled with unclean spirits, came to Him: for virtue went out from Him, and healed all. (P.T. Alleluia.)",
                 latin : "*Lk 6:17-19*\nMultitúdo languéntium, et qui vexabántur a spirítibus immúndis, veniébant ad eum: quia virtus de illo exíbat, et sanábat omnes. (T.P. Allelúja.)"
             ),
             PropersData (
@@ -1563,8 +1588,8 @@ var votive_propers : OrderedDictionary = [
         propers : [
             PropersData (
                 title : "Introit",
-                english : "*Ps 24:6,3,22*\nRemember, O Lord, Thy bowels of compassion, and Thy mercies that are from the beginning of the world, lest at any time our enemies rule over us: deliver us, O God of Israel, from all our tribulations. (P. T. Alleluia, alleluia.)\n*Ps 24:1-2*\nTo Thee, O Lord, have I lifted up my soul: in Thee, O my God. I put my trust; let me not be ashamed.\nGlory be to the Father...\nRemember, O Lord, Thy bowels of compassion, and Thy mercies that are from the beginning of the world, lest at any time our enemies rule over us: deliver us, O God of Israel, from all our tribulations. (P. T. Alleluia, alleluia.)",
-                latin : "*Ps 24:6,3,22*\nReminíscere miseratiónum tuarum, Dómine, et misericórdiæ tuæ, quæ a sǽculo sunt: ne umquam dominéntur nobis inimíci nostri: líbera nos, Deus Israël, ex ómnibus angústiis nostris. (T.P. Allelúja, allelúja.)\n*Ps 24:1-2*\nAd te, Dómine, levávi ánimam meam: Deus meus, in te confído, non erubéscam.\nGlória Patri...\nReminíscere miseratiónum tuarum, Dómine, et misericórdiæ tuæ, quæ a sǽculo sunt: ne umquam dominéntur nobis inimíci nostri: líbera nos, Deus Israël, ex ómnibus angústiis nostris. (T.P. Allelúja, allelúja.)"
+                english : "*Ps 24:6,3,22*\nRemember, O Lord, Thy bowels of compassion, and Thy mercies that are from the beginning of the world, lest at any time our enemies rule over us: deliver us, O God of Israel, from all our tribulations. (P.T. Alleluia, alleluia.)\n*Ps 24:1,2*\nTo Thee, O Lord, have I lifted up my soul: in Thee, O my God. I put my trust; let me not be ashamed.\nGlory be to the Father...\nRemember, O Lord, Thy bowels of compassion, and Thy mercies that are from the beginning of the world, lest at any time our enemies rule over us: deliver us, O God of Israel, from all our tribulations. (P.T. Alleluia, alleluia.)",
+                latin : "*Ps 24:6,3,22*\nReminíscere miseratiónum tuarum, Dómine, et misericórdiæ tuæ, quæ a sǽculo sunt: ne umquam dominéntur nobis inimíci nostri: líbera nos, Deus Israël, ex ómnibus angústiis nostris. (T.P. Allelúja, allelúja.)\n*Ps 24:1,2*\nAd te, Dómine, levávi ánimam meam: Deus meus, in te confído, non erubéscam.\nGlória Patri...\nReminíscere miseratiónum tuarum, Dómine, et misericórdiæ tuæ, quæ a sǽculo sunt: ne umquam dominéntur nobis inimíci nostri: líbera nos, Deus Israël, ex ómnibus angústiis nostris. (T.P. Allelúja, allelúja.)"
             ),
             PropersData (
                 title : "Collect",
@@ -1573,8 +1598,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesson",
-                english : "*Jerm 42:1-2,7-12*\nIn those days all the captains of the warriors came near: and they said to Jeremias the prophet: pray thou for us to the Lord thy God. And the word of the Lord came to Jeremias. And he called all the captains of the fighting men that were with him, and all the people from the least to the greatest. And he said to them: Thus saith the Lord, the God of Israel, to whom you sent me, to present your supplications before Him: If you will be quiet and remain in this land. I will build you up, and not pull you down: I will plant you, and not pluck you up: for now I am appeased for the evil that I have done to you. Fear not because of the king of Babylon, of whom you are greatly afraid: fear him not, saith the Lord: for I am with you, to save you, and to deliver you from his hand. And I will show mercies to you, and will take pity on in you, and will cause you to dwell in your own land, saith the Lord almighty.",
-                latin : "*Jerm 42:1-2,7-12*\nIn diébus illis: Accessérunt omnes príncipes bellatórum: dixerúntque ad Jeremíam Prophétam: Ora pro nobis ad Dóminum, Deum tuum. Et factum est verbum Dómini ad Jeremíam. Vocavítque omnes príncipes bellatórum, et univérsum pópulum a mínimo usque ad magnum. Et dixit ad eos: Hæc dicit Dóminus, Deus Israël, ad quem misístis me, ut prostérnerem preces vestras in conspéctu ejus: Si quiescéntes manséritis in terra hac, ædificábo vos, et non déstruam; plantábo, et non evéllam: jam enim placátus sum super malo, quod feci vobis. Nolíte timére a fácie regis Babylónis, quem vos pavídi formidátis; nolíte metúere eum, dicit Dóminus: quia vobíscum sum ego, ut salvos vos fáciam et éruam de manu ejus. Et dabo vobis misericórdias, et miserébor vestri, et habitáre vos fáciam in terra vestra: dicit Dóminus omnípotens."
+                english : "*Jerm 42:1,2,7-12*\nIn those days all the captains of the warriors came near: and they said to Jeremias the prophet: pray thou for us to the Lord thy God. And the word of the Lord came to Jeremias. And he called all the captains of the fighting men that were with him, and all the people from the least to the greatest. And he said to them: Thus saith the Lord, the God of Israel, to whom you sent me, to present your supplications before Him: If you will be quiet and remain in this land. I will build you up, and not pull you down: I will plant you, and not pluck you up: for now I am appeased for the evil that I have done to you. Fear not because of the king of Babylon, of whom you are greatly afraid: fear him not, saith the Lord: for I am with you, to save you, and to deliver you from his hand. And I will show mercies to you, and will take pity on in you, and will cause you to dwell in your own land, saith the Lord almighty.",
+                latin : "*Jerm 42:1,2,7-12*\nIn diébus illis: Accessérunt omnes príncipes bellatórum: dixerúntque ad Jeremíam Prophétam: Ora pro nobis ad Dóminum, Deum tuum. Et factum est verbum Dómini ad Jeremíam. Vocavítque omnes príncipes bellatórum, et univérsum pópulum a mínimo usque ad magnum. Et dixit ad eos: Hæc dicit Dóminus, Deus Israël, ad quem misístis me, ut prostérnerem preces vestras in conspéctu ejus: Si quiescéntes manséritis in terra hac, ædificábo vos, et non déstruam; plantábo, et non evéllam: jam enim placátus sum super malo, quod feci vobis. Nolíte timére a fácie regis Babylónis, quem vos pavídi formidátis; nolíte metúere eum, dicit Dóminus: quia vobíscum sum ego, ut salvos vos fáciam et éruam de manu ejus. Et dabo vobis misericórdias, et miserébor vestri, et habitáre vos fáciam in terra vestra: dicit Dóminus omnípotens."
             ),
             PropersData (
                 title : "Gradual",
@@ -1603,7 +1628,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Offertory",
-                english : "*Ps 17:28,32*\nThou wilt save the humble people, O Lord, and wilt bring down the eyes of the proud; for Who is God but Thee, O Lord? (P. T. Alleluia.)",
+                english : "*Ps 17:28,32*\nThou wilt save the humble people, O Lord, and wilt bring down the eyes of the proud; for Who is God but Thee, O Lord? (P.T. Alleluia.)",
                 latin : "*Ps 17:28,32*\nPópulum húmilem salvum fácies, Dómine, et óculos superbórum humiliábis: quóniam quis Deus præter te, Dómine? (T.P. Allelúja.)"
             ),
             PropersData (
@@ -1614,7 +1639,7 @@ var votive_propers : OrderedDictionary = [
             PropersData ( title: "Preface of the Season", english: "", latin: "" ),
             PropersData (
                 title : "Communion",
-                english : "*Ps 30:3*\nBow down Thy ear, make haste to deliver us. (P. T. Alleluia.)",
+                english : "*Ps 30:3*\nBow down Thy ear, make haste to deliver us. (P.T. Alleluia.)",
                 latin : "*Ps 30:3*\nInclína aurem tuam: accélera, ut erípias nos. (T.P. Allelúja.)"
             ),
             PropersData (

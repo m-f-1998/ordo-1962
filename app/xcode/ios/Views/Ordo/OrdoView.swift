@@ -13,7 +13,6 @@ struct OrdoView: View {
     @State var first_load: Bool = true
     
     @State var year: Int = CurrentYear ( )
-    @Binding var second_tap: Bool
 
     var searchResults: [ [ OrdoDay ] ] {
         if search.isEmpty {
@@ -26,19 +25,50 @@ struct OrdoView: View {
     var body: some View {
         ScrollViewReader { proxy in
             NavigationStack {
-                List {
-                    ForEach ( searchResults, id: \.self ) { month in
-                        Section ( header: Spacer ( minLength: 0 ) ) {
-                            ForEach ( month ) { day in
-                                Row ( feast: day, month: day.month, year: String ( self.year ) )
-                                    .id ( "\(day.date) \(day.month)" )
-                                    .padding ( [ .top, .bottom ], 8 )
-                            }
-                        }.id ( month [ 0 ].month )
+                VStack ( spacing: 0 ) {
+                    List {
+                        ForEach ( searchResults, id: \.self ) { month in
+                            Section ( header: Spacer ( minLength: 0 ) ) {
+                                ForEach ( month ) { day in
+                                    Row ( feast: day, month: day.month, year: String ( self.year ) )
+                                        .id ( "\(day.date) \(day.month)" )
+                                        .padding ( [ .top, .bottom ], 8 )
+                                }
+                            }.id ( month [ 0 ].month )
+                        }
                     }
+                    HStack {
+                        if CurrentYear ( ) == self.year && self.search == "" {
+                            Button {
+                                let formatter = DateFormatter ( )
+                                formatter.dateFormat = "E dd MMM"
+                                DispatchQueue.main.async {
+                                    proxy.scrollTo ( formatter.string ( from: .now ), anchor: .top )
+                                }
+                            } label: {
+                                Text ( "Go To Today" )
+                                    .font ( .footnote )
+                                    .bold ( )
+                            }
+                            Text ( " | " )
+                                .font ( .footnote )
+                                .foregroundColor ( .secondary )
+                        }
+                        Text ( "Year: \( String ( self.year ) )" )
+                            .font ( .footnote )
+                            .foregroundColor ( .secondary )
+                        Text ( " | " )
+                            .font ( .footnote )
+                            .foregroundColor ( .secondary )
+                        Text ( "Version: \( Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? "Not Found" )" )
+                            .font ( .footnote )
+                            .foregroundColor ( .secondary )
+                    }
+                    .frame ( maxWidth: .infinity, alignment: .center )
+                    .padding ( [ .vertical ], 8 )
+                    .background ( Color ( .systemGray6 ) )
                 }
                 .scrollIndicators ( .hidden )
-                .navigationTitle ( "Liturgical Calendar" )
                 .toolbar {
                     ToolbarItem ( placement: .automatic ) {
                         HStack {
@@ -68,43 +98,12 @@ struct OrdoView: View {
                                     }
                                 }
                             } label: {
-                                Label ( "Change Date", systemImage: "calendar")
+                                Label ( "Change Date", systemImage: "arrow.up.arrow.down")
                             }
                             NavigationLink ( destination:  HelpComponent ( ) ) {
                                 Label ( "Information", systemImage: "info.circle" )
                             }
                         }
-                    }
-                    ToolbarItemGroup ( placement: .bottomBar ) {
-                        VStack {
-                            HStack {
-                                Text ( "App Version \( Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? "Not Found" )" )
-                                    .font ( .footnote )
-                                    .foregroundColor ( .secondary )
-                                if CurrentYear ( ) == self.year {
-                                    Text ( " |" )
-                                        .font ( .footnote )
-                                        .foregroundColor ( .secondary )
-                                        .padding ( [ .leading ], 5 )
-                                    Button {
-                                        let formatter = DateFormatter ( )
-                                        formatter.dateFormat = "E dd MMM"
-                                        DispatchQueue.main.async {
-                                            proxy.scrollTo ( formatter.string ( from: .now ), anchor: .top )
-                                        }
-                                    } label: {
-                                        Text ( "Go To Today" )
-                                            .font ( .footnote )
-                                    }
-                                }
-                            }
-                            Spacer ( )
-                        }
-                    }
-                }
-                .onChange ( of: self.second_tap ) {
-                    withAnimation {
-                        proxy.scrollTo ( "Jan", anchor: .top )
                     }
                 }
                 .onAppear {
