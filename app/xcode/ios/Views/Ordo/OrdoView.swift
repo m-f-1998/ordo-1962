@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct OrdoView: View {
+struct SearchableView: View {
     @EnvironmentObject var activeData: ActiveData
-    @State var search: String = ""
-    @State var first_load: Bool = true
-    
-    @State var year: Int = CurrentYear ( )
+    @Binding var search: String
+    @Binding var year: Int
+    @Environment(\.isSearching) private var isSearching
+    var proxy: ScrollViewProxy
 
     var searchResults: [ [ OrdoDay ] ] {
         if search.isEmpty {
@@ -23,22 +23,50 @@ struct OrdoView: View {
     }
 
     var body: some View {
+        if searchResults.count == 0 {
+            Section ( header: Spacer ( minLength: 0 ) ) {
+                ContentUnavailableView.search
+            }
+        } else {
+            ForEach ( searchResults, id: \.self ) { month in
+                if isSearching {
+                    Section ( header: Spacer ( minLength: 0 ) ) {
+                        ForEach ( month ) { day in
+                            SearchRow ( feast: day, month: day.month, year: String ( self.year ) )
+                                .padding ( [ .top, .bottom ], 8 )
+                        }
+                    }
+                } else {
+                    Section ( header: Spacer ( minLength: 0 ) ) {
+                        ForEach ( month ) { day in
+                            Row ( feast: day, month: day.month, year: String ( self.year ) )
+                                .id ( "\(day.date) \(day.month)" )
+                                .padding ( [ .top, .bottom ], 8 )
+                        }
+                    }.id ( month [ 0 ].month )
+                }
+            }
+        }
+    }
+}
+
+struct OrdoView: View {
+    @EnvironmentObject var activeData: ActiveData
+    @State var search: String = ""
+    @State var first_load: Bool = true
+    @State var year: Int = CurrentYear ( )
+    @State private var searchIsActive = false
+
+    var body: some View {
         ScrollViewReader { proxy in
             NavigationStack {
                 VStack ( spacing: 0 ) {
                     List {
-                        ForEach ( searchResults, id: \.self ) { month in
-                            Section ( header: Spacer ( minLength: 0 ) ) {
-                                ForEach ( month ) { day in
-                                    Row ( feast: day, month: day.month, year: String ( self.year ) )
-                                        .id ( "\(day.date) \(day.month)" )
-                                        .padding ( [ .top, .bottom ], 8 )
-                                }
-                            }.id ( month [ 0 ].month )
-                        }
+                        SearchableView ( search: self.$search,  year: self.$year, proxy: proxy )
                     }
+                    .searchable ( text: self.$search, isPresented: $searchIsActive )
                     HStack {
-                        if CurrentYear ( ) == self.year && self.search == "" {
+                        if CurrentYear ( ) == self.year && self.search == "" && !searchIsActive {
                             Button {
                                 let formatter = DateFormatter ( )
                                 formatter.dateFormat = "E dd MMM"
@@ -50,6 +78,7 @@ struct OrdoView: View {
                                     .font ( .footnote )
                                     .bold ( )
                             }
+                            .foregroundColor ( .blue )
                             Text ( " | " )
                                 .font ( .footnote )
                                 .foregroundColor ( .secondary )
@@ -98,12 +127,16 @@ struct OrdoView: View {
                                     }
                                 }
                             } label: {
-                                Label ( "Change Date", systemImage: "arrow.up.arrow.down")
+                                Label ( "Change Date", systemImage: "arrow.up.arrow.down" )
                             }
                             NavigationLink ( destination:  HelpComponent ( ) ) {
                                 Label ( "Information", systemImage: "info.circle" )
                             }
                         }
+                    }
+                    ToolbarItem ( placement: .topBarLeading ) {
+                        Text ( "1962 Liturgical Ordo" )
+                            .bold ( )
                     }
                 }
                 .onAppear {
@@ -116,6 +149,5 @@ struct OrdoView: View {
                 }
             }
         }
-            .searchable ( text: self.$search )
     }
 }

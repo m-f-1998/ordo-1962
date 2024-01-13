@@ -17,7 +17,7 @@ struct ErrorView: View {
                     Section {
                         HStack ( spacing: 10 ) {
                             DisplayDate ( day: "Mon", date: "1", month: month )
-                            LazyVStack ( alignment: .leading ) {
+                            VStack ( alignment: .leading ) {
                                 Feast ( data: [ CelebrationData ( ) ] )
                                 Tag (
                                     title: String ( repeating: "*", count: 10 ),

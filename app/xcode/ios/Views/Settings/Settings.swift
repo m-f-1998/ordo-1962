@@ -41,8 +41,14 @@ struct Settings: View {
                 .toast ( isPresenting: self.$ical_status.error ) {
                     return AlertToast ( type: .error ( .red ), title: self.ical_status.message )
                 }
-                .navigationTitle ( "1962 Liturgical Ordo" )
+                .toolbar {
+                    ToolbarItem ( placement: .topBarLeading ) {
+                        Text ( "1962 Liturgical Ordo" )
+                            .bold ( )
+                    }
+                }
                 .navigationBarTitleDisplayMode ( .inline )
+                .tint ( .blue )
         }
     }
 }

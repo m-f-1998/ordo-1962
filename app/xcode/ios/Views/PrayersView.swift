@@ -25,22 +25,31 @@ struct Prayer: View {
                         }
                     }
                         .toolbar {
-                            Menu {
-                                ForEach ( (self.activeData.prayers?.GetLanguageDetails ( ))!, id: \.self ) { prayer in
-                                    Button {
-                                        self.lang = prayer
-                                        UserDefaults.standard.set ( prayer, forKey: "prayers-lang" )
-                                    } label: {
-                                        if prayer == self.lang {
-                                            Label ( prayer, systemImage: "checkmark" )
-                                        } else {
-                                            Text ( prayer )
+                            ToolbarItem ( placement: .automatic ) {
+                                HStack {
+                                    Menu {
+                                        ForEach ( (self.activeData.prayers?.GetLanguageDetails ( ))!, id: \.self ) { prayer in
+                                            Button {
+                                                self.lang = prayer
+                                                UserDefaults.standard.set ( prayer, forKey: "prayers-lang" )
+                                            } label: {
+                                                if prayer == self.lang {
+                                                    Label ( prayer, systemImage: "checkmark" )
+                                                } else {
+                                                    Text ( prayer )
+                                                }
+                                            }
                                         }
+                                    } label: {
+                                        Label ( "Propers Language", systemImage: "character.bubble" )
                                     }
+                                    .disabled ( self.activeData.loading )
                                 }
-                            } label: {
-                                Label ( "Propers Language", systemImage: "character.bubble" )
-                            }.disabled ( self.activeData.loading )
+                            }
+                            ToolbarItem ( placement: .topBarLeading ) {
+                                Text ( "1962 Liturgical Ordo" )
+                                    .bold ( )
+                            }
                         }
                 }
             }

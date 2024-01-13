@@ -19,7 +19,7 @@ struct DisplayDate: View {
     }
 
     var body: some View {
-        LazyVStack {
+        VStack {
             Text ( self.day )
             Text ( self.date )
                 .font ( .system ( size: 24 ) )

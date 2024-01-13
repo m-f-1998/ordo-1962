@@ -16,7 +16,7 @@ struct DisplayText: View {
                 Text ( try! AttributedString ( markdown: "\n" + self.text + "\n", options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace ) ) )
                     .lineSpacing ( 10 )
                     .font ( .system ( .body, design: .monospaced ) )
-                    .frame(minHeight: proxy.size.height)
+                    .frame ( minHeight: proxy.size.height )
             }
                 .multilineTextAlignment ( .center )
                 .frame ( maxWidth: .infinity, maxHeight: proxy.size.height )

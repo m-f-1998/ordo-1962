@@ -15,6 +15,7 @@ struct CommonView: View {
     private let app_url: String = "itms-apps://itunes.apple.com/app/6450934181"
     @StateObject var tabStateHanlder: TabStateHandler = TabStateHandler ( )
     @EnvironmentObject var activeData: ActiveData
+    @Environment(\.colorScheme) var colorScheme
 
     init ( ) {
         if UserDefaults.standard.string ( forKey: "prayers-lang" ) == nil {
@@ -39,10 +40,11 @@ struct CommonView: View {
                     .tag ( 2 )
                     .toolbar(.hidden, for: .tabBar)
             }
+            .tint ( colorScheme == .dark ? .white : .black )
             VStack {
                 HStack {
                     ForEach( TabbedItems.allCases, id: \.self){ item in
-                        Button{
+                        Button {
                             tabStateHanlder.tabSelected = item.rawValue
                         } label: {
                             HStack ( spacing: 10 ) {
@@ -50,19 +52,34 @@ struct CommonView: View {
                                     Image ( systemName: item.icon )
                                         .resizable ( )
                                         .renderingMode ( .template )
-                                        .foregroundColor ( tabStateHanlder.tabSelected == item.rawValue ? .black : .gray )
+                                        .foregroundColor (
+                                            tabStateHanlder.tabSelected == item.rawValue ?
+                                                ( colorScheme == .dark ? .white : .black )
+                                            :
+                                                .gray
+                                        )
                                         .frame ( width: 20, height: 20 )
                                 } else {
                                     Image ( item.icon )
                                         .resizable ( )
                                         .renderingMode ( .template )
-                                        .foregroundColor ( tabStateHanlder.tabSelected == item.rawValue ? .black : .gray )
+                                        .foregroundColor (
+                                            tabStateHanlder.tabSelected == item.rawValue ?
+                                                ( colorScheme == .dark ? .white : .black )
+                                            :
+                                                .gray
+                                        )
                                         .frame ( width: 20, height: 20 )
                                 }
                                 if (tabStateHanlder.tabSelected == item.rawValue) {
                                     Text ( item.title )
                                         .font ( .system ( size: 14 ) )
-                                        .foregroundColor ( tabStateHanlder.tabSelected == item.rawValue ? .black : .gray )
+                                        .foregroundColor (
+                                            tabStateHanlder.tabSelected == item.rawValue ?
+                                                ( colorScheme == .dark ? .white : .black )
+                                            :
+                                                .gray
+                                        )
                                 }
                             }
                             .frame ( maxWidth: tabStateHanlder.tabSelected == item.rawValue ? .infinity : 60, maxHeight: 40, alignment: .center )
@@ -74,10 +91,9 @@ struct CommonView: View {
                 .frame ( maxWidth: .infinity, maxHeight: 50 )
                 .cornerRadius ( 35 )
             }
-            .padding ( [ .bottom, .trailing, .leading ], 20 )
+            .padding ( [ .trailing, .leading ], 20 )
         }
-        .background ( LinearGradient ( colors: [ .green.opacity ( 0.5 ), .blue.opacity( 0.3 ) ] ) )
-        .ignoresSafeArea ( edges: [ .bottom ] )
+        .background ( LinearGradient ( colors: [ .green.opacity ( 0.5 ), .blue.opacity( 0.3 ) ] )?.ignoresSafeArea ( ) )
     }
 }
 

@@ -19,17 +19,19 @@ struct DisplayPropers: View {
             DisplayText ( text: self.celebrations [ celebration_selection ].GetPropers ( lang: UserDefaults.standard.string ( forKey: "propers-lang" )! ) )
             Picker ( selection: $celebration_selection, label: EmptyView ( ) ) {
                 ForEach ( Array ( self.celebrations.enumerated ( ) ), id: \.offset ) { index, element in
-                    Text ( element.title.count > 40 ? element.title.prefix ( 40 ) + "..." : element.title )
+                    Text ( element.title )
                         .tag ( index )
                         .font ( .footnote )
                         .bold ( )
                 }
             }
             .pickerStyle ( .menu )
-            .frame ( maxWidth: .infinity, alignment: .center )
             .padding ( [ .vertical ], 4 )
+            .frame ( maxWidth: .infinity )
             .background ( Color ( .systemGray6 ) )
-        }.toolbar {
+            .tint ( .blue )
+        }
+        .toolbar {
             ToolbarItem {
                 Menu {
                     ForEach ( self.languages, id: \.self ) { language in
@@ -49,5 +51,6 @@ struct DisplayPropers: View {
                 }
             }
         }
+            .navigationBarTitleDisplayMode ( .inline )
     }
 }

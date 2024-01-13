@@ -36,8 +36,8 @@ var votive_piety : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Heb 7:24*\nAlleluia, alleluia. But for that Jesus continueth forever, hath an everlasting priesthood. Alleluia.",
-                latin : "*Heb 7:24*\nAllelúja, allelúja. Jesus autem eo quod máneat in ætérnum, sempitérnum habet sacerdótium. Allelúja."
+                english : "*Heb 7:24*\nAlleluia, alleluia.\nBut for that Jesus continueth forever, hath an everlasting priesthood.\nAlleluia.",
+                latin : "*Heb 7:24*\nAllelúja, allelúja.\nJesus autem eo quod máneat in ætérnum, sempitérnum habet sacerdótium.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -46,8 +46,8 @@ var votive_piety : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Heb 7:24*\nAlleluia, alleluia. But for that Jesus continueth forever, hath an everlasting priesthood. Alleluia.\n*Lk 4:18*\nThe Spirit of the Lord is upon me, wherefore He hath anointed me to preach the gospel to the poor, He hath sent me to heal the contrite of heart. Alleluia.",
-                latin : "*Heb 7:24*\nAllelúja, allelúja. Jesus autem eo quod máneat in ætérnum, sempitérnum habet sacerdótium. Allelúja.\n*Lk 4:18*\nSpíritus Dómini super me: propter quod unxit me, evangelizáre paupéribus misit me, sanáre contrítos corde. Allelúja."
+                english : "*Heb 7:24*\nAlleluia, alleluia.\nBut for that Jesus continueth forever, hath an everlasting priesthood.\nAlleluia.\n*Lk 4:18*\nThe Spirit of the Lord is upon me, wherefore He hath anointed me to preach the gospel to the poor, He hath sent me to heal the contrite of heart.\nAlleluia.",
+                latin : "*Heb 7:24*\nAllelúja, allelúja.\nJesus autem eo quod máneat in ætérnum, sempitérnum habet sacerdótium.\nAllelúja.\n*Lk 4:18*\nSpíritus Dómini super me: propter quod unxit me, evangelizáre paupéribus misit me, sanáre contrítos corde.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -73,7 +73,7 @@ var votive_piety : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "We beseech Thee, O Lord, may the divine host which we have offered up and received, quicken us; that, bound to Thee by an eternal love, we may bear fruit that will abide forever.\nThrough our Lord...",
-                latin : "Vivificet nos, quæsumus Dómine, divína quam obtúlimus et súmpsimus hóstia: ut perpétua Tibi caritáte conjúncti, fructum, qui semper máneat, afferámus.\nPer Dóminum nostrum..."
+                latin : "Vivificet nos, quæsumus Dómine, divína quam obtúlimus et súmpsimus hóstia: ut perpétua Tibi caritáte conjúncti, fructum, qui semper máneat, afferámus.\nPer Dóminum..."
             )
         ],
         commemorations : []
@@ -105,8 +105,8 @@ var votive_piety : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Matt 11:29*\nAlleluia, alleluia. Take my yoke upon you and learn from Me, because I am meek and humble of Heart: and you shall find rest to your souls. Alleluia.",
-                latin : "*Matt 11:29*\nAllelúja, allelúja. Tóllite iugum meum super vos, et díscite a me, quia mitis sum et húmilis Corde, et inveniétis réquiem animábus vestris. Allelúja."
+                english : "*Matt 11:29*\nAlleluia, alleluia.\nTake my yoke upon you and learn from Me, because I am meek and humble of Heart: and you shall find rest to your souls.\nAlleluia.",
+                latin : "*Matt 11:29*\nAllelúja, allelúja.\nTóllite iugum meum super vos, et díscite a me, quia mitis sum et húmilis Corde, et inveniétis réquiem animábus vestris.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -115,8 +115,8 @@ var votive_piety : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Matt 11:29*\nAlleluia, alleluia. Take my yoke upon you and learn of me, because I am meek and humble of heart: and you shall find rest to your souls. Alleluia.\n*Matt 11:28*\nCome to me, all you that labor and are burdened, and I will refresh you. Alleluia.",
-                latin : "*Matt 11:29*\nAllelúja, allelúja. Tóllite jugum meum super vos et díscite a me, quia mitis sum et húmilis Corde, et inveniétis réquiem animábus vestris. Allelúja.\n*Matt 11:28*\nVeníte ad me omnes qui laborátis et oneráti estis et ego refíciam vos. Allelúja."
+                english : "*Matt 11:29*\nAlleluia, alleluia.\nTake my yoke upon you and learn of me, because I am meek and humble of heart: and you shall find rest to your souls.\nAlleluia.\n*Matt 11:28*\nCome to me, all you that labor and are burdened, and I will refresh you.\nAlleluia.",
+                latin : "*Matt 11:29*\nAllelúja, allelúja.\nTóllite jugum meum super vos et díscite a me, quia mitis sum et húmilis Corde, et inveniétis réquiem animábus vestris.\nAllelúja.\n*Matt 11:28*\nVeníte ad me omnes qui laborátis et oneráti estis et ego refíciam vos.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -164,7 +164,7 @@ var votive_piety : OrderedDictionary = [
             PropersData (
                 title : "Collect",
                 english : "Almighty everlasting God, who in the heart of the blessed Virgin Mary didst prepare a dwelling worthy of the Holy Spirit; grant in Thy mercy, that we who with devout minds celebrate the festival of that immaculate heart, may be able to live according to Thine own Heart.\nThrough our Lord...",
-                latin : "Omnípotens sempitérne Deus, qui in Corde beátæ Maríæ Vírginis dignum Spíritus Sancti habitáculum præparásti: concéde propítius; ut ejúsdem immaculáti Cordis festivitátem devóta mente recoléntes, secúndum cor tuum vívere valeámus.\nPer Dóminum nostrum..."
+                latin : "Omnípotens sempitérne Deus, qui in Corde beátæ Maríæ Vírginis dignum Spíritus Sancti habitáculum præparásti: concéde propítius; ut ejúsdem immaculáti Cordis festivitátem devóta mente recoléntes, secúndum cor tuum vívere valeámus.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Lesson",
@@ -178,8 +178,8 @@ var votive_piety : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Lk 1:46-47*\nAlleluia, alleluia. My soul doth magnify the Lord and my spirit hath rejoiced in God my Savior. Alleluia.",
-                latin : "*Lk 1:46-47*\nAllelúja, allelúja. Magníficat ánima mea Dóminum: et exsultávit spíritus meus in Deo salutári meo. Allelúja."
+                english : "*Lk 1:46-47*\nAlleluia, alleluia.\nMy soul doth magnify the Lord and my spirit hath rejoiced in God my Savior.\nAlleluia.",
+                latin : "*Lk 1:46-47*\nAllelúja, allelúja.\nMagníficat ánima mea Dóminum: et exsultávit spíritus meus in Deo salutári meo.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -214,7 +214,7 @@ var votive_piety : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "Refreshed by these divine gifts we humbly beseech Thee, O Lord, that by the intercession of the Blessed Virgin Mary whose immaculate heart we now solemnly celebrate, we may be delivered from present dangers and obtain the joys of eternal life.\nThrough our Lord...",
-                latin : "Divinis refecti munéribus te, Dómine, supplíciter exorámus: ut beátæ Maríæ Vírginis intercessióne, cujus immaculáti Cordis solémnia venerándo égimus, a præséntibus perículis liberáti, ætérnæ vitæ gáudia consequámur.\nPer Dóminum nostrum..."
+                latin : "Divinis refecti munéribus te, Dómine, supplíciter exorámus: ut beátæ Maríæ Vírginis intercessióne, cujus immaculáti Cordis solémnia venerándo égimus, a præséntibus perículis liberáti, ætérnæ vitæ gáudia consequámur.\nPer Dóminum..."
             )
         ],
         commemorations : []
@@ -246,8 +246,8 @@ var votive_piety : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Lk 1:28*\nAlleluia, alleluia. Hail Mary, full of grace, the Lord is with thee: blessed art thou among women. Alleluia.",
-                latin : "*Lk 1:28*\nAllelúja, allelúja. Ave, María, grátia plena: Dóminus tecum: benedícta tu in muliéribus. Allelúja."
+                english : "*Lk 1:28*\nAlleluia, alleluia.\nHail Mary, full of grace, the Lord is with thee: blessed art thou among women.\nAlleluia.",
+                latin : "*Lk 1:28*\nAllelúja, allelúja.\nAve, María, grátia plena: Dóminus tecum: benedícta tu in muliéribus.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -311,8 +311,8 @@ var votive_monday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Dan 3:52*\nAlleluia, alleluia. Blessed art thou, O Lord, God of our fathers, and worthy of praise for ever. Alleluia.",
-                latin : "*Dan 3:52*\nAllelúja, allelúja. Benedictus es, Domine Deus patrum nostrorum, et laudabilis in sæcula. Allelúja."
+                english : "*Dan 3:52*\nAlleluia, alleluia.\nBlessed art thou, O Lord, God of our fathers, and worthy of praise for ever.\nAlleluia.",
+                latin : "*Dan 3:52*\nAllelúja, allelúja.\nBenedictus es, Domine Deus patrum nostrorum, et laudabilis in sæcula.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -321,8 +321,8 @@ var votive_monday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Dan 3:52*\nAlleluia, alleluia. Blessed art thou, O Lord, God of our fathers, and worthy of praise for ever. Alleluia.\nLet us bless the Father and the Son with the Holy Ghost. Alleluia.",
-                latin : "*Dan 3:52*\nAllelúja, allelúja. Benedictus es, Domine Deus patrum nostrorum, et laudabilis in sæcula. Allelúja.\nBenedicamus Patrem et Filium cum Sancto Spiritu. Allelúja."
+                english : "*Dan 3:52*\nAlleluia, alleluia.\nBlessed art thou, O Lord, God of our fathers, and worthy of praise for ever.\nAlleluia.\nLet us bless the Father and the Son with the Holy Ghost.\nAlleluia.",
+                latin : "*Dan 3:52*\nAllelúja, allelúja.\nBenedictus es, Domine Deus patrum nostrorum, et laudabilis in sæcula.\nAllelúja.\nBenedicamus Patrem et Filium cum Sancto Spiritu.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -386,8 +386,8 @@ var votive_tuesday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Ps 137:1,2*\nAlleluia, alleluia. I will sing praise to Thee in the sight of the Angels: I will worship towards Thy holy temple, and I will give glory to Thy name. Alleluia.",
-                latin : "*Ps 137:1,2*\nAllelúja, allelúja. In conspectu Angelorum psallam tibi: adorabo ad templum sanctum tuum, et confitebor nomini tuo. Allelúja."
+                english : "*Ps 137:1,2*\nAlleluia, alleluia.\nI will sing praise to Thee in the sight of the Angels: I will worship towards Thy holy temple, and I will give glory to Thy name.\nAlleluia.",
+                latin : "*Ps 137:1,2*\nAllelúja, allelúja.\nIn conspectu Angelorum psallam tibi: adorabo ad templum sanctum tuum, et confitebor nomini tuo.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -396,8 +396,8 @@ var votive_tuesday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 137:1,2*\nAlleluia, alleluia. I will sing praise to Thee in the sight of the Angels: I will worship towards Thy holy temple, and I will give glory to Thy name. Alleluia.\n*Matt 28:2*\nAn Angel of the Lord descended from heaven: and coming rolled back the stone, and sat upon it. Alleluia.",
-                latin : "*Ps 137:1,2*\nAllelúja, allelúja. In conspectu Angelorum psallam tibi: adorabo ad templum sanctum tuum, et confitebor nomini tuo. Allelúja.\n*Matt 28:2*\nAngelus Domini descendit de coelo, et accedens revolvit lapidem, et sedebat super eum. Allelúja."
+                english : "*Ps 137:1,2*\nAlleluia, alleluia.\nI will sing praise to Thee in the sight of the Angels: I will worship towards Thy holy temple, and I will give glory to Thy name.\nAlleluia.\n*Matt 28:2*\nAn Angel of the Lord descended from heaven: and coming rolled back the stone, and sat upon it.\nAlleluia.",
+                latin : "*Ps 137:1,2*\nAllelúja, allelúja.\nIn conspectu Angelorum psallam tibi: adorabo ad templum sanctum tuum, et confitebor nomini tuo.\nAllelúja.\n*Matt 28:2*\nAngelus Domini descendit de coelo, et accedens revolvit lapidem, et sedebat super eum.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -457,8 +457,8 @@ var votive_wednesday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Ps 137:1,2*\nAlleluia, alleluia. Obtain for us, Joseph, grace to lead an innocent life; and may our life ever be shielded by thy patronage. Alleluia.",
-                latin : "*Ps 137:1,2*\nAllelúja, allelúja. Fac nos innócuam, Joseph, decúrrere vitam: sitque tuo semper tuta patrocínio. Allelúja."
+                english : "*Ps 137:1,2*\nAlleluia, alleluia.\nObtain for us, Joseph, grace to lead an innocent life; and may our life ever be shielded by thy patronage.\nAlleluia.",
+                latin : "*Ps 137:1,2*\nAllelúja, allelúja.\nFac nos innócuam, Joseph, decúrrere vitam: sitque tuo semper tuta patrocínio.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -467,8 +467,8 @@ var votive_wednesday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 137:1,2*\nAlleluia, alleluia. In whatever tribulation they shall cry to Me, I will hear them, and be their protector always. Alleluia.\n*Matt 28:2*\nObtain for us, Joseph, grace to lead an innocent life; and may our life ever be shielded by thy patronage. Alleluia.",
-                latin : "*Ps 137:1,2*\nAllelúja, allelúja. De quacúmque tribulatióne clamáverint ad me, exáudiam eos, et ero protéctor eórum semper. Allelúja.\n*Matt 28:2*\nFac nos innócuam, Joseph, decúrrere vitam: sitque tuo semper tuta patrocínio. Allelúja."
+                english : "*Ps 137:1,2*\nAlleluia, alleluia.\nIn whatever tribulation they shall cry to Me, I will hear them, and be their protector always.\nAlleluia.\n*Matt 28:2*\nObtain for us, Joseph, grace to lead an innocent life; and may our life ever be shielded by thy patronage.\nAlleluia.",
+                latin : "*Ps 137:1,2*\nAllelúja, allelúja.\nDe quacúmque tribulatióne clamáverint ad me, exáudiam eos, et ero protéctor eórum semper.\nAllelúja.\n*Matt 28:2*\nFac nos innócuam, Joseph, decúrrere vitam: sitque tuo semper tuta patrocínio.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -535,8 +535,8 @@ var votive_wednesday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "Alleluia, alleluia. Thy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened. Alleluia.",
-                latin : "Allelúja, allelúja. Nimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum. Allelúja."
+                english : "Alleluia, alleluia.\nThy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nNimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -545,8 +545,8 @@ var votive_wednesday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 88:6*\nAlleluia, alleluia. The Heavens shall confess Thy wonders, O Lord; and Thy truth in the Church of the saints. Alleluia.\n*Ps 20:4*\nI have chosen you from the world, that thou should go, and should bring forth fruit, and your fruit should remain. Alleluia.",
-                latin : "*Ps 88:6*\nAllelúja, allelúja. Confitebúntur cœli mirabília tua, Dómine: étenim veritátem tuam in ecclésia sanctórum. Allelúja.\n*Ps 20:4*\nEgo vos elegi di mundo, ut eatis, et fructum afferatis, et frucus vester maneat. Allelúja."
+                english : "*Ps 88:6*\nAlleluia, alleluia.\nThe Heavens shall confess Thy wonders, O Lord; and Thy truth in the Church of the saints.\nAlleluia.\n*Ps 20:4*\nI have chosen you from the world, that thou should go, and should bring forth fruit, and your fruit should remain.\nAlleluia.",
+                latin : "*Ps 88:6*\nAllelúja, allelúja.\nConfitebúntur cœli mirabília tua, Dómine: étenim veritátem tuam in ecclésia sanctórum.\nAllelúja.\n*Ps 20:4*\nEgo vos elegi di mundo, ut eatis, et fructum afferatis, et frucus vester maneat.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -623,8 +623,8 @@ var votive_wednesday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "Alleluia, alleluia. Thy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened. Alleluia.",
-                latin : "Allelúja, allelúja. Nimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum. Allelúja."
+                english : "Alleluia, alleluia.\nThy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nNimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -633,8 +633,8 @@ var votive_wednesday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 88:6*\nAlleluia, alleluia. The Heavens shall confess Thy wonders, O Lord; and Thy truth in the Church of the saints. Alleluia.\n*Ps 20:4*\nI have chosen you from the world, that thou should go, and should bring forth fruit, and your fruit should remain. Alleluia.",
-                latin : "*Ps 88:6*\nAllelúja, allelúja. Confitebúntur cœli mirabília tua, Dómine: étenim veritátem tuam in ecclésia sanctórum. Allelúja.\n*Ps 20:4*\nEgo vos elegi di mundo, ut eatis, et fructum afferatis, et frucus vester maneat. Allelúja."
+                english : "*Ps 88:6*\nAlleluia, alleluia.\nThe Heavens shall confess Thy wonders, O Lord; and Thy truth in the Church of the saints.\nAlleluia.\n*Ps 20:4*\nI have chosen you from the world, that thou should go, and should bring forth fruit, and your fruit should remain.\nAlleluia.",
+                latin : "*Ps 88:6*\nAllelúja, allelúja.\nConfitebúntur cœli mirabília tua, Dómine: étenim veritátem tuam in ecclésia sanctórum.\nAllelúja.\n*Ps 20:4*\nEgo vos elegi di mundo, ut eatis, et fructum afferatis, et frucus vester maneat.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -708,8 +708,8 @@ var votive_thursday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "Alleluia, alleluia. Come, O Holy Spirit, fill the hearts of Thy faithful, and kindle in them the fire of Thy love. Alleluia.",
-                latin : "Allelúja, allelúja. Veni, Sancte Spiritus, reple tuórum corda fidélium: et tui amóris in eis ignem accénde. Allelúja."
+                english : "Alleluia, alleluia.\nCome, O Holy Spirit, fill the hearts of Thy faithful, and kindle in them the fire of Thy love.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nVeni, Sancte Spiritus, reple tuórum corda fidélium: et tui amóris in eis ignem accénde.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -718,8 +718,8 @@ var votive_thursday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 103:30*\nAlleluia, alleluia. Send forth Thy Spirit, and they shall be created; and Thou shalt renew the face of the earth. Alleluia.\nCome, O Holy Spirit, fill the hearts of Thy faithful, and kindle in them the fire of Thy love. Alleluia.",
-                latin : "*Ps 103:30*\nAllelúja, allelúja. Emítte Spiritum tuum, et creabúntur: et renovábis fáciem terræ. Allelúja.\nVeni, Sancte Spiritus, reple tuórum corda fidélium: et tui amóris in eis ignem accénde. Allelúja."
+                english : "*Ps 103:30*\nAlleluia, alleluia.\nSend forth Thy Spirit, and they shall be created; and Thou shalt renew the face of the earth.\nAlleluia.\nCome, O Holy Spirit, fill the hearts of Thy faithful, and kindle in them the fire of Thy love.\nAlleluia.",
+                latin : "*Ps 103:30*\nAllelúja, allelúja.\nEmítte Spiritum tuum, et creabúntur: et renovábis fáciem terræ.\nAllelúja.\nVeni, Sancte Spiritus, reple tuórum corda fidélium: et tui amóris in eis ignem accénde.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -781,8 +781,8 @@ var votive_thursday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Jn 6:56,57*\nAlleluia, alleluia. My Flesh is meat indeed, and My Blood is drink indeed: he that eateth My Flesh and drinketh My Blood, abideth in Me, and I in him. Alleluia.",
-                latin : "*Jn 6:56,57*\nAllelúja, allelúja. Caro mea vere est cibus, et sanguis meus vere est potus: qui mandúcat meam carnem, et bibit meum sánguinem, in me manet et ego is eo. Allelúja."
+                english : "*Jn 6:56,57*\nAlleluia, alleluia.\nMy Flesh is meat indeed, and My Blood is drink indeed: he that eateth My Flesh and drinketh My Blood, abideth in Me, and I in him.\nAlleluia.",
+                latin : "*Jn 6:56,57*\nAllelúja, allelúja.\nCaro mea vere est cibus, et sanguis meus vere est potus: qui mandúcat meam carnem, et bibit meum sánguinem, in me manet et ego is eo.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -791,8 +791,8 @@ var votive_thursday: OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Lk 24:35*\nAlleluia, alleluia. The disciples knew the Lord Jesus in the breaking of bread. Alleluia.\n*Jn 6:56,57*\nLet us bless the Father and the Son with the Holy Ghost. Alleluia.",
-                latin : "*Lk 24:35*\nAllelúja, allelúja. Cognovérunt discípuli Dóminum Jesum in fractióne panis. Allelúja.\n*Jn 6:56,57*\nCaro mea vere est cibus, et sanguis meus vere est potus: qui mandúcat meam carnem, et bibit meum sánguinem, in me manet et ego is eo. Allelúja."
+                english : "*Lk 24:35*\nAlleluia, alleluia.\nThe disciples knew the Lord Jesus in the breaking of bread.\nAlleluia.\n*Jn 6:56,57*\nLet us bless the Father and the Son with the Holy Ghost.\nAlleluia.",
+                latin : "*Lk 24:35*\nAllelúja, allelúja.\nCognovérunt discípuli Dóminum Jesum in fractióne panis.\nAllelúja.\n*Jn 6:56,57*\nCaro mea vere est cibus, et sanguis meus vere est potus: qui mandúcat meam carnem, et bibit meum sánguinem, in me manet et ego is eo.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -852,8 +852,8 @@ var votive_friday : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "Alleluia, alleluia. Hail, Thou our King: Thou alone hast had compassion on our errors: obedient to the Father, Thou wert led to be crucified like a meek lamb to the slaughter. Alleluia.",
-                latin : "Allelúja, allelúja. Ave, Rex noster, tu solus nostros es miseratus errores: Patri obediens, ductus es ad crucifigendum, ut agnus mansuetus ad occisionem. Allelúja."
+                english : "Alleluia, alleluia.\nHail, Thou our King: Thou alone hast had compassion on our errors: obedient to the Father, Thou wert led to be crucified like a meek lamb to the slaughter.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nAve, Rex noster, tu solus nostros es miseratus errores: Patri obediens, ductus es ad crucifigendum, ut agnus mansuetus ad occisionem.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -862,8 +862,8 @@ var votive_friday : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "Alleluia, alleluia. Hail, Thou our King: Thou alone hast had compassion on our errors: obedient to the Father, Thou wert led to be crucified like a meek lamb to the slaughter. Alleluia.\nTo thee be glory, hosanna: to Thee be triumph and victory: to Thee a crown of highest praise and honour. Alleluia.",
-                latin : "Allelúja, allelúja. Ave, Rex noster, tu solus nostros es miseratus errores: Patri obediens, ductus es ad crucifigendum, ut agnus mansuetus ad occisionem. Allelúja.\nTibi gloria, hosanna: tibi triumphus et victoria: tibi summæ laudis et honoris corona. Allelúja."
+                english : "Alleluia, alleluia.\nHail, Thou our King: Thou alone hast had compassion on our errors: obedient to the Father, Thou wert led to be crucified like a meek lamb to the slaughter.\nAlleluia.\nTo thee be glory, hosanna: to Thee be triumph and victory: to Thee a crown of highest praise and honour.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nAve, Rex noster, tu solus nostros es miseratus errores: Patri obediens, ductus es ad crucifigendum, ut agnus mansuetus ad occisionem.\nAllelúja.\nTibi gloria, hosanna: tibi triumphus et victoria: tibi summæ laudis et honoris corona.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -930,8 +930,8 @@ var votive_friday : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "Alleluia, alleluia. Sweet the wood, sweet the nails, sweet the load that hangs thereon: to bear up the King and Lord of Heaven nought was worthy save thou, O holy cross. Alleluia.",
-                latin : "Allelúja, allelúja. Dulce lignum, dulces clavos, dúlcia ferens póndera: quæ sola fuísti digna sustinére Regem coelórum et Dóminum. Allelúja."
+                english : "Alleluia, alleluia.\nSweet the wood, sweet the nails, sweet the load that hangs thereon: to bear up the King and Lord of Heaven nought was worthy save thou, O holy cross.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nDulce lignum, dulces clavos, dúlcia ferens póndera: quæ sola fuísti digna sustinére Regem coelórum et Dóminum.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -940,8 +940,8 @@ var votive_friday : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 95:10*\nAlleluia, alleluia. Say ye among the gentiles, that the Lord hath reigned from the wood. Alleluia. Sweet the wood, sweet the nails, sweet the burden they bore, for thou alone, O Tree, wast deemed worthy to bear Him Who is Lord and king of heaven. Alleluia.",
-                latin : "*Ps 95:10*\nAllelúja, allelúja. Dícite in géntibus, quia Dóminus regnávit a ligno. Allelúja. Dulce lignum, dulces clavos, dúlcia ferens póndera: quæ sola fuísti digna sustinére Regem cælórum et Dóminum. Allelúja."
+                english : "*Ps 95:10*\nAlleluia, alleluia.\nSay ye among the gentiles, that the Lord hath reigned from the wood.\nAlleluia.\nSweet the wood, sweet the nails, sweet the burden they bore, for thou alone, O Tree, wast deemed worthy to bear Him Who is Lord and king of heaven.\nAlleluia.",
+                latin : "*Ps 95:10*\nAllelúja, allelúja.\nDícite in géntibus, quia Dóminus regnávit a ligno.\nAllelúja.\nDulce lignum, dulces clavos, dúlcia ferens póndera: quæ sola fuísti digna sustinére Regem cælórum et Dóminum.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -971,7 +971,7 @@ var votive_friday : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "Be Thou with us, O Lord. our God, and as Thou dost make us rejoice in honor of the holy cross, defend us also by its perpetual assistance.\nThrough our Lord...",
-                latin : "Adésto nobis, Dómine, Deus noster: et quos sanctæ Crucis lætári facis honóre, ejus quoque perpétuis defénde subsídiis.\nPer Dóminum nostrum..."
+                latin : "Adésto nobis, Dómine, Deus noster: et quos sanctæ Crucis lætári facis honóre, ejus quoque perpétuis defénde subsídiis.\nPer Dóminum..."
             )
         ],
         commemorations : []
@@ -1005,8 +1005,8 @@ var votive_our_lady : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "Alleluia, alleluia. V. After childbirth thou didst remain a virgin: O Mother of God, intercede for us. Alleluia.",
-                latin : "Allelúja, allelúja. V. Post partum, Virgo, invioláta permansísti: Dei Génetrix, intercéde pro nobis. Allelúja."
+                english : "Alleluia, alleluia.\nV. After childbirth thou didst remain a virgin: O Mother of God, intercede for us.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nV. Post partum, Virgo, invioláta permansísti: Dei Génetrix, intercéde pro nobis.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -1026,7 +1026,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Secret",
                 english : "By Thy gracious mercy, O Lord, and the intercession of blessed Mary ever Virgin, may this offering be of avail to us for welfare and peace now and for evermore.\nThrough our Lord...",
-                latin : "Dómine, propitiatióne, et beátæ Maríæ semper Vírginis intercessióne, ad perpétuam atque præséntem hæc oblátio nobis profíciat prosperitátem et pacem.\nPer Dóminum nostrum..."
+                latin : "Dómine, propitiatióne, et beátæ Maríæ semper Vírginis intercessióne, ad perpétuam atque præséntem hæc oblátio nobis profíciat prosperitátem et pacem.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Preface of the Blessed Virgin Mary",
@@ -1059,7 +1059,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Collect",
                 english : "Grant us Thy servants, we beseech Thee, O Lord God, to enjoy perpetual health of mind and body; and by the glorious intercession of blessed Mary ever Virgin, to be delivered from present sorrows and to enjoy everlasting gladness.\nThrough our Lord...",
-                latin : "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia et ætérna pérfrui lætítia.\nPer Dóminum nostrum..."
+                latin : "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia et ætérna pérfrui lætítia.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Lesson",
@@ -1073,8 +1073,8 @@ var votive_our_lady : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Num 17:8*\nAlleluia, alleluia. The rod of Jesse hath blossomed: a Virgin hath brought forth Him Who is God and man: God hath restored peace, reconciling in Himself the lowest with the highest. Alleluia.",
-                latin : "*Num 17: 8*\nAllelúja, allelúja. Virga Jesse flóruit: Virgo Deum et hóminem génuit: pacem Deus réddidit, in se reconcílians ima summis. Allelúja."
+                english : "*Num 17:8*\nAlleluia, alleluia.\nThe rod of Jesse hath blossomed: a Virgin hath brought forth Him Who is God and man: God hath restored peace, reconciling in Himself the lowest with the highest.\nAlleluia.",
+                latin : "*Num 17: 8*\nAllelúja, allelúja.\nVirga Jesse flóruit: Virgo Deum et hóminem génuit: pacem Deus réddidit, in se reconcílians ima summis.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -1094,7 +1094,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Secret",
                 english : "By Thy gracious mercy, O Lord, and the intercession of blessed Mary ever Virgin, may this offering be of avail to us for welfare and peace now and for evermore.\nThrough our Lord...",
-                latin : "Tua, Dómine, propitiatióne, et beátæ Maríæ semper Vírginis intercessióne, ad perpétuam atque præséntem hæc oblátio nobis profíciat prosperitátem et pacem.\nPer Dóminum nostrum..."
+                latin : "Tua, Dómine, propitiatióne, et beátæ Maríæ semper Vírginis intercessióne, ad perpétuam atque præséntem hæc oblátio nobis profíciat prosperitátem et pacem.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Preface of the Blessed Virgin Mary",
@@ -1109,7 +1109,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "Having received, O Lord, these helps to our salvation, grant, we beseech Thee, that we may be ever protected by the patronage of blessed Mary ever Virgin, in whose honor we have made these offerings to Thy majesty.\nThrough our Lord...",
-                latin : "Sumptis, Dómine, salútis nostræ subsídiis: da, quǽsumus, beátæ Maríæ semper Vírginis patrocíniis nos ubíque prótegi; in cujus veneratióne hæc tuæ obtúlimus majestáti.\nPer Dóminum nostrum..."
+                latin : "Sumptis, Dómine, salútis nostræ subsídiis: da, quǽsumus, beátæ Maríæ semper Vírginis patrocíniis nos ubíque prótegi; in cujus veneratióne hæc tuæ obtúlimus majestáti.\nPer Dóminum..."
             )
         ],
         commemorations : []
@@ -1127,7 +1127,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Collect",
                 english : "Grant us Thy servants, we beseech Thee, O Lord God, to enjoy perpetual health of mind and body; and by the glorious intercession of blessed Mary ever Virgin, to be delivered from present sorrows and to enjoy everlasting gladness.\nThrough our Lord...",
-                latin : "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia et ætérna pérfrui lætítia.\nPer Dóminum nostrum..."
+                latin : "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia et ætérna pérfrui lætítia.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Lesson",
@@ -1136,8 +1136,8 @@ var votive_our_lady : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "Alleluia, alleluia. The rod of Jesse hath blossomed: a Virgin hath brought forth God and man: God hath restored peace, reconciling in Himself the lowest with the highest. Alleluia. Hail Mary, full of grace: the Lord is with thee: blessed art thou among women. Alleluia.",
-                latin : "Allelúja, allelúja. Virga Jesse floruit: Virgo Deum et hominem genuit: pacem Deus reddidit, in se reconcilians ima summis. Allelúja. Ave María, grátia plena: Dóminus tecum: benedícta tu in muliéribus. Allelúja."
+                english : "Alleluia, alleluia.\nThe rod of Jesse hath blossomed: a Virgin hath brought forth God and man: God hath restored peace, reconciling in Himself the lowest with the highest.\nAlleluia.\nHail Mary, full of grace: the Lord is with thee: blessed art thou among women.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nVirga Jesse floruit: Virgo Deum et hominem genuit: pacem Deus reddidit, in se reconcilians ima summis.\nAllelúja.\nAve María, grátia plena: Dóminus tecum: benedícta tu in muliéribus.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -1152,7 +1152,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Secret",
                 english : "By Thy gracious mercy, O Lord, and the intercession of blessed Mary ever Virgin, may this offering be of avail to us for welfare and peace now and for evermore.\nThrough our Lord...",
-                latin : "Tua, Dómine, propitiatióne, et beátæ Maríæ semper Vírginis intercessióne, ad perpétuam atque præséntem hæc oblátio nobis profíciat prosperitátem et pacem.\nPer Dóminum nostrum..."
+                latin : "Tua, Dómine, propitiatióne, et beátæ Maríæ semper Vírginis intercessióne, ad perpétuam atque præséntem hæc oblátio nobis profíciat prosperitátem et pacem.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Preface of the Blessed Virgin Mary",
@@ -1167,7 +1167,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "Having received, O Lord, these helps to our salvation, grant, we beseech Thee, that we may be ever protected by the patronage of blessed Mary ever Virgin, in whose honor we have made these offerings to Thy majesty.\nThrough our Lord...",
-                latin : "Sumptis, Dómine, salútis nostræ subsídiis: da, quǽsumus, beátæ Maríæ semper Vírginis patrocíniis nos ubíque prótegi; in cujus veneratióne hæc tuæ obtúlimus majestáti.\nPer Dóminum nostrum..."
+                latin : "Sumptis, Dómine, salútis nostræ subsídiis: da, quǽsumus, beátæ Maríæ semper Vírginis patrocíniis nos ubíque prótegi; in cujus veneratióne hæc tuæ obtúlimus majestáti.\nPer Dóminum..."
             )
         ],
         commemorations : []
@@ -1185,7 +1185,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Collect",
                 english : "Grant us Thy servants, we beseech Thee, O Lord God, to enjoy perpetual health of mind and body; and by the glorious intercession of blessed Mary ever Virgin, to be delivered from present sorrows and to enjoy everlasting gladness.\nThrough our Lord...",
-                latin : "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia et ætérna pérfrui lætítia.\nPer Dóminum nostrum..."
+                latin : "Concéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et, gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia et ætérna pérfrui lætítia.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Lesson",
@@ -1199,8 +1199,8 @@ var votive_our_lady : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "Alleluia, alleluia. After childbirth thou didst still remain an inviolate virgin: Mother of God, intercede for us. Alleluia.",
-                latin : "Allelúja, allelúja. Post partum, Virgo, invioláta permansísti: Dei Génetrix, intercéde pro nobis. Allelúja."
+                english : "Alleluia, alleluia.\nAfter childbirth thou didst still remain an inviolate virgin: Mother of God, intercede for us.\nAlleluia.",
+                latin : "Allelúja, allelúja.\nPost partum, Virgo, invioláta permansísti: Dei Génetrix, intercéde pro nobis.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -1215,7 +1215,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Secret",
                 english : "By Thy gracious mercy, O Lord, and the intercession of blessed Mary ever Virgin, may this offering be of avail to us for welfare and peace now and for evermore.\nThrough our Lord...",
-                latin : "Tua, Dómine, propitiatióne, et beátæ Maríæ semper Vírginis intercessióne, ad perpétuam atque præséntem hæc oblátio nobis profíciat prosperitátem et pacem.\nPer Dóminum nostrum..."
+                latin : "Tua, Dómine, propitiatióne, et beátæ Maríæ semper Vírginis intercessióne, ad perpétuam atque præséntem hæc oblátio nobis profíciat prosperitátem et pacem.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Preface of the Blessed Virgin Mary",
@@ -1230,7 +1230,7 @@ var votive_our_lady : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "Having received, O Lord, these helps to our salvation, grant, we beseech Thee, that we may be ever protected by the patronage of blessed Mary ever Virgin, in whose honor we have made these offerings to Thy majesty.\nThrough our Lord...",
-                latin : "Sumptis, Dómine, salútis nostræ subsídiis: da, quǽsumus, beátæ Maríæ semper Vírginis patrocíniis nos ubíque prótegi; in cujus veneratióne hæc tuæ obtúlimus majestáti.\nPer Dóminum nostrum..."
+                latin : "Sumptis, Dómine, salútis nostræ subsídiis: da, quǽsumus, beátæ Maríæ semper Vírginis patrocíniis nos ubíque prótegi; in cujus veneratióne hæc tuæ obtúlimus majestáti.\nPer Dóminum..."
             )
         ],
         commemorations : []
@@ -1264,8 +1264,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Ps 147:12*\nAlleluia, alleluia. Praise the Lord, O Jerusalem: praise thy God, O Sion. Alleluia.",
-                latin : "*Ps 147:12*\nAllelúja, allelúja. Lauda, Jerúsalem, Dóminum: lauda Deum tuum, Sion. Allelúja."
+                english : "*Ps 147:12*\nAlleluia, alleluia.\nPraise the Lord, O Jerusalem: praise thy God, O Sion.\nAlleluia.",
+                latin : "*Ps 147:12*\nAllelúja, allelúja.\nLauda, Jerúsalem, Dóminum: lauda Deum tuum, Sion.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -1274,8 +1274,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 147:12*\nAlleluia, alleluia. Praise the Lord, O Jerusalem: praise thy God, O Sion. Alleluia.\n*Ibid.:14*\nWho hath placed peace in thy borders: and filleth thee with the fat of corn. Alleluia.",
-                latin : "*Ps 147:12*\nAllelúja, allelúja. Lauda, Jerúsalem, Dóminum: lauda Deum tuum, Sion. Allelúja.\n*Ibid.:14*\nQui pósuit fines tuos pacem, et ádipe fruménti sátiat te. Allelúja."
+                english : "*Ps 147:12*\nAlleluia, alleluia.\nPraise the Lord, O Jerusalem: praise thy God, O Sion.\nAlleluia.\n*Ps 147:14*\nWho hath placed peace in thy borders: and filleth thee with the fat of corn.\nAlleluia.",
+                latin : "*Ps 147:12*\nAllelúja, allelúja.\nLauda, Jerúsalem, Dóminum: lauda Deum tuum, Sion.\nAllelúja.\n*Ps 147:14*\nQui pósuit fines tuos pacem, et ádipe fruménti sátiat te.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -1333,8 +1333,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Ps 7:12*\nAlleluia, alleluia. God is a just judge, strong and patient: is He angry every day? Alleluia.",
-                latin : "*Ps 7:12*\nAllelúja, allelúja. Deus judex justus, fortis et pátiens: numquid irascátur per síngulos dies? Allelúja."
+                english : "*Ps 7:12*\nAlleluia, alleluia.\nGod is a just judge, strong and patient: is He angry every day?\nAlleluia.",
+                latin : "*Ps 7:12*\nAllelúja, allelúja.\nDeus judex justus, fortis et pátiens: numquid irascátur per síngulos dies?\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -1343,7 +1343,7 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 7:12*\nAlleluia, alleluia. God is a just judge, strong and patient: is He angry every day? Alleluia\n*Ps 50:10*\nTo my hearing Thou shalt give joy and gladness: and the bones that have been humbled shall rejoice.\nAlleluia.",
+                english : "*Ps 7:12*\nAlleluia, alleluia.\nGod is a just judge, strong and patient: is He angry every day?\nAlleluia\n*Ps 50:10*\nTo my hearing Thou shalt give joy and gladness: and the bones that have been humbled shall rejoice.\nAlleluia.",
                 latin : "Allelúja, allelúja.\n*Ps 7:12*\nDeus judex justus, fortis et pátiens: numquid irascétur per síngulos dies?\nAllelúja.\n*Ps 50:10*\nAudítui meo dabis gáudium et lætítiam: et exsultábunt ossa humiliáta.\nAllelúja."
             ),
             PropersData (
@@ -1402,8 +1402,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Ps 99:1*\nAlleluia, alleluia. O sing joyfully unto God, all the earth, serve ye the Lord with gladness: come into His presence with exceeding joy. Alleluia.",
-                latin : "*Ps 99:1*\nAllelúja, allelúja. Jubiláte Deo, omnis terra: servíte Dómino in lætítia: introíte in conspéctu ejus, in exsultatióne. Allelúja."
+                english : "*Ps 99:1*\nAlleluia, alleluia.\nO sing joyfully unto God, all the earth, serve ye the Lord with gladness: come into His presence with exceeding joy.\nAlleluia.",
+                latin : "*Ps 99:1*\nAllelúja, allelúja.\nJubiláte Deo, omnis terra: servíte Dómino in lætítia: introíte in conspéctu ejus, in exsultatióne.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -1413,7 +1413,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Greater Alleluia",
                 english : "*Ps 99:1,2*\nAlleluia, alleluia.\nO sing joyfully unto God, all the earth, serve ye the Lord with gladness: come into His presence with exceeding joy.\nAlleluia.\nKnow ye, that the Lord He is God: He made us, and not we ourselves.\nAlleluia.",
-                latin : "*Ps 99:1,2*\nAllelúja, allelúja.\nJubiláte Deo, omnis terra: servíte Dómino in lætítia: introíte in conspéctu ejus, in exsultatióne.\nAllelúja.\nScitóte quóniam Dóminus ipse est Deus: ipse fecit nos, et non ipsi nos.\nAllelúja."
+                latin : "*Ps 99:1,2*\nAllelúja, allelúja.\nJubiláte Deo, omnis terra: servíte Dómino in lætítia: introíte in conspéctu ejus, in exsultatióne.\nAllelúja.\n*Ps 99:3*\nScitóte quóniam Dóminus ipse est Deus: ipse fecit nos, et non ipsi nos.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -1457,7 +1457,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Collect",
                 english : "O God, Shepherd and Ruler of all the faithful, look propitiously upon Thy servant N., whom Thou hast been pleased to appoint pastor over Thy Church, grant, we beseech Thee, that both by word and by example he may edify those over whom he is placed, and, together with the flock committed to his care, may attain unto life everlasting.\nThrough our Lord...",
-                latin : "Deus, ómnium fidélium pastor et rector, fámulum tuum N., quem pastórem Ecclésiæ tuæ præésse voluísti, propítius réspice: da ei, quǽsumus, verbo et exémplo, quibus præest, profícere; ut ad vitam, una cum grege sibi crédito, pervéniat sempitérnam.\nPer Dóminum nostrum..."
+                latin : "Deus, ómnium fidélium pastor et rector, fámulum tuum N., quem pastórem Ecclésiæ tuæ præésse voluísti, propítius réspice: da ei, quǽsumus, verbo et exémplo, quibus præest, profícere; ut ad vitam, una cum grege sibi crédito, pervéniat sempitérnam.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Lesson",
@@ -1471,8 +1471,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Matt 16:18*\nAlleluia, alleluia. Thou art Peter, and upon this rock I will build my Church. Alleluia.",
-                latin : "*Matt 16:18*\nAllelúja, allelúja. Tu es Petrus, et super hanc petram ædificábo Ecclésiam meam. Allelúja."
+                english : "*Matt 16:18*\nAlleluia, alleluia.\nThou art Peter, and upon this rock I will build my Church.\nAlleluia.",
+                latin : "*Matt 16:18*\nAllelúja, allelúja.\nTu es Petrus, et super hanc petram ædificábo Ecclésiam meam.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -1492,7 +1492,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Secret",
                 english : "Favorably accept, we beseech Thee, O Lord, the gifts we offer, and by Thy continual protection govern Thy servant, N., whom Thou hast been pleased to appoint as pastor over Thy Church.\nThrough our Lord...",
-                latin : "Oblátis, quǽsumus, Dómine, placáre munéribus: et fámulum tuum N., quem pastórem Ecclésiæ tuæ præésse voluísti, assídua protectióne gubérna.\nPer Dóminum nostrum..."
+                latin : "Oblátis, quǽsumus, Dómine, placáre munéribus: et fámulum tuum N., quem pastórem Ecclésiæ tuæ præésse voluísti, assídua protectióne gubérna.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Preface of the Apostles",
@@ -1507,7 +1507,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "We beseech Thee, O Lord, may the partaking of this divine Sacrament protect us, and ever save and defend Thy servant N., whom Thou hast been pleased to appoint as pastor over Thy Church, together with the flock committed to his care.\nThrough our Lord...",
-                latin : "Hæc nos, quæsumus, Dómine, divíni sacraménti percéptio prótegat: et fámulum tuum N., quem pastórem Ecclésiæ tuæ præésse voluísti; una cum commísso sibi grege, salvet semper et múniat.\nPer Dóminum nostrum..."
+                latin : "Hæc nos, quæsumus, Dómine, divíni sacraménti percéptio prótegat: et fámulum tuum N., quem pastórem Ecclésiæ tuæ præésse voluísti; una cum commísso sibi grege, salvet semper et múniat.\nPer Dóminum..."
             )
         ],
         commemorations : []
@@ -1525,7 +1525,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Collect",
                 english : "O God, Who desirest not the death of sinners, but their repentance, look mercifully upon Thy people when they turn unto Thee, that, while they show devotion to Thee, Thou mayst turn away from them the scourges of Thine anger.\nThrough our Lord...",
-                latin : "Deus, qui non mortem, sed pœniténtiam desideras peccatórum: pópulum tuum ad te reverténtem propítius réspice; ut, dum tibi devótus exsístit, iracúndiæ tuæ flagélla ab eo cleménter amóveas.\nPer Dóminum nostrum..."
+                latin : "Deus, qui non mortem, sed pœniténtiam desideras peccatórum: pópulum tuum ad te reverténtem propítius réspice; ut, dum tibi devótus exsístit, iracúndiæ tuæ flagélla ab eo cleménter amóveas.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Lesson",
@@ -1539,8 +1539,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Ps 68:2*\nAlleluia, alleluia. Save me, O God, for the waters are come in even unto my soul. Alleluia.",
-                latin : "*Ps 68:2*\nAllelúja, allelúja. Salvum me fac, Deus, quóniam intravérunt aquæ usque ad ánimam meam. Allelúja."
+                english : "*Ps 68:2*\nAlleluia, alleluia.\nSave me, O God, for the waters are come in even unto my soul.\nAlleluia.",
+                latin : "*Ps 68:2*\nAllelúja, allelúja.\nSalvum me fac, Deus, quóniam intravérunt aquæ usque ad ánimam meam.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -1549,8 +1549,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 68:2*\nAlleluia, alleluia. Save me O God, for the waters are come in even unto my soul. Alleluia.\n*Zach. 8:7,8*\nI will save my people Israel in the evil day: and I will be their God in truth and in justice. Alleluia.",
-                latin : "*Ps 68:2*\nAllelúja, allelúja Salvum me fac, Deus, quóniam intravérunt aquæ usque ad ánimam meam. Allelúja.\n*Zach. 8:7,8*\nSalvábo pópulum meum Israël in die malo, et ero eis in Deum, in veritáte et justítia. Allelúja."
+                english : "*Ps 68:2*\nAlleluia, alleluia.\nSave me O God, for the waters are come in even unto my soul.\nAlleluia.\n*Zach. 8:7,8*\nI will save my people Israel in the evil day: and I will be their God in truth and in justice.\nAlleluia.",
+                latin : "*Ps 68:2*\nAllelúja, allelúja Salvum me fac, Deus, quóniam intravérunt aquæ usque ad ánimam meam.\nAllelúja.\n*Zach. 8:7,8*\nSalvábo pópulum meum Israël in die malo, et ero eis in Deum, in veritáte et justítia.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -1565,7 +1565,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Secret",
                 english : "May the offering of the present sacrifice, O Lord, we beseech Thee, assist us, that it may both absolve us from all our sins, and save us from the onslaught of complete destruction.\nThrough our Lord...",
-                latin : "Subvéniat nobis, quǽsumus, Dómine, sacrifícii præséntis oblátio: quæ nos et ab erróribus univérsis poténter absolvat, et a totíus erípiat perditiónis incúrsu.\nPer Dóminum nostrum..."
+                latin : "Subvéniat nobis, quǽsumus, Dómine, sacrifícii præséntis oblátio: quæ nos et ab erróribus univérsis poténter absolvat, et a totíus erípiat perditiónis incúrsu.\nPer Dóminum..."
             ),
             PropersData ( title: "Preface of the Season", english: "", latin: "" ),
             PropersData (
@@ -1576,7 +1576,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "Harken unto us, O God, our Savior, and make Thy people free from the terrors of Thy wrath and secure in the gift of Thy mercy.\nThrough our Lord...",
-                latin : "Exáudi nos, Deus, salutáris noster: et pópulum tuum ab iracúndiæ tuæ terróribus líberum, et misericórdiæ tuæ fac largitáte secúrum.\nPer Dóminum nostrum..."
+                latin : "Exáudi nos, Deus, salutáris noster: et pópulum tuum ab iracúndiæ tuæ terróribus líberum, et misericórdiæ tuæ fac largitáte secúrum.\nPer Dóminum..."
             )
         ],
         commemorations : []
@@ -1594,7 +1594,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Collect",
                 english : "O God, Who dost stamp out wars and vanquish the assailants of them that hope in Thee, help us when we cry to Thee, that the ferocity of our enemies may be brought low, and we may praise Thee with unceasing thanksgiving.\nThrough our Lord...",
-                latin : "Deus, qui cónteris bella, et impugnatóres in te sperántium potentia tuæ defensiónis expúgnas: auxiliáre fámulis tuis, implorántibus misericórdiam tuam; ut, inimicórum suórum feritáte depréssa, incessábili te gratiárum actióne laudémus.\nPer Dóminum nostrum..."
+                latin : "Deus, qui cónteris bella, et impugnatóres in te sperántium potentia tuæ defensiónis expúgnas: auxiliáre fámulis tuis, implorántibus misericórdiam tuam; ut, inimicórum suórum feritáte depréssa, incessábili te gratiárum actióne laudémus.\nPer Dóminum..."
             ),
             PropersData (
                 title : "Lesson",
@@ -1608,8 +1608,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Lesser Alleluia",
-                english : "*Ps 58:2*\nAlleluia, alleluia. Deliver me from my enemies, O my God, and defend me from them that rise up against me. Alleluia.",
-                latin : "*Ps 58:2*\nAllelúja, allelúja. Eripe me de inimícis meis, Deus meus: et ab insurgéntibus in me líbera me. Allelúja."
+                english : "*Ps 58:2*\nAlleluia, alleluia.\nDeliver me from my enemies, O my God, and defend me from them that rise up against me.\nAlleluia.",
+                latin : "*Ps 58:2*\nAllelúja, allelúja.\nEripe me de inimícis meis, Deus meus: et ab insurgéntibus in me líbera me.\nAllelúja."
             ),
             PropersData (
                 title : "Tract",
@@ -1618,8 +1618,8 @@ var votive_propers : OrderedDictionary = [
             ),
             PropersData (
                 title : "Greater Alleluia",
-                english : "*Ps 58:2,17*\nAlleluia, alleluia. Deliver me from my enemies, O my God: and defend me from them that rise up against me. Alleluia. But I will sing Thy strength: and will extol Thy mercy in the morning. Alleluia.",
-                latin : "*Ps 58:2,17*\nAllelúja, allelúja. Eripe me de inimícis meis, Deus meus: et ab insurgéntibus in me líbera me. Allelúja. Ego autem cantábo fortitúdinem tuam: et exsultábo mane misericórdiam tuam. Allelúja."
+                english : "*Ps 58:2,17*\nAlleluia, alleluia.\nDeliver me from my enemies, O my God: and defend me from them that rise up against me.\nAlleluia.\nBut I will sing Thy strength: and will extol Thy mercy in the morning.\nAlleluia.",
+                latin : "*Ps 58:2,17*\nAllelúja, allelúja.\nEripe me de inimícis meis, Deus meus: et ab insurgéntibus in me líbera me.\nAllelúja.\nEgo autem cantábo fortitúdinem tuam: et exsultábo mane misericórdiam tuam.\nAllelúja."
             ),
             PropersData (
                 title : "Gospel",
@@ -1634,7 +1634,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Secret",
                 english : "Be appeased, O Lord, by the sacrifice which we offer, that it may deliver us from all the evil of war and set us in the security of Thy protection.\nThrough our Lord...",
-                latin : "Sacrifícium, Dómine, quod immolámus, inténde placátus: ut ab omni nos éruat bellórum nequítia, et in tuæ protectiónis securitáte constítuat.\nPer Dóminum nostrum..."
+                latin : "Sacrifícium, Dómine, quod immolámus, inténde placátus: ut ab omni nos éruat bellórum nequítia, et in tuæ protectiónis securitáte constítuat.\nPer Dóminum..."
             ),
             PropersData ( title: "Preface of the Season", english: "", latin: "" ),
             PropersData (
@@ -1645,7 +1645,7 @@ var votive_propers : OrderedDictionary = [
             PropersData (
                 title : "Postcommunion",
                 english : "O God, Who hast dominion over all kingdoms and all kings, Who dost both heal us by smiting and preserve us by pardoning, stretch forth Thy mercy toward us, that we may employ for the uses of correction the tranquility and peace secured by Thy power.\nThrough our Lord...",
-                latin : "Deus, regnórum ómnium regúmque dominátor, qui nos et percutiéndo sanas et ignoscéndo consérvas: præténde nobis misericórdiam tuam; ut tranquillitáte pacis, tua potestáte serváta, ad remédia correctiónis utámur.\nPer Dóminum nostrum..."
+                latin : "Deus, regnórum ómnium regúmque dominátor, qui nos et percutiéndo sanas et ignoscéndo consérvas: præténde nobis misericórdiam tuam; ut tranquillitáte pacis, tua potestáte serváta, ad remédia correctiónis utámur.\nPer Dóminum..."
             )
         ],
         commemorations : []
