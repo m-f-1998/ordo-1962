@@ -24,26 +24,34 @@ struct SearchableView: View {
 
     var body: some View {
         if searchResults.count == 0 {
-            Section ( header: Spacer ( minLength: 0 ) ) {
-                ContentUnavailableView.search
+            List {
+                Section ( header: Spacer ( minLength: 0 ) ) {
+                    ContentUnavailableView.search
+                }
             }
         } else {
-            ForEach ( searchResults, id: \.self ) { month in
-                if isSearching {
-                    Section ( header: Spacer ( minLength: 0 ) ) {
-                        ForEach ( month ) { day in
-                            SearchRow ( feast: day, month: day.month, year: String ( self.year ) )
-                                .padding ( [ .top, .bottom ], 8 )
+            if isSearching {
+                List {
+                    ForEach ( searchResults, id: \.self ) { month in
+                        Section ( header: Spacer ( minLength: 0 ) ) {
+                            ForEach ( month ) { day in
+                                SearchRow ( feast: day, month: day.month, year: String ( self.year ) )
+                                    .padding ( [ .top, .bottom ], 8 )
+                            }
                         }
                     }
-                } else {
-                    Section ( header: Spacer ( minLength: 0 ) ) {
-                        ForEach ( month ) { day in
-                            Row ( feast: day, month: day.month, year: String ( self.year ) )
-                                .id ( "\(day.date) \(day.month)" )
-                                .padding ( [ .top, .bottom ], 8 )
-                        }
-                    }.id ( month [ 0 ].month )
+                }
+            } else {
+                List {
+                    ForEach ( searchResults, id: \.self ) { month in
+                        Section ( header: Spacer ( minLength: 0 ) ) {
+                            ForEach ( month ) { day in
+                                Row ( feast: day, month: day.month, year: String ( self.year ) )
+                                    .id ( "\(day.date) \(day.month)" )
+                                    .padding ( [ .top, .bottom ], 8 )
+                            }
+                        }.id ( month [ 0 ].month )
+                    }
                 }
             }
         }
@@ -61,10 +69,7 @@ struct OrdoView: View {
         ScrollViewReader { proxy in
             NavigationStack {
                 VStack ( spacing: 0 ) {
-                    List {
-                        SearchableView ( search: self.$search,  year: self.$year, proxy: proxy )
-                    }
-                    .searchable ( text: self.$search, isPresented: $searchIsActive )
+                    SearchableView ( search: self.$search,  year: self.$year, proxy: proxy )
                     HStack {
                         if CurrentYear ( ) == self.year && self.search == "" && !searchIsActive {
                             Button {
@@ -97,6 +102,7 @@ struct OrdoView: View {
                     .padding ( [ .vertical ], 8 )
                     .background ( Color ( .systemGray6 ) )
                 }
+                .searchable ( text: self.$search, isPresented: $searchIsActive )
                 .scrollIndicators ( .hidden )
                 .toolbar {
                     ToolbarItem ( placement: .automatic ) {
