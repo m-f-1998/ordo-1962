@@ -1,10 +1,19 @@
 <?php
 
-  function GetOrdo ( $year ) {
+require_once  __DIR__ . '/db.php';
 
-    require_once  __DIR__ . '/db.php';
-    $db = new DB ( );
-    $conn = $db->connect ( );
+class Ordo {
+
+  private $db;
+
+  function __construct ( ) {
+
+    $this->db = new DB ( );
+    $this->db->Connect ( );
+
+  }
+
+  function GetOrdo ( $year ) {
 
     $res = array (
       "Year" => $year,
@@ -14,7 +23,57 @@
       )
     );
 
-    $celebrations = $conn->execute_query (
+    $previousDay = NULL;
+
+    foreach ( $this->GetCelebrations ( $year ) as $celebration ) {
+
+      $propers = $this->GetPropers ( $celebration [ "feast" ], $celebration [ "date" ] );
+      $date = new DateTime ( $celebration [ "date" ] );
+      $current_index = $date->format ( "n" ) - 1;
+
+      $celebration [ "title" ] = $this->EpiphanyResumed (  $celebration [ "title" ], $date );
+
+      if ( $previousDay != $date->format ( "D d" ) ) { // New Celebration Day
+
+        array_push ( $res [ "Ordo" ] [ $current_index ], array (
+          "date" => array (
+            "weekday" => $date->format ( "D" ),
+            "day" => $date->format ( "d" ),
+            "month" => $date->format ( "M" ),
+            "combined" => $date->format ( "d M Y" )
+          ),
+          "celebrations" => array ( ),
+          "season" => array (
+            "title" => $celebration [ "season" ],
+            "colors" => $celebration [ "s_colors" ]
+          ),
+          "fasting" => $this->GetFastingOptions ( $celebration [ "season" ], $celebration [ "id" ], $celebration [ "title" ], $date )
+        ) );
+        
+        $previousDay = $date->format ( "D d" );
+      
+      }
+
+      array_push ( $res [ "Ordo" ] [ $current_index ] [ count ( $res [ "Ordo" ] [ $current_index ] ) - 1 ] [ "celebrations" ],
+        array (
+          "rank" => $celebration [ "rank" ],
+          "title" => $celebration [ "title" ],
+          "colors" => $celebration [ "colors" ],
+          "options" => $celebration [ "options" ],
+          "propers" => $this->GetProperTexts  ( $propers, $celebration [ "title" ] ),
+          "commemorations" => $this->GetCommemorations ( $celebration [ "id" ] )
+        )
+      );
+    
+    }
+
+    return $res;
+
+  }
+
+  private function GetCelebrations ( $year ) {
+    
+    return $this->db->Query (
       "SELECT c.`id`, c.`date`, c.`options`,
           s.`title` as `season`, s.`colors` as `s_colors`,
           f.`title`, f.`rank`, f.`colors`, `feast`
@@ -24,57 +83,20 @@
         WHERE YEAR ( c.`date` )=? ORDER BY c.`date`, c.`time` ASC",
       [ $year ]
     );
+  
+  }
 
-    $previousDay = NULL;
+  private function GetPropers ( $feast, $date ) {
 
-    foreach ( $celebrations as $celebration ) {
+    $res = $this->db->Query (
+      "SELECT * FROM `Propers` WHERE `feast`=? AND `date`=?",
+      [ $feast, $date ],
+      [ "id", "date", "feast" ]
+    );
 
-      $propers = $conn->execute_query (
-        "SELECT * FROM `Propers` WHERE `feast`=? AND `date`=?",
-        [ $celebration [ "feast" ], $celebration [ "date" ] ]
-      )->fetch_row ( );
+    if ( ! empty ( $res ) ) {
 
-      unset ( $propers [ "id" ], $propers [ "date" ], $propers [ "feast" ] );
-
-      $date = new DateTime ( $celebration [ "date" ] );
-      $short_month = $date->format ( "M" );
-      $index = $date->format ( "n" ) - 1;
-      $formatted_date = $date->format ( "D d" );
-
-      if ( ( $short_month == "Nov" || $short_month == "Dec" ) && str_contains ( $celebration [ "title" ], "Epiphany" ) ) {
-        $celebration [ "title" ] = "(Resumed) " . $celebration [ "title" ];
-      }
-
-      $options = $celebration [ "options" ];
-
-      if ( $previousDay != $formatted_date ) {
-
-        $options = $options . GetFasting ( $conn, $celebration [ "season" ], $celebration [ "id" ], $celebration [ "title" ], $formatted_date, $short_month );
-
-        array_push ( $res [ "Ordo" ] [ $index ], array (
-          "date" => $formatted_date,
-          "month" => $short_month,
-          "celebrations" => array ( ),
-          "season" => array (
-            "title" => $celebration [ "season" ],
-            "colors" => $celebration [ "s_colors" ]
-          )
-        ) );
-        
-        $previousDay = $formatted_date;
-      
-      }
-
-      array_push ( $res [ "Ordo" ] [ $index ] [ count ( $res [ "Ordo" ] [ $index ] ) - 1 ] [ "celebrations" ],
-        array (
-          "rank" => $celebration [ "rank" ],
-          "title" => $celebration [ "title" ],
-          "colors" => $celebration [ "colors" ],
-          "options" => $options,
-          "propers" => GetProperTexts  ( $propers, $conn ),
-          "commemorations" => GetCommemorations ( $celebration [ "id" ], $conn )
-        )
-      );
+      return $res [ 0 ];
 
     }
 
@@ -82,12 +104,24 @@
 
   }
 
-  function GetCommemorations ( $celebration, $conn ) {
+  private function EpiphanyResumed ( $title, $date ) {
+    
+    if ( in_array ( $date->format ( "M" ), array ( "Nov", "Dec" ) ) && str_contains ( $title, "Epiphany" ) ) {
+       
+      return "(Resumed) " . $title;
+    
+    }
 
-    $commemorations = $conn->execute_query (
+    return $title;
+  
+  }
+
+  private function GetCommemorations ( $celebration ) {
+
+    $commemorations = $this->db->Query (
       "SELECT f.`title`, f.`rank`, f.`colors`, `collect`, `secret`, `postcommunion`
       FROM `Commemorations` c
-      LEFT JOIN `Feast` f ON f.`id`=c.`feast`
+        LEFT JOIN `Feast` f ON f.`id`=c.`feast`
       WHERE c.`celebration`=?",
       [ $celebration ]
     );
@@ -96,12 +130,12 @@
 
     foreach ( $commemorations as $commemoration ) {
 
-      $propers = $conn->execute_query (
+      $propers = $this->db->Query (
         "SELECT p.`category` as `title`, p.`english`, p.`latin`
         FROM `ProperText` p
         WHERE p.`id`=? OR p.`id`=? OR p.`id`=? ORDER BY FIELD ( `title`, 'collect', 'secret', 'postcommunion' )",
         [ $commemoration [ "collect" ], $commemoration [ "secret" ], $commemoration [ "postcommunion" ] ]
-      )->fetch_all ( MYSQLI_ASSOC );
+      );
 
       foreach ( $propers as $key => $value ) {
 
@@ -122,28 +156,61 @@
 
   }
 
-  function GetProperTexts ( $propers, $conn ) {
+  private function GetProperTexts ( $propers, $title ) {
 
     $res = array ( );
+    $unique_propers = array ( );
+
+    if ( $title == "Good Friday" ) {
+
+      return json_decode ( file_get_contents ( "./unique_propers/good_friday.json" ) );
+
+    } else if ( $title == "Paschal Vigil" ) {
+
+      return json_decode ( file_get_contents ( "./unique_propers/paschal_vigil.json" ) );
+
+    } else if ( $title == "Mass of the Lord's Supper" ) {
+
+      $unique_propers = json_decode ( file_get_contents ( "./unique_propers/mass_of_the_lords_supper.json" ), true );
+
+    } else if ( $title == "Purification of the Blessed Virgin Mary" ) {
+
+      $unique_propers = json_decode ( file_get_contents ( "./unique_propers/candlemas.json" ), true );
+
+    } else if ( $title == "The Mass of the Chrism" ) {
+
+      $unique_propers = json_decode ( file_get_contents ( "./unique_propers/chrism_mass.json" ), true );
+
+    }
 
     if ( $propers && count ( $propers ) > 0 ) {
 
       foreach ( array_filter ( $propers ) as $key => $value ) {
 
-        $proper = $conn->execute_query (
+        $proper = $this->db->Query (
           "SELECT `category`, `english`, `latin` FROM `ProperText` WHERE `id`=?",
           [ $value ]
-        )->fetch_assoc ( );
+        );
 
-        if ( !is_null ( $proper ) ) {
+        if ( ! empty ( $proper ) ) {
 
           array_push ( $res, array (
-            "title" => ucwords ( str_replace ( "_", " ", $proper [ "category" ] ) ),
-            "english" => $proper [ "english" ],
-            "latin" => $proper [ "latin" ],
+            "title" => ucwords ( str_replace ( "_", " ", $proper [ 0 ] [ "category" ] ) ),
+            "english" => $proper [ 0 ] [ "english" ],
+            "latin" => $proper [ 0 ] [ "latin" ],
           ) );
         
         }
+
+      }
+
+      foreach ( $unique_propers as $proper ) {
+
+        array_splice ( $res, $proper [ "index" ], 0, array ( array (
+          "title" => $proper [ "title" ],
+          "english" => $proper [ "english" ],
+          "latin" => $proper [ "latin" ],
+        ) ) );
 
       }
 
@@ -153,88 +220,60 @@
 
   }
 
-  function GetFasting ( $conn, $season, $celebration_id, $celebration_title, $formatted_date, $short_month ) {
+  private function IsEmberDay ( $id, $title ) {
+
+    if ( str_contains ( $title, "Ember " ) ) {
+
+      return true;
+
+    }
+
+    foreach ( $this->db->Query (
+      "SELECT f.`title` FROM `Commemorations` LEFT JOIN `Feast` f ON f.`id`=`feast` WHERE `celebration`=?", [ $id ]
+    ) as $row ) {
+
+      if ( str_contains ( $row [ "title" ], "Ember " ) ) {
+
+        return true;
+      
+      }
+
+    }
+
+    return false;
+
+  }
+
+  private function GetFastingOptions ( $season, $id, $title, $date ) {
+
+    $res = array ( );
     
-    $options = [];
+    $ember = $this->IsEmberDay ( $id, $title );
+    $is_sunday = $date->format ( "w" ) == 0;
+    $is_friday = $date->format ( "w" ) == 5;
+    $is_vigil_immac_conc = $date->format ( "d M" ) == "07 Dec";
+    $is_vigil_pentecost = $title == "Vigil of Pentecost" && !$is_sunday;
 
-    $commemorations = $conn->execute_query (
-      "SELECT f.`title`
-      FROM `Commemorations` c
-      LEFT JOIN `Feast` f ON f.`id`=c.`feast`
-      WHERE c.`celebration`=?",
-      [ $celebration_id ]
-    );
+    if ( $ember || $is_vigil_pentecost || ( in_array ( $season, array ( "Lent", "Passiontide" ) ) && !$is_sunday ) ) {
 
-    $ember_day = false;
-    foreach ( $commemorations as $commemoration ) {
-
-      if ( str_contains ( $commemoration [ "title" ], "Ember " ) ) {
-
-        $ember_day = true;
-        break;
-
-      }
+      array_push ( $res, "Fast Day" );
 
     }
 
-    if (
-      ( $season == "Lent" && !str_contains ( $formatted_date, "Sun " ) ) ||
-      ( $season == "Passiontide" && !str_contains ( $formatted_date, "Sun " ) ) ||
-      str_contains ( $celebration_title, "Ember " ) ||
-      $ember_day ||
-      ( $celebration_title == "Vigil of Pentecost" && !str_contains ( $formatted_date, "Sun " ) )
-    ) {
+    if ( ( !$is_friday && $ember ) || $is_vigil_pentecost  ) {
 
-      array_push ( $options, "Fast Day" );
+      array_push ( $res, "Partial Abstinence" );
 
     }
 
-    $sat_wed_ember_day = $ember_day;
+    if ( $is_friday || $is_vigil_immac_conc || $title == "Ash Wednesday" || ( $title == "Vigil of Christmas" && !$is_sunday ) ) {
 
-    if ( $ember_day ) {
-
-      foreach ( $commemorations as $commemoration ) {
-
-        if ( str_contains ( $commemoration [ "title" ], "Ember Saturday " ) ) {
-  
-          $sat_wed_ember_day = true;
-          break;
-  
-        }
-
-        if ( str_contains ( $commemoration [ "title" ], "Ember Wednesday " ) ) {
-  
-          $sat_wed_ember_day = true;
-          break;
-  
-        }
-  
-      }
+      array_push ( $res, "Complete Abstinence" );
 
     }
 
-    if (
-      str_contains ( $celebration_title, "Ember Wednesday " ) ||
-      str_contains ( $celebration_title, "Ember Saturday " ) ||
-      $sat_wed_ember_day ||
-      ( $celebration_title == "Vigil of Pentecost" && !str_contains ( $formatted_date, "Sun " ) )
-    ) {
-
-      array_push ( $options, "Partial Abstinence" );
-
-    }
-
-    if (
-      str_contains ( $formatted_date, "Fri " ) ||
-      $celebration_title == "Ash Wednesday" ||
-      ( $celebration_title == "Vigil of Christmas" && !str_contains ( $formatted_date, "Sun " ) ) ||
-      ( $short_month == "Dec" && str_contains ( $formatted_date, " 07" ) )
-    ) {
-
-      array_push ( $options, "Complete Abstinence" );
-
-    }
-
-    return count ( $options ) > 0 ? "\n\n" . implode ( " | ", $options ) : "";
+    return $res;
  
   }
+
+}

@@ -35,10 +35,16 @@ class API {
             }
         }
         cache.Save ( )
+        let version = Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? ""
+        UserDefaults.standard.set ( version, forKey: "version" )
         await MainActor.run { [ ordo, prayers ] in
             self.activeData.SetSuccess ( ordo: ordo, prayers: prayers )
             WidgetCenter.shared.reloadAllTimelines ( )
         }
+    }
+    
+    func GetCurrent ( ) async throws -> OrdoYear {
+        return try await self.OrdoRequest ( year: String ( CurrentYear ( ) ) )
     }
     
     private func Decode <T:Decodable> ( data: Data, type: T.Type ) throws -> T {
@@ -63,7 +69,7 @@ class API {
     }
 
     private func HTTP ( queries: [ URLQueryItem ], url: String ) async throws -> Data {
-        var body: URLComponents = URLComponents ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2/\(url)" )!
+        var body: URLComponents = URLComponents ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2.2/\(url)" )!
         body.queryItems = queries
         body.percentEncodedQuery = body.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         

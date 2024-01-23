@@ -24,5 +24,7 @@ struct Tag: View {
                     .stroke ( .black, lineWidth: 1 )
                     .padding ( [ .top, .bottom ], 0.5 )
             )
+            .multilineTextAlignment ( .center )
+            .lineLimit ( 2 )
     }
 }

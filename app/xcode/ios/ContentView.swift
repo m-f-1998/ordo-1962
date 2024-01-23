@@ -29,7 +29,7 @@ struct ContentView: View {
                     try await self.api.UpdateCache ( )
                 } catch {
                     if self.net.connected {
-                        self.activeData.SetError ( error: error.localizedDescription )
+                        self.activeData.SetError ( error: "Ordo Update Could Not Be Fetched." )
                     }
                 }
             }
@@ -47,7 +47,7 @@ struct ContentView: View {
             LoadingView ( ).onAppear {
                 self.activeData.SetDownload ( download: 0 )
                 Task {
-                    try await Task.sleep ( nanoseconds: 1_500_000_000 )
+                    try await Task.sleep ( nanoseconds: 1_000_000_000 )
                     self.GetData ( )
                 }
             }

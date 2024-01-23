@@ -6,30 +6,26 @@
 //
 
 import SwiftUI
-class TabStateHandler: ObservableObject {
-    @Published var tabSelected: Int = 0
-}
-
 
 struct CommonView: View {
-    private let app_url: String = "itms-apps://itunes.apple.com/app/6450934181"
-    @StateObject var tabStateHanlder: TabStateHandler = TabStateHandler ( )
+    @ObservedObject var tabStateHanlder: TabStateHandler = TabStateHandler ( )
     @EnvironmentObject var activeData: ActiveData
     @Environment(\.colorScheme) var colorScheme
 
     init ( ) {
-        if UserDefaults.standard.string ( forKey: "prayers-lang" ) == nil {
-            UserDefaults.standard.set ( "English", forKey: "prayers-lang" )
-        }
-        
-        if UserDefaults.standard.string ( forKey: "propers-lang" ) == nil {
-            UserDefaults.standard.set ( "English", forKey: "propers-lang" )
+        CreateUserDefault ( key: "prayers-lang", value: "English" )
+        CreateUserDefault ( key: "propers-lang", value: "English" )
+    }
+    
+    private func CreateUserDefault ( key: String, value: String ) {
+        if UserDefaults.standard.string ( forKey: key ) == nil {
+            UserDefaults.standard.set ( value, forKey: key )
         }
     }
 
     var body: some View {
         VStack ( spacing: 0 ) {
-            TabView ( selection: $tabStateHanlder.tabSelected ) {
+            TabView ( selection: $tabStateHanlder.selected ) {
                 OrdoView ( )
                     .tag ( 0 )
                     .toolbar(.hidden, for: .tabBar)
@@ -38,98 +34,12 @@ struct CommonView: View {
                     .toolbar(.hidden, for: .tabBar)
                 Settings ( current_ordo: self.activeData.GetYear ( )! )
                     .tag ( 2 )
-                    .toolbar(.hidden, for: .tabBar)
+                    .toolbar ( .hidden, for: .tabBar )
             }
-            .tint ( colorScheme == .dark ? .white : .black )
-            VStack {
-                HStack {
-                    ForEach( TabbedItems.allCases, id: \.self){ item in
-                        Button {
-                            tabStateHanlder.tabSelected = item.rawValue
-                        } label: {
-                            HStack ( spacing: 10 ) {
-                                if item.systemImage {
-                                    Image ( systemName: item.icon )
-                                        .resizable ( )
-                                        .renderingMode ( .template )
-                                        .foregroundColor (
-                                            tabStateHanlder.tabSelected == item.rawValue ?
-                                                ( colorScheme == .dark ? .white : .black )
-                                            :
-                                                .gray
-                                        )
-                                        .frame ( width: 20, height: 20 )
-                                } else {
-                                    Image ( item.icon )
-                                        .resizable ( )
-                                        .renderingMode ( .template )
-                                        .foregroundColor (
-                                            tabStateHanlder.tabSelected == item.rawValue ?
-                                                ( colorScheme == .dark ? .white : .black )
-                                            :
-                                                .gray
-                                        )
-                                        .frame ( width: 20, height: 20 )
-                                }
-                                if (tabStateHanlder.tabSelected == item.rawValue) {
-                                    Text ( item.title )
-                                        .font ( .system ( size: 14 ) )
-                                        .foregroundColor (
-                                            tabStateHanlder.tabSelected == item.rawValue ?
-                                                ( colorScheme == .dark ? .white : .black )
-                                            :
-                                                .gray
-                                        )
-                                }
-                            }
-                            .frame ( maxWidth: tabStateHanlder.tabSelected == item.rawValue ? .infinity : 60, maxHeight: 40, alignment: .center )
-                            .background ( tabStateHanlder.tabSelected == item.rawValue ? .blue.opacity ( 0.5 ) : .clear )
-                            .cornerRadius ( 30 )
-                        }
-                    }
-                }
-                .frame ( maxWidth: .infinity, maxHeight: 50 )
-                .cornerRadius ( 35 )
-            }
-            .padding ( [ .trailing, .leading ], 20 )
+                .tint ( colorScheme == .dark ? .white : .black )
+            TabBar ( )
+                .environmentObject ( tabStateHanlder )
         }
         .background ( LinearGradient ( colors: [ .green.opacity ( 0.5 ), .blue.opacity( 0.3 ) ] )?.ignoresSafeArea ( ) )
-    }
-}
-
-enum TabbedItems: Int, CaseIterable {
-    case ordo = 0
-    case prayer
-    case settings
-    
-    var systemImage: Bool {
-        switch self {
-            case .prayer:
-                return false
-            default:
-                return true
-        }
-    }
-    
-    var title: String {
-        switch self {
-            case .ordo:
-                return "Ordo"
-            case .prayer:
-                return "Prayer"
-            case .settings:
-                return "Settings"
-        }
-    }
-    
-    var icon: String{
-        switch self {
-            case .ordo:
-                return "calendar"
-            case .prayer:
-                return "pray"
-            case .settings:
-                return "gear"
-        }
     }
 }

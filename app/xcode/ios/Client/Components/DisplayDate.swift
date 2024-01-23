@@ -11,11 +11,13 @@ struct DisplayDate: View {
     let day, date, month: String
     var today: Bool = false
 
-    init ( day: String, date: String, month: String, dateObj: Date = .distantPast ) {
-        self.day = day
-        self.date = date
-        self.month = month
-        self.today = Calendar.current.isDateInToday ( dateObj )
+    init ( date: DateInfo ) {
+        self.day = date.weekday
+        self.date = date.day
+        self.month = date.month
+        
+        let formatter = FormatDate ( date: .medium, time: .none )
+        self.today = Calendar.current.isDateInToday ( formatter.date ( from: date.combined )! )
     }
 
     var body: some View {

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import OrderedCollections
 
 @Model class OrdoYear: Decodable, Hashable, Identifiable {
     let id: String = UUID ( ).uuidString
@@ -50,22 +51,41 @@ import SwiftData
     }
 }
 
+struct DateInfo: Codable, Hashable, Identifiable {
+    let id: String = UUID ( ).uuidString
+    let weekday: String
+    let day: String
+    let month: String
+    let combined: String
+
+    init ( weekday: String = "Mon", day: String = "01", month: String = "Jan", combined: String = "01 Jan 0001" ) {
+        self.weekday = weekday
+        self.day = day
+        self.month = month
+        self.combined = combined
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case weekday, day, month, combined
+    }
+}
+
 struct OrdoDay: Codable, Hashable, Identifiable {
     let id: String = UUID ( ).uuidString
-    let date: String
-    let month: String
+    let date: DateInfo
     let celebrations: [ CelebrationData ]
     let season: SeasonData
+    let fasting: [ String ]
 
-    init ( date: String = FormatDate ( ).string ( from: .now ), celebrations: [ CelebrationData ] = [ CelebrationData ( ) ], season: SeasonData = SeasonData ( title: "", colors: "" ), month: String = CurrentMonth ( ) ) {
+    init ( date: DateInfo = DateInfo ( ), celebrations: [ CelebrationData ] = [ CelebrationData ( ) ], season: SeasonData = SeasonData ( title: "", colors: "" ), month: String = CurrentMonth ( ), fasting: [ String ] = [ ] ) {
         self.date = date
         self.celebrations = celebrations
         self.season = season
-        self.month = month
+        self.fasting = fasting
     }
 
     enum CodingKeys: String, CodingKey {
-        case date, celebrations, season, month
+        case date, celebrations, season, fasting
     }
 
     static func == (lhs: OrdoDay, rhs: OrdoDay) -> Bool {
@@ -108,25 +128,38 @@ struct CelebrationData: Codable, Hashable, Identifiable {
     }
     
     private func FormatProperString ( proper: PropersData, lang: String, first: Bool = false ) -> String {
-        var res = first ? "" : "\n\n"
-        res += "**\( String ( describing: proper.GetTitle ( )! ) )**\n"
+        var res = "**\( String ( describing: proper.GetTitle ( )! ) )**\n"
         res += proper.GetPrayer ( lang: lang )
         return res
     }
     
-    public func GetPropers ( lang: String ) -> String {
-        var res = ""
+    public func GetPropers ( lang: String ) -> OrderedDictionary<String, String> {
+        var res: OrderedDictionary<String, String> = [ : ]
         propers.forEach { proper in
-            res += FormatProperString ( proper: proper, lang: lang, first: res == "" )
+            res [ proper.GetTitle ( )! ] = FormatProperString ( proper: proper, lang: lang, first: res.isEmpty )
             if let index = [ "Collect", "Secret", "Postcommunion" ].firstIndex ( where: { $0 == proper.GetTitle ( )! } ) {
+                var id_index = 2
                 commemorations.forEach { commem in
                     if commem.propers.count > 0 {
-                        res += FormatProperString ( proper: commem.propers [ index ], lang: lang )
+                        res [ "\(id_index.ordinal ?? "Commemoration") \(proper.GetTitle ( )!)" ] = FormatProperString ( proper: commem.propers [ index ], lang: lang )
+                        id_index += 1
                     }
                 }
             }
         }
         return res
+    }
+}
+
+private var ordinalFormatter: NumberFormatter = {
+    let formatter = NumberFormatter ( )
+    formatter.numberStyle = .ordinal
+    return formatter
+} ( )
+
+extension Int {
+    var ordinal: String? {
+        return ordinalFormatter.string ( from: NSNumber ( value: self ) )
     }
 }
 

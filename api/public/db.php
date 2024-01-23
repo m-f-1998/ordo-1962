@@ -6,7 +6,7 @@
 
      function __construct ( ) { }
 
-     function connect ( ) {
+     function Connect ( ) {
 
       require_once __DIR__ . "/../../../private/ordo-1962/db-constants.php";
 
@@ -21,6 +21,24 @@
       return $this->conn;
 
      }
+
+    function Query ( $sql, $params = array ( ), $hidden = array ( ) ) {
+
+        $res = $this->conn->execute_query ( $sql, $params )->fetch_all ( MYSQLI_ASSOC );
+
+        foreach ( $res as $row ) {
+
+            foreach ( $hidden as $key ) {
+
+                unset ( $row [ $key ] );
+
+            }
+
+        }
+
+        return $res;
+
+    }
 
  }
 

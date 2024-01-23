@@ -13,25 +13,7 @@ struct ErrorView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                List ( Calendar.current.shortMonthSymbols, id: \.self ) { month in
-                    Section {
-                        HStack ( spacing: 10 ) {
-                            DisplayDate ( day: "Mon", date: "1", month: month )
-                            VStack ( alignment: .leading ) {
-                                Feast ( data: [ CelebrationData ( ) ] )
-                                Tag (
-                                    title: String ( repeating: "*", count: 10 ),
-                                    colors: [ Color.green.opacity ( 0.5 ) ]
-                                )
-                                    .padding ( [ .trailing, .leading ], 2 )
-                            }
-                        }
-                            .padding ( [ .top, .bottom ], 8 )
-                    }
-                }
-                    .redacted ( reason: .placeholder )
-                    .padding ( [ .top ], 20 )
-                    .scrollDisabled ( true )
+                PlaceholderList ( )
                 VStack ( spacing: 10 ) {
                     Text ( description )
                 }

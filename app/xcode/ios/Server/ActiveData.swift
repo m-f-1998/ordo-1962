@@ -17,7 +17,7 @@ class ActiveData: ObservableObject {
     public private(set) var ordo: [ OrdoYear ] = []
     public private(set) var prayers: PrayerLanguageData? = nil
 
-    func SetSuccess ( ordo: [ OrdoYear ], prayers: PrayerLanguageData ) {
+    func SetSuccess ( ordo: [ OrdoYear ], prayers: PrayerLanguageData? ) {
         DispatchQueue.main.async {
             self.ordo = ordo
             self.prayers = prayers
@@ -42,7 +42,7 @@ class ActiveData: ObservableObject {
 
     func GetIDToday ( ) -> String {
         if self.ordo.count > 0 {
-            return "\(self.ordo [ 0 ].getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ).date) \( CurrentMonth ( ) )"
+            return self.ordo [ 0 ].getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ).date.combined
         }
         return ""
     }

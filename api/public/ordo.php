@@ -32,8 +32,9 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" && isset ( $_GET [ "year" ] ) ) {
     } else {
 
       require_once  __DIR__ . '/generate_ordo.php';
+      $ordo = new Ordo ( );
 
-      $json = json_encode ( GetOrdo ( $year ), JSON_PRETTY_PRINT );
+      $json = json_encode ( $ordo->GetOrdo ( $year ), JSON_PRETTY_PRINT );
       echo ( $json );
 
       file_put_contents ( $cache, $json );

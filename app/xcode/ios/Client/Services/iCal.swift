@@ -26,7 +26,6 @@ class iCalStatus: ObservableObject {
         self.current_ordo = current_ordo
     }
 
-    // Are Calendar Permissions Turned On?
     private func Permissions ( completion: @escaping ( Bool ) -> Void ) {
         self.store.requestFullAccessToEvents { ( granted, error ) in
             if let error = error {
@@ -36,7 +35,6 @@ class iCalStatus: ObservableObject {
         }
     }
 
-    // Get The EKCalendar Object, Check If Duplicates Exist
     private func GetCalendar ( title: String ) throws -> EKCalendar {
         if let id = UserDefaults.standard.string ( forKey: "calendar_id" ) {
             if self.store.calendar ( withIdentifier: id ) != nil {
@@ -68,7 +66,6 @@ class iCalStatus: ObservableObject {
         }
     }
     
-    // Generate iCal from API
     func GenerateCalendar ( ) async {
         self.Permissions ( ) { permissions in
             print ( "EventKit Permissions: \(permissions)" )
@@ -83,7 +80,7 @@ class iCalStatus: ObservableObject {
                                     let event = EKEvent ( eventStore: self.store )
                                     event.title = feast.title + " (Class \(String(feast.rank)))"
                                     event.isAllDay = true
-                                    event.startDate = FormatDate ( ).date ( from: "\(day.date) \(MonthName) \(CurrentYear ( ))" )
+                                    event.startDate = FormatDate ( date: .short, time: .none ).date ( from: "\(day.date) \(MonthName) \(CurrentYear ( ))" )
                                     event.endDate = event.startDate
                                     event.notes = feast.commemorations.map { ( x ) -> String in
                                         return "Commemoration Today: " + x.title

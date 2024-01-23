@@ -6,3 +6,41 @@
 //
 
 import Foundation
+
+func FormatDate ( date: DateFormatter.Style, time: DateFormatter.Style ) -> DateFormatter {
+    let formatter = DateFormatter ( )
+    formatter.locale = Locale ( identifier: "en_GB" )
+    formatter.dateStyle = date
+    formatter.timeStyle = time
+//    if no_year {
+//        formatter.dateFormat = "E dd MMMM yyyy"
+//    } else if short {
+//        formatter.dateFormat = "E dd MMMM yyyy"
+//    } else if time {
+//        formatter.dateFormat = "E dd MMM yyyy HH:mm"
+//    } else {
+//        formatter.dateFormat = "E dd MMM yyyy"
+//    }
+    return formatter
+}
+
+func CurrentWeekday ( ) -> String {
+    let today = Calendar.current.component ( .weekday, from: .now )
+    return Calendar.current.weekdaySymbols [ today - 1 ]
+}
+
+func CurrentMonth ( ) -> String {
+    let today = Calendar.current.dateComponents ( [ .month ], from: .now )
+    return Calendar.current.shortMonthSymbols [ today.month! - 1 ]
+}
+
+func CurrentDay ( add: Int = 0 ) -> Int {
+    var dateComponent = DateComponents()
+    dateComponent.day = add
+    let today = Calendar.current.date ( byAdding: dateComponent, to: .now )
+    return Calendar.current.component ( .day, from: today! )
+}
+
+func CurrentYear ( ) -> Int {
+    return Calendar.current.component ( .year, from: .now )
+}

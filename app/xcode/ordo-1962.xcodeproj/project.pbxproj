@@ -9,12 +9,23 @@
 /* Begin PBXBuildFile section */
 		C8022BB22B2E5CB500921A27 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
 		C8022BB32B2E5CB600921A27 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
-		C80883102A5DAE90001AC6E5 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808830F2A5DAE90001AC6E5 /* Row.swift */; };
+		C80655BF2B5D285200051AF8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C80655BE2B5D285200051AF8 /* OrderedCollections */; };
+		C80655C12B5D942600051AF8 /* RenderMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C02B5D942600051AF8 /* RenderMarkdown.swift */; };
+		C80655C22B5D942600051AF8 /* RenderMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C02B5D942600051AF8 /* RenderMarkdown.swift */; };
+		C80655C32B5D942600051AF8 /* RenderMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C02B5D942600051AF8 /* RenderMarkdown.swift */; };
+		C80655C52B5DAC7C00051AF8 /* TabService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C42B5DAC7C00051AF8 /* TabService.swift */; };
+		C80655C62B5DAC7C00051AF8 /* TabService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C42B5DAC7C00051AF8 /* TabService.swift */; };
+		C80655C72B5DAC7C00051AF8 /* TabService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C42B5DAC7C00051AF8 /* TabService.swift */; };
+		C80655C92B5DACDE00051AF8 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C82B5DACDE00051AF8 /* TabBar.swift */; };
+		C80883102A5DAE90001AC6E5 /* OrdoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808830F2A5DAE90001AC6E5 /* OrdoRow.swift */; };
+		C80ED7372B53ECCD00FDCD51 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80ED7362B53ECCD00FDCD51 /* DateFormatter.swift */; };
+		C80ED7382B53ECE200FDCD51 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80ED7362B53ECCD00FDCD51 /* DateFormatter.swift */; };
+		C80ED73A2B53ECEC00FDCD51 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80ED7362B53ECCD00FDCD51 /* DateFormatter.swift */; };
 		C8186FBB2A2A544D0072AB13 /* PrayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8186FBA2A2A544D0072AB13 /* PrayersView.swift */; };
 		C837C76F2A3A569100178D00 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C837C76E2A3A569000178D00 /* NetworkMonitor.swift */; };
 		C844736F2A900184005E2E9D /* ordo-1962-widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C844736E2A9000A1005E2E9D /* ordo-1962-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C84A18E22B21B0FC00D55834 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84A18E12B21B0FC00D55834 /* LoadingView.swift */; };
-		C84C543F2A0C016E006CEB35 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C543E2A0C016E006CEB35 /* Settings.swift */; };
+		C84C543F2A0C016E006CEB35 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C543E2A0C016E006CEB35 /* SettingsView.swift */; };
 		C84E92062B30F4450083A2FB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FE43932B2A45F7000A68C6 /* API.swift */; };
 		C84E92072B30F4450083A2FB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FE43932B2A45F7000A68C6 /* API.swift */; };
 		C84E92082B30F4480083A2FB /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FE43912B2A3EB8000A68C6 /* Cache.swift */; };
@@ -30,10 +41,8 @@
 		C871588529F0433400E1F02D /* OrdoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C871588429F0433400E1F02D /* OrdoView.swift */; };
 		C871588729F051C500E1F02D /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C871588629F051C500E1F02D /* ErrorView.swift */; };
 		C872D32F2B2F3667006EE383 /* DisplayPropers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C872D32E2B2F3667006EE383 /* DisplayPropers.swift */; };
-		C8839F892A2267EB006348B5 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8839F882A2267EB006348B5 /* Options.swift */; };
-		C897C6F52A868F9300600131 /* iCalStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897C6F42A868F9300600131 /* iCalStructs.swift */; };
 		C89E51AD2A8FDEE5006C88B3 /* 1962 Ordo.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C89213992A8FDCA2000ED8E1 /* 1962 Ordo.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C89F1BEA2B4037FE00073084 /* CalendarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89F1BE92B4037FE00073084 /* CalendarInfo.swift */; };
+		C89F1BEA2B4037FE00073084 /* CalendarDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89F1BE92B4037FE00073084 /* CalendarDetails.swift */; };
 		C8A3596C29EF06220018F6B7 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3596B29EF06220018F6B7 /* App.swift */; };
 		C8A3596E29EF06220018F6B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3596D29EF06220018F6B7 /* ContentView.swift */; };
 		C8A3597029EF06240018F6B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8A3596F29EF06240018F6B7 /* Assets.xcassets */; };
@@ -50,16 +59,19 @@
 		C8AD1EB32B2CBA1600631ACA /* Prayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AD1EA92B2CB9E600631ACA /* Prayers.swift */; };
 		C8AD1EB42B2CBA1600631ACA /* Prayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AD1EA92B2CB9E600631ACA /* Prayers.swift */; };
 		C8AD1EB62B2CCC0B00631ACA /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AD1EB52B2CCC0B00631ACA /* CommonView.swift */; };
+		C8ADAC472B60609D001EE81B /* VotivePropers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ADAC462B60609D001EE81B /* VotivePropers.swift */; };
+		C8ADAC492B60627C001EE81B /* OrdoEventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ADAC482B60627C001EE81B /* OrdoEventList.swift */; };
+		C8ADAC4B2B606406001EE81B /* OrdoToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ADAC4A2B606406001EE81B /* OrdoToolbar.swift */; };
+		C8ADAC4D2B60651F001EE81B /* OrdoFeast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ADAC4C2B60651F001EE81B /* OrdoFeast.swift */; };
+		C8ADAC4F2B606EE2001EE81B /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8ADAC4E2B606EE2001EE81B /* OrderedCollections */; };
 		C8AE1DD92A2125D000B36A2C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DD82A2125D000B36A2C /* Tag.swift */; };
 		C8AE1DDB2A21260500B36A2C /* DisplayDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DDA2A21260500B36A2C /* DisplayDate.swift */; };
-		C8AE1DDD2A21265200B36A2C /* Feast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DDC2A21265200B36A2C /* Feast.swift */; };
 		C8AE1DE42A21275F00B36A2C /* SendEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DE32A21275F00B36A2C /* SendEmail.swift */; };
 		C8AE1DE82A214B7D00B36A2C /* iCal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DE72A214B7D00B36A2C /* iCal.swift */; };
 		C8B374602A23A2040024E930 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B3745F2A23A2040024E930 /* LaunchScreen.storyboard */; };
-		C8B61D142B3F71E000CF74CB /* HelpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D132B3F71E000CF74CB /* HelpComponent.swift */; };
+		C8B61D142B3F71E000CF74CB /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D132B3F71E000CF74CB /* InfoView.swift */; };
 		C8B61D172B3F881E00CF74CB /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8B61D162B3F881E00CF74CB /* OrderedCollections */; };
 		C8B7FBC02A715BDE0026107C /* DisplayText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBBF2A715BDE0026107C /* DisplayText.swift */; };
-		C8BDCC7B2B49C9DD00A81131 /* VotivePropers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BDCC7A2B49C9DD00A81131 /* VotivePropers.swift */; };
 		C8C6CEFD2A8260610010EEDE /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C6CEFC2A8260610010EEDE /* Gradient.swift */; };
 		C8C904B32A377EF100BB6872 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C8C904B22A377EF100BB6872 /* AlertToast */; };
 		C8CB0D792A478EEA00B2CB95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
@@ -68,6 +80,10 @@
 		C8D4DCC42A3610E70049C042 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D4DCC32A3610E70049C042 /* Assets.xcassets */; };
 		C8D4DCC72A3610E70049C042 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D4DCC62A3610E70049C042 /* Preview Assets.xcassets */; };
 		C8D4DCCF2A3616D90049C042 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8D4DCCE2A3616D90049C042 /* SwiftUI.framework */; };
+		C8F9C1452B5DC9E90052864F /* PlaceholderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9C1442B5DC9E90052864F /* PlaceholderList.swift */; };
+		C8F9C1472B5EF47A0052864F /* InfoStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9C1462B5EF47A0052864F /* InfoStructure.swift */; };
+		C8F9C14A2B5EFF0C0052864F /* KeyboardShowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9C1492B5EFF0C0052864F /* KeyboardShowing.swift */; };
+		C8F9C14C2B5EFF8B0052864F /* OrdoBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9C14B2B5EFF8B0052864F /* OrdoBar.swift */; };
 		C8FE43902B2A359F000A68C6 /* ActiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FE438F2B2A359F000A68C6 /* ActiveData.swift */; };
 		C8FE43922B2A3EB8000A68C6 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FE43912B2A3EB8000A68C6 /* Cache.swift */; };
 		C8FE43942B2A45F7000A68C6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FE43932B2A45F7000A68C6 /* API.swift */; };
@@ -126,12 +142,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C808830F2A5DAE90001AC6E5 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
+		C80655C02B5D942600051AF8 /* RenderMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderMarkdown.swift; sourceTree = "<group>"; };
+		C80655C42B5DAC7C00051AF8 /* TabService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabService.swift; sourceTree = "<group>"; };
+		C80655C82B5DACDE00051AF8 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		C808830F2A5DAE90001AC6E5 /* OrdoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoRow.swift; sourceTree = "<group>"; };
+		C80ED7362B53ECCD00FDCD51 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		C8186FBA2A2A544D0072AB13 /* PrayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayersView.swift; sourceTree = "<group>"; };
 		C837C76E2A3A569000178D00 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		C844736E2A9000A1005E2E9D /* ordo-1962-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ordo-1962-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84A18E12B21B0FC00D55834 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		C84C543E2A0C016E006CEB35 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C84C543E2A0C016E006CEB35 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C85DEB122A34A7E3005269E3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C85DEB142A34A7E4005269E3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		C85DEB4E2A34A9D5005269E3 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
@@ -141,12 +161,10 @@
 		C871588629F051C500E1F02D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		C872D32E2B2F3667006EE383 /* DisplayPropers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPropers.swift; sourceTree = "<group>"; };
 		C87DF9D82A4086FD00AD1D88 /* ordo-1962.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ordo-1962.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8839F882A2267EB006348B5 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		C89213992A8FDCA2000ED8E1 /* 1962 Ordo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1962 Ordo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C89296252A45D21A0090871A /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS9.4.sdk/System/Library/Frameworks/WatchKit.framework; sourceTree = DEVELOPER_DIR; };
 		C89559CB2A3E24B7007F3882 /* widget-ent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "widget-ent.entitlements"; sourceTree = "<group>"; };
-		C897C6F42A868F9300600131 /* iCalStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCalStructs.swift; sourceTree = "<group>"; };
-		C89F1BE92B4037FE00073084 /* CalendarInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfo.swift; sourceTree = "<group>"; };
+		C89F1BE92B4037FE00073084 /* CalendarDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetails.swift; sourceTree = "<group>"; };
 		C8A3596B29EF06220018F6B7 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		C8A3596D29EF06220018F6B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C8A3596F29EF06240018F6B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -155,16 +173,18 @@
 		C8AD1EAB2B2CB9FD00631ACA /* Ordo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ordo.swift; sourceTree = "<group>"; };
 		C8AD1EAD2B2CBA0A00631ACA /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		C8AD1EB52B2CCC0B00631ACA /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
+		C8ADAC462B60609D001EE81B /* VotivePropers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotivePropers.swift; sourceTree = "<group>"; };
+		C8ADAC482B60627C001EE81B /* OrdoEventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoEventList.swift; sourceTree = "<group>"; };
+		C8ADAC4A2B606406001EE81B /* OrdoToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoToolbar.swift; sourceTree = "<group>"; };
+		C8ADAC4C2B60651F001EE81B /* OrdoFeast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoFeast.swift; sourceTree = "<group>"; };
 		C8AE1DD82A2125D000B36A2C /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		C8AE1DDA2A21260500B36A2C /* DisplayDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayDate.swift; sourceTree = "<group>"; };
-		C8AE1DDC2A21265200B36A2C /* Feast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feast.swift; sourceTree = "<group>"; };
 		C8AE1DE32A21275F00B36A2C /* SendEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmail.swift; sourceTree = "<group>"; };
 		C8AE1DE72A214B7D00B36A2C /* iCal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCal.swift; sourceTree = "<group>"; };
 		C8B3745F2A23A2040024E930 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C8B61D132B3F71E000CF74CB /* HelpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpComponent.swift; sourceTree = "<group>"; };
+		C8B61D132B3F71E000CF74CB /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		C8B7FBBF2A715BDE0026107C /* DisplayText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayText.swift; sourceTree = "<group>"; };
 		C8BAA13829F2F12200D167E8 /* app-ent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "app-ent.entitlements"; sourceTree = "<group>"; };
-		C8BDCC7A2B49C9DD00A81131 /* VotivePropers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotivePropers.swift; sourceTree = "<group>"; };
 		C8C6CEFC2A8260610010EEDE /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		C8CB0D782A478EEA00B2CB95 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C8D4DCBF2A3610E50049C042 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -175,6 +195,10 @@
 		C8DF2F002A900FAE001F4D7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8DF2F022A90161E001F4D7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8ECAF6B2B3A269A00788D68 /* ordo-1962-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ordo-1962-Info.plist"; sourceTree = "<group>"; };
+		C8F9C1442B5DC9E90052864F /* PlaceholderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderList.swift; sourceTree = "<group>"; };
+		C8F9C1462B5EF47A0052864F /* InfoStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStructure.swift; sourceTree = "<group>"; };
+		C8F9C1492B5EFF0C0052864F /* KeyboardShowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShowing.swift; sourceTree = "<group>"; };
+		C8F9C14B2B5EFF8B0052864F /* OrdoBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoBar.swift; sourceTree = "<group>"; };
 		C8FE438F2B2A359F000A68C6 /* ActiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveData.swift; sourceTree = "<group>"; };
 		C8FE43912B2A3EB8000A68C6 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		C8FE43932B2A45F7000A68C6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -187,6 +211,7 @@
 			files = (
 				C85DEB4A2A34A9D5005269E3 /* SwiftUI.framework in Frameworks */,
 				C85DEB492A34A9D5005269E3 /* WidgetKit.framework in Frameworks */,
+				C8ADAC4F2B606EE2001EE81B /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C80655BF2B5D285200051AF8 /* OrderedCollections in Frameworks */,
 				C8D4DCCF2A3616D90049C042 /* SwiftUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,29 +254,11 @@
 				C871588629F051C500E1F02D /* ErrorView.swift */,
 				C84A18E12B21B0FC00D55834 /* LoadingView.swift */,
 				C8186FBA2A2A544D0072AB13 /* PrayersView.swift */,
+				C84C543E2A0C016E006CEB35 /* SettingsView.swift */,
+				C8B61D132B3F71E000CF74CB /* InfoView.swift */,
 				C8AE1DD72A21258300B36A2C /* Ordo */,
-				C8AE1DE22A21274400B36A2C /* Settings */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		C897C6F32A868F8500600131 /* Calendar */ = {
-			isa = PBXGroup;
-			children = (
-				C8AE1DE72A214B7D00B36A2C /* iCal.swift */,
-				C897C6F42A868F9300600131 /* iCalStructs.swift */,
-			);
-			path = Calendar;
-			sourceTree = "<group>";
-		};
-		C89F1BE62B40377100073084 /* Help */ = {
-			isa = PBXGroup;
-			children = (
-				C8BDCC7A2B49C9DD00A81131 /* VotivePropers.swift */,
-				C89F1BE92B4037FE00073084 /* CalendarInfo.swift */,
-				C8B61D132B3F71E000CF74CB /* HelpComponent.swift */,
-			);
-			path = Help;
 			sourceTree = "<group>";
 		};
 		C8A3595F29EF06220018F6B7 = {
@@ -277,7 +285,6 @@
 				C8AD1EA12B2C59CD00631ACA /* Client */,
 				C8FE438E2B2A3557000A68C6 /* Server */,
 				C8BAA13829F2F12200D167E8 /* app-ent.entitlements */,
-				C871588329F042F000E1F02D /* Views */,
 				C8A3596F29EF06240018F6B7 /* Assets.xcassets */,
 				C8B3745F2A23A2040024E930 /* LaunchScreen.storyboard */,
 			);
@@ -287,8 +294,9 @@
 		C8AD1EA12B2C59CD00631ACA /* Client */ = {
 			isa = PBXGroup;
 			children = (
-				C89F1BE62B40377100073084 /* Help */,
+				C871588329F042F000E1F02D /* Views */,
 				C8AD1EA32B2C59E800631ACA /* Style */,
+				C8F9C1482B5EF5DD0052864F /* Data */,
 				C8AD1EA22B2C59DB00631ACA /* Services */,
 				C8B7FBC32A7165140026107C /* Components */,
 			);
@@ -299,7 +307,12 @@
 			isa = PBXGroup;
 			children = (
 				C8AE1DE32A21275F00B36A2C /* SendEmail.swift */,
+				C8AE1DE72A214B7D00B36A2C /* iCal.swift */,
 				C837C76E2A3A569000178D00 /* NetworkMonitor.swift */,
+				C80ED7362B53ECCD00FDCD51 /* DateFormatter.swift */,
+				C80655C02B5D942600051AF8 /* RenderMarkdown.swift */,
+				C80655C42B5DAC7C00051AF8 /* TabService.swift */,
+				C8F9C1492B5EFF0C0052864F /* KeyboardShowing.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -326,20 +339,13 @@
 		C8AE1DD72A21258300B36A2C /* Ordo */ = {
 			isa = PBXGroup;
 			children = (
-				C8AE1DDC2A21265200B36A2C /* Feast.swift */,
 				C871588429F0433400E1F02D /* OrdoView.swift */,
-				C808830F2A5DAE90001AC6E5 /* Row.swift */,
+				C8ADAC482B60627C001EE81B /* OrdoEventList.swift */,
+				C808830F2A5DAE90001AC6E5 /* OrdoRow.swift */,
+				C8ADAC4A2B606406001EE81B /* OrdoToolbar.swift */,
+				C8ADAC4C2B60651F001EE81B /* OrdoFeast.swift */,
 			);
 			path = Ordo;
-			sourceTree = "<group>";
-		};
-		C8AE1DE22A21274400B36A2C /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				C8B7FBC42A7165B00026107C /* Components */,
-				C84C543E2A0C016E006CEB35 /* Settings.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 		C8B7FBC32A7165140026107C /* Components */ = {
@@ -348,16 +354,10 @@
 				C8AE1DD82A2125D000B36A2C /* Tag.swift */,
 				C8AE1DDA2A21260500B36A2C /* DisplayDate.swift */,
 				C8B7FBBF2A715BDE0026107C /* DisplayText.swift */,
+				C8F9C14B2B5EFF8B0052864F /* OrdoBar.swift */,
 				C872D32E2B2F3667006EE383 /* DisplayPropers.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		C8B7FBC42A7165B00026107C /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				C897C6F32A868F8500600131 /* Calendar */,
-				C8839F882A2267EB006348B5 /* Options.swift */,
+				C80655C82B5DACDE00051AF8 /* TabBar.swift */,
+				C8F9C1442B5DC9E90052864F /* PlaceholderList.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -393,6 +393,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		C8F9C1482B5EF5DD0052864F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C89F1BE92B4037FE00073084 /* CalendarDetails.swift */,
+				C8F9C1462B5EF47A0052864F /* InfoStructure.swift */,
+				C8ADAC462B60609D001EE81B /* VotivePropers.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		C8FE438E2B2A3557000A68C6 /* Server */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,6 +431,7 @@
 			);
 			name = "ordo-1962-widget";
 			packageProductDependencies = (
+				C8ADAC4E2B606EE2001EE81B /* OrderedCollections */,
 			);
 			productName = CalendarWidgetExtension;
 			productReference = C844736E2A9000A1005E2E9D /* ordo-1962-widget.appex */;
@@ -466,6 +477,7 @@
 			);
 			name = "ordo-1962-watch";
 			packageProductDependencies = (
+				C80655BE2B5D285200051AF8 /* OrderedCollections */,
 			);
 			productName = "Ordo62 Watch App";
 			productReference = C89213992A8FDCA2000ED8E1 /* 1962 Ordo.app */;
@@ -552,9 +564,12 @@
 			files = (
 				C8AD1EA72B2CB9C900631ACA /* Propers.swift in Sources */,
 				C84E92082B30F4480083A2FB /* Cache.swift in Sources */,
+				C80655C22B5D942600051AF8 /* RenderMarkdown.swift in Sources */,
 				C8AD1EB12B2CBA1100631ACA /* Ordo.swift in Sources */,
 				C85DEB4F2A34A9D5005269E3 /* Widget.swift in Sources */,
 				C84E920A2B30F44B0083A2FB /* ActiveData.swift in Sources */,
+				C80655C62B5DAC7C00051AF8 /* TabService.swift in Sources */,
+				C80ED7382B53ECE200FDCD51 /* DateFormatter.swift in Sources */,
 				C8AD1EAF2B2CBA0D00631ACA /* Season.swift in Sources */,
 				C8AD1EB32B2CBA1600631ACA /* Prayers.swift in Sources */,
 				C84E920C2B30F6A90083A2FB /* NetworkMonitor.swift in Sources */,
@@ -567,36 +582,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8F9C14A2B5EFF0C0052864F /* KeyboardShowing.swift in Sources */,
 				C8AE1DD92A2125D000B36A2C /* Tag.swift in Sources */,
 				C8AD1EAC2B2CB9FD00631ACA /* Ordo.swift in Sources */,
+				C8F9C14C2B5EFF8B0052864F /* OrdoBar.swift in Sources */,
 				C8FE43922B2A3EB8000A68C6 /* Cache.swift in Sources */,
 				C871588729F051C500E1F02D /* ErrorView.swift in Sources */,
 				C8186FBB2A2A544D0072AB13 /* PrayersView.swift in Sources */,
 				C8AE1DDB2A21260500B36A2C /* DisplayDate.swift in Sources */,
+				C8ADAC4D2B60651F001EE81B /* OrdoFeast.swift in Sources */,
+				C8F9C1452B5DC9E90052864F /* PlaceholderList.swift in Sources */,
 				C8AE1DE82A214B7D00B36A2C /* iCal.swift in Sources */,
 				C8C6CEFD2A8260610010EEDE /* Gradient.swift in Sources */,
-				C8AE1DDD2A21265200B36A2C /* Feast.swift in Sources */,
 				C871588529F0433400E1F02D /* OrdoView.swift in Sources */,
-				C8BDCC7B2B49C9DD00A81131 /* VotivePropers.swift in Sources */,
 				C8AD1EB62B2CCC0B00631ACA /* CommonView.swift in Sources */,
+				C8F9C1472B5EF47A0052864F /* InfoStructure.swift in Sources */,
 				C8AE1DE42A21275F00B36A2C /* SendEmail.swift in Sources */,
 				C8FE43902B2A359F000A68C6 /* ActiveData.swift in Sources */,
-				C84C543F2A0C016E006CEB35 /* Settings.swift in Sources */,
+				C84C543F2A0C016E006CEB35 /* SettingsView.swift in Sources */,
+				C8ADAC4B2B606406001EE81B /* OrdoToolbar.swift in Sources */,
+				C80655C12B5D942600051AF8 /* RenderMarkdown.swift in Sources */,
+				C80655C52B5DAC7C00051AF8 /* TabService.swift in Sources */,
 				C8B7FBC02A715BDE0026107C /* DisplayText.swift in Sources */,
 				C8A3596E29EF06220018F6B7 /* ContentView.swift in Sources */,
-				C89F1BEA2B4037FE00073084 /* CalendarInfo.swift in Sources */,
+				C89F1BEA2B4037FE00073084 /* CalendarDetails.swift in Sources */,
 				C837C76F2A3A569100178D00 /* NetworkMonitor.swift in Sources */,
 				C8AD1EA62B2CB9C100631ACA /* Propers.swift in Sources */,
 				C8CB0D792A478EEA00B2CB95 /* Extensions.swift in Sources */,
-				C8839F892A2267EB006348B5 /* Options.swift in Sources */,
 				C8AD1EAE2B2CBA0A00631ACA /* Season.swift in Sources */,
-				C897C6F52A868F9300600131 /* iCalStructs.swift in Sources */,
 				C872D32F2B2F3667006EE383 /* DisplayPropers.swift in Sources */,
 				C8AD1EAA2B2CB9E600631ACA /* Prayers.swift in Sources */,
+				C80ED7372B53ECCD00FDCD51 /* DateFormatter.swift in Sources */,
 				C84A18E22B21B0FC00D55834 /* LoadingView.swift in Sources */,
-				C8B61D142B3F71E000CF74CB /* HelpComponent.swift in Sources */,
-				C80883102A5DAE90001AC6E5 /* Row.swift in Sources */,
+				C8B61D142B3F71E000CF74CB /* InfoView.swift in Sources */,
+				C80883102A5DAE90001AC6E5 /* OrdoRow.swift in Sources */,
+				C8ADAC492B60627C001EE81B /* OrdoEventList.swift in Sources */,
+				C80655C92B5DACDE00051AF8 /* TabBar.swift in Sources */,
 				C8A3596C29EF06220018F6B7 /* App.swift in Sources */,
+				C8ADAC472B60609D001EE81B /* VotivePropers.swift in Sources */,
 				C8FE43942B2A45F7000A68C6 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,6 +628,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C80ED73A2B53ECEC00FDCD51 /* DateFormatter.swift in Sources */,
 				C84E920D2B30F7A30083A2FB /* NetworkMonitor.swift in Sources */,
 				C8AD1EB42B2CBA1600631ACA /* Prayers.swift in Sources */,
 				C84E920B2B30F44B0083A2FB /* ActiveData.swift in Sources */,
@@ -613,8 +637,10 @@
 				C8022BB32B2E5CB600921A27 /* Extensions.swift in Sources */,
 				C8AD1EA82B2CB9C900631ACA /* Propers.swift in Sources */,
 				C8D4DCC02A3610E50049C042 /* App.swift in Sources */,
+				C80655C32B5D942600051AF8 /* RenderMarkdown.swift in Sources */,
 				C84E92092B30F4480083A2FB /* Cache.swift in Sources */,
 				C8AD1EB02B2CBA0F00631ACA /* Season.swift in Sources */,
+				C80655C72B5DAC7C00051AF8 /* TabService.swift in Sources */,
 				C84E92072B30F4450083A2FB /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,7 +681,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -685,7 +711,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -854,7 +880,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -894,7 +920,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -926,7 +952,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.Watch";
 				PRODUCT_NAME = "1962 Ordo";
 				SDKROOT = watchos;
@@ -960,7 +986,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.Watch";
 				PRODUCT_NAME = "1962 Ordo";
 				SDKROOT = watchos;
@@ -1033,6 +1059,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C80655BE2B5D285200051AF8 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8B61D152B3F881E00CF74CB /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		C8ADAC4E2B606EE2001EE81B /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8B61D152B3F881E00CF74CB /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
 		C8B61D162B3F881E00CF74CB /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C8B61D152B3F881E00CF74CB /* XCRemoteSwiftPackageReference "swift-collections" */;

@@ -9,10 +9,8 @@ import SwiftUI
 
 struct Gradient: ViewModifier {
     init ( from: UIColor, to: UIColor ) {
-        let tabbar = UITabBarAppearance ( )
         let navbar = UINavigationBarAppearance ( )
 
-        tabbar.backgroundColor = .clear
         navbar.backgroundColor = .clear
 
         let imageRenderer = UIGraphicsImageRenderer ( size: .init ( width: 1, height: 1 ) )
@@ -25,7 +23,6 @@ struct Gradient: ViewModifier {
             gradientLayer.endPoint = .init ( x: 0.5, y: 1.0 )
             gradientLayer.render ( in: ctx.cgContext )
         }
-        tabbar.backgroundImage = gradientImage
         navbar.backgroundImage = gradientImage
 
         UINavigationBar.appearance ( ).standardAppearance = navbar
@@ -34,9 +31,6 @@ struct Gradient: ViewModifier {
         if #available(iOS 15.0, *) {
             UINavigationBar.appearance ( ).compactScrollEdgeAppearance = navbar
         }
-    
-        UITabBar.appearance ( ).standardAppearance = tabbar
-        UITabBar.appearance ( ).scrollEdgeAppearance = tabbar
     }
     
     func body ( content: Content ) -> some View {

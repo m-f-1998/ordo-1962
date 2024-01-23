@@ -53,10 +53,20 @@ class Cache {
     
     func CacheExists ( predicate: Predicate<OrdoYear> = #Predicate<OrdoYear> { year in true } ) throws -> Bool {
         let ordo = try GetOrdo ( predicate: predicate )
-        if ( try GetPrayers ( ) ) != nil {
-            return ordo.count == 6 && ordo [ 0 ].year == CurrentYear ( )
+        if let version = UserDefaults.standard.string ( forKey: "version" ) {
+            print ( "Version: \(version)" )
+            if !version.isEmpty && version == Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? "" {
+                if ( try GetPrayers ( ) ) != nil {
+                    return ordo.count == 6 && ordo [ 0 ].year == CurrentYear ( )
+                }
+            }
         }
         return false
+    }
+    
+    func CurrentCacheExists ( predicate: Predicate<OrdoYear> = #Predicate<OrdoYear> { year in true } ) throws -> Bool {
+        let ordo = try GetOrdo ( predicate: predicate )
+        return ordo.count > 0 && ordo [ 0 ].year == CurrentYear ( )
     }
 
     func DeleteAll ( ) throws {

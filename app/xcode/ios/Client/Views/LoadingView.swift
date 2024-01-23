@@ -8,52 +8,29 @@
 import SwiftUI
 
 struct LoadingView: View {
+    @EnvironmentObject var activeData: ActiveData
+
     var body: some View {
         NavigationStack {
             ZStack {
-                List ( Calendar.current.shortMonthSymbols, id: \.self ) { month in
-                    Section ( header: Spacer ( minLength: 0 ) ) {
-                        HStack ( spacing: 10 ) {
-                            DisplayDate ( day: "Mon", date: "1", month: month )
-                            VStack ( alignment: .leading ) {
-                                Feast ( data: [ CelebrationData ( ) ] )
-                                Tag (
-                                    title: String ( repeating: "*", count: 10 ),
-                                    colors: [ Color.green.opacity ( 0.5 ) ]
-                                )
-                                    .padding ( [ .trailing, .leading ], 2 )
-                            }
-                        }
-                            .padding ( [ .top, .bottom ], 8 )
+                PlaceholderList ( )
+                VStack ( spacing: 10 ) {
+                    ProgressView ( )
+                        .progressViewStyle ( .circular )
+                    if self.activeData.downloading {
+                        Text ( "Downloading Update (" + String ( self.activeData.percentage ) + "%)..." )
+                    } else {
+                        Text ( "Loading..." )
                     }
                 }
-                    .redacted ( reason: .placeholder )
-                    .scrollDisabled ( true )
-                LoadingIndicator ( )
+                    .padding ( )
+                    .tint ( .white )
+                    .foregroundStyle ( .white )
+                    .background ( .black )
+                    .cornerRadius ( 10 )
             }
                 .navigationTitle ( "1962 Liturgical Ordo" )
         }
             .SetGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
-    }
-}
-
-struct LoadingIndicator: View {
-    @EnvironmentObject var activeData: ActiveData
-
-    var body: some View {
-        VStack ( spacing: 10 ) {
-            ProgressView ( )
-                .progressViewStyle ( .circular )
-            if self.activeData.downloading {
-                Text ( "Downloading Update (" + String ( self.activeData.percentage ) + "%)..." )
-            } else {
-                Text ( "Loading..." )
-            }
-        }
-            .padding ( )
-            .tint ( .white )
-            .foregroundStyle ( .white )
-            .background ( .black )
-            .cornerRadius ( 10 )
     }
 }

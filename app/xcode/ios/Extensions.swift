@@ -7,39 +7,6 @@
 
 import SwiftUI
 
-// Format Date In Given Format
-func FormatDate ( time: Bool = false, short: Bool = false ) -> DateFormatter {
-    let formatter = DateFormatter ( )
-    if short {
-        formatter.dateFormat = "E dd MMMM yyyy"
-    } else if time {
-        formatter.dateFormat = "E dd MMM yyyy HH:mm"
-    } else {
-        formatter.dateFormat = "E dd MMM yyyy"
-    }
-    return formatter
-}
-
-// Current Month - Full Name
-func CurrentMonth ( ) -> String {
-    let today = Calendar.current.dateComponents ( [ .month ], from: .now )
-    return Calendar.current.shortMonthSymbols [ today.month! - 1 ]
-}
-
-// Current Day In Int (Array Index Is -1)
-func CurrentDay ( add: Int = 0 ) -> Int {
-    var dateComponent = DateComponents()
-    dateComponent.day = add
-    let today = Calendar.current.date ( byAdding: dateComponent, to: .now )
-    return Calendar.current.component ( .day, from: today! )
-}
-
-// Current Year As A String
-func CurrentYear ( ) -> Int {
-    return Calendar.current.component ( .year, from: .now )
-}
-
-// Colours by Tags
 extension Color {
     init? ( word: String ) {
         switch word {
@@ -56,7 +23,7 @@ extension Color {
         case "g":
             self = .green
         case "v":
-            self = .purple
+            self = Color ( red: 191/255, green: 139/255, blue: 1 )
         case "p":
             self = Color ( red: 2.55, green: 0, blue: 1.27 )
         default:
@@ -65,7 +32,6 @@ extension Color {
     }
 }
 
-// Color Blends
 extension LinearGradient {
     init? ( colors: [ Color ] = [ .green.opacity ( 0.3 ), .blue.opacity ( 0.5 ) ] ) {
         self = LinearGradient ( colors: colors, startPoint: .topLeading, endPoint: .bottomTrailing )

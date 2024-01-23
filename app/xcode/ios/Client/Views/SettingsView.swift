@@ -10,6 +10,7 @@ import AlertToast
 
 struct Settings: View {
     @ObservedObject private var ical_status: iCalStatus
+    
     @State private var locale: String = "General"
     private let locations: [ String ] = [
         "General"

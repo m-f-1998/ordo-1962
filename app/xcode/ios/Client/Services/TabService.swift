@@ -5,9 +5,24 @@
 //  Created by Matthew Frankland on 21/01/2024.
 //
 
-import Foundation
+import SwiftUI
 
-enum TabItems: Int, CaseIterable {
+class TabStateHandler: ObservableObject {
+    @Published var selected: Int = 0
+
+    private func IsSelected ( tab: Int ) -> Bool {
+        return selected == tab
+    }
+    
+    public func SchemeColor ( item: Int, isDarkMode: Bool ) -> Color {
+        if self.IsSelected ( tab: item ) {
+            return isDarkMode ? .white : .black
+        }
+        return .gray
+    }
+}
+
+enum TabService: Int, CaseIterable {
     case ordo = 0
     case prayer
     case settings

@@ -13,7 +13,7 @@ struct Ordo: View {
     var body: some View {
         List ( self.ordo, id: \.self ) { feast in
             VStack ( alignment: .leading, spacing: 3 ) {
-                Text ( "\(feast.date) \(CurrentMonth())" ).bold ( )
+                Text ( "\(feast.date.combined)" ).bold ( )
                 ForEach ( feast.celebrations, id: \.id ) { celebration in
                     Text ( celebration.title )
                     Text ( "Class \(celebration.rank)" )
@@ -64,16 +64,12 @@ struct ContentView: View {
             if self.activeData.loading {
                 ProgressView ( ).onAppear {
                     do {
-                        if try self.api.cache.CacheExists ( ) {
-                            let data = try self.api.cache.GetOrdo ( )
-                            if data.count > 0 {
-                                if let prayers = try self.api.cache.GetPrayers ( ) {
-                                    self.activeData.SetSuccess ( ordo: data, prayers: prayers )
-                                }
+                        if try self.api.cache.CurrentCacheExists ( ) {
+                            self.activeData.SetSuccess ( ordo: try self.api.cache.GetOrdo ( ), prayers: nil )
+                        } else {
+                            Task {
+                                self.activeData.SetSuccess ( ordo: [ try await self.api.GetCurrent ( ) ], prayers: nil )
                             }
-                        }
-                        Task {
-                            try await self.api.UpdateCache ( )
                         }
                     } catch {
                         print ( error )

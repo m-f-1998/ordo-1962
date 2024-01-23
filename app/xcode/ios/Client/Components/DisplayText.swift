@@ -13,15 +13,11 @@ struct DisplayText: View {
     var body: some View {
         GeometryReader { proxy in
             ScrollView ( .vertical, showsIndicators: false ) {
-                Text ( try! AttributedString ( markdown: "\n" + self.text + "\n", options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace ) ) )
-                    .lineSpacing ( 10 )
-                    .font ( .system ( .body, design: .monospaced ) )
+                RenderMarkdown ( text: self.text )
                     .frame ( minHeight: proxy.size.height )
             }
                 .multilineTextAlignment ( .center )
                 .frame ( maxWidth: .infinity, maxHeight: proxy.size.height )
         }
-            .navigationBarTitleDisplayMode ( .inline )
-            .padding ( [ .leading, .trailing ], 15 )
     }
 }

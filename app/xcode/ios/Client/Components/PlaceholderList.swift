@@ -7,8 +7,25 @@
 
 import SwiftUI
 
-struct PlaceholderView: View {
+struct PlaceholderList: View {
     var body: some View {
-        
+        List ( Calendar.current.shortMonthSymbols, id: \.self ) { month in
+            Section ( header: Spacer ( minLength: 0 ) ) {
+                HStack ( spacing: 10 ) {
+                    DisplayDate ( date: DateInfo ( ) )
+                    VStack ( alignment: .leading ) {
+                        OrdoFeast ( data: [ CelebrationData ( ) ] )
+                        Tag (
+                            title: String ( repeating: "*", count: 10 ),
+                            colors: [ .green.opacity ( 0.5 ) ]
+                        )
+                            .padding ( [ .trailing, .leading ], 2 )
+                    }
+                }
+                    .padding ( [ .top, .bottom ], 8 )
+            }
+        }
+            .redacted ( reason: .placeholder )
+            .scrollDisabled ( true )
     }
 }
