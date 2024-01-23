@@ -8,6 +8,10 @@
 import SwiftUI
 import EventKitUI
 
+enum iCalError: Error {
+    case calendar, duplicate
+}
+
 class iCalStatus: ObservableObject {
     var current_ordo: OrdoYear
     private let title: String = "Liturgical Ordo (1962)"

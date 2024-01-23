@@ -7,7 +7,7 @@
 
 import Foundation
 
-var calendar_info = [
+var calendar_details = [
     "External Solemnities": """
     Feasts are not transferred in the 1962 Missal unlike the Ordinary Form of the Roman Liturgy; it is obligatory to celebrate both the Mass and Divine Office on the traditional days. The “external solemnity” is a pastoral provision which may be made, but is not obligatory, in cases where a reasonable number of the faithful are unable to attend the feast on the day itself.
 

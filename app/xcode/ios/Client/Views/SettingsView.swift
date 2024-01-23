@@ -10,7 +10,11 @@ import AlertToast
 
 struct Settings: View {
     @ObservedObject private var ical_status: iCalStatus
-    
+    @State private var locale: String = "General"
+    private let locations: [ String ] = [
+        "General"
+    ]
+
     init ( current_ordo: OrdoYear ) {
         self.ical_status = iCalStatus ( current_ordo: current_ordo )
     }
@@ -18,7 +22,13 @@ struct Settings: View {
     var body: some View {
         NavigationStack {
             List {
-                Options ( )
+                Section ( header: Text ( "App Options" ), footer: Text ( "Coming Soon" ) ) {
+                    Picker ( "Localization", selection: $locale ) {
+                        ForEach ( self.locations, id: \.self ) {
+                            Text ( $0 )
+                        }
+                    }
+                }
                 Button {
                     self.ical_status.loading = true
                     Task {
