@@ -15,12 +15,12 @@ struct Info: Hashable {
 
 var InfoStructure: [ Info ] = [
     Info (
-        header: "Votive Masses of Particular Piety",
-        footer: "",
+        header: "Of Particular Piety",
+        footer: "For use during First Thursday; Friday; or Saturday Devotions",
         data: votive_piety
     ),
     Info (
-        header: "Recommended Votive Masses per Day",
+        header: "The Most Fitting Votive Masses for Particular Days of the Week",
         footer: "Monday",
         data: votive_monday
     ),
@@ -46,7 +46,7 @@ var InfoStructure: [ Info ] = [
     ),
     Info (
         header: "",
-        footer: "Votive Masses of Our Lady",
+        footer: "Of Our Lady (Saturday)",
         data: votive_our_lady
     ),
     Info (

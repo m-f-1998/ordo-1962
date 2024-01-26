@@ -70,14 +70,11 @@ class Cache {
     }
 
     func DeleteAll ( ) throws {
-        let descriptor = FetchDescriptor <OrdoYear> ( )
-        try self.context.fetch ( descriptor ).forEach { res in
-            print ( "Delete Ordo Data..." )
-            self.context.delete ( res )
-        }
-        if let prayers = try GetPrayers ( ) {
-            print ( "Delete Prayers Data..." )
-            self.context.delete ( prayers )
+        do {
+            try self.context.delete ( model: PrayerLanguageData.self )
+            try self.context.delete ( model: OrdoYear.self )
+        } catch {
+            print ( "Failed to clear all data" )
         }
         self.Save ( )
     }
@@ -94,8 +91,8 @@ class Cache {
         do {
             try self.context.save()
         } catch {
-            print ( error )
             print ( "Could Not Save Cache State" )
+            print ( error )
         }
     }
 }

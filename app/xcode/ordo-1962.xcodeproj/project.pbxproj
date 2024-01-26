@@ -669,7 +669,7 @@
 				CODE_SIGN_ENTITLEMENTS = "widget/widget-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = widget/Info.plist;
@@ -699,7 +699,7 @@
 				CODE_SIGN_ENTITLEMENTS = "widget/widget-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = widget/Info.plist;
@@ -858,7 +858,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ios/app-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
@@ -899,7 +899,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ios/app-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
@@ -938,7 +938,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ordo-1962-watch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"watchos/Preview Content\"";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
@@ -972,7 +972,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ordo-1962-watch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"watchos/Preview Content\"";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
