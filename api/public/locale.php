@@ -50,7 +50,7 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" ) {
       if ( !in_array ( $row [ "locale" ], $res [ "feasts" ] [ "locale" ] [ $row [ "country" ] ] [ "dioceses" ] ) ) {
 
         $res [ "feasts" ] [ "locale" ] [ $row [ "country" ] ] [ "locale" ] [ $row [ "locale" ] ] = array ( );
-        array_push ( $res [ "feasts" ] [ "locale" ] [ $row [ "country" ] ] [ "dioceses" ] [ "locale" ], $row [ "locale" ] );
+        array_push ( $res [ "feasts" ] [ "locale" ] [ $row [ "country" ] ] [ "dioceses" ], $row [ "locale" ] );
       
       }
 
