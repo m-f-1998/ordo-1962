@@ -19,7 +19,7 @@ class Cache {
     init ( ) {
         do {
             let configuration = ModelConfiguration ( groupContainer: .identifier ( "group.mfrankland.ordo-62.contents" ) )
-            self.container = try ModelContainer ( for: OrdoYear.self, PrayerLanguageData.self, configurations: configuration )
+            self.container = try ModelContainer ( for: OrdoYear.self, PrayerLanguageData.self, LocaleOrdo.self, configurations: configuration )
             self.context = ModelContext ( container )
         } catch {
             print ( error )
@@ -47,6 +47,15 @@ class Cache {
         return nil
     }
     
+    func GetLocale ( ) throws -> LocaleOrdo?  {
+        let descriptor = FetchDescriptor <LocaleOrdo> ( )
+        let data = try self.context.fetch ( descriptor )
+        if data.count > 0 {
+            return data [ 0 ]
+        }
+        return nil
+    }
+    
     func GetContainer ( ) -> ModelContainer {
         return container
     }
@@ -56,8 +65,10 @@ class Cache {
         if let version = UserDefaults.standard.string ( forKey: "version" ) {
             print ( "Version: \(version)" )
             if !version.isEmpty && version == Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? "" {
-                if ( try GetPrayers ( ) ) != nil {
-                    return ordo.count == 6 && ordo [ 0 ].year == CurrentYear ( )
+                if try GetPrayers ( ) != nil {
+                    if try GetLocale ( ) != nil {
+                        return ordo.count == 6 && ordo [ 0 ].year == CurrentYear ( )
+                    }
                 }
             }
         }
@@ -73,6 +84,7 @@ class Cache {
         do {
             try self.context.delete ( model: PrayerLanguageData.self )
             try self.context.delete ( model: OrdoYear.self )
+            try self.context.delete ( model: LocaleOrdo.self )
         } catch {
             print ( "Failed to clear all data" )
         }
@@ -85,6 +97,10 @@ class Cache {
     
     func Insert ( ordo: OrdoYear ) {
         self.context.insert ( ordo )
+    }
+    
+    func Insert ( locale: LocaleOrdo ) {
+        self.context.insert ( locale )
     }
     
     func Save ( ) {

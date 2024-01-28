@@ -7,23 +7,21 @@
 
 import SwiftUI
 import EventKitUI
+import AlertToast
 
 enum iCalError: Error {
     case calendar, duplicate
 }
 
-class iCalStatus: ObservableObject {
+class iCal {
     var current_ordo: OrdoYear
     private let title: String = "Liturgical Ordo (1962)"
     private let store: EKEventStore = EKEventStore ( )
-    
-    @Published var error: Bool = false
-    @Published var loading: Bool = false
-    @Published var success: Bool = false
-    @Published var message: String = ""
-    
-    init ( current_ordo: OrdoYear ) {
+    @ObservedObject public var status: AlertViewModel
+
+    init ( current_ordo: OrdoYear, alert: AlertViewModel ) {
         self.current_ordo = current_ordo
+        self.status = alert
     }
 
     private func Permissions ( completion: @escaping ( Bool ) -> Void ) {
@@ -57,16 +55,7 @@ class iCalStatus: ObservableObject {
         return calendar
     }
     
-    private func SetStatus ( error: Bool = false, loading: Bool = false, success: Bool = false, message: String = "" ) {
-        DispatchQueue.main.async {
-            self.error = error
-            self.loading = loading
-            self.success = success
-            self.message = message
-        }
-    }
-    
-    func GenerateCalendar ( ) async {
+    func GenerateCalendar ( completion: @escaping ( ) -> Void ) {
         self.Permissions ( ) { permissions in
             print ( "EventKit Permissions: \(permissions)" )
             if permissions {
@@ -80,7 +69,7 @@ class iCalStatus: ObservableObject {
                                     let event = EKEvent ( eventStore: self.store )
                                     event.title = feast.title + " (Class \(String(feast.rank)))"
                                     event.isAllDay = true
-                                    event.startDate = FormatDate ( date: .short, time: .none ).date ( from: "\(day.date) \(MonthName) \(CurrentYear ( ))" )
+                                    event.startDate = FormatDate ( date: .short, time: .none ).date ( from: "\(day.date.day) \(day.date.month) \(CurrentYear ( ))" )
                                     event.endDate = event.startDate
                                     event.notes = feast.commemorations.map { ( x ) -> String in
                                         return "Commemoration Today: " + x.title
@@ -90,15 +79,27 @@ class iCalStatus: ObservableObject {
                                 }
                             }
                         }
-                        self.SetStatus ( success: true, message: "iCal Successfully Created" )
+                        DispatchQueue.main.async {
+                            self.status.alertToast = AlertToast ( type: .complete ( .green ), title: "iCal Successfully Created" )
+                            completion ( )
+                        }
                     }
                 } catch iCalError.duplicate {
-                    self.SetStatus ( error: true, message: "iCal Already Exists" )
+                    DispatchQueue.main.async {
+                        self.status.alertToast = AlertToast ( type: .error ( .red ), title: "iCal Already Exists" )
+                        completion ( )
+                    }
                 } catch {
-                    self.SetStatus ( error: true, message: "iCal Could Not Be Saved" )
+                    DispatchQueue.main.async {
+                        self.status.alertToast = AlertToast ( type: .error ( .red ), title: "iCal Could Not Be Saved" )
+                        completion ( )
+                    }
                 }
             } else {
-                self.SetStatus ( error: true, message: "Calendar Permissions Failed" )
+                DispatchQueue.main.async {
+                    self.status.alertToast = AlertToast ( type: .error ( .red ), title: "Calendar Permissions Failed" )
+                    completion ( )
+                }
             }
         }
     }

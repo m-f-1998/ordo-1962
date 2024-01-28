@@ -65,10 +65,10 @@ struct ContentView: View {
                 ProgressView ( ).onAppear {
                     do {
                         if try self.api.cache.CurrentCacheExists ( ) {
-                            self.activeData.SetSuccess ( ordo: try self.api.cache.GetOrdo ( ), prayers: nil )
+                            self.activeData.SetSuccess ( ordo: try self.api.cache.GetOrdo ( ), locale: try self.api.cache.GetLocale ( ), prayers: nil )
                         } else {
                             Task {
-                                self.activeData.SetSuccess ( ordo: [ try await self.api.GetCurrent ( ) ], prayers: nil )
+                                self.activeData.SetSuccess ( ordo: [ try await self.api.GetCurrent ( ) ], locale: try self.api.cache.GetLocale ( ), prayers: nil )
                             }
                         }
                     } catch {

@@ -11,6 +11,7 @@ import SwiftUI
 struct OrdoiOS: App {
     @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
     @ObservedObject var activeData: ActiveData
+    @ObservedObject var tabStateHanlder: TabStateHandler = TabStateHandler ( )
     @State var api: API
     
     init ( ) {
@@ -24,6 +25,7 @@ struct OrdoiOS: App {
             ContentView ( api: api )
         }
         .environmentObject ( self.activeData )
+        .environmentObject ( self.tabStateHanlder )
         .modelContainer ( self.api.cache.GetContainer ( ) )
     }
 }

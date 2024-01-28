@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OrderedCollections
 
 class ActiveData: ObservableObject {
     @Published private(set) var loading: Bool = true
@@ -16,11 +17,13 @@ class ActiveData: ObservableObject {
     public private(set) var last_err = ""
     public private(set) var ordo: [ OrdoYear ] = []
     public private(set) var prayers: PrayerLanguageData? = nil
+    public private(set) var locale: LocaleOrdo? = nil
 
-    func SetSuccess ( ordo: [ OrdoYear ], prayers: PrayerLanguageData? ) {
+    func SetSuccess ( ordo: [ OrdoYear ], locale: LocaleOrdo?, prayers: PrayerLanguageData? ) {
         DispatchQueue.main.async {
             self.ordo = ordo
             self.prayers = prayers
+            self.locale = locale
             self.SetStatus ( )
         }
     }
@@ -45,6 +48,18 @@ class ActiveData: ObservableObject {
             return self.ordo [ 0 ].getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ).date.combined
         }
         return ""
+    }
+    
+    func GetCountries ( ) -> OrderedSet<String> {
+        return OrderedSet ( locale!.feasts.countries )
+    }
+    
+    func GetDioceses ( country: String ) -> OrderedSet<String> {
+        return OrderedSet ( locale!.feasts.locale [ country ]!.dioceses )
+    }
+    
+    func GetDioceseLocale ( country: String, diocese: String ) -> [ LocaleData ] {
+        return self.locale!.feasts.locale [ country ]!.locale [ diocese ]!
     }
     
     func GetYear ( year: Int = CurrentYear ( ) ) -> OrdoYear? {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CommonView: View {
-    @ObservedObject var tabStateHanlder: TabStateHandler = TabStateHandler ( )
+    @EnvironmentObject private var tabStateHanlder: TabStateHandler
     @EnvironmentObject var activeData: ActiveData
     @Environment(\.colorScheme) var colorScheme
 
@@ -38,7 +38,6 @@ struct CommonView: View {
             }
                 .tint ( colorScheme == .dark ? .white : .black )
             TabBar ( )
-                .environmentObject ( tabStateHanlder )
         }
         .background ( LinearGradient ( colors: [ .green.opacity ( 0.5 ), .blue.opacity( 0.3 ) ] )?.ignoresSafeArea ( ) )
     }

@@ -22,7 +22,7 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" && isset ( $_GET [ "year" ] ) ) {
 
     }
 
-    $cache = "cache" . DIRECTORY_SEPARATOR . md5 ( "ordo-" . strval ( $year ) ) . ".json";
+    $cache = dirname ( __DIR__ ) . '/../../private/ordo-1962/cache/v1.3/' . md5 ( "ordo-" . strval ( $year ) ) . ".json";
 
     if ( !$update && file_exists ( $cache ) ) {
 

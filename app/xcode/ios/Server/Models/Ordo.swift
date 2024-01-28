@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import OrderedCollections
 
-@Model class OrdoYear: Decodable, Hashable, Identifiable {
+@Model class OrdoYear: Codable, ObservableObject, Hashable, Identifiable {
     let id: String = UUID ( ).uuidString
     public private(set) var ordo: [ [ OrdoDay ] ]
     public private(set) var year: Int
@@ -24,6 +24,12 @@ import OrderedCollections
         let values = try decoder.container ( keyedBy: CodingKeys.self )
         self.year = try values.decode ( Int.self, forKey: .Year )
         self.ordo = try values.decode ( Array<Array<OrdoDay>>.self, forKey: .Ordo )
+    }
+    
+    public func encode ( to encoder: Encoder ) throws {
+        var container = encoder.container ( keyedBy: CodingKeys.self )
+        try container.encode ( ordo, forKey: .Ordo )
+        try container.encode ( year, forKey: .Year )
     }
     
     private enum CodingKeys: String, CodingKey {

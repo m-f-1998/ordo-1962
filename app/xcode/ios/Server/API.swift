@@ -22,6 +22,11 @@ class API {
 
     func UpdateCache ( ) async throws {
         try cache.DeleteAll ( )
+        let locale = try await LocaleRequest ( )
+        DispatchQueue.main.async {
+            self.activeData.SetDownload ( download: 4 )
+        }
+
         let prayers = try await PrayerRequest ( )
         DispatchQueue.main.async {
             self.activeData.SetDownload ( download: 8 )
@@ -38,7 +43,7 @@ class API {
         let version = Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? ""
         UserDefaults.standard.set ( version, forKey: "version" )
         await MainActor.run { [ ordo, prayers ] in
-            self.activeData.SetSuccess ( ordo: ordo, prayers: prayers )
+            self.activeData.SetSuccess ( ordo: ordo, locale: locale, prayers: prayers )
             WidgetCenter.shared.reloadAllTimelines ( )
         }
     }
@@ -67,9 +72,16 @@ class API {
         cache.Insert ( prayers: json )
         return json
     }
+    
+    private func LocaleRequest ( ) async throws -> LocaleOrdo {
+        let data = try await self.HTTP ( queries: [], url: "locale.php" )
+        let json: LocaleOrdo = try self.Decode ( data: data, type: LocaleOrdo.self )
+        cache.Insert ( locale: json )
+        return json
+    }
 
     private func HTTP ( queries: [ URLQueryItem ], url: String ) async throws -> Data {
-        var body: URLComponents = URLComponents ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.2.2/\(url)" )!
+        var body: URLComponents = URLComponents ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.3/\(url)" )!
         body.queryItems = queries
         body.percentEncodedQuery = body.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         
