@@ -21,8 +21,8 @@ We also have plans for a rolling updates:
 - A Wider Variety of Languages
 
 <div>
-<img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-1.png" width="200">
-<img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-2.png" width="200">
-<img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-3.png" width="200">
-<img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iphone-xs/iphone-xs-4.png" width="200">
+<img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iOS%20Phones%20-%206.5/01.png" width="200">
+<img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iOS%20Phones%20-%206.5/02.png" width="200">
+<img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iOS%20Phones%20-%206.5/03.png" width="200">
+<img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iOS%20Phones%20-%206.5/04.png" width="200">
 </div>
