@@ -11,14 +11,8 @@ A Traditional Catholic Liturgical Calendar for the Holy Sacrifice of the Mass ac
 - Options Information for Feasts
 - Changeable Years
 - Propers of the Mass
-
-We also have plans for a rolling updates:
-
-- Android Implementation
 - Localization Support
 - Votive Masses
-- An Increased Quantity of Prayers
-- A Wider Variety of Languages
 
 <div>
 <img src="https://github.com/m-f-1998/ordo-1962/blob/main/app-store-images/iOS%20Phones%20-%206.5/01.png" width="200">
