@@ -190,3 +190,4 @@ api/private/
 composer.lock
 DerivedData/
 GoogleService-Info.plist
+app/ionic/android/*
