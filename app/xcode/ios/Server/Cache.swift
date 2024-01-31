@@ -1,114 +1,86 @@
-//
-//  Cache.swift
-//  ordo-1962
-//
-//  Created by Matthew Frankland on 13/12/2023.
-//
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
-import SwiftUI
-import SwiftData
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-enum CacheStatus {
-    case valid ( OrdoYear, PrayerLanguageData ), deleted, missing
-}
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-class Cache {
-    private var container: ModelContainer!
-    private var context: ModelContext!
-        
-    init ( ) {
-        do {
-            let configuration = ModelConfiguration ( groupContainer: .identifier ( "group.mfrankland.ordo-62.contents" ) )
-            self.container = try ModelContainer ( for: OrdoYear.self, PrayerLanguageData.self, LocaleOrdo.self, configurations: configuration )
-            self.context = ModelContext ( container )
-        } catch {
-            print ( error )
-            print ( "Error: Cache Couldn't Be Created" )
-        }
-    }
-    
-    func GetOrdo ( predicate: Predicate<OrdoYear> = #Predicate<OrdoYear> { year in true } ) throws -> [ OrdoYear ] {
-        let descriptor = FetchDescriptor <OrdoYear> ( predicate: predicate, sortBy: [ SortDescriptor ( \.year ) ] )
-        let data = try self.context.fetch ( descriptor )
-        if data.count > 0 && data [ 0 ].year == CurrentYear ( ) {
-            if Calendar.current.dateComponents ( [ .month ], from: data [ 0 ].date, to: Date ( ) ).month ?? 0 < 2 {
-                return data
-            }
-        }
-        return [ ]
-    }
-    
-    func GetPrayers ( ) throws -> PrayerLanguageData? {
-        let descriptor = FetchDescriptor <PrayerLanguageData> ( )
-        let data = try self.context.fetch ( descriptor )
-        if data.count > 0 {
-            return data [ 0 ]
-        }
-        return nil
-    }
-    
-    func GetLocale ( ) throws -> LocaleOrdo?  {
-        let descriptor = FetchDescriptor <LocaleOrdo> ( )
-        let data = try self.context.fetch ( descriptor )
-        if data.count > 0 {
-            return data [ 0 ]
-        }
-        return nil
-    }
-    
-    func GetContainer ( ) -> ModelContainer {
-        return container
-    }
-    
-    func CacheExists ( predicate: Predicate<OrdoYear> = #Predicate<OrdoYear> { year in true } ) throws -> Bool {
-        let ordo = try GetOrdo ( predicate: predicate )
-        if let version = UserDefaults.standard.string ( forKey: "version" ) {
-            print ( "Version: \(version)" )
-            if !version.isEmpty && version == Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? "" {
-                if try GetPrayers ( ) != nil {
-                    if try GetLocale ( ) != nil {
-                        return ordo.count == 6 && ordo [ 0 ].year == CurrentYear ( )
-                    }
-                }
-            }
-        }
-        return false
-    }
-    
-    func CurrentCacheExists ( predicate: Predicate<OrdoYear> = #Predicate<OrdoYear> { year in true } ) throws -> Bool {
-        let ordo = try GetOrdo ( predicate: predicate )
-        return ordo.count > 0 && ordo [ 0 ].year == CurrentYear ( )
+public class Cache {
+    private static final String ORDO_SET_KEY = "ordo_set";
+    private static final String PRAYERS_KEY = "prayers";
+    private static final String LOCALE_KEY = "locale";
+    private static final String VERSION_KEY = "version";
+
+    private final SharedPreferences preferences;
+    private final Gson gson;
+
+    public Cache(Context context) {
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.gson = new Gson();
     }
 
-    func DeleteAll ( ) throws {
-        do {
-            try self.context.delete ( model: PrayerLanguageData.self )
-            try self.context.delete ( model: OrdoYear.self )
-            try self.context.delete ( model: LocaleOrdo.self )
-        } catch {
-            print ( "Failed to clear all data" )
-        }
-        self.Save ( )
+    public List<OrdoYear> getOrdo() {
+        String ordoSetString = preferences.getString(ORDO_SET_KEY, "");
+        Type ordoListType = new TypeToken<List<OrdoYear>>() {}.getType();
+        return gson.fromJson(ordoSetString, ordoListType);
     }
 
-    func Insert ( prayers: PrayerLanguageData ) {
-        self.context.insert ( prayers )
+    public PrayerLanguageData getPrayers() {
+        String prayersJson = preferences.getString(PRAYERS_KEY, "");
+        return gson.fromJson(prayersJson, PrayerLanguageData.class);
     }
-    
-    func Insert ( ordo: OrdoYear ) {
-        self.context.insert ( ordo )
+
+    public LocaleOrdo getLocale() {
+        String localeJson = preferences.getString(LOCALE_KEY, "");
+        return gson.fromJson(localeJson, LocaleOrdo.class);
     }
-    
-    func Insert ( locale: LocaleOrdo ) {
-        self.context.insert ( locale )
-    }
-    
-    func Save ( ) {
-        do {
-            try self.context.save()
-        } catch {
-            print ( "Could Not Save Cache State" )
-            print ( error )
+
+    public boolean cacheExists() {
+        List<OrdoYear> ordo = getOrdo();
+        String version = preferences.getString(VERSION_KEY, "");
+        if (!version.isEmpty() && version.equals("1.0")) { // Replace with actual implementation
+            return ordo.size() == 6 && ordo.get(0).getYear() == getCurrentYear();
         }
+        return false;
+    }
+
+    public boolean currentCacheExists() {
+        List<OrdoYear> ordo = getOrdo();
+        return ordo.size() > 0 && ordo.get(0).getYear() == getCurrentYear();
+    }
+
+    public void deleteAll() {
+        preferences.edit().remove(ORDO_SET_KEY).remove(PRAYERS_KEY).remove(LOCALE_KEY).apply();
+    }
+
+    public void insertPrayers(PrayerLanguageData prayers) {
+        String prayersJson = gson.toJson(prayers);
+        preferences.edit().putString(PRAYERS_KEY, prayersJson).apply();
+    }
+
+    public void insertOrdo(OrdoYear ordo) {
+        List<OrdoYear> ordoList = getOrdo();
+        ordoList.add(ordo);
+        String ordoSetString = gson.toJson(ordoList);
+        preferences.edit().putString(ORDO_SET_KEY, ordoSetString).apply();
+    }
+
+    public void insertLocale(LocaleOrdo locale) {
+        String localeJson = gson.toJson(locale);
+        preferences.edit().putString(LOCALE_KEY, localeJson).apply();
+    }
+
+    public void save() {
+        // No need to implement save in SharedPreferences, as data is updated in real-time
+    }
+
+    private int getCurrentYear() {
+        // Implement the logic to get the current year
+        return 2024; // Example: replace with actual implementation
     }
 }

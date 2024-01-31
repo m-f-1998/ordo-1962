@@ -11,9 +11,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mfrankland.ordo62.ui.theme._1962LiturgicalOrdoTheme
+import Server.API
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Perform the network request using coroutines
+        Thread {
+            try {
+                val api = API(Server.ActiveData(), applicationContext)
+            } catch (e: Exception) {
+                // Handle network failure or any exception
+                println(e)
+            }
+        }.start()
+
         super.onCreate(savedInstanceState)
         setContent {
             _1962LiturgicalOrdoTheme {
