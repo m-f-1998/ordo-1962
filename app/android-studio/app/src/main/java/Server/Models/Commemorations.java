@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.UUID;
 
-public class CommemorationData {
+public class Commemorations {
     @SerializedName("id")
     private String id;
 
@@ -21,7 +21,7 @@ public class CommemorationData {
     @SerializedName("propers")
     private List<Propers> propers;
 
-    public CommemorationData(String title, int rank, String colors, List<Propers> propers) {
+    public Commemorations(String title, int rank, String colors, List<Propers> propers) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
         this.rank = rank;
@@ -49,7 +49,7 @@ public class CommemorationData {
         return propers;
     }
 
-    public boolean equals(CommemorationData lhs, CommemorationData rhs) {
+    public boolean equals(Commemorations lhs, Commemorations rhs) {
         return lhs.id.equals(rhs.id);
     }
 

@@ -45,7 +45,6 @@
 		C85DEB512A34A9D7005269E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C85DEB502A34A9D7005269E3 /* Assets.xcassets */; };
 		C87086772B66C80F009A9796 /* AdditionalMassPropers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87086762B66C80F009A9796 /* AdditionalMassPropers.swift */; };
 		C87086792B66C832009A9796 /* LocalFeast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87086782B66C832009A9796 /* LocalFeast.swift */; };
-		C870867B2B66C964009A9796 /* CountryFeastDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C870867A2B66C964009A9796 /* CountryFeastDates.swift */; };
 		C871588529F0433400E1F02D /* OrdoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C871588429F0433400E1F02D /* OrdoView.swift */; };
 		C871588729F051C500E1F02D /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C871588629F051C500E1F02D /* ErrorView.swift */; };
 		C872D32F2B2F3667006EE383 /* DisplayPropers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C872D32E2B2F3667006EE383 /* DisplayPropers.swift */; };
@@ -88,7 +87,8 @@
 		C8D4DCC42A3610E70049C042 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D4DCC32A3610E70049C042 /* Assets.xcassets */; };
 		C8D4DCC72A3610E70049C042 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D4DCC62A3610E70049C042 /* Preview Assets.xcassets */; };
 		C8D4DCCF2A3616D90049C042 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8D4DCCE2A3616D90049C042 /* SwiftUI.framework */; };
-		C8F9C1452B5DC9E90052864F /* PlaceholderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9C1442B5DC9E90052864F /* PlaceholderList.swift */; };
+		C8DE94D42B6ADCD6002FB5E6 /* CountryFeastDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DE94D32B6ADCD6002FB5E6 /* CountryFeastDates.swift */; };
+		C8DE94D62B6ADCE5002FB5E6 /* PlaceholderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DE94D52B6ADCE5002FB5E6 /* PlaceholderList.swift */; };
 		C8F9C1472B5EF47A0052864F /* InfoStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9C1462B5EF47A0052864F /* InfoStructure.swift */; };
 		C8F9C14A2B5EFF0C0052864F /* KeyboardShowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9C1492B5EFF0C0052864F /* KeyboardShowing.swift */; };
 		C8F9C14C2B5EFF8B0052864F /* OrdoBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9C14B2B5EFF8B0052864F /* OrdoBar.swift */; };
@@ -170,7 +170,6 @@
 		C86842562B33988500A1A95F /* ordo-1962-watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ordo-1962-watch.entitlements"; sourceTree = "<group>"; };
 		C87086762B66C80F009A9796 /* AdditionalMassPropers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalMassPropers.swift; sourceTree = "<group>"; };
 		C87086782B66C832009A9796 /* LocalFeast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeast.swift; sourceTree = "<group>"; };
-		C870867A2B66C964009A9796 /* CountryFeastDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CountryFeastDates.swift; path = "../New Group/CountryFeastDates.swift"; sourceTree = "<group>"; };
 		C871588429F0433400E1F02D /* OrdoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoView.swift; sourceTree = "<group>"; };
 		C871588629F051C500E1F02D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		C872D32E2B2F3667006EE383 /* DisplayPropers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPropers.swift; sourceTree = "<group>"; };
@@ -206,10 +205,11 @@
 		C8D4DCC32A3610E70049C042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8D4DCC62A3610E70049C042 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C8D4DCCE2A3616D90049C042 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS9.4.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
+		C8DE94D32B6ADCD6002FB5E6 /* CountryFeastDates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryFeastDates.swift; sourceTree = "<group>"; };
+		C8DE94D52B6ADCE5002FB5E6 /* PlaceholderList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderList.swift; sourceTree = "<group>"; };
 		C8DF2F002A900FAE001F4D7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8DF2F022A90161E001F4D7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8ECAF6B2B3A269A00788D68 /* ordo-1962-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ordo-1962-Info.plist"; sourceTree = "<group>"; };
-		C8F9C1442B5DC9E90052864F /* PlaceholderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaceholderList.swift; path = "../New Group1/PlaceholderList.swift"; sourceTree = "<group>"; };
 		C8F9C1462B5EF47A0052864F /* InfoStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStructure.swift; sourceTree = "<group>"; };
 		C8F9C1492B5EFF0C0052864F /* KeyboardShowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShowing.swift; sourceTree = "<group>"; };
 		C8F9C14B2B5EFF8B0052864F /* OrdoBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoBar.swift; sourceTree = "<group>"; };
@@ -264,7 +264,7 @@
 		C870867C2B66C97C009A9796 /* InfoView */ = {
 			isa = PBXGroup;
 			children = (
-				C870867A2B66C964009A9796 /* CountryFeastDates.swift */,
+				C8DE94D32B6ADCD6002FB5E6 /* CountryFeastDates.swift */,
 				C87086762B66C80F009A9796 /* AdditionalMassPropers.swift */,
 				C87086782B66C832009A9796 /* LocalFeast.swift */,
 			);
@@ -282,7 +282,7 @@
 		C870867E2B66C9AF009A9796 /* LoadingView */ = {
 			isa = PBXGroup;
 			children = (
-				C8F9C1442B5DC9E90052864F /* PlaceholderList.swift */,
+				C8DE94D52B6ADCE5002FB5E6 /* PlaceholderList.swift */,
 			);
 			path = LoadingView;
 			sourceTree = "<group>";
@@ -345,8 +345,8 @@
 		C8AD1EA12B2C59CD00631ACA /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				C8DE94D22B6ADC33002FB5E6 /* Style */,
 				C871588329F042F000E1F02D /* Views */,
-				C8AD1EA32B2C59E800631ACA /* Style */,
 				C8F9C1482B5EF5DD0052864F /* Data */,
 				C8AD1EA22B2C59DB00631ACA /* Services */,
 				C8B7FBC32A7165140026107C /* Components */,
@@ -367,14 +367,6 @@
 				C8589D5C2B6644DF00C55C69 /* LocalPushNoifications.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		C8AD1EA32B2C59E800631ACA /* Style */ = {
-			isa = PBXGroup;
-			children = (
-				C8C6CEFC2A8260610010EEDE /* Gradient.swift */,
-			);
-			name = Style;
 			sourceTree = "<group>";
 		};
 		C8AD1EA42B2CB9AD00631ACA /* Models */ = {
@@ -443,6 +435,14 @@
 				C8D4DCC62A3610E70049C042 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C8DE94D22B6ADC33002FB5E6 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				C8C6CEFC2A8260610010EEDE /* Gradient.swift */,
+			);
+			path = Style;
 			sourceTree = "<group>";
 		};
 		C8F9C1482B5EF5DD0052864F /* Data */ = {
@@ -644,13 +644,13 @@
 				C8186FBB2A2A544D0072AB13 /* PrayersView.swift in Sources */,
 				C8AE1DDB2A21260500B36A2C /* DisplayDate.swift in Sources */,
 				C8ADAC4D2B60651F001EE81B /* OrdoFeast.swift in Sources */,
-				C8F9C1452B5DC9E90052864F /* PlaceholderList.swift in Sources */,
 				C8AE1DE82A214B7D00B36A2C /* iCal.swift in Sources */,
 				C8C6CEFD2A8260610010EEDE /* Gradient.swift in Sources */,
 				C871588529F0433400E1F02D /* OrdoView.swift in Sources */,
 				C8AD1EB62B2CCC0B00631ACA /* CommonView.swift in Sources */,
 				C8F9C1472B5EF47A0052864F /* InfoStructure.swift in Sources */,
 				C82C281D2B655DFC0092904A /* Locale.swift in Sources */,
+				C8DE94D42B6ADCD6002FB5E6 /* CountryFeastDates.swift in Sources */,
 				C8AE1DE42A21275F00B36A2C /* SendEmail.swift in Sources */,
 				C87086792B66C832009A9796 /* LocalFeast.swift in Sources */,
 				C8FE43902B2A359F000A68C6 /* ActiveData.swift in Sources */,
@@ -659,6 +659,7 @@
 				C8ADAC4B2B606406001EE81B /* OrdoToolbar.swift in Sources */,
 				C80655C12B5D942600051AF8 /* RenderMarkdown.swift in Sources */,
 				C80655C52B5DAC7C00051AF8 /* TabService.swift in Sources */,
+				C8DE94D62B6ADCE5002FB5E6 /* PlaceholderList.swift in Sources */,
 				C8B7FBC02A715BDE0026107C /* DisplayText.swift in Sources */,
 				C8A3596E29EF06220018F6B7 /* ContentView.swift in Sources */,
 				C89F1BEA2B4037FE00073084 /* CalendarDetails.swift in Sources */,
@@ -672,7 +673,6 @@
 				C84A18E22B21B0FC00D55834 /* LoadingView.swift in Sources */,
 				C87086772B66C80F009A9796 /* AdditionalMassPropers.swift in Sources */,
 				C8589D5D2B6644DF00C55C69 /* LocalPushNoifications.swift in Sources */,
-				C870867B2B66C964009A9796 /* CountryFeastDates.swift in Sources */,
 				C8B61D142B3F71E000CF74CB /* InfoView.swift in Sources */,
 				C80883102A5DAE90001AC6E5 /* OrdoRow.swift in Sources */,
 				C8ADAC492B60627C001EE81B /* OrdoEventList.swift in Sources */,

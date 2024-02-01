@@ -3,15 +3,16 @@ package Server.Models;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Map;
 
 public class LocaleCountries {
     @SerializedName("countries")
     private List<String> countries;
 
     @SerializedName("locale")
-    private List<LocaleDioceses> locale;
+    private Map<String, LocaleDioceses> locale;
 
-    public LocaleCountries(List<String> countries, List<LocaleDioceses> locale) {
+    public LocaleCountries(List<String> countries, Map<String, LocaleDioceses> locale) {
         this.countries = countries;
         this.locale = locale;
     }
@@ -20,12 +21,8 @@ public class LocaleCountries {
         return countries;
     }
 
-    public List<LocaleDioceses> getLocale() {
+    public Map<String, LocaleDioceses> getLocale() {
         return locale;
-    }
-
-    public boolean equals(LocaleCountries lhs, LocaleCountries rhs) {
-        return lhs.countries.equals(rhs.countries) && lhs.locale.equals(rhs.locale);
     }
 
     public int hashCode() {

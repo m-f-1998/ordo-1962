@@ -63,9 +63,5 @@ public class Ordo {
     public static boolean equals(Ordo lhs, Ordo rhs) {
         return lhs.id.equals(rhs.id);
     }
-
-    public int hashCode() {
-        return id.hashCode();
-    }
 }
 

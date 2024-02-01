@@ -9,6 +9,16 @@ public class Season {
     @SerializedName("colors")
     private String colors;
 
+    public Season ( String title, String colors ) {
+        this.title = title;
+        this.colors = colors;
+    }
+
+    public Season ( ) {
+        this.title = "";
+        this.colors = "";
+    }
+
     public String getTitle() {
         return title;
     }

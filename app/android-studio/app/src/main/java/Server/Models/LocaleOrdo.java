@@ -34,10 +34,6 @@ public class LocaleOrdo {
     }
 
     public static boolean equals(LocaleOrdo lhs, LocaleOrdo rhs) {
-        return lhs.id.equals(rhs.id) && lhs.certainLocations.equals(rhs.certainLocations) && lhs.feasts.equals(rhs.feasts);
-    }
-
-    public int hashCode() {
-        return id.hashCode() + certainLocations.hashCode() + feasts.hashCode();
+        return lhs.id.equals(rhs.id);
     }
 }

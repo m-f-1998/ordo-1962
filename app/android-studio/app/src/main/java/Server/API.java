@@ -1,21 +1,26 @@
 package Server;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.preference.PreferenceManager;
+
 import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import java.time.Year;
+
 import Server.Models.*;
-import java.io.*;
+import com.mfrankland.ordo62.BuildConfig;
 
 public class API {
     private final Cache cache;
@@ -23,11 +28,18 @@ public class API {
     private final Executor backgroundExecutor;
     private final Executor mainThreadExecutor;
 
+    private final SharedPreferences sharedPreferences;
+
     public API(ActiveData activeData, Context context) {
         this.activeData = activeData;
         this.cache = new Cache(context);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.backgroundExecutor = Executors.newCachedThreadPool();
         this.mainThreadExecutor = new MainThreadExecutor();
+    }
+
+    public Cache getCache() {
+        return this.cache;
     }
 
     public void updateCache() {
@@ -46,7 +58,7 @@ public class API {
 
     private int getCurrentYear() {
         // Implement the logic to get the current year
-        return 2024; // Example: replace with actual implementation
+        return Year.now().getValue(); // Example: replace with actual implementation
     }
 
     private <T> T decode(String json, Class<T> type) {
@@ -59,10 +71,10 @@ public class API {
         return decode(httpRequest(url), Ordo.class);
     }
 
-    private PrayerLanguageData prayerRequest() throws IOException {
+    private Prayers prayerRequest() throws IOException {
         String url = "https://matthewfrankland.co.uk/ordo-1962/v1.3/prayers.php";
         // Implement the logic to perform HTTP request and handle the response
-        return decode(httpRequest(url), PrayerLanguageData.class);
+        return decode(httpRequest(url), Prayers.class);
     }
 
     private LocaleOrdo localeRequest() throws IOException {
@@ -76,26 +88,19 @@ public class API {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();
-            // Implement the logic to read the input stream and convert it to a String
             return convertInputStreamToString(in);
-        } catch (Exception e) {
-            return e.toString();
         } finally {
             urlConnection.disconnect();
         }
     }
 
     private String convertInputStreamToString(InputStream inputStream) throws IOException {
-        // Implement the logic to convert InputStream to String
-        // This can be done using BufferedReader, StringBuilder, etc.
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
         for (int length; (length = inputStream.read(buffer)) != -1; ) {
             result.write(buffer, 0, length);
         }
-        // StandardCharsets.UTF_8.name() > JDK 7
         return result.toString("UTF-8");
-        // return null; // Example: replace with actual implementation
     }
 
     private void updateCacheTask() {
@@ -105,7 +110,7 @@ public class API {
             // Update the UI on the main thread
             updateMainThread(() -> activeData.setDownload(4));
 
-            PrayerLanguageData prayers = prayerRequest();
+            Prayers prayers = prayerRequest();
             // Update the UI on the main thread
             updateMainThread(() -> activeData.setDownload(8));
 
@@ -115,24 +120,19 @@ public class API {
                 System.out.println("Downloading " + i + "...");
                 Ordo ordoYear = ordoRequest(String.valueOf(i));
                 ordo.add(ordoYear);
-                cache.insert(ordoYear);
+                cache.insertOrdo(ordoYear);
                 // Update the UI on the main thread
                 int finalI = i;
                 updateMainThread(() -> activeData.setDownload((finalI + 1 - getCurrentYear()) * 16));
             }
 
-            cache.save();
             // Get version from the app's metadata
-            String version = "1.0"; // Replace with actual implementation
+            String version = BuildConfig.VERSION_NAME; // Replace with actual implementation
             // Save the version in SharedPreferences
             // You need to implement SharedPreferences logic
             // Here's a simplified example:
-            // SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", MODE_PRIVATE).edit();
-            // editor.putString("version", version);
-            // editor.apply();
+            this.sharedPreferences.edit().putString("version", version).apply();
             activeData.setSuccess(ordo, locale, prayers);
-            // Update the UI on the main thread
-//            WidgetCenter.getInstance().reloadAllTimelines();
         } catch (IOException e) {
             e.printStackTrace();
             // Handle the exception

@@ -14,7 +14,7 @@ public class OrdoDay {
     private DateInfo date;
 
     @SerializedName("celebrations")
-    private List<CelebrationData> celebrations;
+    private List<Celebrations> celebrations;
 
     @SerializedName("season")
     private Season season;
@@ -22,7 +22,7 @@ public class OrdoDay {
     @SerializedName("fasting")
     private List<String> fasting;
 
-    public OrdoDay(DateInfo date, List<CelebrationData> celebrations, Season season, List<String> fasting) {
+    public OrdoDay(DateInfo date, List<Celebrations> celebrations, Season season, List<String> fasting) {
         this.id = UUID.randomUUID().toString();
         this.date = date;
         this.celebrations = celebrations;
@@ -33,7 +33,7 @@ public class OrdoDay {
     public OrdoDay ( ) {
         this.id = UUID.randomUUID().toString();
         this.date = new DateInfo();
-        this.celebrations = new ArrayList<CelebrationData>();
+        this.celebrations = new ArrayList<Celebrations>();
         this.season = new Season();
         this.fasting = new ArrayList<String>();
     }
@@ -47,7 +47,7 @@ public class OrdoDay {
         return date;
     }
 
-    public List<CelebrationData> getCelebrations() {
+    public List<Celebrations> getCelebrations() {
         return celebrations;
     }
 
@@ -61,9 +61,5 @@ public class OrdoDay {
 
     public boolean equals(OrdoDay lhs, OrdoDay rhs) {
         return lhs.id.equals(rhs.id);
-    }
-
-    public int hashCode() {
-        return id.hashCode();
     }
 }
