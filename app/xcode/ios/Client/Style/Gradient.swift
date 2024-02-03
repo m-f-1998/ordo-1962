@@ -31,6 +31,8 @@ struct Gradient: ViewModifier {
         if #available(iOS 15.0, *) {
             UINavigationBar.appearance ( ).compactScrollEdgeAppearance = navbar
         }
+        
+        UITabBar.appearance ( ).isHidden = true
     }
     
     func body ( content: Content ) -> some View {

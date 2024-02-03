@@ -32,6 +32,6 @@ struct AdditionalMassPropers: View {
                     }
                 }
             }
-        }.listRowSpacing(0)
+        }.listRowSpacing ( 0 )
     }
 }

@@ -103,6 +103,7 @@ struct DisplayPropers: View {
                     PickCelebration ( )
                 }
             }
-        }.navigationBarTitleDisplayMode ( .inline )
+        }
+        .navigationBarTitleDisplayMode ( .inline )
     }
 }

@@ -12,15 +12,6 @@ func FormatDate ( date: DateFormatter.Style, time: DateFormatter.Style ) -> Date
     formatter.locale = Locale ( identifier: "en_GB" )
     formatter.dateStyle = date
     formatter.timeStyle = time
-//    if no_year {
-//        formatter.dateFormat = "E dd MMMM yyyy"
-//    } else if short {
-//        formatter.dateFormat = "E dd MMMM yyyy"
-//    } else if time {
-//        formatter.dateFormat = "E dd MMM yyyy HH:mm"
-//    } else {
-//        formatter.dateFormat = "E dd MMM yyyy"
-//    }
     return formatter
 }
 

@@ -28,13 +28,10 @@ struct CommonView: View {
             TabView ( selection: $tabStateHanlder.selected ) {
                 OrdoView ( )
                     .tag ( 0 )
-                    .toolbar(.hidden, for: .tabBar)
                 Prayer ( )
                     .tag ( 1 )
-                    .toolbar(.hidden, for: .tabBar)
                 Settings ( current_ordo: self.activeData.GetYear ( )! )
                     .tag ( 2 )
-                    .toolbar ( .hidden, for: .tabBar )
             }
                 .tint ( colorScheme == .dark ? .white : .black )
             TabBar ( )

@@ -69,17 +69,17 @@ fun OrdoAppUI(api: API, net: NetworkMonitor, activeData: MutableState<ActiveData
         Text(activeData.value.lastErr)
 //        ErrorView(description = activeData.value.error.value)
     } else if (isLoading) {
-        Text("Loading")
-        activeData.value.setDownload(0)
-
-        LaunchedEffect(isLoading) {
-            // Ensure that the coroutine runs on the UI thread using MainDispatcher
-            withContext(Dispatchers.Main) {
-                delay(1000)
-                // Now call your suspend function or perform your logic
-                getData(api, activeData, net)
-            }
-        }
+        ErrorView("Loading")
+//        activeData.value.setDownload(0)
+//
+//        LaunchedEffect(isLoading) {
+//            // Ensure that the coroutine runs on the UI thread using MainDispatcher
+//            withContext(Dispatchers.Main) {
+//                delay(1000)
+//                // Now call your suspend function or perform your logic
+//                getData(api, activeData, net)
+//            }
+//        }
 
 //        LoadingView().onAppear {
 //            activeData.value.setDownload(0)
