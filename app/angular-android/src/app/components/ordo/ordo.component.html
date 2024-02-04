@@ -1,0 +1,77 @@
+@if ( this.ordo.length > 0 ) {
+  <div>
+    <div style="text-align: center; padding-top: 70px; font-style: italic;">
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+          Current Year: {{this.year}}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          @for ( index of YearRange(); track index ) {
+            <li>
+              <button class="dropdown-item" type="button" (click)="this.UpdateYear(index.toString())">
+                <span>
+                  {{index}}
+                  @if ( this.year === index.toString() ) {
+                    &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
+                  }
+                </span>
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+      <div style="margin-top: 30px;">
+        @for ( month of months; track month ) {
+          <span>
+            <a href="#" (click)="GoTo(month.substring(0,3))" class="link-primary" style="text-decoration: none; margin: 5; font-size: large;">{{month}}</a>
+            @if ( month != "December" ) {
+              &nbsp;&nbsp;
+            }
+          </span>
+        }
+      </div>
+    </div>
+    @for ( month of this.ordo; track month ) {
+      <div class="section" id="{{month [ 0 ].date.month}}">
+        <div class="container">
+          @for ( day of month; track day ) {
+            <div class="card mb-3">
+              <div class="row g-0" style="border-radius: 20%;">
+                <div class="col-md-4">
+                  <div class="img-fluid rounded-start h-100 h2" style="background: linear-gradient(rgb(135, 218, 149) 11.2%, rgb(72, 203, 217) 91.1%);">
+                    <div class="h-100" style="display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">
+                      <p style="text-align: center; margin: 0;">{{day.date.weekday}} {{day.date.day}}<br />{{day.date.month}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    @for ( celeb of day.celebrations; track celeb ) {
+                      <div>
+                        <h5 class="card-title">
+                          <strong>
+                            {{celeb.title}}&nbsp;<span class="dot" [style.color]="this.getForegroundColor(celeb.colors)" [style.background-color]="this.translateColor(celeb.colors)"></span>
+                          </strong>
+                        </h5>
+                        @for ( commem of celeb.commemorations; track commem ) {
+                          <h5 class="card-title" style="font-size: 14px">
+                            <strong>
+                              {{commem.title}}&nbsp;<span class="dot" [style.color]="this.getForegroundColor(commem.colors)" [style.background-color]="this.translateColor(commem.colors)"></span>
+                            </strong>
+                          </h5>
+                        }
+                      </div>
+                      <p class="card-text" style="white-space: pre-wrap;">Class {{celeb.rank}}</p>
+                      <p class="card-text" style="white-space: pre-wrap;">{{celeb.options}}</p>
+                    }
+                    <span class="badge card-text" [style.background-color]="this.translateColor(day.season.colors)" [style.color]="this.getForegroundColor(day.season.colors)">{{day.season.title}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+}
