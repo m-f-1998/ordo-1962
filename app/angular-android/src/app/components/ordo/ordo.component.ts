@@ -7,6 +7,12 @@ import { ViewportScroller, CommonModule } from "@angular/common";
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalPropersComponent } from '../modal-propers/modal-propers.component';
+import { StoreService } from '../../storage.service';
+
+import {
+  CapacitorDataStorageSqlite,
+  capOpenStorageOptions,
+} from "capacitor-data-storage-sqlite";
 
 @Component({
   selector: 'ordo-component',
@@ -20,6 +26,7 @@ import { ModalPropersComponent } from '../modal-propers/modal-propers.component'
   styleUrl: './ordo.component.css'
 })
 export class OrdoComponent {
+  sqlStore = CapacitorDataStorageSqlite;
   public ordo: any [ ] = [ ]
 
   public language = "English"
@@ -53,11 +60,107 @@ export class OrdoComponent {
     });
   }
 
+  setData = async (key: string, value: any): Promise<boolean> => {
+    let valueJson = JSON.stringify(value);
+    try {
+      await this.sqlStore.set({ key: key, value: valueJson });
+      return true;
+    } catch (err) {
+      console.log(`Error setting ${key}: ${valueJson}`);
+      console.log(err);
+      return false;
+    }
+  }
+
+  initSqlStore = async () => {
+    console.log("Init capacitor-data-storage-sqlite");
+  
+    let options: capOpenStorageOptions = {
+      database: "insert_db_name_here",
+      table: "insert_table_name_here",
+    };
+  
+    try {
+      await this.sqlStore.openStore(options);
+    } catch (err) {
+      console.log("Error initialising capacitor-data-storage-sqlite.");
+      console.log(err);
+    }
+  };
+
+  inMemoryMap = new Map<string, any>();
+
+  loadInMemoryMap = async (): Promise<void> => {
+    try {
+      let keysvalues = await this.sqlStore.keysvalues();
+  
+      for (let entry of keysvalues.keysvalues) {
+        let key = entry.key;
+        let value = JSON.parse(entry.value);
+  
+        this.inMemoryMap.set(key, value);
+      }
+  
+    } catch (err) {
+      console.log("Error loading table to in memory map.");
+      console.log(err);
+      return;
+    }
+  }
+  
+  restoreData = async (key: string): Promise<any> => {
+    try {
+      let exists = await this.sqlStore.iskey({ key: key });
+      console.log ( exists );
+      if (!exists.result) return null;
+      console.log ( exists );
+      let valueJson = await this.sqlStore.get({ key: key});
+      let value = JSON.parse(valueJson.value);
+      return value;
+    } catch (err) {
+      console.log(`Error restoring key ${key}`);
+      console.log(err);
+      return null;
+    }
+  }
+
   constructor (
     private httpClient: HttpClient,
     private scroller: ViewportScroller,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private storage: StoreService //Declare for use in constructor
   ) {
+    this.restoreData ( 'ordo' ).then ( data => {
+      console.log ( data )
+      console.log ( "Hello" )
+      if ( data ) {
+        let value = JSON.parse ( data )
+        this.loading = false
+        this.ordo = value.Ordo
+        this.year = value.Year
+        console.log ( "Saved")
+      } else {
+        let url = `https://www.matthewfrankland.co.uk/ordo-1962/v${this.version}/ordo.php`
+        let params = new HttpParams ( ).set ( "year", this.year );
+
+        this.httpClient.get<any> ( url, { params: params } ).subscribe (
+          {
+            next: ( response: any ) => {
+              this.loading = false
+              this.ordo = response.Ordo
+              this.setData ( 'ordo', JSON.stringify ( this.ordo ) )
+            },
+            error: this.handleUpdateError.bind ( this )
+          }
+        );
+      }
+    });
+  }
+
+  public UpdateYear ( year: string ) {
+    this.ordo = [ ]
+    this.loading = true
+
     let url = `https://www.matthewfrankland.co.uk/ordo-1962/v${this.version}/ordo.php`
     let params = new HttpParams ( ).set ( "year", this.year )
     
@@ -67,28 +170,11 @@ export class OrdoComponent {
           console.log ( response )
           this.loading = false
           this.ordo = response.Ordo
+          this.year = year
         },
         error: this.handleUpdateError.bind ( this )
       }
     )
-  }
-
-  public UpdateYear ( year: string ) {
-    this.ordo = [ ]
-    this.loading = true
-    let url = `https://www.matthewfrankland.co.uk/ordo-1962/v${this.version}/ordo.php`
-    let params = new HttpParams ( ).set ( "year", year );
-
-    this.httpClient.get<any> ( url, { params: params } ).subscribe (
-      {
-        next: ( response: any ) => {
-          this.loading = false
-          this.year = year
-          this.ordo = response.Ordo
-        },
-        error: this.handleUpdateError.bind ( this )
-      }
-    );
   }
 
   private handleUpdateError ( error: any ) {

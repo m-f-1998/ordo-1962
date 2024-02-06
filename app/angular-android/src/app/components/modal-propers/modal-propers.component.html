@@ -20,17 +20,18 @@
       </ul>
     </div>
     <br />
+    <br />
     @for ( celeb of this.celebrations; track celeb ) {
       @if ( celeb.title == this.celebrationTitle ) {
         @for ( proper of celeb.propers; track proper ) {
           <div>
             <h1 class="modal-title fs-5" id="{{proper.title}}">{{proper.title}}</h1>
             @if ( this.language == "Latin" ) {
-              <p style="white-space: pre-wrap;">
+              <p style="white-space: pre-wrap;" [innerHTML]="this.marked(proper.latin)">
                 {{proper.latin}}
               </p>
             } @else {
-              <p style="white-space: pre-wrap;">
+              <p style="white-space: pre-wrap;" [innerHTML]="this.marked(proper.english)">
                 {{proper.english}}
               </p>
             }

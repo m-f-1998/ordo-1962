@@ -3,6 +3,7 @@ import { RouterOutlet, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import * as marked from 'marked';
 
 @Component({
   selector: 'modal-propers',
@@ -19,6 +20,7 @@ export class ModalPropersComponent {
   title = 'angular-android';
   celebrations: any[] = []
   language: string = "English"
+  public marked = marked.parse
 
   faCheck = faCheck;
 
@@ -27,6 +29,7 @@ export class ModalPropersComponent {
   constructor (
     public activeModal: NgbActiveModal
   ) {
+    
     
   }
 

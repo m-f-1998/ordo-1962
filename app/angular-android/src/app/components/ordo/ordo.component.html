@@ -70,7 +70,7 @@
       <div class="section" id="{{month [ 0 ].date.month}}" [style.padding-top]="(month [ 0 ].date.month=='Jan') ? 0 : 30">
         <div class="container">
           @for ( day of month; track day ) {
-            <div class="card mb-3" (click)="OpenPropers(day.celebrations)">
+            <div class="card mb-3" (click)="OpenPropers(day.celebrations)" style="cursor: pointer;">
               <div class="row g-0 rounded-2">
                 <div class="col-md-4">
                   <div class="img-fluid h-100 h2" style="background: linear-gradient(rgb(135, 218, 149) 11.2%, rgb(72, 203, 217) 91.1%);">
@@ -79,7 +79,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                   <div class="card-body">
                     @for ( celeb of day.celebrations; track celeb ) {
                       <div>
@@ -106,6 +106,13 @@
                       <p class="card-text" style="white-space: pre-wrap;">{{celeb.options}}</p>
                     }
                     <span class="badge card-text" [style.background-color]="this.translateColor(day.season.colors)" [style.color]="this.getForegroundColor(day.season.colors)">{{day.season.title}}</span>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="img-fluid h-100 h2">
+                    <div class="h-100" style="display: flex; justify-content: center; align-items: center;">
+                      <p style="text-align: center; margin: 0; font-weight: bold;">&gt;</p>
+                    </div>
                   </div>
                 </div>
               </div>
