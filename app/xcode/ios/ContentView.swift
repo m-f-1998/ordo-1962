@@ -30,6 +30,7 @@ struct ContentView: View {
                 do {
                     try await self.api.UpdateCache ( )
                 } catch {
+                    print ( error )
                     if self.net.connected {
                         self.activeData.SetError ( error: "Ordo Update Could Not Be Fetched." )
                     }
