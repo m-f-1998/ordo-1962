@@ -4,7 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TabBarComponent } from './components/tabbar/tabbar.component';
 import { OrdoComponent } from './components/ordo/ordo.component';
 import { HttpClientModule } from "@angular/common/http";
-import {StoreService} from './storage.service'; // Our Storage service which we have created
+import { DataService } from './data.service'; // Our Storage service which we have created
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ import {StoreService} from './storage.service'; // Our Storage service which we 
     HttpClientModule
   ],
   providers: [
-    StoreService
+    DataService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
