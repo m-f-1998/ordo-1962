@@ -11,9 +11,22 @@
   bottom: 15px;
   right: 15px;
   opacity: 0;
+  padding: 0;
   transition: all .2s ease-in-out;
- }
- .show-scrollTop {
+}
+.show-scrollTop {
   opacity: 1;
   transition: all .2s ease-in-out;
- }
+}
+.info {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  opacity: 0;
+  padding: 0;
+  transition: all .2s ease-in-out;
+}
+.show-info {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}

@@ -17,7 +17,6 @@ import * as marked from 'marked';
   styleUrl: './modal-propers.component.css'
 })
 export class ModalPropersComponent {
-  title = 'angular-android';
   celebrations: any[] = []
   language: string = "English"
   public marked = marked.parse
@@ -28,15 +27,12 @@ export class ModalPropersComponent {
 
   constructor (
     public activeModal: NgbActiveModal
-  ) {
-    
-    
-  }
+  ) { }
 
   public UpdateCelebrations ( title: string ) {
     this.celebrationTitle = title
   }
-  
+
   public dismiss ( ) {
     this.activeModal.close()
   }

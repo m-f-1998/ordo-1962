@@ -1,25 +1,23 @@
 @if ( this.loading ) {
   <div style="text-align: center; padding-top: 70px; font-style: italic;">
-    <div class="d-flex justify-content-center"> 
-      <div class="spinner-border" role="status"> 
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
           <span class="sr-only" id="loading"></span>
       </div>
     </div>
     <br />
     Loading...
   </div>
-}
-@if ( this.error ) {
+} @else if ( this.error ) {
   <div style="text-align: center; padding-top: 70px; font-style: italic;">
-    {{this.last_err}}
+    Ordo could not be fetched.
   </div>
-}
-@if ( this.ordo.length > 0 ) {
+} @else if ( !this.loading && !this.error ) {
   <div>
     <div style="text-align: center; padding-top: 70px; font-style: italic;">
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-          Language: {{this.language}}
+          {{this.language}}
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
           @for ( index of this.languages; track index ) {
@@ -38,7 +36,7 @@
       </div>
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-          Year: {{this.year}}
+          {{this.year}}
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
           @for ( index of YearRange(); track index ) {
@@ -66,11 +64,11 @@
         }
       </div>
     </div>
-    @for ( month of this.ordo; track month ) {
+    @for ( month of this.ordo [ this.year ]; track month ) {
       <div class="section" id="{{month [ 0 ].date.month}}" [style.padding-top]="(month [ 0 ].date.month=='Jan') ? 0 : 30">
         <div class="container">
           @for ( day of month; track day ) {
-            <div class="card mb-3" (click)="OpenPropers(day.celebrations)" style="cursor: pointer;">
+            <div class="card mb-3" style="cursor: pointer;">
               <div class="row g-0 rounded-2">
                 <div class="col-md-4">
                   <div class="img-fluid h-100 h2" style="background: linear-gradient(rgb(135, 218, 149) 11.2%, rgb(72, 203, 217) 91.1%);">
@@ -108,13 +106,9 @@
                     <span class="badge card-text" [style.background-color]="this.translateColor(day.season.colors)" [style.color]="this.getForegroundColor(day.season.colors)">{{day.season.title}}</span>
                   </div>
                 </div>
-                <div class="col-md-1">
-                  <div class="img-fluid h-100 h2">
-                    <div class="h-100" style="display: flex; justify-content: center; align-items: center;">
-                      <p style="text-align: center; margin: 0; font-weight: bold;">&gt;</p>
-                    </div>
-                  </div>
-                </div>
+                <a class="btn btn-primary ng-flex justify-content-center align-items-center" style="margin-bottom: 0px;" href="javascript:void(0)" (click)="OpenPropers(day.celebrations)">
+                  Open Propers
+                </a>
               </div>
             </div>
           }
@@ -123,8 +117,13 @@
     }
   </div>
   <div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
-    <button type="button" class="btn btn-danger active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+    <button type="button" class="btn btn-danger active" data-toggle="button" aria-pressed="true">
       <fa-icon [icon]="faArrow" />
+    </button>
+  </div>
+  <div class="info" [ngClass]="{'show-info': windowScrolled}">
+    <button type="button" class="btn btn-danger active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+      <fa-icon [icon]="faInfo" />
     </button>
   </div>
 }

@@ -11,7 +11,7 @@
 }
 @if ( this.error ) {
   <div style="text-align: center; padding-top: 70px; font-style: italic;">
-    {{this.last_err}}
+    Prayers could not be fetched.
   </div>
 }
 @if ( GetKeys(this.prayers[this.language]).length > 0 ) {
@@ -19,7 +19,7 @@
     <div style="text-align: center; padding-top: 70px; padding-bottom: 40px; font-style: italic;">
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-          Language: {{this.language}}
+          {{this.language}}
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
           @for ( index of this.languages; track index ) {

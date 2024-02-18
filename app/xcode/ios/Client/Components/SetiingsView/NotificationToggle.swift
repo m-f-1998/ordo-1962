@@ -14,9 +14,9 @@ struct NotificationToggle: View {
     public var hour: Int
     public var minute: Int
     public var id: String
-    
+
     private var notifications: LocalPushNoifications
-    
+
     init ( label: String, title: String, hour: Int, minute: Int = 0, id: String, alert: AlertViewModel ) {
         self.label = label
         self.title = title
@@ -25,9 +25,9 @@ struct NotificationToggle: View {
         self.id = id
         self.notifications = LocalPushNoifications ( status: alert )
     }
-    
+
     @State private var toggled = false
-    
+
     var body: some View {
         Toggle ( self.label, isOn: $toggled )
         .onChange ( of: self.toggled ) {

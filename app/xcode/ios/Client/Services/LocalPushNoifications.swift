@@ -10,7 +10,7 @@ import AlertToast
 
 class LocalPushNoifications {
     @ObservedObject public var status: AlertViewModel
-    
+
     init ( status: AlertViewModel ) {
         self.status = status
     }
@@ -25,7 +25,7 @@ class LocalPushNoifications {
                         notificationContent.title = title
                         notificationContent.body = body
                         notificationContent.sound = .default
-                                        
+
                         let datComp = DateComponents ( hour: hour, minute: minute )
                         let trigger = UNCalendarNotificationTrigger ( dateMatching: datComp, repeats: true )
                         let request = UNNotificationRequest ( identifier: id, content: notificationContent, trigger: trigger )

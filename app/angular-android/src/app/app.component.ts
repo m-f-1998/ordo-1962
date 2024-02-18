@@ -5,6 +5,13 @@ import { TabBarComponent } from './components/tabbar/tabbar.component';
 import { OrdoComponent } from './components/ordo/ordo.component';
 import { HttpClientModule } from "@angular/common/http";
 import { DataService } from './data.service'; // Our Storage service which we have created
+import { StatusBar, Style } from '@capacitor/status-bar';
+
+const setStatusBarStyleDark = async () => {
+  await StatusBar.setBackgroundColor ( { color: "#000000" } )
+  await StatusBar.setStyle ( { style: Style.Dark } )
+}
+setStatusBarStyleDark ( )
 
 @Component({
   selector: 'app-root',
@@ -23,5 +30,7 @@ import { DataService } from './data.service'; // Our Storage service which we ha
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angular-android';
+  title = 'angular-android'
+
+  constructor ( ) { }
 }

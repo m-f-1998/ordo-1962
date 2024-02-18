@@ -1,10 +1,10 @@
 import { Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { HttpClient } from "@angular/common/http"
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalTextComponent } from '../modal-text/modal-text.component';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'prayers-component',
@@ -13,12 +13,10 @@ import { ModalTextComponent } from '../modal-text/modal-text.component';
     RouterOutlet,
     FontAwesomeModule
   ],
-  templateUrl: './prayer.component.html',
-  // styleUrl: './prayer.component.css'
+  templateUrl: './prayer.component.html'
 })
 export class PrayerComponent {
   public prayers: any = { }
-  private version = "1.3"
 
   public language: string = "English"
   public languages = [ "English", "Latin" ]
@@ -26,28 +24,20 @@ export class PrayerComponent {
 
   public error = false
   public loading = true
-  public last_err = ""
 
   constructor (
-    private httpClient: HttpClient,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private apiRequests: DataService
   ) {
-    let url = `https://www.matthewfrankland.co.uk/ordo-1962/v${this.version}/prayers.php`
-    
-    this.httpClient.get<any> ( url ).subscribe (
-      {
-        next: ( response: any ) => {
-          console.log ( response )
-          this.loading = false
-          this.prayers = response
-        },
-        error: this.handleUpdateError.bind ( this )
-      }
-    )
-  }
-
-  private handleUpdateError ( error: any ) {
-    console.error ( error )
+    this.apiRequests.GetPrayers ( ).then ( prayers => {
+      this.prayers = prayers
+      this.loading = false
+      this.error = false
+    } ).catch ( e => {
+      console.error ( e )
+      this.loading = false
+      this.error = true
+    } )
   }
 
   public UpdateLanguage ( id: string ) {

@@ -1,8 +1,7 @@
 import { Component, HostListener } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
-import { HttpClient, HttpParams } from '@angular/common/http'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import { ViewportScroller, CommonModule } from "@angular/common"
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
@@ -21,21 +20,20 @@ import { DataService } from '../../data.service'
   styleUrl: './ordo.component.css'
 })
 export class OrdoComponent {
-  public ordo: any [ ] = [ ]
+  public ordo: any = { }
+
+  public loading = true
+  public error = false
 
   public language = "English"
   public languages = [ "English", "Latin" ]
-  
-  private version = "1.3"
-  public year = "2024"
 
-  public error = false
-  public loading = true
-  public last_err = ""
+  public year = "2024"
 
   public faCheck = faCheck
   public months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
   faArrow = faArrowUp
+  faInfo = faCircleInfo
   windowScrolled: boolean = false;
 
   @HostListener("window:scroll", [])
@@ -47,68 +45,31 @@ export class OrdoComponent {
     }
   }
   scrollToTop() {
-    window.scroll({ 
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
     });
   }
 
   constructor (
-    private httpClient: HttpClient,
     private scroller: ViewportScroller,
     private modalService: NgbModal,
-    private apiRequests: DataService //Declare for use in constructor
+    private apiRequests: DataService
   ) {
-    this.apiRequests.init ( )
-    // this.restoreData ( 'ordo' ).then ( data => {
-    //   if ( data ) {
-    //     let value = JSON.parse ( data )
-    //     this.loading = false
-    //     this.ordo = value.Ordo
-    //     this.year = value.Year
-    //   } else {
-    //     let url = `https://www.matthewfrankland.co.uk/ordo-1962/v${this.version}/ordo.php`
-    //     let params = new HttpParams ( ).set ( "year", this.year );
-
-    //     this.httpClient.get<any> ( url, { params: params } ).subscribe (
-    //       {
-    //         next: ( response: any ) => {
-    //           this.loading = false
-    //           this.ordo = response.Ordo
-    //           this.setData ( 'ordo', JSON.stringify ( this.ordo ) )
-    //         },
-    //         error: this.handleUpdateError.bind ( this )
-    //       }
-    //     );
-    //   }
-    // });
+    this.apiRequests.GetOrdo ( ).then ( ordo => {
+      this.ordo = ordo
+      this.loading = false
+      this.error = false
+    } ).catch ( e => {
+      console.error ( e )
+      this.loading = false
+      this.error = true
+    } )
   }
 
   public UpdateYear ( year: string ) {
-    this.ordo = [ ]
-    this.loading = true
-
-    let url = `https://www.matthewfrankland.co.uk/ordo-1962/v${this.version}/ordo.php`
-    let params = new HttpParams ( ).set ( "year", this.year )
-    
-    this.httpClient.get<any> ( url, { params: params } ).subscribe (
-      {
-        next: ( response: any ) => {
-          console.log ( response )
-          this.loading = false
-          this.ordo = response.Ordo
-          this.year = year
-        },
-        error: this.handleUpdateError.bind ( this )
-      }
-    )
-  }
-
-  private handleUpdateError ( error: any ) {
-    this.error = true
-    this.loading = false
-    console.error ( error )
+    this.year = year
   }
 
   public YearRange ( ) {
@@ -163,7 +124,7 @@ export class OrdoComponent {
   }
 
   public OpenPropers ( celebrations: any[] ) {
-    let propers = this.modalService.open ( ModalPropersComponent, { size: 'lg', keyboard: false, centered: true } );
+    let propers = this.modalService.open ( ModalPropersComponent, { size: 'lg', keyboard: false, centered: true } )
     propers.componentInstance.celebrations = celebrations
     propers.componentInstance.celebrationTitle = celebrations [ 0 ].title
     propers.componentInstance.language = this.language

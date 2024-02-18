@@ -1,26 +1,33 @@
 <div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">{{this.celebrationTitle}}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="dismiss()"></button>
+  </div>
   <div class="modal-body">
-    <div class="btn-group">
-      <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: medium; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-        {{this.celebrationTitle}}
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        @for ( celeb of this.celebrations; track celeb ) {
-          <li>
-            <button class="dropdown-item" type="button" (click)="this.UpdateCelebrations(celeb.title.toString())">
-              <span>
-                {{celeb.title}}
-                @if ( this.celebrationTitle === celeb.title.toString() ) {
-                  &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
-                }
-              </span>
-            </button>
-          </li>
-        }
-      </ul>
-    </div>
-    <br />
-    <br />
+    @if ( this.celebrations.length > 1 ) {
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: medium; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+          Change Propers
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+          @for ( celeb of this.celebrations; track celeb ) {
+            <li>
+              <button class="dropdown-item" type="button" (click)="this.UpdateCelebrations(celeb.title.toString())">
+                <span>
+                  {{celeb.title}}
+                  @if ( this.celebrationTitle === celeb.title.toString() ) {
+                    &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
+                  }
+                </span>
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+      <br />
+      <br />
+    }
     @for ( celeb of this.celebrations; track celeb ) {
       @if ( celeb.title == this.celebrationTitle ) {
         @for ( proper of celeb.propers; track proper ) {
