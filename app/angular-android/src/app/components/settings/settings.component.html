@@ -1,58 +1,69 @@
-<div style="text-align: center; padding-top: 40px">
-  <div style="display: inline-block; text-align: center;">
-    <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
-      <div class="card-header">
-        Daily Notifications
+@if ( this.loading ) {
+  <div style="text-align: center; padding-top: 70px; font-style: italic;">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+          <span class="sr-only" id="loading"></span>
       </div>
-      <ul class="list-group list-group-flush">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" [(ngModel)]="AngelusSix" (change)="TurnOnNotifications ( 0, '6AM Angelus', 6, 0, $event )">
-              <label class="form-check-label">6AM Angelus</label>
-            </div>
-          </li>
-        </ul>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" [(ngModel)]="AngelusTwelve" (change)="TurnOnNotifications ( 1, 'Noon Angelus', 12, 0, $event )">
-              <label class="form-check-label">Noon Angelus</label>
-            </div>
-          </li>
-        </ul>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" [(ngModel)]="AngelusEighteen" (change)="TurnOnNotifications ( 2, '6PM Angelus', 18, 0, $event )">
-              <label class="form-check-label">6PM Angelus</label>
-            </div>
-          </li>
-        </ul>
-      </ul>
     </div>
-    <!-- <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
-      <div class="card-header"></div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <a style="text-decoration: none;" href="javascript:void(0);" (click)="createGoogleCal()">
-            Create a Google Calendar with the {{this.getFullYear()}} Ordo
-          </a>
-        </li>
-      </ul>
-    </div> -->
-    <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
-      <div class="card-header">
-        Support
+    <br />
+    Loading...
+  </div>
+} @else if ( this.error ) {
+  <div style="text-align: center; padding-top: 70px; font-style: italic;">
+    Settings could not be fetched.
+  </div>
+} @else if ( !this.loading && !this.error ) {
+  <div style="text-align: center; padding-top: 40px">
+    <div style="display: inline-block; text-align: center;">
+      <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
+        <div class="card-header">
+          Daily Notifications
+        </div>
+        <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="form-check form-switch">
+                <input id="AngelusSix" class="form-check-input" type="checkbox" role="switch" [ngModel]="AngelusSix" (change)="TurnOnNotifications ( 0, '6AM Angelus', 6, 0, $event )">
+                <label for="AngelusSix" class="form-check-label">6AM Angelus</label>
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="form-check form-switch">
+                <input id="NoonAngelus" class="form-check-input" type="checkbox" role="switch" [ngModel]="AngelusTwelve" (change)="TurnOnNotifications ( 1, 'Noon Angelus', 12, 0, $event )">
+                <label for="NoonAngelus" class="form-check-label">Noon Angelus</label>
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="form-check form-switch">
+                <input id="AngelusEighteen" class="form-check-input" type="checkbox" role="switch" [ngModel]="AngelusEighteen" (change)="TurnOnNotifications ( 2, '6PM Angelus', 18, 0, $event )">
+                <label for="AngelusEighteen" class="form-check-label">6PM Angelus</label>
+              </div>
+            </li>
+          </ul>
+        </ul>
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <a style="text-decoration: none;" href="mailto:ordo62@matthewfrankland.co.uk?subject=Customer Feedback - 1962 Liturgical Ordo">Report an Error or Make a Comment</a>
-        </li>
-        <li class="list-group-item">
-          <a style="text-decoration: none;" href="https://matthewfrankland.co.uk/ordo-1962/support">Privacy Policy</a>
-        </li>
-      </ul>
+      <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
+        <button class="btn btn-primary" style="font-weight: bold; margin: 0px;" type="submit" (click)="createGoogleCal()">
+          Create Google Events with the {{this.getFullYear()}} Ordo
+        </button>
+      </div>
+      <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
+        <div class="card-header">
+          Support
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a style="text-decoration: none;" href="mailto:ordo62@matthewfrankland.co.uk?subject=Customer Feedback - 1962 Liturgical Ordo">Report an Error or Make a Comment</a>
+          </li>
+          <li class="list-group-item">
+            <a style="text-decoration: none;" href="https://matthewfrankland.co.uk/ordo-1962/support">Privacy Policy</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+}

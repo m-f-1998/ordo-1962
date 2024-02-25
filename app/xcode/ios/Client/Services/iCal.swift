@@ -44,17 +44,17 @@ class iCal {
         let calendar = EKCalendar ( for: .event, eventStore: self.store )
         calendar.title = title
         calendar.source = self.store.defaultCalendarForNewEvents!.source
-        
+
         do {
             try self.store.saveCalendar ( calendar, commit: true )
         } catch {
             throw iCalError.calendar
         }
-        
+
         UserDefaults.standard.set ( calendar.calendarIdentifier, forKey: "calendar_id" )
         return calendar
     }
-    
+
     func GenerateCalendar ( completion: @escaping ( ) -> Void ) {
         self.Permissions ( ) { permissions in
             print ( "EventKit Permissions: \(permissions)" )

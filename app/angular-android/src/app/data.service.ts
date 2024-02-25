@@ -16,6 +16,9 @@ export class DataService {
   async GetOrdo ( ): Promise<any> {
     return new Promise<void> ( async ( resolve, reject ) => {
       this.readFile ( "ordo.json" ).then ( json => {
+        if ( Object.keys ( json ).length != 7 ) {
+          throw Error ( "Cache Object Not Full" )
+        }
         resolve ( json )
       } ).catch ( e => {
         console.error ( e )
@@ -31,7 +34,7 @@ export class DataService {
               },
               complete: async ( ) => {
                 if ( i == currentYear + 5 ) {
-                  await this.deleteFile ( "ordo.json", reject )
+                  await this.deleteFile ( "ordo.json" )
                   await this.writeFile ( "ordo.json", ordo, reject )
                   resolve ( ordo )
                 }
@@ -53,7 +56,7 @@ export class DataService {
         this.http.get <any> ( this.getURL ( "locale.php" ) ).subscribe (
           {
             next: async ( response: any ) => {
-              await this.deleteFile ( "locale.json", reject )
+              await this.deleteFile ( "locale.json" )
               await this.writeFile ( "locale.json", response, reject )
               resolve ( response )
             },
@@ -65,23 +68,15 @@ export class DataService {
   }
 
   async GetPrayers ( ): Promise<any> {
-    console.log ( "Promise")
     return new Promise<void> ( async ( resolve, reject ) => {
-      console.log ( "Read" )
       this.readFile ( "prayers.json" ).then ( json => {
-        console.log ( "Try File")
         resolve ( json )
       } ).catch ( e => {
-        console.log ( "HTTP Request" )
-        console.log ( e )
         this.http.get <any> ( this.getURL ( "prayers.php" ) ).subscribe (
           {
             next: async ( response: any ) => {
-              console.log ( "1" )
-              await this.deleteFile ( "prayers.json", reject )
-              console.log ( "1" )
+              await this.deleteFile ( "prayers.json" )
               await this.writeFile ( "prayers.json", response, reject )
-              console.log ( "1" )
               resolve ( response )
             },
             error: ( e ) => reject ( e )
@@ -95,7 +90,7 @@ export class DataService {
     return new Promise<any> ( ( resolve, reject ) => {
       Filesystem.readFile ( {
         path: file,
-        directory: Directory.Documents,
+        directory: Directory.Cache,
         encoding: Encoding.UTF8
       } ).then ( ( res: any ) => {
         try {
@@ -113,14 +108,14 @@ export class DataService {
     } )
   }
 
-  private async deleteFile ( file: string, reject: (reason?: any) => void ) {
+  private async deleteFile ( file: string ) {
     try {
       await Filesystem.deleteFile ( {
         path: file,
-        directory: Directory.Documents
+        directory: Directory.Cache
       } )
     } catch ( e ) {
-      reject ( e )
+      console.error ( e )
     }
   }
 
@@ -130,7 +125,7 @@ export class DataService {
       json.date = moment ( ).add ( 2, "weeks" ).format ( )
       await Filesystem.writeFile ( {
         path: file,
-        directory: Directory.Documents,
+        directory: Directory.Cache,
         data: JSON.stringify ( json ),
         encoding: Encoding.UTF8
       } )

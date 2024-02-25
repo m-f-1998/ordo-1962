@@ -7,7 +7,6 @@ import { ModalTextComponent } from '../modal-text/modal-text.component';
 import { DataService } from '../../data.service';
 
 @Component({
-  selector: 'prayers-component',
   standalone: true,
   imports: [
     RouterOutlet,
@@ -54,7 +53,7 @@ export class PrayerComponent {
   public OpenPrayer ( title: string, body: string ) {
     let propers = this.modalService.open ( ModalTextComponent, { size: 'lg', keyboard: false, centered: true } );
     propers.componentInstance.title = title
-    propers.componentInstance.body = body
+    propers.componentInstance.body = body.trimStart ( )
   }
 
 }

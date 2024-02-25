@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { HttpClientModule } from "@angular/common/http"
+import { DataService } from './data.service' // Our Storage service which we have created
+import { StatusBar, Style } from '@capacitor/status-bar'
 import { TabBarComponent } from './components/tabbar/tabbar.component';
-import { OrdoComponent } from './components/ordo/ordo.component';
-import { HttpClientModule } from "@angular/common/http";
-import { DataService } from './data.service'; // Our Storage service which we have created
-import { StatusBar, Style } from '@capacitor/status-bar';
 
 const setStatusBarStyleDark = async () => {
   await StatusBar.setBackgroundColor ( { color: "#000000" } )
@@ -20,7 +19,6 @@ setStatusBarStyleDark ( )
     RouterOutlet,
     FontAwesomeModule,
     TabBarComponent,
-    OrdoComponent,
     HttpClientModule
   ],
   providers: [
@@ -30,7 +28,14 @@ setStatusBarStyleDark ( )
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angular-android'
+  title = "angular-android"
+  theme = "light"
 
-  constructor ( ) { }
+  constructor ( ) {
+    if ( window.matchMedia && window.matchMedia ( "(prefers-color-scheme: dark)" ).matches ) {
+      this.theme = "dark"
+    } else {
+      this.theme = "light"
+    }
+  }
 }

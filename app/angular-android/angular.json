@@ -24,13 +24,12 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/assets"
+              "src/assets",
+              { "glob": "details.json", "input": "./", "output": "./assets/" }
             ],
             "styles": [
-              "node_modules/aos/dist/aos.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/main.css",
-              "src/styles.css"
+              "src/styles.scss",
+              "src/main.css"
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
@@ -91,7 +90,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

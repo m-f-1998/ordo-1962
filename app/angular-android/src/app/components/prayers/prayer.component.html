@@ -21,7 +21,7 @@
         <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
           {{this.language}}
         </button>
-        <ul class="dropdown-menu dropdown-menu-end">
+        <ul class="dropdown-menu">
           @for ( index of this.languages; track index ) {
             <li>
               <button class="dropdown-item" type="button" (click)="this.UpdateLanguage(index.toString())">
