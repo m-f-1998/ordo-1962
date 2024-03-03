@@ -6,7 +6,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import * as marked from 'marked';
 
 @Component({
-  selector: 'modal-propers',
+  selector: 'app-modal-propers',
   standalone: true,
   imports: [
     RouterModule,
@@ -17,9 +17,11 @@ import * as marked from 'marked';
   styleUrl: './modal-propers.component.css'
 })
 export class ModalPropersComponent {
-  celebrations: any[] = []
-  language: string = "English"
+  public celebrations: any[] = []
   public marked = marked.parse
+
+  public language = "English"
+  public languages = [ "English", "Latin" ]
 
   faCheck = faCheck;
 
@@ -27,10 +29,15 @@ export class ModalPropersComponent {
 
   constructor (
     public activeModal: NgbActiveModal
-  ) { }
+  ) {
+  }
 
   public UpdateCelebrations ( title: string ) {
     this.celebrationTitle = title
+  }
+
+  public UpdateLanguage ( lan: string ) {
+    this.language = lan
   }
 
   public dismiss ( ) {

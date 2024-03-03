@@ -51,9 +51,9 @@ export class PrayerComponent {
   }
 
   public OpenPrayer ( title: string, body: string ) {
-    let propers = this.modalService.open ( ModalTextComponent, { size: 'lg', keyboard: false, centered: true } );
+    const propers = this.modalService.open ( ModalTextComponent, { size: 'lg', keyboard: false, centered: true } );
     propers.componentInstance.title = title
-    propers.componentInstance.body = body.trimStart ( )
+    propers.componentInstance.body = body
   }
 
 }

@@ -16,27 +16,6 @@
   <div>
     <div style="text-align: center; padding-top: 70px; padding-bottom: 40px; font-style: italic;">
       <div style="text-align: center; font-style: italic;">
-        @if ( this.option == "Votive Masses" ) {
-          <div class="btn-group">
-            <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-              {{this.language}}
-            </button>
-            <ul class="dropdown-menu">
-              @for ( index of this.languages; track index ) {
-                <li>
-                  <button class="dropdown-item" type="button" (click)="this.UpdateLanguage(index.toString())">
-                    <span>
-                      {{index}}
-                      @if ( this.language === index ) {
-                        &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
-                      }
-                    </span>
-                  </button>
-                </li>
-              }
-            </ul>
-          </div>
-        }
         <div class="btn-group">
           <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
             {{this.option}}
@@ -47,7 +26,7 @@
                 <button class="dropdown-item" type="button" (click)="this.UpdateOption(index.toString())">
                   <span>
                     {{index}}
-                    @if ( this.language === index ) {
+                    @if ( this.option === index ) {
                       &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
                     }
                   </span>
@@ -57,7 +36,7 @@
           </ul>
         </div>
       </div>
-      @if ( this.option == "Information on the Ordo" ) {
+      @if ( this.option === "Information on the Ordo" ) {
         <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
           <div class="card-header">User Information</div>
           <ul class="list-group">
@@ -88,17 +67,17 @@
           </ul>
         </div>
       }
-      @if ( this.option == "Votive Masses" ) {
+      @if ( this.option === "Votive Masses" ) {
         <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
           <div class="card-header">Votive Masses Of Particular Piety</div>
           <ul class="list-group">
           @for ( detail of this.votives_of_piety; track detail ) {
-              <li class="list-group-item">
-                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_of_piety )">
-                  {{detail.title}}
-                </a>
-              </li>
-            }
+            <li class="list-group-item">
+              <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_of_piety, detail.title )">
+                {{detail.title}}
+              </a>
+            </li>
+          }
           </ul>
           <div class="card-footer">For use during First Thursday; Friday; or Saturday Devotions</div>
         </div>
@@ -107,7 +86,7 @@
           <ul class="list-group">
             @for ( detail of this.votives_monday; track detail ) {
               <li class="list-group-item">
-                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_monday )">
+                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_monday, detail.title )">
                   {{detail.title}}
                 </a>
               </li>
@@ -115,7 +94,7 @@
             <div class="card-footer">Monday</div>
             @for ( detail of this.votives_tuesday; track detail ) {
               <li class="list-group-item">
-                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_tuesday )">
+                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_tuesday, detail.title )">
                   {{detail.title}}
                 </a>
               </li>
@@ -123,7 +102,7 @@
             <div class="card-footer">Tuesday</div>
             @for ( detail of this.votives_wednesday; track detail ) {
               <li class="list-group-item">
-                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_wednesday )">
+                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_wednesday, detail.title )">
                   {{detail.title}}
                 </a>
               </li>
@@ -131,7 +110,7 @@
             <div class="card-footer">Wednesday</div>
             @for ( detail of this.votives_thursday; track detail ) {
               <li class="list-group-item">
-                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_thursday )">
+                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_thursday, detail.title )">
                   {{detail.title}}
                 </a>
               </li>
@@ -139,7 +118,7 @@
             <div class="card-footer">Thursday</div>
             @for ( detail of this.votives_friday; track detail ) {
               <li class="list-group-item">
-                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_friday )">
+                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_friday, detail.title )">
                   {{detail.title}}
                 </a>
               </li>
@@ -152,7 +131,7 @@
           <ul class="list-group">
           @for ( detail of this.votives_our_lady; track detail ) {
               <li class="list-group-item">
-                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_our_lady )">
+                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_our_lady, detail.title )">
                   {{detail.title}}
                 </a>
               </li>
@@ -165,7 +144,7 @@
           <ul class="list-group">
           @for ( detail of this.other_votives; track detail ) {
               <li class="list-group-item">
-                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.other_votives )">
+                <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.other_votives, detail.title )">
                   {{detail.title}}
                 </a>
               </li>

@@ -1,0 +1,101 @@
+<ion-content overflow-scroll="true">
+  <app-ordo-header />
+  @if ( this.loading ) {
+    <div style="text-align: center; padding-top: 70px; font-style: italic;">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only" id="loading"></span>
+        </div>
+      </div>
+      <br />
+      Loading...
+    </div>
+  } @else if ( this.error ) {
+    <div style="text-align: center; padding-top: 70px; font-style: italic;">
+      Locale could not be fetched.
+    </div>
+  } @else if ( this.in_certain_locations.length > 0 ) {
+    <div style="text-align: center; font-style: italic;">
+      <div class="section">
+        <div class="container">
+          @for ( day of this.in_certain_locations; track day ) {
+            <div class="card mb-3" style="cursor: pointer;">
+              <div class="row g-0 rounded-2">
+                <div class="col-md-4">
+                  <div class="img-fluid h-100 h2" style="background: linear-gradient(0deg, rgb(62, 98, 68) 11.2%, rgb(42, 119, 129) 91.1%);">
+                    <div class="h-100" style="display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">
+                      <p style="text-align: center; margin: 0; padding: 10px; font-size: 22px;">{{day.date}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8" style="display: flex;">
+                  <div class="card-body" style="min-height: fit-content; align-self: center;">
+                    <div>
+                      <h5 class="card-title" style="padding: 30px;">
+                        <strong>
+                          {{day.title}}&nbsp;
+                        </strong>
+                        <span class="dot" [style.color]="this.getForegroundColor(day.colors)" [style.background-color]="this.translateColor(day.colors)"></span>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+    @if ( this.windowScrolled ) {
+      <div class="scroll-to-top">
+        <button type="button" class="btn btn-danger active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+          <fa-icon [icon]="faArrow" />
+        </button>
+      </div>
+    }
+  } @else if ( GetKeys ( this.locale ).length > 0 ) {
+    <div style="text-align: center; padding-top: 70px; font-style: italic;">
+      @for ( diocese of this.locale.dioceses; track this.locale.dioceses ) {
+        <div class="section">
+          <div class="container">
+            <div style="width: 100%;">
+              <caption style="display: flex;">{{diocese}}</caption>
+            </div>
+            @for ( day of this.locale.locale [ diocese ]; track day ) {
+              <div class="card mb-3" style="cursor: pointer;">
+                <div class="row g-0 rounded-2">
+                  <div class="col-md-4">
+                    <div class="img-fluid h-100 h2" style="background: linear-gradient(0deg, rgb(62, 98, 68) 11.2%, rgb(42, 119, 129) 91.1%);">
+                      <div class="h-100" style="display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">
+                        <p style="text-align: center; margin: 0; padding: 10px; font-size: 22px;">{{day.date}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-8" style="display: flex;">
+                    <div class="card-body p-0" style="min-height: fit-content; align-self: center;">
+                      <div style="height: 100%;">
+                        <h5 class="card-title" style="padding: 30px;">
+                          <strong>
+                            {{day.title}}&nbsp;
+                          </strong>
+                          <span class="dot" [style.color]="this.getForegroundColor(day.colors)" [style.background-color]="this.translateColor(day.colors)"></span>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+    @if ( this.windowScrolled ) {
+      <div class="scroll-to-top">
+        <button type="button" class="btn btn-danger active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+          <fa-icon [icon]="faArrow" />
+        </button>
+      </div>
+    }
+  }
+</ion-content>

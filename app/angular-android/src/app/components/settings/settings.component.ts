@@ -10,7 +10,7 @@ import moment from "moment"
 import { Toast } from '@capacitor/toast';
 
 @Component({
-  selector: 'settings-component',
+  selector: 'app-settings-component',
   standalone: true,
   imports: [
     RouterOutlet,
@@ -48,12 +48,12 @@ export class SettingsComponent {
       this.error = true
     } )
     LocalNotifications.getPending ( ).then ( pending => {
-      for ( let not of pending.notifications ) {
-        if ( not.id == 0 ) {
+      for ( const not of pending.notifications ) {
+        if ( not.id == 111 ) {
           this.AngelusSix = true
-        } else if ( not.id == 1 ) {
+        } else if ( not.id == 222 ) {
           this.AngelusTwelve = true
-        } else if ( not.id == 2 ) {
+        } else if ( not.id == 333 ) {
           this.AngelusEighteen = true
         }
       }
@@ -63,7 +63,7 @@ export class SettingsComponent {
   private async getCalendarID ( ): Promise<number> {
     return new Promise<number> ( ( resolve, reject ) => {
       this.calendar.listCalendars ( ).then ( async calendars => {
-        for ( let calendar of calendars ) {
+        for ( const calendar of calendars ) {
           await this.calendar.deleteCalendar ( calendar.id )
           if ( calendar.isPrimary ) {
             resolve ( calendar.id )
@@ -85,13 +85,13 @@ export class SettingsComponent {
   }
 
   private async calMissing ( ) {
-    let events = await this.calendar.listEventsInRange ( moment ( ).startOf ( "month" ).toDate ( ), moment().endOf ( "month" ).toDate ( ) )
+    const events = await this.calendar.listEventsInRange ( moment ( ).startOf ( "month" ).toDate ( ), moment().endOf ( "month" ).toDate ( ) )
 
     let index = 0
 
-    for ( let event of events ) {
+    for ( const event of events ) {
       let matched = false
-      for ( let celebration of this.ordo [ this.getFullYear ( ) ] [ new Date ( ).getMonth ( ) ] [ index ] [ "celebrations" ] ) {
+      for ( const celebration of this.ordo [ this.getFullYear ( ) ] [ new Date ( ).getMonth ( ) ] [ index ] [ "celebrations" ] ) {
         if ( event.title == celebration.title ) {
           matched = true
           break
@@ -108,18 +108,18 @@ export class SettingsComponent {
 
   async createGoogleCal ( ) {
     if ( Object.keys ( this.ordo ).length > 0 ) {
-      let readwrite = await this.calendar.hasReadWritePermission ( )
+      const readwrite = await this.calendar.hasReadWritePermission ( )
       if ( !readwrite ) {
         await this.calendar.requestReadWritePermission ( )
       }
       if ( await this.calMissing ( ) ) {
         this.getCalendarID ( ).then ( async id => {
-          for ( let month of this.ordo [ this.getFullYear ( ) ] ) {
-            for ( let day of month ) {
-              for ( let celebration of day [ "celebrations" ] ) {
+          for ( const month of this.ordo [ this.getFullYear ( ) ] ) {
+            for ( const day of month ) {
+              for ( const celebration of day [ "celebrations" ] ) {
                 await this.calendar.createEventWithOptions ( celebration.title, undefined, celebration.commemorations.map ( ( e: any ) => {
                   return "Commemoration Today: " + e.title
-                } ).join ( "\n" ), moment ( day.date.combined, "DD MMM YYYY" ).toDate ( ), moment ( day.date.combined, "DD MMM YYYY" ).add(1, "day").toDate ( ), {
+                } ).join ( "\n" ), moment ( day.date.combined, "dd MMM YYYY" ).toDate ( ), moment ( day.date.combined, "dd MMM YYYY" ).add(1, "day").toDate ( ), {
                   "calendarId": id
                 }  )
               }
@@ -145,8 +145,17 @@ export class SettingsComponent {
     return new Date().getFullYear()
   }
 
-  TurnOnNotifications ( id: number, body: string, hour: number, minute: number, event: Event ) {
-    let checked = ( <HTMLInputElement> event.target ).checked
+  async TurnOnNotifications ( id: number, body: string, hour: number, minute: number, event: Event ) {
+    await LocalNotifications.createChannel ( {
+      id: '1',
+      name: 'channel_name',
+      description: 'channel_description',
+      importance : 5,
+      visibility: 1,
+      vibration: true,
+      // sound: 'sound_name.wav'
+    } )
+    const checked = ( <HTMLInputElement> event.target ).checked
     if ( !checked ) {
       LocalNotifications.cancel ( {
         "notifications": [
@@ -158,29 +167,52 @@ export class SettingsComponent {
     } else {
       LocalNotifications.checkPermissions ( ).then ( async permissions => {
         if ( String ( permissions.display ) !== "granted" ) {
-          console.error ( "Local Permissions Error" )
-          console.error ( permissions.display )
-          await LocalNotifications.requestPermissions ( )
+          await LocalNotifications.requestPermissions ( ).then ( async res => {
+            if ( res.display == "denied" ) {
+              await Toast.show ( {
+                text: "Notification Permissions are not Allowed on this Device."
+              } )
+            }
+            console.error ( res )
+          } )
         }
 
-        LocalNotifications.schedule ( {
-          notifications: [
-            {
-              id,
-              title: "Oremus",
-              body,
-              schedule: {
-                repeats: true,
-                every: "day",
-                on: {
-                  hour,
-                  minute
-                },
-                allowWhileIdle: true
-            }
-            }
-          ]
-        } )
+        try {
+          await LocalNotifications.schedule ( {
+            notifications: [
+              {
+                id: 444,
+                title: "Test",
+                body: "Test",
+                channelId: "1",
+                schedule: {
+                  at: new Date()
+                }
+              }
+            ]
+          } )
+          await LocalNotifications.schedule ( {
+            notifications: [
+              {
+                id,
+                title: "Oremus",
+                channelId: "1",
+                body,
+                schedule: {
+                  repeats: true,
+                  every: "day",
+                  on: {
+                    hour,
+                    minute
+                  },
+                  allowWhileIdle: true
+              }
+              }
+            ]
+          } )
+        } catch ( e ) {
+          console.error ( e )
+        }
       } )
     }
   }

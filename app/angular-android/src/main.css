@@ -380,6 +380,9 @@ img
 {
 	opacity: 1;
 }
+body {
+	overflow: scroll;
+}
 .card
 {
 	border: 0;
@@ -632,7 +635,6 @@ img
 	left: 0;
 	opacity: 0.0;
 	position: absolute;
-	webkit-animation: pulsate 1.6s ease-out;
 	width: 180px;
 	z-index: 99;
 }
@@ -655,7 +657,6 @@ img
 .cc-profile-image a:hover:before
 {
 	animation: none;
-	webkit-animation: none;
 }
 .button-container .btn-default
 {
@@ -838,7 +839,6 @@ img
 	left: 0;
 	opacity: 0.0;
 	position: absolute;
-	webkit-animation: pulsate 1.6s ease-out;
 	width: 180px;
 	z-index: 99;
 }
@@ -1111,4 +1111,4 @@ img
 .page-header.page-header-small {
 	height: 60vh;
 	max-height: 440px;
-}  
+}

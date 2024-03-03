@@ -4,7 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCog, faHandsPraying, faCalendar, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'ordo-tabbar',
+  selector: 'app-ordo-tabbar',
   standalone: true,
   imports: [
     RouterModule,

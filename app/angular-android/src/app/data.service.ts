@@ -14,7 +14,7 @@ export class DataService {
   ) { }
 
   async GetOrdo ( ): Promise<any> {
-    return new Promise<void> ( async ( resolve, reject ) => {
+    return new Promise<void> ( ( resolve, reject ) => {
       this.readFile ( "ordo.json" ).then ( json => {
         if ( Object.keys ( json ).length != 7 ) {
           throw Error ( "Cache Object Not Full" )
@@ -34,8 +34,11 @@ export class DataService {
               },
               complete: async ( ) => {
                 if ( i == currentYear + 5 ) {
-                  await this.deleteFile ( "ordo.json" )
-                  await this.writeFile ( "ordo.json", ordo, reject )
+                  this.deleteFile ( "ordo.json" ).then ( ( ) => {
+                    this.writeFile ( "ordo.json", ordo, reject ).then ( ( ) => {
+                      resolve ( ordo )
+                    } )
+                  } )
                   resolve ( ordo )
                 }
               },
@@ -48,7 +51,7 @@ export class DataService {
   }
 
   async GetLocale ( ): Promise<any> {
-    return new Promise<void> ( async ( resolve, reject ) => {
+    return new Promise<void> ( ( resolve, reject ) => {
       this.readFile ( "locale.json" ).then ( json => {
         resolve ( json )
       } ).catch ( e => {
@@ -56,8 +59,11 @@ export class DataService {
         this.http.get <any> ( this.getURL ( "locale.php" ) ).subscribe (
           {
             next: async ( response: any ) => {
-              await this.deleteFile ( "locale.json" )
-              await this.writeFile ( "locale.json", response, reject )
+              this.deleteFile ( "locale.json" ).then ( ( ) => {
+                this.writeFile ( "locale.json", response, reject ).then ( ( ) => {
+                  resolve ( response )
+                } )
+              } )
               resolve ( response )
             },
             error: ( e ) => reject ( e )
@@ -68,16 +74,18 @@ export class DataService {
   }
 
   async GetPrayers ( ): Promise<any> {
-    return new Promise<void> ( async ( resolve, reject ) => {
+    return new Promise<void> ( ( resolve, reject ) => {
       this.readFile ( "prayers.json" ).then ( json => {
         resolve ( json )
-      } ).catch ( e => {
+      } ).catch ( () => {
         this.http.get <any> ( this.getURL ( "prayers.php" ) ).subscribe (
           {
             next: async ( response: any ) => {
-              await this.deleteFile ( "prayers.json" )
-              await this.writeFile ( "prayers.json", response, reject )
-              resolve ( response )
+              this.deleteFile ( "prayers.json" ).then ( ( ) => {
+                this.writeFile ( "prayers.json", response, reject ).then ( ( ) => {
+                  resolve ( response )
+                } )
+              } )
             },
             error: ( e ) => reject ( e )
           }

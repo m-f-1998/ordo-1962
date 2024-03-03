@@ -4,7 +4,6 @@ import { ModalTextComponent } from '../modal-text/modal-text.component'
 import { HttpClient } from '@angular/common/http'
 import { DataService } from '../../data.service'
 import { ModalPropersComponent } from '../modal-propers/modal-propers.component'
-import { Preferences } from '@capacitor/preferences'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { RouterModule } from '@angular/router'
@@ -34,9 +33,6 @@ export class InfoComponent {
   public error = false
   public loading = true
 
-  public language: string = "English"
-  public languages = [ "English", "Latin" ]
-
   public option: string = "Information on the Ordo"
   public options = [ "Information on the Ordo", "Votive Masses" ]
   public faCheck = faCheck
@@ -51,14 +47,6 @@ export class InfoComponent {
     this.getLocale ( )
   }
 
-  public UpdateLanguage ( id: string ) {
-    this.language = id
-    Preferences.set ( {
-      key: "language",
-      value: this.language
-    } )
-  }
-
   public UpdateOption ( id: string ) {
     this.option = id
   }
@@ -68,7 +56,7 @@ export class InfoComponent {
       this.locale = locale
       this.loading = false
       this.error = false
-    } ).catch ( ( e: any) => {
+    } ).catch ( ( ) => {
       this.loading = false
       this.error = true
     } )
@@ -139,15 +127,14 @@ export class InfoComponent {
   }
 
   public OpenText ( title: string, body: string ) {
-    let propers = this.modalService.open ( ModalTextComponent, { size: 'lg', keyboard: false, centered: true } )
+    const propers = this.modalService.open ( ModalTextComponent, { size: 'lg', keyboard: false, centered: true } )
     propers.componentInstance.title = title
-    propers.componentInstance.body = body.trimStart ( )
+    propers.componentInstance.body = body
   }
 
-  public OpenPropers ( celebrations: any[ ] ) {
-    let propers = this.modalService.open ( ModalPropersComponent, { size: 'lg', keyboard: false, centered: true } )
+  public OpenPropers ( celebrations: any[ ], title: string ) {
+    const propers = this.modalService.open ( ModalPropersComponent, { size: 'lg', keyboard: false, centered: true } )
     propers.componentInstance.celebrations = celebrations
-    propers.componentInstance.celebrationTitle = celebrations [ 0 ].title
-    propers.componentInstance.language = this.language
+    propers.componentInstance.celebrationTitle = title
   }
 }

@@ -3,11 +3,10 @@ import { ActivatedRoute, RouterModule } from '@angular/router'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { DataService } from '../../data.service'
 
 @Component({
-  selector: 'locale-component',
+  selector: 'app-locale-component',
   standalone: true,
   imports: [
     RouterModule,
@@ -62,7 +61,7 @@ export class LocaleComponent {
       }
       this.loading = false
       this.error = false
-    } ).catch ( ( e: any ) => {
+    } ).catch ( ( ) => {
       this.loading = false
       this.error = true
     } )

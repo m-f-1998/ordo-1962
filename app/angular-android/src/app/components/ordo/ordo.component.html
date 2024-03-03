@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 @if ( this.loading ) {
   <div style="text-align: center; padding-top: 70px; font-style: italic;">
     <div class="d-flex justify-content-center">
@@ -15,25 +16,6 @@
 } @else if ( !this.loading && !this.error ) {
   <div>
     <div style="text-align: center; padding-top: 70px; font-style: italic;">
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-          {{this.language}}
-        </button>
-        <ul class="dropdown-menu">
-          @for ( index of this.languages; track index ) {
-            <li>
-              <button class="dropdown-item" type="button" (click)="this.UpdateLanguage(index.toString())">
-                <span>
-                  {{index}}
-                  @if ( this.language === index.toString() ) {
-                    &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
-                  }
-                </span>
-              </button>
-            </li>
-          }
-        </ul>
-      </div>
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
           {{this.year}}
@@ -57,7 +39,7 @@
         @for ( month of months; track month ) {
           <span>
             <a href="javascript:void(0)" (click)="GoTo(month.substring(0,3))" class="link-primary" style="text-decoration: none; margin: 5; font-size: large;">{{month}}</a>
-            @if ( month != "December" ) {
+            @if ( month !== "December" ) {
               &nbsp;&nbsp;
             }
           </span>
@@ -65,7 +47,7 @@
       </div>
     </div>
     @for ( month of this.ordo [ this.year ]; track month ) {
-      <div class="section" id="{{month [ 0 ].date.month}}" [style.padding-top]="(month [ 0 ].date.month=='Jan') ? 0 : 30">
+      <div class="section" id="{{month [ 0 ].date.month}}" [style.padding-top]="(month [ 0 ].date.month==='Jan') ? 0 : 30">
         <div class="container">
           @for ( day of month; track day ) {
             <div class="card mb-3" style="cursor: pointer; border: 1px solid var(--bs-emphasis-color);">
@@ -77,7 +59,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-7" (click)="OpenPropers(day.celebrations)">
+                <div class="col-md-7" (click)="OpenPropers(day.celebrations)" (keydown)="OpenPropers(day.celebrations)">
                   <div class="card-body">
                     @for ( celeb of day.celebrations; track celeb ) {
                       <div>

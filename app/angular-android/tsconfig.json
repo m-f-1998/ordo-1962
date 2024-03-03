@@ -1,33 +1,48 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
+    "alwaysStrict": true,
     "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "declaration": false,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "declaration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "useDefineForClassFields": false,
+    "forceConsistentCasingInFileNames": true,
     "lib": [
-      "ES2022",
-      "dom"
-    ]
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+      "dom",
+      "es2017"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "removeComments": false,
+    "esModuleInterop":true,
+    "strictPropertyInitialization": false,
+    "target": "es2017",
+    "baseUrl": ".",
+    "paths": {
+      "@ionic/core/hydrate": [
+        "./core/hydrate"
+      ],
+      "@ionic/core": [
+        "./core"
+      ],
+      "@ionic/angular": [
+        "./angular"
+      ],
+      "@ionic/angular-server": [
+        "./packages/angular-server"
+      ],
+      "@ionic/react": [
+        "./react"
+      ],
+      "@ionic/vue": [
+        "./vue"
+      ]
+    }
   }
 }

@@ -4,7 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'modal-text',
+  selector: 'app-modal-text',
   standalone: true,
   imports: [
     RouterModule,

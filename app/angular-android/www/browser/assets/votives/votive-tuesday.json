@@ -1,0 +1,75 @@
+[
+  {
+    "rank": 4,
+    "title": "The Holy Angels",
+    "colors": "w",
+    "propers": [
+      {
+        "title": "Introit",
+        "english": "*Ps 102:20*\nBless the Lord, all ye His Angels: you that are mighty in strength, and execute His word, hearkening to the voice of His orders. (P.T. Aileluia, alleluia.)\n*Ps 102:1*\nBless the Lord, O my soul: and let all that is within me bless His holy Name.\nGlory be to the Father...\nBless the Lord, all ye His Angels: you that are mighty in strength, and execute His word, hearkening to the voice of His orders. (P.T. Alleluia, alleluia.)",
+        "latin": "*Ps 102:20*\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus, ad audiendam vocem sermonum ejus. (T.P. Allelúja, allelúja.)\n*Ps 102:1*\nBenedic, anima mea, Domino: et omnia, quae intra me sunt, nomini sancto ejus.\nGlória Patri...\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus, ad audiendam vocem sermonum ejus. (T.P. Allelúja, allelúja.)"
+      },
+      {
+        "title": "Collect",
+        "english": "O God, who hast constituted the services of Angels and of men in a wonderful order, mercifully grant, that they who ever stand before Thy face to do Thee service in heaven, may also defend our life upon earth.\nThrough our Lord...",
+        "latin": "Deus, qui, miro ordine, Angelorum ministerial hominumque dispensas: concede propitius; ut, a quibus tibi ministrantibus in cælo semper assistitur, ab his in terra vita nostra muniatur.\nPer Dóminum..."
+      },
+      {
+        "title": "Lesson",
+        "english": "*Apoc 5:11-14*\nIn those days: I heard the voice of many Angels round about the throne, and the living creatures and the ancients; and the number of them was thousands of thou sands, saying with a loud voice: The Lamb that was slain is worthy to receive power, and divinity, and wisdom, and strength, and honor, and glory, and benediction. And every creature which is in heaven and on the earth, and under the earth, and such as are in the sea, and all that are in them, I heard all saying: To Him that sitteth on the throne, and to the Lamb, benediction, and honor, and glory, and power, for ever and ever. And the four living creatures said: Amen. And the four and twenty ancients fell down on their faces, and adored Him that liveth for ever and ever.",
+        "latin": "*Apoc 5:11-14*\nIn diebus illis: Audivi vocem Angelorum multorum in circuitu throni, et animalium, et seniorum, et erat numerus eorum milia milium, dicentium voce magna: Dignus est Agnus, qui occisus est, accipere virtutem, et divinitatem, et sapientiam, et fortitudinem, et honorem, et gloriam, et benedictionem. Et omnem creaturam, quae in coelo est, et super terram, et sub terra, et quae sunt in mari, et quae in eo: omnes audivi dicentes: Sedenti in throno, et Agno: benedictio, et honor, et gloria, et potestas in saecula saeculorum. Et quatuor animalia dicebant: Amen. Et viginti quatuor seniors ceciderunt in facies suas: et adoraverunt viventem in saecula saeculorum."
+      },
+      {
+        "title": "Gradual",
+        "english": "*Ps 148:1,2*\nPraise ye the Lord from the heavens: praise Him, in the high places. Praise ye Him, all His angels: praise ye Him, all His hosts.",
+        "latin": "*Ps 148:1,2*\nLaudate Dominum de coelis: laudate eum in excelsis. Laudate eum, omnes Angeli ejus: laudate eum, omnes virtutes ejus."
+      },
+      {
+        "title": "Lesser Alleluia",
+        "english": "*Ps 137:1,2*\nAlleluia, alleluia.\nI will sing praise to Thee in the sight of the Angels: I will worship towards Thy holy temple, and I will give glory to Thy name.\nAlleluia.",
+        "latin": "*Ps 137:1,2*\nAllelúja, allelúja.\nIn conspectu Angelorum psallam tibi: adorabo ad templum sanctum tuum, et confitebor nomini tuo.\nAllelúja."
+      },
+      {
+        "title": "Tract",
+        "english": "*Ps 102:20-22*\nBless the Lord all ye His Angels: ye that are mighty in strength, and execute His word. Bless the Lord, all ye His hosts: ye ministers of His that do His will. Bless the Lord, all His works: in every place of His dominion, Oh my soul, bless thou the Lord.",
+        "latin": "*Ps 102:20-22*\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus. Benedicite Domino, omnes virtutes ejus: ministry ejus, qui facitis voluntatem ejus. Benedicite Domino, omnia opera ejus: in omni loco dominationis ejus, benedic, anima mea, Domino."
+      },
+      {
+        "title": "Greater Alleluia",
+        "english": "*Ps 137:1,2*\nAlleluia, alleluia.\nI will sing praise to Thee in the sight of the Angels: I will worship towards Thy holy temple, and I will give glory to Thy name.\nAlleluia.\n*Matt 28:2*\nAn Angel of the Lord descended from heaven: and coming rolled back the stone, and sat upon it.\nAlleluia.",
+        "latin": "*Ps 137:1,2*\nAllelúja, allelúja.\nIn conspectu Angelorum psallam tibi: adorabo ad templum sanctum tuum, et confitebor nomini tuo.\nAllelúja.\n*Matt 28:2*\nAngelus Domini descendit de coelo, et accedens revolvit lapidem, et sedebat super eum.\nAllelúja."
+      },
+      {
+        "title": "Gospel",
+        "english": "*Jn 1:47,51*\nAt that time: Jesus saw Nathanael coming to Him: and He saith of him: Behold an Israelite indeed, in whom there is no guile. Nathanael saith to Him: Whence knowest Thou me? Jesus answered, and said to him: Before that Philip called thee, when thou wast under the fig-tree, I saw thee. Nathanael answered Him, and said: Rabbi, Thou art the Son of God, Thou art the King of Israel. Jesus answered, and said to him: Because I said unto thee, I saw thee under the fig-tree, thou believest: greater things than these shalt thou see. And He said to him: Amen, amen I say to you, you shall see the heavens opened, and the Angels of God ascending and descending upon the Son of Man.",
+        "latin": "*Jn 1:47,51*\nIn illo tempore: Vidit Jesus Nathanaël venientem ad se, et dicit de eo: Ecce vere Israëlita, in quo dolus non est. Dicit ei Nathanaël: Unde me nosti? Respondit Jesus, et dixit ei: Priusquam te Philippus vocaret, cum esses sub ficu, vidi te. Respondit ei Nathanaël, et ait: Rabbi, tu es Filius Dei, tu es Rex Israël. Respondit Jesus, et dixit ei: Quia dixi tibi: Vidi te sub ficu, credis: majus his videbis. Et dicit ei: Amen, amen dico vobis, videbitis coelum apertum, et Angelos Dei ascendentes, et descendentes supra Filium hominis."
+      },
+      {
+        "title": "Offertory",
+        "english": "*Apoc 8:3-4*\nAn angel stood near the altar of the temple, having a golden censer in his hand: and there was given to him much incense, and the smoke of the perfumes ascended before God. (P.T. Alleluia.)",
+        "latin": "*Apoc 8:3-4*\nStetit Angelus juxta aram templi, habens thuribulum aureum in manu sua: et data sunt ei incensa multa: et ascendit fumus aromatum in conspectu Dei. (T.P. Alleluia.)"
+      },
+      {
+        "title": "Secret",
+        "english": "We offer unto Thee, O Lord, the Sacrifice of praise and humbly beseech Thee, that through the prayers of the Angels who plead for us, Thou wouldst graciously accept it and make it of avail to us for salvation.\nThrough our Lord...",
+        "latin": "Hostias tibi, Domine, laudis offerimus, suppliciter deprecantes: ut easdem, angelico pro nobis interveniente suffragio, et placatus accipias, et ad salute nostram provenire concedas.\nPer Dóminum..."
+      },
+      {
+        "title": "Preface of the Season",
+        "english": "",
+        "latin": ""
+      },
+      {
+        "title": "Communion",
+        "english": "Angels, Archangels, Thrones and Dominions, Principalities, and Powers, the Virtues of the heavens, Cherubim and Seraphim, bless ye the Lord for ever. (P.T. Alleluia.)",
+        "latin": "Angeli, Archangeli, Throni et Dominationes, Principatus et Potestates, Virtutes cœlorum, Cherubim atque Seraphim, Dominum benedicite in aeternum. (T.P. Allelúja.)"
+      },
+      {
+        "title": "Postcommunion",
+        "english": "We who are filled with the heavenly blessing, humbly beseech Thee, O Lord, that the Mysteries which we celebrate with this imperfect worship of ours may be profitable to us by the help of Thy holy Angels and Archangels.\nThrough our Lord...",
+        "latin": "Repleti, Domine, benedictione coelesti, suppliciter imploramus: ut, quod fragili celebramus officio, sanctorum Angelorum atque Archangelorum nobis prodesse sentiamus auxilio.\nPer Dóminum..."
+      }
+    ],
+    "commemorations" : []
+  }
+]
