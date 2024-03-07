@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, ViewChild } from "@angular/core"
 import { Router } from "@angular/router"
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
-import { ViewportScroller } from "@angular/common"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
 import { ModalPropersComponent } from "../modal-propers/modal-propers.component"
@@ -21,6 +20,8 @@ export class OrdoComponent {
   public error = false
 
   public year = "2024"
+  public language = "English"
+  public languages = ["English", "Latin"]
 
   public faCheck = faCheck
   public months = [
@@ -45,13 +46,16 @@ export class OrdoComponent {
     this.content.scrollToTop()
   }
 
+  public UpdateLanguage(event: Event) {
+    this.language = (<HTMLInputElement>event.target).value
+  }
+
   detectScroll ( e: ScrollCustomEvent ) {
     this.windowScrolled = e.detail.currentY > 50
     this.changeDetector.detectChanges()
   }
 
   constructor(
-    private scroller: ViewportScroller,
     private modalService: NgbModal,
     private apiRequests: DataService,
     private changeDetector: ChangeDetectorRef,
@@ -83,8 +87,8 @@ export class OrdoComponent {
     return differenceInCalendarDays(parse(date.combined, "dd MMM yyyy", new Date()), new Date()) === 0
   }
 
-  public UpdateYear(year: string) {
-    this.year = year
+  public UpdateYear(event: Event) {
+    this.year = (<HTMLInputElement>event.target).value
   }
 
   public YearRange() {
@@ -102,9 +106,9 @@ export class OrdoComponent {
       if ( obj ) {
         obj.scrollIntoView({
           behavior: 'smooth',
-        });
+        })
       }
-      console.error ( "Today Not Found" )
+      console.error ( id, obj  )
     } catch (err) {
       console.error ( err )
     }
@@ -144,14 +148,15 @@ export class OrdoComponent {
     }
   }
 
-  public OpenPropers(celebrations: any[]) {
+  public OpenPropers(celebration: any) {
     const propers = this.modalService.open(ModalPropersComponent, {
       size: "lg",
       keyboard: false,
       centered: true,
       modalDialogClass: "test",
     })
-    propers.componentInstance.celebrations = celebrations
-    propers.componentInstance.celebrationTitle = celebrations[0].title
+    propers.componentInstance.celebration = celebration
+    propers.componentInstance.celebrationTitle = celebration.title
+    propers.componentInstance.language = this.language
   }
 }

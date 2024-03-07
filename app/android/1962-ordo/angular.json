@@ -35,7 +35,7 @@
             "styles": [
               "src/theme/variables.scss",
               "src/global.scss",
-              "src/main.css"
+              "src/main.min.css"
             ],
             "scripts": [],
             "browser": "src/main.ts"
@@ -124,7 +124,10 @@
               "src/theme/variables.scss",
               "src/global.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "ci": {

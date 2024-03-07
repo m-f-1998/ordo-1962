@@ -68,7 +68,7 @@ export class DataService {
   async GetPrayers(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
       this.readFile("prayers.json")
-        .then((json) => resolve(json))
+        .then((json) => resolve(json) )
         .catch(() => {
           this.http.get<any>(this.getURL("prayers.php")).subscribe({
             next: async (response: any) => {

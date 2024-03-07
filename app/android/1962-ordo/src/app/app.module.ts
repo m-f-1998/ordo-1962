@@ -21,7 +21,6 @@ import { DataService } from './data.service';
 import { HttpClientModule } from "@angular/common/http"
 import { HeaderComponent } from './header/header.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +40,7 @@ import { HeaderComponent } from './header/header.component';
     IonicModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     DataService,

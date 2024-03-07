@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, HostListener } from "@angular/core"
+import { ChangeDetectorRef, Component, ViewChild } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { DataService } from "../data.service"
+import { IonContent, ScrollCustomEvent } from "@ionic/angular"
 
 @Component({
   templateUrl: "./locale.component.html",
@@ -15,23 +16,20 @@ export class LocaleComponent {
   public faCheck = faCheck
   faArrow = faArrowUp
   public windowScrolled = false
+  @ViewChild(IonContent) content!: IonContent;
 
   public error = false
   public loading = true
 
   private country: string | null = null
 
-  @HostListener("window:scroll", ["$event"])
-  onWindowScroll() {
-    this.windowScrolled = window.scrollY > 50
-    this.changeDetector.detectChanges()
-  }
   scrollToTop() {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    })
+    this.content.scrollToTop()
+  }
+
+  detectScroll ( e: ScrollCustomEvent ) {
+    this.windowScrolled = e.detail.currentY > 50
+    this.changeDetector.detectChanges()
   }
 
   constructor(

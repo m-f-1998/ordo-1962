@@ -8,20 +8,18 @@ import * as marked from "marked"
   styleUrl: "./modal-propers.component.css",
 })
 export class ModalPropersComponent {
-  public celebrations: any[] = []
+  public celebration: any = null
   public marked = marked.parse
 
   public language = "English"
-  public languages = ["English", "Latin"]
 
   faCheck = faCheck
-
   celebrationTitle = ""
 
   constructor(public activeModal: NgbActiveModal) {}
 
-  public UpdateCelebrations(title: string) {
-    this.celebrationTitle = title
+  public UpdateCelebrations(event: Event) {
+    this.celebrationTitle = (<HTMLInputElement>event.target).value
   }
 
   public UpdateLanguage(lan: string) {

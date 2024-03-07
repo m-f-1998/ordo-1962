@@ -16,27 +16,17 @@
     </div>
   } @else {
     <div>
-      <div style="text-align: center; padding-top: 70px; padding-bottom: 40px; font-style: italic;">
-        <div style="text-align: center; font-style: italic;">
-          <div class="btn-group">
-            <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-              {{this.option}}
-            </button>
-            <ul class="dropdown-menu">
-              @for ( index of this.options; track index ) {
-                <li>
-                  <button class="dropdown-item" type="button" (click)="this.UpdateOption(index.toString())">
-                    <span>
-                      {{index}}
-                      @if ( this.option === index ) {
-                        &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
-                      }
-                    </span>
-                  </button>
-                </li>
-              }
-            </ul>
-          </div>
+      <div style="padding-top: 40px; text-align: center;">
+        <div class="btn-group">
+          <ion-list>
+            <ion-item>
+              <ion-select aria-label="Info View to Show" [ngModel]="option" (ionChange)="UpdateOption($event)">
+                @for ( index of this.options; track index ) {
+                  <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+                }
+              </ion-select>
+            </ion-item>
+          </ion-list>
         </div>
         @if ( this.option === "Information on the Ordo" ) {
           <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">

@@ -1,137 +1,46 @@
 import { Component } from "@angular/core"
-import { LocalNotifications } from "@capacitor/local-notifications"
-import { DataService } from "../data.service"
+import { LocalNotifications, PendingLocalNotificationSchema } from "@capacitor/local-notifications"
 import { Toast } from "@capacitor/toast"
-import { set } from "date-fns"
 
 @Component({
   templateUrl: "./settings.component.html",
 })
 export class SettingsComponent {
-  public ordo: any = {}
-
-  public loading = true
+  public ordo: any = { }
+  public active_notifications: number [ ] = [ ]
+  public loading = false
   public error = false
 
-  AngelusSix = false
-  AngelusTwelve = false
-  AngelusEighteen = false
-  DailyFeast = false
+  constructor ( ) {
+    LocalNotifications.getPending ( ).then ( pending => {
+      this.active_notifications = pending.notifications.map ( ( notification: PendingLocalNotificationSchema ) => { return notification.id } )
+    } )
+  }
 
-  constructor(
-    private apiRequests: DataService
-  ) {
-    this.apiRequests
-      .GetOrdo()
-      .then((ordo) => {
-        this.ordo = ordo
-        this.loading = false
-        this.error = false
-      })
-      .catch((e) => {
-        console.error(e)
-        this.loading = false
-        this.error = true
-      })
-    LocalNotifications.getPending().then((pending) => {
-      console.log ( pending )
-      for (const not of pending.notifications) {
-        if (not.id == 1) {
-          this.AngelusSix = true
-        } else if (not.id == 2) {
-          this.AngelusTwelve = true
-        } else if (not.id == 3) {
-          this.AngelusEighteen = true
-        } else if ( not.id == 4 ) {
-          this.DailyFeast = true
+  async TurnOnNotifications ( id: number, body: string, hour: number, minute: number, event: Event ) {
+    if ( !( <HTMLInputElement>event.target ).checked ) {
+      LocalNotifications.cancel ( { notifications: [
+        {
+          id: id,
         }
-      }
-    })
-  }
-
-  getFullYear() {
-    return new Date().getFullYear()
-  }
-
-  async SwitchDailyFeast ( id: number, event: Event ) {
-    const checked = (<HTMLInputElement>event.target).checked
-    if (!checked) {
-      LocalNotifications.cancel({
-        notifications: [
-          {
-            id: id,
-          },
-        ],
-      })
+      ] } )
     } else {
-      LocalNotifications.checkPermissions().then(async (permissions) => {
-        if (String(permissions.display) !== "granted") {
-          await LocalNotifications.requestPermissions().then(async (res) => {
-            if (res.display == "denied") {
-              await Toast.show({
+      LocalNotifications.checkPermissions ( ).then ( async permissions => {
+        if ( permissions.display !== "granted" ) {
+          await LocalNotifications.requestPermissions ( ).then ( async res => {
+            if ( res.display == "denied" ) {
+              await Toast.show ( {
                 text: "Notification Permissions are not Allowed on this Device.",
-              })
+              } )
+              console.error ( res )
+              this.active_notifications = this.active_notifications.filter ( item => item !== id )
+              return
             }
-            console.error(res)
-            return
           })
         }
-
+        this.active_notifications.push ( id )
         try {
-          for ( const celebration of this.ordo [ this.getFullYear ( ) ] [ new Date ( ).getMonth ( ) ] [ new Date ( ).getDate ( ) - 1 ].celebrations ) {
-            await LocalNotifications.schedule({
-              notifications: [
-                {
-                  title: "Daily Feast of the Day",
-                  body: celebration.title,
-                  id: id,
-                  sound: undefined,
-                  attachments: undefined,
-                  actionTypeId: "",
-                  extra: null,
-                  schedule: {
-                    repeats: true,
-                    every: "day",
-                    allowWhileIdle: true,
-                    at: set ( new Date ( ), { hours: 17, minutes: 13, } )
-                  },
-                },
-              ],
-            })
-          }
-        } catch (e) {
-          console.error ( e )
-        }
-      } )
-    }
-  }
-
-  async TurnOnNotifications(id: number, body: string, hour: number, minute: number, event: Event) {
-    const checked = (<HTMLInputElement>event.target).checked
-    if (!checked) {
-      LocalNotifications.cancel({
-        notifications: [
-          {
-            id: id,
-          },
-        ],
-      })
-    } else {
-      LocalNotifications.checkPermissions().then(async (permissions) => {
-        if (String(permissions.display) !== "granted") {
-          await LocalNotifications.requestPermissions().then(async (res) => {
-            if (res.display == "denied") {
-              await Toast.show({
-                text: "Notification Permissions are not Allowed on this Device.",
-              })
-            }
-            console.error(res)
-            return
-          })
-        }
-
-        try {
-          await LocalNotifications.schedule({
+          await LocalNotifications.schedule ( {
             notifications: [
               {
                 title: "Oremus",
@@ -142,18 +51,16 @@ export class SettingsComponent {
                 actionTypeId: "",
                 extra: null,
                 schedule: {
-                  repeats: true,
-                  every: "day",
+                  on: { hour: hour, minute: minute },
                   allowWhileIdle: true,
-                  at: set ( new Date ( ), { hours: hour, minutes: minute, } )
                 },
               },
             ],
-          })
-        } catch (e) {
-          console.error(e)
+          } )
+        } catch ( e ) {
+          console.error ( e )
         }
-      })
+      } )
     }
   }
 }

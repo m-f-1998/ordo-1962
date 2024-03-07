@@ -37,10 +37,7 @@
 .btn-danger:active:focus,
 .btn-danger:active:hover,
 .btn-danger.active:focus,
-.btn-danger.active:hover,
-.show > .btn-danger.dropdown-toggle,
-.show > .btn-danger.dropdown-toggle:focus,
-.show > .btn-danger.dropdown-toggle:hover {
+.btn-danger.active:hover {
   background-color: #ff5555;
   color: #ffffff;
   box-shadow: none;

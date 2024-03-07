@@ -8,32 +8,32 @@ import { DataService } from "../data.service"
   templateUrl: "./prayer.component.html",
 })
 export class PrayerComponent {
-  public prayers: any = {}
+  public prayers: any = { }
 
   public language: string = "English"
-  public languages = ["English", "Latin"]
+  public languages = [ "English", "Latin" ]
   public faCheck = faCheck
 
   public error = false
   public loading = true
 
-  constructor(private modalService: NgbModal, private apiRequests: DataService) {
-    this.apiRequests
-      .GetPrayers()
-      .then((prayers) => {
-        this.prayers = prayers
-        this.loading = false
-        this.error = false
-      })
-      .catch((e) => {
-        console.error(e)
-        this.loading = false
-        this.error = true
-      })
+  constructor (
+    private modalService: NgbModal,
+    private apiRequests: DataService
+  ) {
+    this.apiRequests.GetPrayers ( ).then( prayers => {
+      this.prayers = prayers
+      this.loading = false
+      this.error = false
+    } ).catch ( e => {
+      console.error ( e )
+      this.loading = false
+      this.error = true
+    } )
   }
 
-  public UpdateLanguage(id: string) {
-    this.language = id
+  public UpdateLanguage(event: Event) {
+    this.language = (<HTMLInputElement>event.target).value
   }
 
   public GetKeys(data: any) {
@@ -44,7 +44,7 @@ export class PrayerComponent {
   }
 
   public OpenPrayer(title: string, body: string) {
-    const propers = this.modalService.open(ModalTextComponent, {
+    const propers = this.modalService.open (ModalTextComponent, {
       size: "lg",
       keyboard: false,
       centered: true,

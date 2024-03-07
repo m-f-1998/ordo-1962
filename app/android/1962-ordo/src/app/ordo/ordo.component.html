@@ -1,54 +1,44 @@
 <ion-content overflow-scroll="true" [scrollEvents]="true" (ionScroll)="detectScroll($event)">
   <app-ordo-header />
-  @if ( this.loading ) {
-    <div style="text-align: center; padding-top: 70px; font-style: italic;">
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-            <span class="sr-only" id="loading"></span>
-        </div>
-      </div>
-      <br />
-      Loading...
-    </div>
-  } @else if ( this.error ) {
-    <div style="text-align: center; padding-top: 70px; font-style: italic;">
-      Ordo could not be fetched.
-    </div>
-  } @else if ( !this.loading && !this.error ) {
-    <div>
-      <div style="text-align: center; padding-top: 70px; font-style: italic;">
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-            {{this.year}}
-          </button>
-          <ul class="dropdown-menu">
-            @for ( index of YearRange(); track index ) {
-              <li>
-                <button class="dropdown-item" type="button" (click)="this.UpdateYear(index.toString())">
-                  <span>
-                    {{index}}
-                    @if ( this.year === index.toString() ) {
-                      &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
-                    }
-                  </span>
-                </button>
-              </li>
-            }
-          </ul>
-        </div>
-        <div style="margin: 30px;">
-          @for ( month of months; track month ) {
-            <span>
-              <a href="javascript:void(0)" (click)="GoTo(month.substring(0,3))" class="link-primary" style="text-decoration: none; margin: 5; font-size: large;">{{month}}</a>
-              @if ( month !== "December" ) {
-                &nbsp;&nbsp;
+  <div style="padding-top: 70px; text-align: center;">
+    @if ( this.loading ) {
+      <ion-spinner></ion-spinner>
+      <p style="padding-top: 20px;">Loading...</p>
+    } @else if ( this.error ) {
+      <p>Ordo could not be fetched.</p>
+    } @else if ( !this.loading && !this.error ) {
+      <div class="btn-group">
+        <ion-list>
+          <ion-item>
+            <ion-select aria-label="Ordo Year" [ngModel]="year" (ionChange)="UpdateYear($event)">
+              @for ( index of this.YearRange(); track index ) {
+                <ion-select-option value="{{index}}">{{index}}</ion-select-option>
               }
-            </span>
-          }
-        </div>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <ion-select aria-label="Ordo Language" [ngModel]="language" (ionChange)="UpdateLanguage($event)">
+              @for ( index of this.languages; track index ) {
+                <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div style="margin: 30px;">
+        @for ( month of months; track month ) {
+          <span>
+            <a href="javascript:void(0)" (click)="GoTo('#' + month.substring(0,3))" class="link-primary" style="text-decoration: none; margin: 5; font-size: large;">{{month}}</a>
+            @if ( month !== "December" ) {
+              &nbsp;&nbsp;
+            }
+          </span>
+        }
       </div>
       @for ( month of this.ordo [ this.year ]; track month ) {
-        <div class="section" id="{{month [ 0 ].date.month}}" [style.padding-top]="(month [ 0 ].date.month==='Jan') ? 0 : 30">
+        <div class="section" id="{{month [ 0 ].date.month}}" [style.padding-top]="(month [ 0 ].date.month==='Jan') ? 0 : 30" style="text-align: left;">
           <div class="container">
             @for ( day of month; track day ) {
               <div class="card mb-3" style="cursor: pointer; border: 1px solid var(--bs-emphasis-color);">
@@ -60,7 +50,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-7" (click)="OpenPropers(day.celebrations)" (keydown)="OpenPropers(day.celebrations)">
+                  <div class="col-md-7">
                     <div class="card-body">
                       @for ( celeb of day.celebrations; track celeb ) {
                         <div>
@@ -83,33 +73,35 @@
                             </div>
                           }
                         </div>
-                        <p class="card-text" style="white-space: pre-wrap;">Class {{celeb.rank}}</p>
-                        <p class="card-text" style="white-space: pre-wrap;">{{celeb.options}}</p>
+                        <p class="card-text mb-1" style="white-space: pre-wrap;">Class {{celeb.rank}}</p>
+                        <p class="card-text mb-2" style="white-space: pre-wrap;">{{celeb.options}}</p>
+                        <a class="btn btn-primary m-0 mb-4" style="background-color: var(--bs-primary);" href="javascript:void(0)" (click)="OpenPropers(celeb)">
+                          Open Propers
+                        </a>
                       }
-                      <span class="badge card-text" [style.background-color]="this.translateColor(day.season.colors)" [style.color]="this.getForegroundColor(day.season.colors)">{{day.season.title}}</span>
+                      <div style="margin-top: 10px;">
+                        <span class="badge card-text" [style.background-color]="this.translateColor(day.season.colors)" [style.color]="this.getForegroundColor(day.season.colors)">{{day.season.title}}</span>
+                      </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary ng-flex justify-content-center align-items-center m-0" style="margin-bottom: 0px; background-color: var(--bs-primary);" href="javascript:void(0)" (click)="OpenPropers(day.celebrations)">
-                    Open Propers
-                  </a>
                 </div>
               </div>
             }
           </div>
         </div>
       }
-    </div>
-    @if ( this.windowScrolled ) {
-      <div class="scroll-to-top">
-        <button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
-          <fa-icon [icon]="faArrow" />
-        </button>
-      </div>
-      <div class="scroll-to-today">
-        <button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="true" (click)="this.GoTo('#today')">
-          Go To Today
-        </button>
-      </div>
+      @if ( this.windowScrolled ) {
+        <div class="scroll-to-top">
+          <button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+            <fa-icon [icon]="faArrow" />
+          </button>
+        </div>
+        <div class="scroll-to-today">
+          <button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="true" (click)="this.GoTo('#today')">
+            Go To Today
+          </button>
+        </div>
+      }
     }
-  }
+  </div>
 </ion-content>

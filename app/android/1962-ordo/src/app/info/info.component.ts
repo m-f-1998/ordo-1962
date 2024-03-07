@@ -40,8 +40,8 @@ export class InfoComponent {
     this.getLocale ( )
   }
 
-  public UpdateOption ( id: string ) {
-    this.option = id
+  public UpdateOption ( event: Event ) {
+    this.option = (<HTMLInputElement>event.target).value
   }
 
   private getLocale ( ) {

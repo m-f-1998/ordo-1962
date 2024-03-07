@@ -1,43 +1,22 @@
 <ion-content overflow-scroll="true">
   <app-ordo-header />
-  @if ( this.loading ) {
-    <div style="text-align: center; padding-top: 70px; font-style: italic;">
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-            <span class="sr-only" id="loading"></span>
-        </div>
-      </div>
-      <br />
-      Loading...
-    </div>
-  }
-  @if ( this.error ) {
-    <div style="text-align: center; padding-top: 70px; font-style: italic;">
-      Prayers could not be fetched.
-    </div>
-  }
-  @if ( GetKeys(this.prayers[this.language]).length > 0 ) {
-    <div>
-      <div style="text-align: center; padding-top: 70px; padding-bottom: 40px; font-style: italic;">
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary dropdown-toggle" style="font-size: large; font-weight: bold;" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-            {{this.language}}
-          </button>
-          <ul class="dropdown-menu">
-            @for ( index of this.languages; track index ) {
-              <li>
-                <button class="dropdown-item" type="button" (click)="this.UpdateLanguage(index.toString())">
-                  <span>
-                    {{index}}
-                    @if ( this.language === index.toString() ) {
-                      &nbsp;<fa-icon [icon]="this.faCheck" size="lg" />
-                    }
-                  </span>
-                </button>
-              </li>
-            }
-          </ul>
-        </div>
+  <div style="text-align: center; padding-top: 70px;">
+    @if ( this.loading ) {
+      <ion-spinner></ion-spinner>
+      <p style="padding-top: 20px;">Loading...</p>
+    } @else if ( this.error ) {
+      <p>Prayers could not be fetched.</p>
+    } @else {
+      <div class="btn-group">
+        <ion-list>
+          <ion-item>
+            <ion-select [value]="language" (ionChange)="UpdateLanguage($event)">
+              @for ( index of this.languages; track index ) {
+                <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </ion-list>
       </div>
       <div style="display: inline-block; text-align: center;">
         @for ( category of GetKeys(this.prayers[this.language]); track category ) {
@@ -47,12 +26,16 @@
             </div>
             <ul class="list-group list-group-flush">
               @for ( prayer of GetKeys(this.prayers[this.language][category]); track prayer ) {
-                <li class="list-group-item"><a style="text-decoration: none;" href="javascript:void(0)" (click)="OpenPrayer(prayer, this.prayers[this.language][category][prayer])">{{prayer}}</a></li>
+                <li class="list-group-item">
+                  <a style="text-decoration: none;" href="javascript:void(0)" (click)="OpenPrayer(prayer, this.prayers[this.language][category][prayer])">
+                    {{prayer}}
+                  </a>
+                </li>
               }
             </ul>
           </div>
         }
       </div>
-    </div>
-  }
+    }
+  </div>
 </ion-content>
