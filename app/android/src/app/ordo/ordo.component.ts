@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component } from "@angular/core"
 import { Router } from "@angular/router"
-import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
 import { ModalPropersComponent } from "../modal-propers/modal-propers.component"
@@ -20,7 +19,6 @@ export class OrdoComponent {
   public language = "English"
   public languages = ["English", "Latin"]
 
-  public faCheck = faCheck
   public months = Array.from ( { length: 12 }, ( _, i ) => format ( new Date ( ).setMonth ( i ), "LLLL" ) )
 
   public faArrow = faArrowUp
@@ -56,7 +54,11 @@ export class OrdoComponent {
     this.changeDetector.detectChanges ( )
   }
 
-  public isToday ( date: any ): boolean {
+  public IsCurrentYear ( ): boolean {
+    return this.year == String ( new Date ( ).getFullYear ( ) )
+  }
+
+  public IsToday ( date: any ): boolean {
     return isToday ( parse ( date.combined, "dd MMM yyyy", new Date ( ) ) )
   }
 

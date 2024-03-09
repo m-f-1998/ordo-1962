@@ -1,6 +1,5 @@
 import { Component } from "@angular/core"
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
-import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import * as marked from "marked"
 
 @Component({
@@ -13,7 +12,6 @@ export class ModalPropersComponent {
 
   public language = "English"
 
-  public faCheck = faCheck
   public title = ""
 
   constructor(public activeModal: NgbActiveModal) { }

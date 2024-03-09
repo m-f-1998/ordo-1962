@@ -7,25 +7,17 @@
     } @else if ( this.error ) {
       <p>Ordo could not be fetched.</p>
     } @else if ( !this.loading && !this.error ) {
-      <div class="btn-group">
-        <ion-list>
-          <ion-item>
-            <ion-select [value]="year" (ionChange)="UpdateYear($event)">
-              @for ( index of this.YearRange(); track index ) {
-                <ion-select-option value="{{index}}">{{index}}</ion-select-option>
-              }
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <ion-list>
-          <ion-item>
-            <ion-select [value]="language" (ionChange)="UpdateLanguage($event)">
-              @for ( index of this.languages; track index ) {
-                <ion-select-option value="{{index}}">{{index}}</ion-select-option>
-              }
-            </ion-select>
-          </ion-item>
-        </ion-list>
+      <div class="btn-group" style="gap: 20px; display: flex; justify-content: center;">
+        <ion-select [value]="year" (ionChange)="UpdateYear($event)" style="width: auto;">
+          @for ( index of this.YearRange(); track index ) {
+            <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+          }
+        </ion-select>
+        <ion-select [value]="language" (ionChange)="UpdateLanguage($event)" style="width: auto;">
+          @for ( index of this.languages; track index ) {
+            <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+          }
+        </ion-select>
       </div>
       <div style="margin: 30px;">
         @for ( month of months; track month ) {
@@ -44,7 +36,7 @@
               <div class="card mb-3" style="cursor: pointer; border: 1px solid var(--bs-emphasis-color);">
                 <div class="row g-0 rounded-2">
                   <div class="col-md-4">
-                    <div class="img-fluid h-100 h2 date-field" [class.today]="isToday ( day.date )" id="{{isToday ( day.date ) ? 'today' : ''}}">
+                    <div class="img-fluid h-100 h2 date-field" [class.today]="IsToday ( day.date )" id="{{IsToday ( day.date ) ? 'today' : ''}}">
                       <div style="display: flex; height: 100%; justify-content: center; align-items: center; color: white; font-weight: bold;">
                         <p style="text-align: center; margin: 0;">{{day.date.weekday}} {{day.date.day}}<br />{{day.date.month}}</p>
                       </div>
@@ -98,9 +90,11 @@
         <ion-button (click)="this.GoTo ( '#top-ordo' )" class="scroll-to-top">
           <fa-icon [icon]="faArrow" />
         </ion-button>
-        <ion-button (click)="this.GoTo ( '#today' )" class="scroll-to-today">
-          Go To Today
-        </ion-button>
+        @if ( this.IsCurrentYear ( ) ) {
+          <ion-button (click)="this.GoTo ( '#today' )" class="scroll-to-today">
+            Go To Today
+          </ion-button>
+        }
       }
     }
   </div>

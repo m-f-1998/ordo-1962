@@ -1,5 +1,6 @@
 import { Component } from "@angular/core"
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
+import * as marked from "marked"
 
 @Component({
   templateUrl: "./modal-text.component.html",
@@ -8,6 +9,7 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
 export class ModalTextComponent {
   public title = ""
   public body = ""
+  public marked = marked.parse
 
   constructor(public activeModal: NgbActiveModal) {}
 

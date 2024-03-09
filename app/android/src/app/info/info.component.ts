@@ -4,7 +4,6 @@ import { ModalTextComponent } from '../modal-text/modal-text.component'
 import { HttpClient } from '@angular/common/http'
 import { DataService } from '../data.service'
 import { ModalPropersComponent } from '../modal-propers/modal-propers.component'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   templateUrl: './info.component.html',
@@ -31,7 +30,6 @@ export class InfoComponent {
 
   public option: string = "Information on the Ordo"
   public options = [ "Information on the Ordo", "Votive Masses" ]
-  public faCheck = faCheck
 
   constructor (
     private modalService: NgbModal,

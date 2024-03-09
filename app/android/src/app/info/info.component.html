@@ -9,25 +9,19 @@
     } @else {
       <div>
         <div style="text-align: center;">
-          <div class="btn-group">
-            <ion-list>
-              <ion-item>
-                <ion-select [ngModel]="option" (ionChange)="UpdateOption($event)">
-                  @for ( index of this.options; track index ) {
-                    <ion-select-option value="{{index}}">{{index}}</ion-select-option>
-                  }
-                </ion-select>
-              </ion-item>
-              @if ( this.option === "Votive Masses" ) {
-                <ion-item>
-                  <ion-select [value]="language" (ionChange)="UpdateLanguage($event)">
-                    @for ( index of this.languages; track index ) {
-                      <ion-select-option value="{{index}}">{{index}}</ion-select-option>
-                    }
-                  </ion-select>
-                </ion-item>
+          <div class="btn-group" style="gap: 20px; display: flex; justify-content: center;">
+            <ion-select [ngModel]="option" (ionChange)="UpdateOption($event)" style="width: auto;">
+              @for ( index of this.options; track index ) {
+                <ion-select-option value="{{index}}">{{index}}</ion-select-option>
               }
-            </ion-list>
+            </ion-select>
+            @if ( this.option === "Votive Masses" ) {
+              <ion-select [value]="language" (ionChange)="UpdateLanguage($event)" style="width: auto;">
+                @for ( index of this.languages; track index ) {
+                  <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+                }
+              </ion-select>
+            }
           </div>
           @if ( this.option === "Information on the Ordo" ) {
             <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">

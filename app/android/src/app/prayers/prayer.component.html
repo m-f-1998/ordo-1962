@@ -7,16 +7,12 @@
     } @else if ( this.error ) {
       <p>Prayers could not be fetched.</p>
     } @else {
-      <div class="btn-group">
-        <ion-list>
-          <ion-item>
-            <ion-select [value]="language" (ionChange)="UpdateLanguage($event)">
-              @for ( index of this.languages; track index ) {
-                <ion-select-option value="{{index}}">{{index}}</ion-select-option>
-              }
-            </ion-select>
-          </ion-item>
-        </ion-list>
+      <div class="btn-group" style="gap: 20px; display: flex; justify-content: center;">
+        <ion-select [value]="language" (ionChange)="UpdateLanguage($event)" style="width: auto;">
+          @for ( index of this.languages; track index ) {
+            <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+          }
+        </ion-select>
       </div>
       <div style="display: inline-block; text-align: center;">
         @for ( category of GetKeys(this.prayers[this.language]); track category ) {

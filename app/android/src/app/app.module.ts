@@ -20,6 +20,7 @@ import { DataService } from './data.service';
 
 import { HttpClientModule } from "@angular/common/http"
 import { HeaderComponent } from './header/header.component';
+import { LocaleRowComponent } from './locale/locale-row/locale-row.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HeaderComponent } from './header/header.component';
     PrayerComponent,
     SettingsComponent,
     TabBarComponent,
-    HeaderComponent
+    HeaderComponent,
+    LocaleRowComponent
   ],
   imports: [
     FormsModule,

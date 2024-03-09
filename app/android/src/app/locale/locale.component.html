@@ -6,77 +6,31 @@
       <p style="padding-top: 20px;">Loading...</p>
     } @else if ( this.error ) {
       <p>Locale could not be fetched.</p>
-    } @else if ( this.in_certain_locations.length > 0 ) {
+    } @else {
       <div style="font-style: italic;">
-        <div class="container">
-          @for ( day of this.in_certain_locations; track day ) {
-            <div class="card mb-3" style="cursor: pointer;">
-              <div class="row g-0 rounded-2">
-                <div class="col-md-4">
-                  <div class="img-fluid h-100 h2" style="background: linear-gradient(0deg, rgb(62, 98, 68) 11.2%, rgb(42, 119, 129) 91.1%);">
-                    <div class="h-100" style="display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">
-                      <p style="text-align: center; margin: 0; padding: 10px; font-size: 22px;">{{day.date}}</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-8" style="display: flex;">
-                  <div class="card-body" style="min-height: fit-content; align-self: center;">
-                    <div>
-                      <h5 class="card-title" style="padding: 30px;">
-                        <strong>
-                          {{day.title}}&nbsp;
-                        </strong>
-                        <span class="dot" [style.color]="this.colorSvc.getForegroundColor(day.colors)" [style.background-color]="this.colorSvc.getBackgroundColor(day.colors)"></span>
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          }
-        </div>
-      </div>
-      @if ( this.scrolled ) {
-        <ion-button (click)="this.GoTo ( '#top-locale' )" class="scroll-to-top">
-          <fa-icon [icon]="faArrow" />
-        </ion-button>
-      }
-    } @else if ( GetKeys ( this.locale ).length > 0 ) {
-      <div style="text-align: center; padding-top: 70px; font-style: italic;">
-        @for ( diocese of this.locale.dioceses; track this.locale.dioceses ) {
+        @if ( this.in_certain_locations.length > 0 ) {
           <div class="container">
-            <div style="width: 100%;">
-              <caption style="display: flex;">{{diocese}}</caption>
-            </div>
-            @for ( day of this.locale.locale [ diocese ]; track day ) {
-              <div class="card mb-3" style="cursor: pointer;">
-                <div class="row g-0 rounded-2">
-                  <div class="col-md-4">
-                    <div class="img-fluid h-100 h2" style="background: linear-gradient(0deg, rgb(62, 98, 68) 11.2%, rgb(42, 119, 129) 91.1%);">
-                      <div class="h-100" style="display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">
-                        <p style="text-align: center; margin: 0; padding: 10px; font-size: 22px;">{{day.date}}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-8" style="display: flex;">
-                    <div class="card-body p-0" style="min-height: fit-content; align-self: center;">
-                      <div style="height: 100%;">
-                        <h5 class="card-title" style="padding: 30px;">
-                          <strong>
-                            {{day.title}}&nbsp;
-                          </strong>
-                          <span class="dot" [style.color]="this.colorSvc.getForegroundColor(day.colors)" [style.background-color]="this.colorSvc.getBackgroundColor(day.colors)"></span>
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            @for ( day of this.in_certain_locations; track day ) {
+              <app-locale-row [title]="day.title" [colors]="day.colors" [date]="day.date" />
             }
           </div>
+        } @else {
+          @for ( diocese of this.locale.dioceses; track this.locale.dioceses ) {
+            <div class="container">
+              <div style="width: 100%;">
+                <caption style="display: flex;">{{diocese}}</caption>
+              </div>
+              @for ( day of this.locale.locale [ diocese ]; track day ) {
+                <app-locale-row [title]="day.title" [colors]="day.colors" [date]="day.date" />
+              }
+            </div>
+          }
         }
       </div>
       @if ( this.scrolled ) {
+        <ion-button (click)="this.GoBack ( )" class="go-back">
+          <fa-icon [icon]="faBack" />&nbsp;Go Back
+        </ion-button>
         <ion-button (click)="this.GoTo ( '#top-locale' )" class="scroll-to-top">
           <fa-icon [icon]="faArrow" />
         </ion-button>

@@ -1,5 +1,4 @@
 import { Component } from "@angular/core"
-import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
 import { ModalTextComponent } from "../modal-text/modal-text.component"
 import { DataService } from "../data.service"
@@ -12,7 +11,6 @@ export class PrayerComponent {
 
   public language: string = "English"
   public languages = [ "English", "Latin" ]
-  public faCheck = faCheck
 
   public error = false
   public loading = true
