@@ -23,6 +23,9 @@ export class InfoComponent {
   public other_votives: any = { }
   public locale: any = { }
 
+  public language: string = "English"
+  public languages = [ "English", "Latin" ]
+
   public error = false
   public loading = true
 
@@ -38,6 +41,10 @@ export class InfoComponent {
     this.getDetails ( )
     this.getVotives ( )
     this.getLocale ( )
+  }
+
+  public UpdateLanguage(event: Event) {
+    this.language = (<HTMLInputElement>event.target).value
   }
 
   public UpdateOption ( event: Event ) {
@@ -127,7 +134,8 @@ export class InfoComponent {
 
   public OpenPropers ( celebrations: any[ ], title: string ) {
     const propers = this.modalService.open ( ModalPropersComponent, { size: 'lg', keyboard: false, centered: true } )
-    propers.componentInstance.celebrations = celebrations
-    propers.componentInstance.celebrationTitle = title
+    propers.componentInstance.celebration = celebrations.find ( x => x.title == title )
+    propers.componentInstance.title = title
+    propers.componentInstance.language = this.language
   }
 }

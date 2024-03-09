@@ -6,8 +6,8 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
   styleUrl: "./modal-text.component.css",
 })
 export class ModalTextComponent {
-  title = ""
-  body = ""
+  public title = ""
+  public body = ""
 
   constructor(public activeModal: NgbActiveModal) {}
 

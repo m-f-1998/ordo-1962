@@ -11,7 +11,7 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  async GetOrdo(): Promise<any> {
+  public async GetOrdo(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
       this.readFile("ordo.json")
         .then((json) => {
@@ -45,7 +45,7 @@ export class DataService {
     })
   }
 
-  async GetLocale(): Promise<any> {
+  public async GetLocale(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
       this.readFile("locale.json")
         .then((json) => resolve(json))
@@ -65,7 +65,7 @@ export class DataService {
     })
   }
 
-  async GetPrayers(): Promise<any> {
+  public async GetPrayers(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
       this.readFile("prayers.json")
         .then((json) => resolve(json) )

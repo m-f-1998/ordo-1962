@@ -13,13 +13,13 @@ export class ModalPropersComponent {
 
   public language = "English"
 
-  faCheck = faCheck
-  celebrationTitle = ""
+  public faCheck = faCheck
+  public title = ""
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) { }
 
   public UpdateCelebrations(event: Event) {
-    this.celebrationTitle = (<HTMLInputElement>event.target).value
+    this.title = (<HTMLInputElement>event.target).value
   }
 
   public UpdateLanguage(lan: string) {

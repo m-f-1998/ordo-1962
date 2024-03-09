@@ -1,10 +1,10 @@
 <div class="modal-content">
   <div class="modal-header">
-    <h5 class="modal-title">{{this.celebrationTitle}}</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="dismiss()"></button>
+    <h5 class="modal-title">{{this.title}}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="dismiss()"></button>
   </div>
   <div class="modal-body">
-    @if ( celebration.title === this.celebrationTitle ) {
+    @if ( celebration.title === this.title ) {
       @for ( proper of celebration.propers; track proper ) {
         <div>
           <h1 class="modal-title fs-5" id="{{proper.title}}">{{proper.title}}</h1>
