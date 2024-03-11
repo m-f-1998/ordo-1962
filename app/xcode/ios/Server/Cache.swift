@@ -27,7 +27,7 @@ class Cache {
         }
     }
     
-    func GetOrdo ( predicate: Predicate<OrdoYear> = #Predicate<OrdoYear> { year in true } ) throws -> [ OrdoYear ] {
+    func GetOrdo ( predicate: Predicate<OrdoYear> ) throws -> [ OrdoYear ] {
         let descriptor = FetchDescriptor <OrdoYear> ( predicate: predicate, sortBy: [ SortDescriptor ( \.year ) ] )
         let data = try self.context.fetch ( descriptor )
         if data.count > 0 && data [ 0 ].year == CurrentYear ( ) {
@@ -60,7 +60,7 @@ class Cache {
         return container
     }
     
-    func CacheExists ( predicate: Predicate<OrdoYear> = #Predicate<OrdoYear> { year in true } ) throws -> Bool {
+    func CacheExists ( predicate: Predicate<OrdoYear> ) throws -> Bool {
         let ordo = try GetOrdo ( predicate: predicate )
         if let version = UserDefaults.standard.string ( forKey: "version" ) {
             print ( "Version: \(version)" )
@@ -75,7 +75,7 @@ class Cache {
         return false
     }
     
-    func CurrentCacheExists ( predicate: Predicate<OrdoYear> = #Predicate<OrdoYear> { year in true } ) throws -> Bool {
+    func CurrentCacheExists ( predicate: Predicate<OrdoYear> ) throws -> Bool {
         let ordo = try GetOrdo ( predicate: predicate )
         return ordo.count > 0 && ordo [ 0 ].year == CurrentYear ( )
     }

@@ -9,8 +9,12 @@ const config: CapacitorConfig = {
     SplashScreen: {
       launchAutoHide: false,
       androidScaleType: "CENTER_CROP",
-      splashFullScreen: false,
-      splashImmersive: false
+      splashFullScreen: true,
+      splashImmersive: true,
+      backgroundColor: "#FFFFFF",
+      androidSplashResourceName: "splash",
+      showSpinner: true,
+      androidSpinnerStyle: "large",
     },
   },
 }

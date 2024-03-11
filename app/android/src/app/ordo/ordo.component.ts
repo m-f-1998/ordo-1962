@@ -5,7 +5,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
 import { ModalPropersComponent } from "../modal-propers/modal-propers.component"
 import { DataService } from "../data.service"
 import { format, isToday, parse } from "date-fns"
-import { ScrollCustomEvent } from "@ionic/angular"
+import { Platform, ScrollCustomEvent } from "@ionic/angular"
 import { ColorsService } from "../colors.service"
 
 @Component({
@@ -32,15 +32,15 @@ export class OrdoComponent {
     private apiRequests: DataService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
-    public colorSvc: ColorsService
+    public colorSvc: ColorsService,
+    public platform: Platform,
   ) {
     this.apiRequests.GetOrdo ( ).then ( ordo => {
       this.ordo = ordo
-      this.loading = false
-      this.error = false
 
       if ( !( this.router.getCurrentNavigation()?.previousNavigation ) ) {
-        setTimeout ( ( ) => this.GoTo ( "#today" ), 100 )
+        this.loading = false
+        this.error = false
       }
     } ).catch ( e => {
       console.error ( e )

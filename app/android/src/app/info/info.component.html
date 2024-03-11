@@ -40,15 +40,15 @@
               <div class="card-header">Ordo Locale</div>
               <ul class="list-group">
                 <li class="list-group-item">
-                  <a href="javascript:void(0);" style="text-decoration: none;" [routerLink]="'/locale'">
+                  <button style="text-decoration: none; background-color: transparent; color: #378c3f;" routerLink="/locale">
                     In Certain Locations
-                  </a>
+                  </button>
                 </li>
                 @for ( detail of this.locale.feasts.countries; track detail ) {
                   <li class="list-group-item">
-                    <a href="javascript:void(0);" style="text-decoration: none;" [routerLink]="'/locale/' + detail">
+                    <button style="text-decoration: none; background-color: transparent; color: #378c3f;" [routerLink]="'/locale/' + detail">
                       {{detail}}
-                    </a>
+                    </button>
                   </li>
                 }
               </ul>

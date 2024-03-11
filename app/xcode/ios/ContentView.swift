@@ -14,8 +14,8 @@ struct ContentView: View {
 
     func GetData ( ) {
         do {
-            if try self.api.cache.CacheExists ( ) {
-                let ordo = try self.api.cache.GetOrdo ( )
+            if try self.api.cache.CacheExists ( predicate: #Predicate<OrdoYear> { year in true } ) {
+                let ordo = try self.api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { year in true } )
                 if ordo.count > 0 {
                     if let prayers = try self.api.cache.GetPrayers ( ) {
                         if let locale = try self.api.cache.GetLocale ( ) {

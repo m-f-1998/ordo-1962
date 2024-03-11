@@ -64,8 +64,8 @@ struct ContentView: View {
             if self.activeData.loading {
                 ProgressView ( ).onAppear {
                     do {
-                        if try self.api.cache.CurrentCacheExists ( ) {
-                            self.activeData.SetSuccess ( ordo: try self.api.cache.GetOrdo ( ), locale: try self.api.cache.GetLocale ( ), prayers: nil )
+                        if try self.api.cache.CurrentCacheExists ( predicate: #Predicate<OrdoYear> { year in true } ) {
+                            self.activeData.SetSuccess ( ordo: try self.api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { year in true } ), locale: try self.api.cache.GetLocale ( ), prayers: nil )
                         } else {
                             Task {
                                 self.activeData.SetSuccess ( ordo: [ try await self.api.GetCurrent ( ) ], locale: try self.api.cache.GetLocale ( ), prayers: nil )
