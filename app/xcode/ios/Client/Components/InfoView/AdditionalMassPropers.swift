@@ -20,13 +20,15 @@ struct AdditionalMassPropers: View {
                         } label: {
                             HStack {
                                 Text ( key )
-                                Circle ( )
-                                    .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
-                                    .background (
-                                        Circle ( )
-                                            .foregroundColor ( Color ( word: info.data [ key ]!.colors.components ( separatedBy: "," ) [ 0 ] ) )
-                                    )
-                                    .frame ( width: 15, height: 15 )
+                                ForEach ( info.data [ key ]!.colors.components ( separatedBy: "," ), id: \.self ) {
+                                    Circle ( )
+                                        .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
+                                        .background (
+                                            Circle ( )
+                                                .foregroundColor ( Color ( word: $0 ) )
+                                        )
+                                        .frame ( width: 15, height: 15 )
+                                }
                             }
                         }
                     }

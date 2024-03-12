@@ -30,13 +30,15 @@ struct LocalFeast: View {
                             .frame ( alignment: .leading )
                             .font ( .system ( size: 14.0 ) )
                             .bold ( )
-                        Circle ( )
-                            .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
-                            .background (
-                                Circle ( )
-                                    .foregroundColor ( Color ( word: data.colors.components ( separatedBy: "," ) [ 0 ] ) )
-                            )
-                            .frame ( width: 15, height: 15 )
+                        ForEach ( data.colors.components ( separatedBy: "," ), id: \.self ) {
+                            Circle ( )
+                                .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
+                                .background (
+                                    Circle ( )
+                                        .foregroundColor ( Color ( word: $0 ) )
+                                )
+                                .frame ( width: 15, height: 15 )
+                        }
                     }
                 }
             }

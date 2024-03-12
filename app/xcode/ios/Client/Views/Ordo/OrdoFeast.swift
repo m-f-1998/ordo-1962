@@ -18,13 +18,15 @@ struct FeastInfo: View {
                 .frame ( alignment: .leading )
                 .font ( .system ( size: self.title_size ) )
                 .bold ( )
-            Circle ( )
-                .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
-                .background (
-                    Circle ( )
-                        .foregroundColor ( Color ( word: self.colors.components ( separatedBy: "," ) [ 0 ] ) )
-                )
-                .frame ( width: 15, height: 15 )
+            ForEach ( self.colors.components ( separatedBy: "," ), id: \.self ) {
+                Circle ( )
+                    .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
+                    .background (
+                        Circle ( )
+                            .foregroundColor ( Color ( word: $0 ) )
+                    )
+                    .frame ( width: 15, height: 15 )
+            }
         }
     }
 }
