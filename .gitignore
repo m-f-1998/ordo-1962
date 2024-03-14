@@ -184,7 +184,7 @@ Temporary Items
 .apdisk
 
 # Project Specific
-api/private/
+api/private/*
 **/.vscode/
 **/vendor/*
 composer.lock
