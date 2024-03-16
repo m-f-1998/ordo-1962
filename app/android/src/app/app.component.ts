@@ -7,7 +7,9 @@ import { Platform } from "@ionic/angular"
   templateUrl: "app.component.html"
 })
 export class AppComponent {
-  constructor(public platform: Platform) {
+  constructor (
+    public platform: Platform
+  ) {
     this.platform.ready().then(() => {
       setTimeout(() => {
         SplashScreen.hide()

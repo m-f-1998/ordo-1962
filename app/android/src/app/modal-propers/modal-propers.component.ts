@@ -14,7 +14,9 @@ export class ModalPropersComponent {
 
   public title = ""
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor (
+    public activeModal: NgbActiveModal
+  ) { }
 
   public UpdateCelebrations(event: Event) {
     this.title = (<HTMLInputElement>event.target).value

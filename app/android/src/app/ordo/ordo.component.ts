@@ -27,7 +27,7 @@ export class OrdoComponent {
   public error = false
   public scrolled = false
 
-  constructor(
+  constructor (
     private modalService: NgbModal,
     private apiRequests: DataService,
     private changeDetector: ChangeDetectorRef,

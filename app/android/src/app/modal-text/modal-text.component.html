@@ -1,7 +1,6 @@
 <div class="modal-content">
   <div class="modal-header">
     <h5 class="modal-title">{{this.title}}</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="dismiss()"></button>
   </div>
   <div class="modal-body">
     <div>
@@ -9,5 +8,8 @@
         {{body}}
       </p>
     </div>
+  </div>
+  <div style="position: fixed; bottom: 15px; right: 15px; padding: 0; overflow-x: scroll; overflow-y: hidden;">
+    <ion-button data-bs-dismiss="modal" (click)="dismiss()">Close Text</ion-button>
   </div>
 </div>

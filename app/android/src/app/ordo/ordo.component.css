@@ -7,22 +7,6 @@
   display: inline-block;
 }
 
-.scroll-to-top {
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
-  padding: 0;
-  transition: all 0.1s ease-in-out;
-}
-
-.scroll-to-today {
-  position: fixed;
-  bottom: 15px;
-  right: 65px;
-  padding: 0;
-  transition: all 0.1s ease-in-out;
-}
-
 .date-field {
   background: linear-gradient(0deg, rgb(62, 98, 68) 11.2%, rgb(42, 119, 129) 91.1%);
 }
@@ -35,5 +19,5 @@
   padding: 10px;
   font-size: small;
   border: 1px solid black;
-  text-transform:uppercase;
+  text-transform: uppercase;
 }

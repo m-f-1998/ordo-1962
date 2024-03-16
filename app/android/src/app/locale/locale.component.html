@@ -9,12 +9,17 @@
     } @else {
       <div style="font-style: italic;">
         @if ( this.in_certain_locations.length > 0 ) {
+          <h3>Feasts In Certain Locations</h3>
           <div class="container">
             @for ( day of this.in_certain_locations; track day ) {
+              <div style="width: 100%;">
+                <caption style="display: flex;">All Dioceses</caption>
+              </div>
               <app-locale-row [title]="day.title" [colors]="day.colors" [date]="day.date" />
             }
           </div>
         } @else {
+          <h3>{{this.country}}</h3>
           @for ( diocese of this.locale.dioceses; track this.locale.dioceses ) {
             <div class="container">
               <div style="width: 100%;">
@@ -27,14 +32,16 @@
           }
         }
       </div>
-      @if ( this.scrolled ) {
+      <div style="position: fixed; bottom: 15px; right: 15px; padding: 0; overflow-x: scroll; overflow-y: hidden; z-index: 1000;">
         <ion-button (click)="this.GoBack ( )" class="go-back">
           <fa-icon [icon]="faBack" />&nbsp;Go Back
         </ion-button>
-        <ion-button (click)="this.GoTo ( '#top-locale' )" class="scroll-to-top">
-          <fa-icon [icon]="faArrow" />
-        </ion-button>
-      }
+        @if ( this.scrolled ) {
+          <ion-button (click)="this.GoTo ( '#top-locale' )" class="scroll-to-top">
+            <fa-icon [icon]="faArrow" />
+          </ion-button>
+        }
+      </div>
     }
   </div>
 </ion-content>

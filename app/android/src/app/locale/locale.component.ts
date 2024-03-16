@@ -21,7 +21,7 @@ export class LocaleComponent {
   public error = false
   public loading = true
 
-  private country: string | null = null
+  public country: string | null = null
 
   constructor(
     private changeDetector: ChangeDetectorRef,

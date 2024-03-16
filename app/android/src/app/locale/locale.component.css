@@ -1,22 +1,7 @@
-.scroll-to-top {
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
-  padding: 0;
-  transition: all .2s ease-in-out;
-}
 .container {
   width: 100%;
   padding-right: calc(1.5rem * .5);
   padding-left: calc(1.5rem * .5);
   margin-right: auto;
   margin-left: auto;
-}
-
-.go-back {
-  position: fixed;
-  bottom: 15px;
-  right: 65px;
-  padding: 0;
-  transition: all 0.1s ease-in-out;
 }

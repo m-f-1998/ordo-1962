@@ -11,7 +11,9 @@ export class ModalTextComponent {
   public body = ""
   public marked = marked.parse
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor (
+    public activeModal: NgbActiveModal
+  ) { }
 
   public dismiss() {
     this.activeModal.close()

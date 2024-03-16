@@ -86,16 +86,18 @@
           </div>
         </div>
       }
-      @if ( this.scrolled ) {
-        <ion-button (click)="this.GoTo ( '#top-ordo' )" class="scroll-to-top">
-          <fa-icon [icon]="faArrow" />
-        </ion-button>
+      <div style="position: fixed; bottom: 15px; right: 15px; padding: 0; overflow-x: scroll; overflow-y: hidden; z-index: 1000">
         @if ( this.IsCurrentYear ( ) ) {
           <ion-button (click)="this.GoTo ( '#today' )" class="scroll-to-today">
             Go To Today
           </ion-button>
         }
-      }
+        @if ( this.scrolled ) {
+          <ion-button (click)="this.GoTo ( '#top-ordo' )" class="scroll-to-top">
+            <fa-icon [icon]="faArrow" />
+          </ion-button>
+        }
+      </div>
     }
   </div>
 </ion-content>
