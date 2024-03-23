@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, Input } from "@angular/core"
 import { faCog, faHandsPraying, faCalendar, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
@@ -10,4 +10,5 @@ export class TabBarComponent {
   faCalendar = faCalendar
   faPray = faHandsPraying
   faInfo = faInfoCircle
+  @Input() index: number = 0
 }

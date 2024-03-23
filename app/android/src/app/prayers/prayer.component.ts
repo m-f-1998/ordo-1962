@@ -20,7 +20,6 @@ export class PrayerComponent {
     private apiRequests: DataService
   ) {
     this.apiRequests.GetPrayers ( ).then( prayers => {
-      console.log ( "prayers" )
       this.prayers = prayers
       this.loading = false
       this.error = false

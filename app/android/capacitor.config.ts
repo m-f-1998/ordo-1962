@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   loggingBehavior: "production",
   plugins: {
     SplashScreen: {
-      launchAutoHide: false,
+      launchAutoHide: true,
       androidScaleType: "CENTER_CROP",
       splashFullScreen: true,
       splashImmersive: true,

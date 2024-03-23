@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from "@angular/core"
+import { Component } from "@angular/core"
 import { Router } from "@angular/router"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
@@ -30,7 +30,6 @@ export class OrdoComponent {
   constructor (
     private modalService: NgbModal,
     private apiRequests: DataService,
-    private changeDetector: ChangeDetectorRef,
     private router: Router,
     public colorSvc: ColorsService,
     public platform: Platform,
@@ -51,7 +50,6 @@ export class OrdoComponent {
 
   public detectScroll ( e: ScrollCustomEvent ) {
     this.scrolled = e.detail.currentY > 50
-    this.changeDetector.detectChanges ( )
   }
 
   public IsCurrentYear ( ): boolean {
@@ -77,6 +75,7 @@ export class OrdoComponent {
   public GoTo ( id: string ) {
     try {
       const obj = document.querySelector ( id )
+      console.log ( obj )
       if ( obj ) {
         obj.scrollIntoView ( { behavior: 'smooth' } )
       }
@@ -94,5 +93,21 @@ export class OrdoComponent {
     propers.componentInstance.celebration = celebration
     propers.componentInstance.title = celebration.title
     propers.componentInstance.language = this.language
+  }
+
+  public trackByMonth(index: number, month: any): any {
+    return month[0].date.month;
+  }
+
+  public trackByDay(index: number, day: any): any {
+    return day.date;
+  }
+
+  public trackByCeleb(index: number, celeb: any): any {
+    return celeb.title;
+  }
+
+  public trackByCommem(index: number, commem: any): any {
+    return commem.title;
   }
 }

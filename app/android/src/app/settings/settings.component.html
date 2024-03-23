@@ -1,5 +1,5 @@
 <ion-content overflow-scroll="true">
-  <app-ordo-header />
+  <app-ordo-header [index]="3" />
   <div style="text-align: center; padding-top: 70px;">
     @if ( this.loading ) {
       <ion-spinner></ion-spinner>
@@ -22,10 +22,10 @@
         </ion-list>
       </ion-card>
       <ion-card>
-        <ion-button fill="clear" href="mailto:ordo62@matthewfrankland.co.uk?subject=Customer Feedback - 1962 Ordo">
+        <ion-button fill="clear" class="ion-text-wrap" href="mailto:ordo62@matthewfrankland.co.uk?subject=Customer Feedback - 1962 Ordo">
           Report an Error or Make a Comment
         </ion-button>
-        <ion-button fill="clear" href="https://matthewfrankland.co.uk/ordo-1962/support">
+        <ion-button class="ion-text-wrap" fill="clear" href="https://matthewfrankland.co.uk/ordo-1962/support">
           Privacy Policy
         </ion-button>
       </ion-card>

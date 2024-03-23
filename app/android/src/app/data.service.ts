@@ -1,168 +1,140 @@
 import { HttpClient, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { Filesystem, Directory, Encoding } from "@capacitor/filesystem"
 import { addWeeks, format, isBefore, isValid, parse } from "date-fns"
+import { compress, decompress } from 'compress-json'
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: "platform",
 })
 export class DataService {
   private API_VERSION: string = "1.3"
-  private prayers: any = null
-  private ordo: any = null
-  private locale: any = null
 
   constructor (
     private http: HttpClient
   ) { }
 
   public async GetOrdo(): Promise<any> {
-    return new Promise<void>((resolve, reject) => {
-      if ( this.ordo != null ) {
-        resolve ( this.ordo )
-      } else {
-        this.readFile("ordo.json")
-          .then((json) => {
-            if (Object.keys(json).length != 7) {
-              throw Error("Cache Object Not Full")
+    return new Promise<void> ( ( resolve, reject ) => {
+      const currentYear = new Date ( ).getFullYear ( )
+      const ordo: any = { }
+      for (let i = currentYear; i <= currentYear + 5; i++) {
+        Preferences.get ( {
+          key: "ordo-" + String ( i )
+        } ).then ( value => {
+          let expired = false
+          const cacheData = value.value ? decompress ( JSON.parse ( value.value ) ) : null
+          if ( cacheData && "date" in cacheData ) {
+            const date = parse ( cacheData.date, "dd MMM yyyy", new Date ( ) )
+            if ( !isValid ( date ) || isBefore ( date, new Date ( ) ) ) {
+              expired = true
             }
-            this.ordo = json
-            resolve(json)
-          })
-          .catch(() => {
-            const ordo: any = {}
-            const currentYear = new Date().getFullYear()
-            for (let i = currentYear; i <= currentYear + 5; i++) {
-              const params = new HttpParams().set("year", String(i))
-              this.http.get<any>(this.getURL("ordo.php"), { params }).subscribe({
-                next: (response: any) => {
-                  ordo[response.Year] = response.Ordo
-                },
-                complete: async () => {
-                  if (i == currentYear + 5) {
-                    this.ordo = ordo
-                    this.deleteFile("ordo.json").then(() => {
-                      this.writeFile("ordo.json", ordo, reject).then(() => {
-                        resolve(ordo)
-                      })
-                    })
-                  }
-                },
-                error: (e) => reject(e),
-              })
+          }
+          if (
+            cacheData
+            && !( new Date().getMonth() === 1 && new Date().getDate() === 1 )
+            && !expired
+          ) {
+            ordo [ i ] = cacheData
+            if ( i == currentYear + 5 ) {
+              resolve ( ordo )
             }
-          })
-        }
+          } else {
+            const params = new HttpParams ( ).set ( "year", String ( i ) )
+            this.http.get<any> ( this.getURL ( "ordo.php" ), { params } ).subscribe ( {
+              next: ( response: any ) => {
+                ordo [ response.Year ] = response.Ordo
+                ordo [ "date" ] = format ( addWeeks ( new Date ( ), 2 ), "dd MMM yyyy" )
+                Preferences.set ( {
+                  key: "ordo-" + response.Year,
+                  value: JSON.stringify ( compress ( ordo [ response.Year ] ) )
+                } )
+              },
+              complete: ( ) => {
+                if ( i == currentYear + 5 ) {
+                  resolve ( ordo )
+                }
+              },
+              error: ( e ) => reject ( e ),
+            } )
+          }
+        } ).catch ( e => reject ( e ) )
+      }
     })
   }
 
   public async GetLocale(): Promise<any> {
-    return new Promise<void>((resolve, reject) => {
-      if ( this.locale != null ) {
-        resolve ( this.locale )
-      } else {
-        this.readFile("locale.json")
-          .then ( json => {
-            this.locale = json
-            resolve ( json )
-          } )
-          .catch(() => {
-            this.http.get<any>(this.getURL("locale.php")).subscribe({
-              next: async (response: any) => {
-                this.locale = response
-                this.deleteFile("locale.json").then(() => {
-                  this.writeFile("locale.json", response, reject).then(() => {
-                    resolve(response)
-                  })
-                })
-                resolve(response)
-              },
-              error: (e) => reject(e),
-            })
+    return new Promise<void> ( ( resolve, reject ) => {
+      Preferences.get ( {
+        key: "locale"
+      } ).then ( value => {
+        let expired = false
+        const cacheData = value.value ? decompress ( JSON.parse ( value.value ) ) : null
+        if ( cacheData && "date" in cacheData ) {
+          const date = parse ( cacheData.date, "dd MMM yyyy", new Date ( ) )
+          if ( !isValid ( date ) || isBefore ( date, new Date ( ) ) ) {
+            expired = true
+          }
+        }
+        if (
+          cacheData
+          && !( new Date().getMonth() === 1 && new Date().getDate() === 1 )
+          && !expired
+        ) {
+          resolve ( cacheData )
+        } else {
+          this.http.get<any> ( this.getURL ( "locale.php" ) ).subscribe ( {
+            next: async ( response: any ) => {
+              const locale = response
+              locale [ "date" ] = format ( addWeeks ( new Date ( ), 2 ), "dd MMM yyyy" )
+              Preferences.set ( {
+                key: "locale",
+                value: JSON.stringify ( compress ( locale ) )
+              } )
+              resolve ( response )
+            },
+            error: ( e ) => reject ( e ),
           })
         }
+      } )
     })
   }
 
   public async GetPrayers(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
-      if ( this.prayers != null ) {
-        resolve ( this.prayers )
-      } else {
-        this.readFile ( "prayers.json" )
-          .then ( json => {
-            this.prayers = json
-            resolve ( json )
-          } )
-          .catch(() => {
-            this.http.get<any>(this.getURL("prayers.php")).subscribe({
-              next: async (response: any) => {
-                this.prayers = response
-                this.deleteFile("prayers.json").then(() => {
-                  this.writeFile("prayers.json", response, reject).then(() => {
-                    resolve(response)
-                  })
-                })
-              },
-              error: (e) => reject(e),
-            })
-          })
-        }
-    })
-  }
-
-  private async readFile(file: string): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      if (new Date().getMonth() === 1 && new Date().getDate() === 1) {
-        reject("New Year's Day Refetch")
-      }
-      Filesystem.readFile({
-        path: file,
-        directory: Directory.Cache,
-        encoding: Encoding.UTF8,
-      })
-        .then((res: any) => {
-          try {
-            const json = JSON.parse(res.data.toString())
-            if ("date" in json) {
-              const date = parse(json.date, "dd MMM yyyy", new Date())
-              if (!isValid(date) || isBefore(date, new Date())) {
-                reject("Date Invalid in Cache. Refreshing...")
-              }
-            }
-            resolve(json)
-          } catch (e) {
-            reject(e)
+      Preferences.get ( {
+        key: "prayers"
+      } ).then ( value => {
+        let expired = false
+        const cacheData = value.value ? decompress ( JSON.parse ( value.value ) ) : null
+        if ( cacheData && "date" in cacheData ) {
+          const date = parse ( cacheData.date, "dd MMM yyyy", new Date ( ) )
+          if ( !isValid ( date ) || isBefore ( date, new Date ( ) ) ) {
+            expired = true
           }
-        })
-        .catch((e) => reject(e))
+        }
+        if (
+          cacheData
+          && !( new Date().getMonth() === 1 && new Date().getDate() === 1 )
+          && !expired
+        ) {
+          resolve ( cacheData )
+        } else {
+          this.http.get<any> ( this.getURL ( "prayers.php" ) ).subscribe ( {
+            next: async (response: any) => {
+              const prayers = response
+              prayers [ "date" ] = format ( addWeeks ( new Date ( ), 2 ), "dd MMM yyyy" )
+              Preferences.set ( {
+                key: "prayers",
+                value: JSON.stringify ( compress ( prayers ) )
+              } )
+              resolve ( response )
+            },
+            error: ( e ) => reject ( e ),
+          } )
+        }
+      } )
     })
-  }
-
-  private async deleteFile(file: string) {
-    try {
-      await Filesystem.deleteFile({
-        path: file,
-        directory: Directory.Cache,
-      })
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  private async writeFile(file: string, data: any, reject: (reason?: any) => void) {
-    try {
-      const json = data
-      json.date = format(addWeeks(new Date(), 2), "dd MMM yyyy")
-      await Filesystem.writeFile({
-        path: file,
-        directory: Directory.Cache,
-        data: JSON.stringify(json),
-        encoding: Encoding.UTF8,
-      })
-    } catch (e) {
-      reject(e)
-    }
   }
 
   private getURL(file: string): string {

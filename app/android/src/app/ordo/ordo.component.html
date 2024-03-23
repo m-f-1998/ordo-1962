@@ -1,5 +1,5 @@
-<ion-content overflow-scroll="true" [scrollEvents]="true" (ionScroll)="detectScroll($event)">
-  <app-ordo-header id="top-ordo" />
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="detectScroll($event)">
+  <app-ordo-header id="top-ordo" [index]="0" />
   <div style="padding-top: 70px; text-align: center;">
     @if ( this.loading ) {
       <ion-spinner></ion-spinner>
@@ -45,23 +45,23 @@
                   <div class="col-md-7">
                     <div class="card-body">
                       @for ( celeb of day.celebrations; track celeb ) {
-                        <div>
+                        <div style="margin-bottom: 10px;">
                           <div style="display: flex; align-items: baseline;">
-                            <h5 class="card-title">
-                              <strong>
-                                {{celeb.title}}&nbsp;
-                                <span class="dot" [style.color]="this.colorSvc.getForegroundColor(celeb.colors)" [style.background-color]="this.colorSvc.getBackgroundColor(celeb.colors)"></span>
+                            <h5 class="card-title" style="margin-bottom: 5px;">
+                              <span class="dot" [style.color]="this.colorSvc.getForegroundColor(celeb.colors)" [style.background-color]="this.colorSvc.getBackgroundColor(celeb.colors)"></span>
+                              <strong style="margin-left: 5px;">
+                                {{celeb.title}}
                               </strong>
                             </h5>
                           </div>
                           @for ( commem of celeb.commemorations; track commem ) {
-                            <div style="display: flex;  align-items: baseline;">
-                              <h5 class="card-title" style="font-size: 13px">
-                                <strong>
-                                  {{commem.title}}&nbsp;
-                                  <span class="dot" [style.color]="this.colorSvc.getForegroundColor(commem.colors)" [style.background-color]="this.colorSvc.getBackgroundColor(commem.colors)"></span>
+                            <div style="display: flex; align-items: baseline;">
+                              <span>
+                                <span class="dot" style="width: 13px; height: 13px;" [style.color]="this.colorSvc.getForegroundColor(commem.colors)" [style.background-color]="this.colorSvc.getBackgroundColor(commem.colors)"></span>
+                                <strong style="margin-left: 5px">
+                                  {{commem.title}}
                                 </strong>
-                              </h5>
+                              </span>
                             </div>
                           }
                         </div>
@@ -86,7 +86,7 @@
           </div>
         </div>
       }
-      <div style="position: fixed; bottom: 15px; right: 15px; padding: 0; overflow-x: scroll; overflow-y: hidden; z-index: 1000">
+      <div style="position: fixed; bottom: 15px; right: 15px; padding: 0; z-index: 1000">
         @if ( this.IsCurrentYear ( ) ) {
           <ion-button (click)="this.GoTo ( '#today' )" class="scroll-to-today">
             Go To Today

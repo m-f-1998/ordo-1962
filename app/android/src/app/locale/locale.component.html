@@ -1,5 +1,5 @@
 <ion-content overflow-scroll="true" [scrollEvents]="true" (ionScroll)="detectScroll($event)">
-  <app-ordo-header id="top-locale" />
+  <app-ordo-header [index]="2" id="top-locale" />
   <div style="padding-top: 70px; text-align: center;">
     @if ( this.loading ) {
       <ion-spinner />

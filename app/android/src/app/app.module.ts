@@ -42,7 +42,7 @@ import { LocaleRowComponent } from './locale/locale-row/locale-row.component';
     IonicModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     DataService,

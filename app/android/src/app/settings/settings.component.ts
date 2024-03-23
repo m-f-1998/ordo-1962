@@ -13,6 +13,7 @@ export class SettingsComponent {
 
   constructor ( ) {
     LocalNotifications.getPending ( ).then ( pending => {
+      console.log ( pending )
       this.active_notifications = pending.notifications.map ( ( notification: PendingLocalNotificationSchema ) => { return notification.id } )
     } )
   }
@@ -51,7 +52,11 @@ export class SettingsComponent {
                 actionTypeId: "",
                 extra: null,
                 schedule: {
-                  on: { hour: hour, minute: minute },
+                  on: {
+                    hour: hour,
+                    minute: minute
+                  },
+                  repeats: true,
                   allowWhileIdle: true,
                 },
               },

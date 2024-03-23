@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from "@angular/core"
+import { Component } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
 import { faArrowLeft, faArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { DataService } from "../data.service"
@@ -24,7 +24,6 @@ export class LocaleComponent {
   public country: string | null = null
 
   constructor(
-    private changeDetector: ChangeDetectorRef,
     private apiRequests: DataService,
     private route: ActivatedRoute,
     private _location: Location,
@@ -69,6 +68,5 @@ export class LocaleComponent {
 
   public detectScroll ( e: ScrollCustomEvent ) {
     this.scrolled = e.detail.currentY > 50
-    this.changeDetector.detectChanges()
   }
 }

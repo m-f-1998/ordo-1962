@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "compress-json"
+            ],
             "outputPath": "www",
             "index": "src/index.html",
             "polyfills": [
