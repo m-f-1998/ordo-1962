@@ -51,6 +51,7 @@ struct Settings: View {
                 }.disabled ( iCalLoading )
                 Section {
                     SendEmail ( )
+                    MakeReview ( )
                     Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/support/privacy.html" )! )
                 }
             }

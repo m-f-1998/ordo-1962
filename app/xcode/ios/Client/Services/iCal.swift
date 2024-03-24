@@ -96,9 +96,11 @@ class iCal {
                     }
                 }
             } else {
-                DispatchQueue.main.async {
-                    self.status.alertToast = AlertToast ( type: .error ( .red ), title: "Calendar Permissions Failed" )
-                    completion ( )
+                if let settings = URL ( string: UIApplication.openSettingsURLString ), UIApplication.shared.canOpenURL ( settings ) {
+                    DispatchQueue.main.async {
+                        UIApplication.shared.open ( settings )
+                        completion ( )
+                    }
                 }
             }
         }
