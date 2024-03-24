@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">1962 Ordo</string>
-    <string name="title_activity_main">1962 Ordo</string>
-    <string name="package_name">com.mfrankland.ordo_1962</string>
-    <string name="custom_url_scheme">com.mfrankland.ordo_1962</string>
-</resources>
