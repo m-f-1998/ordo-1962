@@ -38,17 +38,19 @@ struct Settings: View {
                     NotificationToggle ( label: "Noon Angelus", title: "Oremus", hour: 12, id: "Angelus_Noon", alert: notification_alert )
                     NotificationToggle ( label: "6PM Angelus", title: "Oremus", hour: 18, id: "Angelus_Eighteen", alert: notification_alert )
                 }
-                Button {
-                    self.iCalLoading = true
-                    self.ical.GenerateCalendar ( ) {
-                        Task {
-                            try await Task.sleep ( nanoseconds: 1_000_000_000 )
-                            self.iCalLoading = false
+                Section ( footer: Text ( "'Full Access' to your Phone's Calendar is Required" ) ) {
+                    Button {
+                        self.iCalLoading = true
+                        self.ical.GenerateCalendar ( ) {
+                            Task {
+                                try await Task.sleep ( nanoseconds: 1_000_000_000 )
+                                self.iCalLoading = false
+                            }
                         }
-                    }
-                } label: {
-                    Text ( "Create an iCal with the \( String ( CurrentYear ( ) ) ) Ordo" )
-                }.disabled ( iCalLoading )
+                    } label: {
+                        Text ( "Create an iCal with the \( String ( CurrentYear ( ) ) ) Ordo" )
+                    }.disabled ( iCalLoading )
+                }
                 Section {
                     SendEmail ( )
                     MakeReview ( )

@@ -49,6 +49,8 @@
 		C871588529F0433400E1F02D /* OrdoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C871588429F0433400E1F02D /* OrdoView.swift */; };
 		C871588729F051C500E1F02D /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C871588629F051C500E1F02D /* ErrorView.swift */; };
 		C872D32F2B2F3667006EE383 /* DisplayPropers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C872D32E2B2F3667006EE383 /* DisplayPropers.swift */; };
+		C8806F672BB09906000BA9FA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C8806F662BB09906000BA9FA /* PrivacyInfo.xcprivacy */; };
+		C8806F682BB09906000BA9FA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C8806F662BB09906000BA9FA /* PrivacyInfo.xcprivacy */; };
 		C89E51AD2A8FDEE5006C88B3 /* 1962 Ordo.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C89213992A8FDCA2000ED8E1 /* 1962 Ordo.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C89F1BEA2B4037FE00073084 /* CalendarDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89F1BE92B4037FE00073084 /* CalendarDetails.swift */; };
 		C8A3596C29EF06220018F6B7 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3596B29EF06220018F6B7 /* App.swift */; };
@@ -176,6 +178,7 @@
 		C871588629F051C500E1F02D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		C872D32E2B2F3667006EE383 /* DisplayPropers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPropers.swift; sourceTree = "<group>"; };
 		C87DF9D82A4086FD00AD1D88 /* ordo-1962.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ordo-1962.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8806F662BB09906000BA9FA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C89213992A8FDCA2000ED8E1 /* 1962 Ordo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1962 Ordo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C89296252A45D21A0090871A /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS9.4.sdk/System/Library/Frameworks/WatchKit.framework; sourceTree = DEVELOPER_DIR; };
 		C89559CB2A3E24B7007F3882 /* widget-ent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "widget-ent.entitlements"; sourceTree = "<group>"; };
@@ -210,8 +213,6 @@
 		C8DE94D32B6ADCD6002FB5E6 /* CountryFeastDates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryFeastDates.swift; sourceTree = "<group>"; };
 		C8DE94D52B6ADCE5002FB5E6 /* PlaceholderList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderList.swift; sourceTree = "<group>"; };
 		C8DF2F002A900FAE001F4D7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C8DF2F022A90161E001F4D7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C8ECAF6B2B3A269A00788D68 /* ordo-1962-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ordo-1962-Info.plist"; sourceTree = "<group>"; };
 		C8F9C1462B5EF47A0052864F /* InfoStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStructure.swift; sourceTree = "<group>"; };
 		C8F9C1492B5EFF0C0052864F /* KeyboardShowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShowing.swift; sourceTree = "<group>"; };
 		C8F9C14B2B5EFF8B0052864F /* OrdoBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdoBar.swift; sourceTree = "<group>"; };
@@ -317,7 +318,7 @@
 		C8A3595F29EF06220018F6B7 = {
 			isa = PBXGroup;
 			children = (
-				C8ECAF6B2B3A269A00788D68 /* ordo-1962-Info.plist */,
+				C8806F662BB09906000BA9FA /* PrivacyInfo.xcprivacy */,
 				C86842562B33988500A1A95F /* ordo-1962-watch.entitlements */,
 				C8A3596A29EF06220018F6B7 /* ios */,
 				C85DEB4B2A34A9D5005269E3 /* widget */,
@@ -427,7 +428,6 @@
 				C8D4DCC12A3610E50049C042 /* ContentView.swift */,
 				C8D4DCC32A3610E70049C042 /* Assets.xcassets */,
 				C8D4DCC52A3610E70049C042 /* Preview Content */,
-				C8DF2F022A90161E001F4D7F /* Info.plist */,
 			);
 			path = watchos;
 			sourceTree = "<group>";
@@ -596,6 +596,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8806F672BB09906000BA9FA /* PrivacyInfo.xcprivacy in Resources */,
 				C8B374602A23A2040024E930 /* LaunchScreen.storyboard in Resources */,
 				C8A3597029EF06240018F6B7 /* Assets.xcassets in Resources */,
 			);
@@ -605,6 +606,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8806F682BB09906000BA9FA /* PrivacyInfo.xcprivacy in Resources */,
 				C8D4DCC72A3610E70049C042 /* Preview Assets.xcassets in Resources */,
 				C8D4DCC42A3610E70049C042 /* Assets.xcassets in Resources */,
 			);
@@ -733,7 +735,7 @@
 				CODE_SIGN_ENTITLEMENTS = "widget/widget-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = widget/Info.plist;
@@ -763,7 +765,7 @@
 				CODE_SIGN_ENTITLEMENTS = "widget/widget-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = widget/Info.plist;
@@ -922,13 +924,13 @@
 				CODE_SIGN_ENTITLEMENTS = "ios/app-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ordo-1962-Info.plist";
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = "1962 Ordo";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Store 'Ordo' dates on your device";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -963,12 +965,12 @@
 				CODE_SIGN_ENTITLEMENTS = "ios/app-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ordo-1962-Info.plist";
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = "1962 Ordo";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Store 'Ordo' dates on your device";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1002,12 +1004,12 @@
 				CODE_SIGN_ENTITLEMENTS = "ordo-1962-watch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"watchos/Preview Content\"";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = watchos/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = "1962 Ordo";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.mfrankland.ordo-62";
@@ -1036,12 +1038,12 @@
 				CODE_SIGN_ENTITLEMENTS = "ordo-1962-watch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"watchos/Preview Content\"";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = watchos/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = "1962 Ordo";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.mfrankland.ordo-62";
