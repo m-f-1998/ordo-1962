@@ -1,6 +1,8 @@
 import { Component } from "@angular/core"
+import { Platform } from "@ionic/angular"
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
 import * as marked from "marked"
+import { Subscription } from "rxjs"
 
 @Component({
   templateUrl: "./modal-text.component.html",
@@ -11,11 +13,19 @@ export class ModalTextComponent {
   public body = ""
   public marked = marked.parse
 
+  private backButton: Subscription
+
   constructor (
-    public activeModal: NgbActiveModal
-  ) { }
+    public activeModal: NgbActiveModal,
+    private platform: Platform
+  ) {
+    this.backButton = this.platform.backButton.subscribe ( ( ) => {
+      this.dismiss ( )
+    } )
+  }
 
   public dismiss() {
     this.activeModal.close()
+    this.backButton.unsubscribe ( )
   }
 }

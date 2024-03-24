@@ -13,7 +13,6 @@ export class SettingsComponent {
 
   constructor ( ) {
     LocalNotifications.getPending ( ).then ( pending => {
-      console.log ( pending )
       this.active_notifications = pending.notifications.map ( ( notification: PendingLocalNotificationSchema ) => { return notification.id } )
     } )
   }
@@ -33,7 +32,6 @@ export class SettingsComponent {
               await Toast.show ( {
                 text: "Notification Permissions are not Allowed on this Device.",
               } )
-              console.error ( res )
               this.active_notifications = this.active_notifications.filter ( item => item !== id )
               return
             }

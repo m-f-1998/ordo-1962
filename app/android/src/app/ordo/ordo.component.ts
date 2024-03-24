@@ -75,7 +75,6 @@ export class OrdoComponent {
   public GoTo ( id: string ) {
     try {
       const obj = document.querySelector ( id )
-      console.log ( obj )
       if ( obj ) {
         obj.scrollIntoView ( { behavior: 'smooth' } )
       }
