@@ -1,34 +1,46 @@
 <ion-content overflow-scroll="true">
   <app-ordo-header [index]="3" />
   <div style="text-align: center; padding-top: 70px;">
-    @if ( this.loading ) {
-      <ion-spinner></ion-spinner>
-      <p style="padding-top: 20px;">Loading...</p>
-    } @else if ( this.error ) {
-      <p>Settings could not be fetched.</p>
-    } @else if ( !this.loading && !this.error ) {
-      <ion-card>
-        <ion-title style="padding-top: 10px">Daily Notifications</ion-title>
-        <ion-list>
-          <ion-item>
-            <ion-toggle [checked]="this.active_notifications.includes ( 1 )" (ionChange)="TurnOnNotifications ( 1, '6AM Angelus', 6, 0, $event )">6AM Angelus</ion-toggle>
-          </ion-item>
-          <ion-item>
-            <ion-toggle [checked]="this.active_notifications.includes ( 2 )" (ionChange)="TurnOnNotifications ( 2, 'Noon Angelus', 12, 0, $event )">Noon Angelus</ion-toggle>
-          </ion-item>
-          <ion-item>
-            <ion-toggle [checked]="this.active_notifications.includes ( 3 )" (ionChange)="TurnOnNotifications ( 3, '6PM Angelus', 18, 0, $event )">6PM Angelus</ion-toggle>
-          </ion-item>
-        </ion-list>
-      </ion-card>
-      <ion-card>
-        <ion-button fill="clear" class="ion-text-wrap" href="mailto:ordo62@matthewfrankland.co.uk?subject=Customer Feedback - 1962 Ordo">
-          Report an Error or Make a Comment
-        </ion-button>
-        <ion-button class="ion-text-wrap" fill="clear" href="https://matthewfrankland.co.uk/ordo-1962/support">
-          Privacy Policy
-        </ion-button>
-      </ion-card>
-    }
+    <ion-card>
+      <ion-title style="padding-top: 10px">Daily Notifications</ion-title>
+      <ion-list>
+        <ion-item>
+          <ion-toggle
+            [disabled]="this.disabled"
+            [checked]="this.active_notifications.includes ( 1 )"
+            (ionChange)="TurnOnNotifications ( 1, '6AM Angelus', 6, 0, $event )">
+            6AM Angelus
+          </ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-toggle
+            [disabled]="this.disabled"
+            [checked]="this.active_notifications.includes ( 2 )"
+            (ionChange)="TurnOnNotifications ( 2, 'Noon Angelus', 12, 0, $event )">
+            Noon Angelus
+          </ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-toggle
+            [disabled]="this.disabled"
+            [checked]="this.active_notifications.includes ( 3 )"
+            (ionChange)="TurnOnNotifications ( 3, '6PM Angelus', 18, 0, $event )">
+            6PM Angelus
+          </ion-toggle>
+        </ion-item>
+      </ion-list>
+      <ion-footer style="padding: 10px">Notifications are scheduled by your Android OS and may not be precise.</ion-footer>
+    </ion-card>
+    <ion-card>
+      <ion-button fill="clear" class="ion-text-wrap" href="mailto:ordo62@matthewfrankland.co.uk?subject=Customer Feedback - 1962 Ordo">
+        Report an Error or Make a Comment
+      </ion-button>
+      <ion-button class="ion-text-wrap" fill="clear" href="http://play.google.com/store/apps/details?id=com.mfrankland.ordo_1962">
+        Leave a Review in the Google Play Store
+      </ion-button>
+      <ion-button class="ion-text-wrap" fill="clear" href="https://matthewfrankland.co.uk/ordo-1962/support">
+        Privacy Policy
+      </ion-button>
+    </ion-card>
   </div>
 </ion-content>

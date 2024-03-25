@@ -6,64 +6,65 @@ import { Toast } from "@capacitor/toast"
   templateUrl: "./settings.component.html",
 })
 export class SettingsComponent {
-  public ordo: any = { }
+  public disabled = false
   public active_notifications: number [ ] = [ ]
-  public loading = false
-  public error = false
 
   constructor ( ) {
+    LocalNotifications.checkPermissions ( ).then ( permissions => {
+      if ( permissions.display !== "granted" ) {
+        LocalNotifications.requestPermissions ( ).then ( requestPermissions => {
+          if ( requestPermissions.display == "denied" ) {
+            Toast.show ( {
+              text: "Notification can be enabled in your Phone's Settings App.",
+            } )
+            this.disabled = true
+          } else { this.checkPendingNotifications ( ) }
+        } ).catch ( e => { console.error ( e ) } )
+      } else { this.checkPendingNotifications ( ) }
+    } ).catch ( e => { console.error ( e ) } )
+  }
+
+  private checkPendingNotifications ( ) {
     LocalNotifications.getPending ( ).then ( pending => {
       this.active_notifications = pending.notifications.map ( ( notification: PendingLocalNotificationSchema ) => { return notification.id } )
     } )
   }
 
-  async TurnOnNotifications ( id: number, body: string, hour: number, minute: number, event: Event ) {
+  public async TurnOnNotifications ( id: number, body: string, hour: number, minute: number, event: Event ) {
     if ( !( <HTMLInputElement>event.target ).checked ) {
       LocalNotifications.cancel ( { notifications: [
         {
           id: id,
         }
       ] } )
+      this.active_notifications = this.active_notifications.filter ( item => item !== id )
     } else {
-      LocalNotifications.checkPermissions ( ).then ( async permissions => {
-        if ( permissions.display !== "granted" ) {
-          await LocalNotifications.requestPermissions ( ).then ( async res => {
-            if ( res.display == "denied" ) {
-              await Toast.show ( {
-                text: "Notification Permissions are not Allowed on this Device.",
-              } )
-              this.active_notifications = this.active_notifications.filter ( item => item !== id )
-              return
-            }
-          })
-        }
+      try {
         this.active_notifications.push ( id )
-        try {
-          await LocalNotifications.schedule ( {
-            notifications: [
-              {
-                title: "Oremus",
-                body: body,
-                id: id,
-                sound: undefined,
-                attachments: undefined,
-                actionTypeId: "",
-                extra: null,
-                schedule: {
-                  on: {
-                    hour: hour,
-                    minute: minute
-                  },
-                  repeats: true,
-                  allowWhileIdle: true,
+        await LocalNotifications.schedule ( {
+          notifications: [
+            {
+              title: "Oremus",
+              body: body,
+              id: id,
+              sound: undefined,
+              attachments: undefined,
+              actionTypeId: "",
+              extra: null,
+              schedule: {
+                on: {
+                  hour: hour,
+                  minute: minute
                 },
+                repeats: true,
+                allowWhileIdle: true,
               },
-            ],
-          } )
-        } catch ( e ) {
-          console.error ( e )
-        }
-      } )
+            },
+          ],
+        } )
+      } catch ( e ) {
+        console.error ( e )
+      }
     }
   }
 }
