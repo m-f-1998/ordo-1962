@@ -15,7 +15,7 @@ export class SettingsComponent {
         LocalNotifications.requestPermissions ( ).then ( requestPermissions => {
           if ( requestPermissions.display == "denied" ) {
             Toast.show ( {
-              text: "Notification can be enabled in your Phone's Settings App.",
+              text: "Notification can be enabled in your Phone's Settings.",
             } )
             this.disabled = true
           } else { this.checkPendingNotifications ( ) }
