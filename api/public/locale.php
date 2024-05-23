@@ -1,6 +1,7 @@
 <?php
 
 header ( "Content-Type: application/json; charset=utf-8" );
+header ( "Access-Control-Allow-Origin: http://localhost" );
 
 if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" ) {
 
@@ -16,7 +17,7 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" ) {
     )
   );
 
-  $celebrations = $conn->execute_query (
+  $celebrations = $conn->query (
     "SELECT `date`, `title`, `colors`, `country`, `locale` FROM `CelebrationsLocale`"
   );
 
@@ -33,9 +34,9 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" ) {
     } else {
 
       if ( !in_array ( $row [ "country"], $res [ "feasts" ] [ "countries" ] ) ) {
-        
+
         array_push ( $res [ "feasts" ] [ "countries" ], $row [ "country" ] );
-      
+
       }
 
       if ( !isset ( $res [ "feasts" ] [ "locale" ] [ $row [ "country" ] ] ) ) {

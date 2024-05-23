@@ -1,6 +1,7 @@
 <?php
 
 header ( "Content-Type: application/json; charset=utf-8" );
+header ( "Access-Control-Allow-Origin: http://localhost" );
 
 if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" ) {
 
@@ -10,7 +11,7 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" ) {
 
   $res = array ( );
 
-  $prayers = $conn->execute_query (
+  $prayers = $conn->query (
     "SELECT `language`, `category`, `title`, `body` FROM `Prayers`"
   );
 

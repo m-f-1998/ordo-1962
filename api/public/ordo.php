@@ -1,19 +1,20 @@
 <?php
 
 header ( "Content-Type: application/json; charset=utf-8" );
+header ( "Access-Control-Allow-Origin: http://localhost" );
 
 if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" && isset ( $_GET [ "year" ] ) ) {
 
   $year = intval ( $_GET [ "year" ] );
 
   if ( $year ) {
-    
+
     $update = false;
-    
+
     if ( isset ( $_GET [ "update" ] ) ) {
 
       $isset = intval ( $_GET [ "update" ] );
-      
+
       if ( $isset == 1 ) {
 
         $update = true;
@@ -22,7 +23,7 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" && isset ( $_GET [ "year" ] ) ) {
 
     }
 
-    $cache = dirname ( __DIR__ ) . '/../../private/ordo-1962/cache/v1.3/' . md5 ( "ordo-" . strval ( $year ) ) . ".json";
+    $cache = dirname ( __DIR__ ) . '/../../private/ordo-1962/cache/' . md5 ( "ordo-" . strval ( $year ) ) . ".json";
 
     if ( !$update && file_exists ( $cache ) ) {
 
@@ -31,21 +32,22 @@ if ( $_SERVER [ "REQUEST_METHOD" ] === "GET" && isset ( $_GET [ "year" ] ) ) {
 
     } else {
 
-      require_once  __DIR__ . '/generate_ordo.php';
-      $ordo = new Ordo ( );
+        require_once  __DIR__ . '/generate_ordo.php';
+        $ordo = new Ordo ( );
 
-      $json = json_encode ( $ordo->GetOrdo ( $year ), JSON_PRETTY_PRINT );
-      echo ( $json );
+        $json = json_encode ( $ordo->GetOrdo ( $year ), JSON_PRETTY_PRINT );
 
-      file_put_contents ( $cache, $json );
+        file_put_contents ( $cache, $json );
+
+        echo ( $json );
 
     }
-  
+
   } else {
-      
+
     http_response_code ( 422 );
     echo ( "Unprocessable Year" );
-  
+
   }
 
 } else {

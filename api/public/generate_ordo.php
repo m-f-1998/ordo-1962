@@ -49,9 +49,9 @@ class Ordo {
           ),
           "fasting" => $this->GetFastingOptions ( $celebration [ "season" ], $celebration [ "id" ], $celebration [ "title" ], $date )
         ) );
-        
+
         $previousDay = $date->format ( "D d" );
-      
+
       }
 
       array_push ( $res [ "Ordo" ] [ $current_index ] [ count ( $res [ "Ordo" ] [ $current_index ] ) - 1 ] [ "celebrations" ],
@@ -64,7 +64,7 @@ class Ordo {
           "commemorations" => $this->GetCommemorations ( $celebration [ "id" ] )
         )
       );
-    
+
     }
 
     return $res;
@@ -72,7 +72,7 @@ class Ordo {
   }
 
   private function GetCelebrations ( $year ) {
-    
+
     return $this->db->Query (
       "SELECT c.`id`, c.`date`, c.`options`,
           s.`title` as `season`, s.`colors` as `s_colors`,
@@ -133,7 +133,13 @@ class Ordo {
       $propers = $this->db->Query (
         "SELECT p.`category` as `title`, p.`english`, p.`latin`
         FROM `ProperText` p
-        WHERE p.`id`=? OR p.`id`=? OR p.`id`=? ORDER BY FIELD ( `title`, 'collect', 'secret', 'postcommunion' )",
+        WHERE p.id IN (?, ?, ?) ORDER BY
+        CASE p.category
+          WHEN 'collect' THEN 1
+          WHEN 'secret' THEN 2
+          WHEN 'postcommunion' THEN 3
+          ELSE 4
+        END;",
         [ $commemoration [ "collect" ], $commemoration [ "secret" ], $commemoration [ "postcommunion" ] ]
       );
 

@@ -1,0 +1,3 @@
+ssh almalinux@51.89.148.95 "mysqldump --hex-blob -u matt_ordo_62 -p matt_ordo_62 | gzip -9" > dbBackup.sql.gz
+
+mysql -u root -p --init-command="SET SESSION FOREIGN_KEY_CHECKS=0;" 62_ordo < dbBackup.sql
