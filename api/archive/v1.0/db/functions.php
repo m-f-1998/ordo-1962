@@ -19,7 +19,7 @@ class Functions {
    *
    */
     public function GetOrdoYear ( $year ) {
-      
+
       $res = array (
         'January' => [], 'February' => [], 'March' => [], 'April' => [],
         'May' => [], 'June' => [], 'July' => [], 'August' => [],
@@ -38,7 +38,7 @@ class Functions {
             ASC",
           [ $year, $month ]
         );
-        
+
         foreach ( $days as $day ) {
 
           $celebrations = array ( );
@@ -64,7 +64,7 @@ class Functions {
             if ( ( $date->format('M') == "Nov" || $date->format('M') == "Dec" ) && str_contains ( $row [ "title" ], "Epiphany" ) ) {
               $row [ "title" ] = "(Resumed) " . $row [ "title" ];
             }
-            
+
             array_push ( $celebrations, $row );
           }
 
@@ -77,13 +77,13 @@ class Functions {
               "colors" => $day [ "season_colors" ]
             )
           ) );
-        
+
         }
 
       }
 
       return $res;
-    
+
     }
 
   /**
@@ -94,9 +94,9 @@ class Functions {
     public function GetOrdoWeek ( $timestamp ) {
 
       $res = array ( );
-      
+
       date_default_timezone_set ( $timestamp );
-      
+
       $today = date ( 'Y-m-d' );
       $next_week = date ( 'Y-m-d', strtotime ( '+1 week' ) );
 
@@ -108,7 +108,7 @@ class Functions {
           ASC",
         [ $today, $next_week ]
       );
-        
+
       foreach ( $celebrations as $celebration ) {
 
         $date = new DateTime( $celebration [ "date" ] );
@@ -143,12 +143,12 @@ class Functions {
     public function GetPrayers ( $language ) {
 
       $res = array ( );
-      
+
       $prayers = $this->conn->execute_query (
         "SELECT `category`, `title`, `body` FROM `Prayers` WHERE `language`=?",
         [ $language ]
       );
-        
+
       foreach ( $prayers as $prayer ) {
 
         if ( !array_key_exists ( $prayer [ "category" ], $res ) ) {
@@ -184,7 +184,7 @@ class Functions {
 
           $id = vsprintf ( '%s%s-%s-%s-%s-%s%s%s', str_split ( bin2hex ( random_bytes ( 16 ) ), 4 ) );
           $date =  $year . "-" . strval ( $month ) . "-" . strval ( $day );
-          
+
           array_push ( $res [ array_keys ( $res ) [ $month - 1 ] ],
             $this->GetProperText ( $id, $date )
           );
@@ -194,7 +194,7 @@ class Functions {
       }
 
       return $res;
-    
+
     }
 
     private function GetProperText ( $id, $date ) {

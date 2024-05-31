@@ -80,17 +80,17 @@ class Ordo {
         FROM `Celebrations` c
           LEFT JOIN `Season` s ON s.`id` = c.`season`
           LEFT JOIN `Feast` f ON f.`id` = c.`feast`
-        WHERE YEAR ( c.`date` )=? ORDER BY c.`date`, c.`time` ASC",
-      [ $year ]
+        WHERE YEAR ( c.`date` )=:year ORDER BY c.`date`, c.`time` ASC",
+      [ ":year" => $year ]
     );
-  
+
   }
 
   private function GetPropers ( $feast, $date ) {
 
     $res = $this->db->Query (
-      "SELECT * FROM `Propers` WHERE `feast`=? AND `date`=?",
-      [ $feast, $date ],
+      "SELECT * FROM `Propers` WHERE `feast`=:feast AND `date`=:date",
+      [ ":feast" => $feast, ":date" => $date ],
       [ "id", "date", "feast" ]
     );
 
@@ -105,15 +105,15 @@ class Ordo {
   }
 
   private function EpiphanyResumed ( $title, $date ) {
-    
+
     if ( in_array ( $date->format ( "M" ), array ( "Nov", "Dec" ) ) && str_contains ( $title, "Epiphany" ) ) {
-       
+
       return "(Resumed) " . $title;
-    
+
     }
 
     return $title;
-  
+
   }
 
   private function GetCommemorations ( $celebration ) {
@@ -122,8 +122,8 @@ class Ordo {
       "SELECT f.`title`, f.`rank`, f.`colors`, `collect`, `secret`, `postcommunion`
       FROM `Commemorations` c
         LEFT JOIN `Feast` f ON f.`id`=c.`feast`
-      WHERE c.`celebration`=?",
-      [ $celebration ]
+      WHERE c.`celebration`=:celebration",
+      [ ":celebration" => $celebration ]
     );
 
     $res = array ( );
@@ -133,20 +133,23 @@ class Ordo {
       $propers = $this->db->Query (
         "SELECT p.`category` as `title`, p.`english`, p.`latin`
         FROM `ProperText` p
-        WHERE p.id IN (?, ?, ?) ORDER BY
+        WHERE p.id IN (:collect, :secr, :postcommunion) ORDER BY
         CASE p.category
           WHEN 'collect' THEN 1
           WHEN 'secret' THEN 2
           WHEN 'postcommunion' THEN 3
           ELSE 4
         END;",
-        [ $commemoration [ "collect" ], $commemoration [ "secret" ], $commemoration [ "postcommunion" ] ]
+        [ ":collect" => $commemoration [ "collect" ],
+          ":secr" => $commemoration [ "secret" ],
+          ":postcommunion" => $commemoration [ "postcommunion" ]
+        ]
       );
 
       foreach ( $propers as $key => $value ) {
 
         $propers [ $key ] [ "title" ] = ucwords ( $value [ "title" ] );
-      
+
       }
 
       array_push ( $res, array (
@@ -194,8 +197,8 @@ class Ordo {
       foreach ( array_filter ( $propers ) as $key => $value ) {
 
         $proper = $this->db->Query (
-          "SELECT `category`, `english`, `latin` FROM `ProperText` WHERE `id`=?",
-          [ $value ]
+          "SELECT `category`, `english`, `latin` FROM `ProperText` WHERE `id`=:id",
+          [ ":id" => $value ]
         );
 
         if ( ! empty ( $proper ) ) {
@@ -205,7 +208,7 @@ class Ordo {
             "english" => $proper [ 0 ] [ "english" ],
             "latin" => $proper [ 0 ] [ "latin" ],
           ) );
-        
+
         }
 
       }
@@ -235,13 +238,13 @@ class Ordo {
     }
 
     foreach ( $this->db->Query (
-      "SELECT f.`title` FROM `Commemorations` LEFT JOIN `Feast` f ON f.`id`=`feast` WHERE `celebration`=?", [ $id ]
+      "SELECT f.`title` FROM `Commemorations` LEFT JOIN `Feast` f ON f.`id`=`feast` WHERE `celebration`=:id", [ ":id" => $id ]
     ) as $row ) {
 
       if ( str_contains ( $row [ "title" ], "Ember " ) ) {
 
         return true;
-      
+
       }
 
     }
@@ -253,7 +256,7 @@ class Ordo {
   private function GetFastingOptions ( $season, $id, $title, $date ) {
 
     $res = array ( );
-    
+
     $ember = $this->IsEmberDay ( $id, $title );
     $is_sunday = $date->format ( "w" ) == 0;
     $is_friday = $date->format ( "w" ) == 5;

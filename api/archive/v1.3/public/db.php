@@ -27,15 +27,19 @@
     function Query ( $sql, $params = array ( ), $hidden = array ( ) ) {
 
         try {
-            $res = $this->conn->query ( $sql, $params )->fetch_all ( MYSQLI_ASSOC );
+            $res = array ( );
+            $sth = $this->conn->prepare ( $sql, [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ] );
+            $sth->execute ( $params );
 
-            foreach ( $res as $row ) {
+            while( $row = $sth->fetch ( PDO::FETCH_ASSOC ) ) {
 
                 foreach ( $hidden as $key ) {
 
                     unset ( $row [ $key ] );
 
                 }
+
+                array_push ( $res, $row );
 
             }
 

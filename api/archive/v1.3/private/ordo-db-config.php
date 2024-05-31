@@ -1,7 +1,7 @@
 
 <?php
-  define ( "DB_HOST", "127.0.0.1" );
-  define ( "DB_USER", "matt_ordo_62" );
-  define ( "DB_PASSWORD", "#df^urK9Mt6igmnf" );
-  define ( "DB_NAME", "matt_ordo_62" );
+  define ( "DB_HOST", "localhost" );
+  define ( "DB_USER", "matthewf1_api" );
+  define ( "DB_PASSWORD", "12fXW33&Zu98sTNj" );
+  define ( "DB_NAME", "matthewf1_ordo_1962" );
 ?>
