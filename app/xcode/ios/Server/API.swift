@@ -81,6 +81,7 @@ class API {
     }
 
     private func HTTP ( queries: [ URLQueryItem ], url: String ) async throws -> Data {
+        print ( url )
         var body: URLComponents = URLComponents ( string: "https://matthewfrankland.co.uk/ordo-1962/v1.3/\(url)" )!
         body.queryItems = queries
         body.percentEncodedQuery = body.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")

@@ -172,23 +172,23 @@ class Ordo {
 
     if ( $title == "Good Friday" ) {
 
-      return json_decode ( file_get_contents ( "./unique_propers/good_friday.json" ) );
+      return json_decode ( file_get_contents ( __DIR__ . "/unique_propers/good_friday.json" ), true );
 
     } else if ( $title == "Paschal Vigil" ) {
 
-      return json_decode ( file_get_contents ( "./unique_propers/paschal_vigil.json" ) );
+      return json_decode ( file_get_contents ( __DIR__ . "/unique_propers/paschal_vigil.json" ), true );
 
     } else if ( $title == "Mass of the Lord's Supper" ) {
 
-      $unique_propers = json_decode ( file_get_contents ( "./unique_propers/mass_of_the_lords_supper.json" ), true );
+      $unique_propers = json_decode ( file_get_contents ( __DIR__ . "/unique_propers/mass_of_the_lords_supper.json" ), true );
 
     } else if ( $title == "Purification of the Blessed Virgin Mary" ) {
 
-      $unique_propers = json_decode ( file_get_contents ( "./unique_propers/candlemas.json" ), true );
+      $unique_propers = json_decode ( file_get_contents ( __DIR__ . "/unique_propers/candlemas.json" ), true );
 
     } else if ( $title == "The Mass of the Chrism" ) {
 
-      $unique_propers = json_decode ( file_get_contents ( "./unique_propers/chrism_mass.json" ), true );
+      $unique_propers = json_decode ( file_get_contents ( __DIR__ . "/unique_propers/chrism_mass.json" ), true );
 
     }
 
