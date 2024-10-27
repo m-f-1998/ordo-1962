@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BackgroundTasks
 
 @main
 struct OrdoiOS: App {
@@ -18,7 +19,14 @@ struct OrdoiOS: App {
         let activeData = ActiveData ( )
         self.activeData = activeData
         self.api = API ( activeData: activeData )
+//        registerBackgroundTask()
     }
+
+//    private func registerBackgroundTask() {
+//        BGTaskScheduler.shared.register ( forTaskWithIdentifier: "com.mfrankland.ordo-62", using: nil ) { task in
+//            handleBackgroundTask ( task: task as! BGProcessingTask )
+//        }
+//    }
 
     var body: some Scene {
         WindowGroup {
@@ -28,4 +36,9 @@ struct OrdoiOS: App {
         .environmentObject ( self.tabStateHanlder )
         .modelContainer ( self.api.cache.GetContainer ( ) )
     }
+    
+//    private func handleBackgroundTask(task: BGProcessingTask) {
+//        // Your background task logic
+//        task.setTaskCompleted(success: true)
+//    }
 }

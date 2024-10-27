@@ -39,7 +39,7 @@
 		C84E920C2B30F6A90083A2FB /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C837C76E2A3A569000178D00 /* NetworkMonitor.swift */; };
 		C84E920D2B30F7A30083A2FB /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C837C76E2A3A569000178D00 /* NetworkMonitor.swift */; };
 		C8589D5D2B6644DF00C55C69 /* LocalPushNoifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8589D5C2B6644DF00C55C69 /* LocalPushNoifications.swift */; };
-		C8589D5F2B66476D00C55C69 /* NotificationToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8589D5E2B66476D00C55C69 /* NotificationToggle.swift */; };
+		C8589D5F2B66476D00C55C69 /* FixedTimeNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8589D5E2B66476D00C55C69 /* FixedTimeNotification.swift */; };
 		C85DEB492A34A9D5005269E3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85DEB122A34A7E3005269E3 /* WidgetKit.framework */; };
 		C85DEB4A2A34A9D5005269E3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85DEB142A34A7E4005269E3 /* SwiftUI.framework */; };
 		C85DEB4F2A34A9D5005269E3 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85DEB4E2A34A9D5005269E3 /* Widget.swift */; };
@@ -82,6 +82,7 @@
 		C8B61D142B3F71E000CF74CB /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D132B3F71E000CF74CB /* InfoView.swift */; };
 		C8B61D172B3F881E00CF74CB /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8B61D162B3F881E00CF74CB /* OrderedCollections */; };
 		C8B7FBC02A715BDE0026107C /* DisplayText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBBF2A715BDE0026107C /* DisplayText.swift */; };
+		C8C3A85E2C87A5F6005F663A /* FastingNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C3A85D2C87A5F6005F663A /* FastingNotification.swift */; };
 		C8C6CEFD2A8260610010EEDE /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C6CEFC2A8260610010EEDE /* Gradient.swift */; };
 		C8C904B32A377EF100BB6872 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C8C904B22A377EF100BB6872 /* AlertToast */; };
 		C8CB0D792A478EEA00B2CB95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
@@ -166,7 +167,7 @@
 		C84A18E12B21B0FC00D55834 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C84C543E2A0C016E006CEB35 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C8589D5C2B6644DF00C55C69 /* LocalPushNoifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPushNoifications.swift; sourceTree = "<group>"; };
-		C8589D5E2B66476D00C55C69 /* NotificationToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationToggle.swift; sourceTree = "<group>"; };
+		C8589D5E2B66476D00C55C69 /* FixedTimeNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeNotification.swift; sourceTree = "<group>"; };
 		C85DEB122A34A7E3005269E3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C85DEB142A34A7E4005269E3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		C85DEB4E2A34A9D5005269E3 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
@@ -203,6 +204,7 @@
 		C8B61D132B3F71E000CF74CB /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		C8B7FBBF2A715BDE0026107C /* DisplayText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayText.swift; sourceTree = "<group>"; };
 		C8BAA13829F2F12200D167E8 /* app-ent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "app-ent.entitlements"; sourceTree = "<group>"; };
+		C8C3A85D2C87A5F6005F663A /* FastingNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingNotification.swift; sourceTree = "<group>"; };
 		C8C6CEFC2A8260610010EEDE /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		C8CB0D782A478EEA00B2CB95 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C8D4DCBF2A3610E50049C042 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -277,7 +279,8 @@
 		C870867D2B66C99D009A9796 /* SetiingsView */ = {
 			isa = PBXGroup;
 			children = (
-				C8589D5E2B66476D00C55C69 /* NotificationToggle.swift */,
+				C8589D5E2B66476D00C55C69 /* FixedTimeNotification.swift */,
+				C8C3A85D2C87A5F6005F663A /* FastingNotification.swift */,
 			);
 			path = SetiingsView;
 			sourceTree = "<group>";
@@ -660,7 +663,7 @@
 				C8AE1DE42A21275F00B36A2C /* SendEmail.swift in Sources */,
 				C87086792B66C832009A9796 /* LocalFeast.swift in Sources */,
 				C8FE43902B2A359F000A68C6 /* ActiveData.swift in Sources */,
-				C8589D5F2B66476D00C55C69 /* NotificationToggle.swift in Sources */,
+				C8589D5F2B66476D00C55C69 /* FixedTimeNotification.swift in Sources */,
 				C84C543F2A0C016E006CEB35 /* SettingsView.swift in Sources */,
 				C8ADAC4B2B606406001EE81B /* OrdoToolbar.swift in Sources */,
 				C80655C12B5D942600051AF8 /* RenderMarkdown.swift in Sources */,
@@ -677,6 +680,7 @@
 				C8AD1EAA2B2CB9E600631ACA /* Prayers.swift in Sources */,
 				C80ED7372B53ECCD00FDCD51 /* DateFormatter.swift in Sources */,
 				C84A18E22B21B0FC00D55834 /* LoadingView.swift in Sources */,
+				C8C3A85E2C87A5F6005F663A /* FastingNotification.swift in Sources */,
 				C87086772B66C80F009A9796 /* AdditionalMassPropers.swift in Sources */,
 				C8589D5D2B6644DF00C55C69 /* LocalPushNoifications.swift in Sources */,
 				C8B61D142B3F71E000CF74CB /* InfoView.swift in Sources */,
@@ -735,7 +739,7 @@
 				CODE_SIGN_ENTITLEMENTS = "widget/widget-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = widget/Info.plist;
@@ -747,7 +751,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -765,7 +769,7 @@
 				CODE_SIGN_ENTITLEMENTS = "widget/widget-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = widget/Info.plist;
@@ -777,7 +781,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -924,13 +928,13 @@
 				CODE_SIGN_ENTITLEMENTS = "ios/app-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = "ordo-1962-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "1962 Ordo";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Store 'Ordo' dates on your device";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -946,7 +950,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -965,12 +969,12 @@
 				CODE_SIGN_ENTITLEMENTS = "ios/app-ent.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = "ordo-1962-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "1962 Ordo";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Store 'Ordo' dates on your device";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -986,7 +990,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1004,7 +1008,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ordo-1962-watch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watchos/Preview Content\"";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
@@ -1018,7 +1022,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.Watch";
 				PRODUCT_NAME = "1962 Ordo";
 				SDKROOT = watchos;
@@ -1038,7 +1042,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ordo-1962-watch.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watchos/Preview Content\"";
 				DEVELOPMENT_TEAM = 5LVS6ZWDJW;
 				ENABLE_PREVIEWS = YES;
@@ -1052,7 +1056,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mfrankland.ordo-62.Watch";
 				PRODUCT_NAME = "1962 Ordo";
 				SDKROOT = watchos;

@@ -34,9 +34,10 @@ struct Settings: View {
         NavigationStack {
             List {
                 Section ( "Daily Notifications" ) {
-                    NotificationToggle ( label: "6AM Angelus", title: "Oremus", hour: 6, id: "Angelus_Six", alert: notification_alert )
-                    NotificationToggle ( label: "Noon Angelus", title: "Oremus", hour: 12, id: "Angelus_Noon", alert: notification_alert )
-                    NotificationToggle ( label: "6PM Angelus", title: "Oremus", hour: 18, id: "Angelus_Eighteen", alert: notification_alert )
+                    FixedTimeNotification ( label: "Oremus", title: "6AM Angelus", hour: 6, id: "Angelus_Six", alert: notification_alert )
+                    FixedTimeNotification ( label: "Oremus", title: "Noon Angelus", hour: 12, id: "Angelus_Noon", alert: notification_alert )
+                    FixedTimeNotification ( label: "Oremus", title: "6PM Angelus", hour: 18, id: "Angelus_Eighteen", alert: notification_alert )
+                    FastingNotification ( title: "Fasting Reminder", id: "Fasting_Notification", alert: notification_alert )
                 }
                 Section ( footer: Text ( "'Full Access' to your Phone's Calendar is Required" ) ) {
                     Button {
