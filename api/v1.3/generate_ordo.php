@@ -90,7 +90,7 @@ class Ordo {
 
         $res = $this->db->Query (
             "SELECT pt.`category`, pt.`english`, pt.`latin`
-                FROM `PropersV2` p
+                FROM `Propers` p
                     INNER JOIN `ProperText` pt ON p.`text` = pt.`ID`
                 WHERE p.`feast`=:feast AND p.`date`=:date",
             [ ":feast" => $feast, ":date" => $date ]
