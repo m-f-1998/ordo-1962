@@ -1,16 +1,16 @@
 import { HttpClient, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { addWeeks, format, isBefore, isValid, parse } from "date-fns"
-import { compress, decompress } from 'compress-json'
-import { Preferences } from '@capacitor/preferences';
+import { compress, decompress } from "compress-json"
+import { Preferences } from "@capacitor/preferences"
 
-@Injectable({
+@Injectable ( {
   providedIn: "platform",
-})
+} )
 export class DataService {
-  private API_VERSION: string = "1.3"
+  private APIVERSION: string = "1.3"
 
-  constructor (
+  public constructor (
     private http: HttpClient
   ) { }
 
@@ -42,7 +42,7 @@ export class DataService {
           }
         } ).catch ( e => reject ( e ) )
       }
-    })
+    } )
   }
 
   public async GetLocale ( ): Promise<any> {
@@ -65,7 +65,7 @@ export class DataService {
           resolve ( response )
         } ).catch ( e => reject ( e ) )
       } )
-    })
+    } )
   }
 
   public async GetPrayers ( ): Promise<any> {
@@ -88,7 +88,7 @@ export class DataService {
           resolve ( response )
         } ).catch ( e => reject ( e ) )
       } )
-    })
+    } )
   }
 
   private httpRequest ( page: string, params: HttpParams = new HttpParams ( ) ) {
@@ -113,6 +113,6 @@ export class DataService {
   }
 
   private getURL ( file: string ): string {
-    return `https://www.matthewfrankland.co.uk/ordo-1962/v${this.API_VERSION}/${file}`
+    return `https://www.matthewfrankland.co.uk/ordo-1962/v${this.APIVERSION}/${file}`
   }
 }

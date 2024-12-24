@@ -8,17 +8,17 @@ import { format, isToday, parse } from "date-fns"
 import { Platform, ScrollCustomEvent } from "@ionic/angular"
 import { ColorsService } from "../colors.service"
 
-@Component({
-    templateUrl: "./ordo.component.html",
-    styleUrl: "./ordo.component.scss",
-    standalone: false
-})
+@Component ( {
+  templateUrl: "./ordo.component.html",
+  styleUrl: "./ordo.component.scss",
+  selector: "app-ordo",
+} )
 export class OrdoComponent {
   public ordo: any = {}
 
   public year = "2024"
   public language = "English"
-  public languages = ["English", "Latin"]
+  public languages = [ "English", "Latin" ]
 
   public months = Array.from ( { length: 12 }, ( _, i ) => format ( new Date ( ).setMonth ( i ), "LLLL" ) )
 
@@ -28,7 +28,7 @@ export class OrdoComponent {
   public error = false
   public scrolled = false
 
-  constructor (
+  public constructor (
     private modalService: NgbModal,
     private apiRequests: DataService,
     private router: Router,
@@ -38,7 +38,7 @@ export class OrdoComponent {
     this.apiRequests.GetOrdo ( ).then ( ordo => {
       this.ordo = ordo
 
-      if ( !( this.router.getCurrentNavigation()?.previousNavigation ) ) {
+      if ( !( this.router.getCurrentNavigation ()?.previousNavigation ) ) {
         this.loading = false
         this.error = false
       }
@@ -69,7 +69,7 @@ export class OrdoComponent {
     this.language = ( <HTMLInputElement> event.target ).value
   }
 
-  public YearRange() {
+  public YearRange () {
     return Array.from ( { length: 6 }, ( _, i ) => new Date ( ).getFullYear ( ) + i )
   }
 
@@ -77,14 +77,14 @@ export class OrdoComponent {
     try {
       const obj = document.querySelector ( id )
       if ( obj ) {
-        obj.scrollIntoView ( { behavior: 'smooth' } )
+        obj.scrollIntoView ( { behavior: "smooth" } )
       }
     } catch ( err ) {
       console.error ( err )
     }
   }
 
-  public OpenPropers(celebration: any) {
+  public OpenPropers ( celebration: any ) {
     const propers = this.modalService.open ( ModalPropersComponent, {
       size: "lg",
       keyboard: false,
@@ -95,19 +95,19 @@ export class OrdoComponent {
     propers.componentInstance.language = this.language
   }
 
-  public trackByMonth(index: number, month: any): any {
-    return month[0].date.month;
+  public trackByMonth ( index: number, month: any ): any {
+    return month[0].date.month
   }
 
-  public trackByDay(index: number, day: any): any {
-    return day.date;
+  public trackByDay ( index: number, day: any ): any {
+    return day.date
   }
 
-  public trackByCeleb(index: number, celeb: any): any {
-    return celeb.title;
+  public trackByCeleb ( index: number, celeb: any ): any {
+    return celeb.title
   }
 
-  public trackByCommem(index: number, commem: any): any {
-    return commem.title;
+  public trackByCommem ( index: number, commem: any ): any {
+    return commem.title
   }
 }

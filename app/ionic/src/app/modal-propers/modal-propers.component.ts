@@ -4,11 +4,11 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap"
 import * as marked from "marked"
 import { Subscription } from "rxjs"
 
-@Component({
-    templateUrl: "./modal-propers.component.html",
-    styleUrl: "./modal-propers.component.css",
-    standalone: false
-})
+@Component ( {
+  templateUrl: "./modal-propers.component.html",
+  styleUrl: "./modal-propers.component.css",
+  selector: "app-modal-propers",
+} )
 export class ModalPropersComponent {
   public celebration: any = null
   public marked = marked.parse
@@ -17,7 +17,7 @@ export class ModalPropersComponent {
 
   private backButton: Subscription
 
-  constructor (
+  public constructor (
     public activeModal: NgbActiveModal,
     private platform: Platform
   ) {
@@ -26,15 +26,15 @@ export class ModalPropersComponent {
     } )
   }
 
-  public UpdateCelebrations(event: Event) {
-    this.title = (<HTMLInputElement>event.target).value
+  public UpdateCelebrations ( event: Event ) {
+    this.title = ( <HTMLInputElement>event.target ).value
   }
 
-  public UpdateLanguage(lan: string) {
+  public UpdateLanguage ( lan: string ) {
     this.language = lan
   }
 
-  public dismiss() {
+  public dismiss () {
     this.activeModal.close ( )
     this.backButton.unsubscribe ( )
   }

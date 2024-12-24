@@ -2,15 +2,15 @@ import { Component } from "@angular/core"
 import { LocalNotifications, PendingLocalNotificationSchema } from "@capacitor/local-notifications"
 import { Toast } from "@capacitor/toast"
 
-@Component({
-    templateUrl: "./settings.component.html",
-    standalone: false
-})
+@Component ( {
+  templateUrl: "./settings.component.html",
+  selector: "app-ordo-settings",
+} )
 export class SettingsComponent {
   public disabled = false
-  public active_notifications: number [ ] = [ ]
+  public activeNotifications: number [ ] = [ ]
 
-  constructor ( ) {
+  public constructor ( ) {
     LocalNotifications.checkPermissions ( ).then ( permissions => {
       if ( permissions.display !== "granted" ) {
         LocalNotifications.requestPermissions ( ).then ( requestPermissions => {
@@ -27,7 +27,7 @@ export class SettingsComponent {
 
   private checkPendingNotifications ( ) {
     LocalNotifications.getPending ( ).then ( pending => {
-      this.active_notifications = pending.notifications.map ( ( notification: PendingLocalNotificationSchema ) => { return notification.id } )
+      this.activeNotifications = pending.notifications.map ( ( notification: PendingLocalNotificationSchema ) => { return notification.id } )
     } )
   }
 
@@ -38,10 +38,10 @@ export class SettingsComponent {
           id: id,
         }
       ] } )
-      this.active_notifications = this.active_notifications.filter ( item => item !== id )
+      this.activeNotifications = this.activeNotifications.filter ( item => item !== id )
     } else {
       try {
-        this.active_notifications.push ( id )
+        this.activeNotifications.push ( id )
         await LocalNotifications.schedule ( {
           notifications: [
             {

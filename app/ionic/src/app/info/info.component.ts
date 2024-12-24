@@ -1,26 +1,26 @@
-import { Component } from '@angular/core'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { ModalTextComponent } from '../modal-text/modal-text.component'
-import { HttpClient } from '@angular/common/http'
-import { DataService } from '../data.service'
-import { ModalPropersComponent } from '../modal-propers/modal-propers.component'
+import { Component } from "@angular/core"
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
+import { ModalTextComponent } from "../modal-text/modal-text.component"
+import { HttpClient } from "@angular/common/http"
+import { DataService } from "../data.service"
+import { ModalPropersComponent } from "../modal-propers/modal-propers.component"
 
-@Component({
-    templateUrl: './info.component.html',
-    styleUrl: './info.component.css',
-    standalone: false
-})
+@Component ( {
+  templateUrl: "./info.component.html",
+  styleUrl: "./info.component.css",
+  selector: "app-info",
+} )
 export class InfoComponent {
   public details: any = { }
   public votives: any = { }
-  public votives_of_piety: any = { }
-  public votives_monday: any = { }
-  public votives_tuesday: any = { }
-  public votives_wednesday: any = { }
-  public votives_thursday: any = { }
-  public votives_friday: any = { }
-  public votives_our_lady: any = { }
-  public other_votives: any = { }
+  public votivesOfPiety: any = { }
+  public monday: any = { }
+  public tuesday: any = { }
+  public wednesday: any = { }
+  public thursday: any = { }
+  public friday: any = { }
+  public ourLady: any = { }
+  public otherVotives: any = { }
   public locale: any = { }
 
   public language: string = "English"
@@ -32,7 +32,7 @@ export class InfoComponent {
   public option: string = "Information on the Ordo"
   public options = [ "Information on the Ordo", "Votive Masses" ]
 
-  constructor (
+  public constructor (
     private modalService: NgbModal,
     private httpClient: HttpClient,
     private apiRequests: DataService
@@ -42,12 +42,12 @@ export class InfoComponent {
     this.getLocale ( )
   }
 
-  public UpdateLanguage(event: Event) {
-    this.language = (<HTMLInputElement>event.target).value
+  public UpdateLanguage ( event: Event ) {
+    this.language = ( <HTMLInputElement>event.target ).value
   }
 
   public UpdateOption ( event: Event ) {
-    this.option = (<HTMLInputElement>event.target).value
+    this.option = ( <HTMLInputElement>event.target ).value
   }
 
   private getLocale ( ) {
@@ -63,62 +63,62 @@ export class InfoComponent {
 
   private getDetails ( ) {
     this.httpClient.get ( "/assets/details.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.details = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.details = data
+        }
+      } )
   }
 
   private getVotives ( ) {
     this.httpClient.get ( "/assets/votives/other-votive-masses.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.other_votives = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.otherVotives = data
+        }
+      } )
     this.httpClient.get ( "/assets/votives/votive-our-lady.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.votives_our_lady = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.ourLady = data
+        }
+      } )
     this.httpClient.get ( "/assets/votives/votive-friday.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.votives_friday = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.friday = data
+        }
+      } )
     this.httpClient.get ( "/assets/votives/votive-thursday.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.votives_thursday = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.thursday = data
+        }
+      } )
     this.httpClient.get ( "/assets/votives/votive-wednesday.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.votives_wednesday = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.wednesday = data
+        }
+      } )
     this.httpClient.get ( "/assets/votives/votive-tuesday.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.votives_tuesday = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.tuesday = data
+        }
+      } )
     this.httpClient.get ( "/assets/votives/votive-monday.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.votives_monday = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.monday = data
+        }
+      } )
     this.httpClient.get ( "/assets/votives/votive-of-particular-piety.json" )
-    .subscribe ( {
-      next: ( data: any ) => {
-        this.votives_of_piety = data
-      }
-    } )
+      .subscribe ( {
+        next: ( data: any ) => {
+          this.votivesOfPiety = data
+        }
+      } )
   }
 
   public getKeys ( value: any ) {
@@ -126,13 +126,13 @@ export class InfoComponent {
   }
 
   public OpenText ( title: string, body: string ) {
-    const propers = this.modalService.open ( ModalTextComponent, { size: 'lg', keyboard: false, centered: true } )
+    const propers = this.modalService.open ( ModalTextComponent, { size: "lg", keyboard: false, centered: true } )
     propers.componentInstance.title = title
     propers.componentInstance.body = body
   }
 
   public OpenPropers ( celebrations: any[ ], title: string ) {
-    const propers = this.modalService.open ( ModalPropersComponent, { size: 'lg', keyboard: false, centered: true } )
+    const propers = this.modalService.open ( ModalPropersComponent, { size: "lg", keyboard: false, centered: true } )
     propers.componentInstance.celebration = celebrations.find ( x => x.title == title )
     propers.componentInstance.title = title
     propers.componentInstance.language = this.language

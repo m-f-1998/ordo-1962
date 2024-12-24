@@ -1,11 +1,10 @@
-import { Component, Input } from "@angular/core"
+import { Component, input, InputSignal } from "@angular/core"
 
-@Component({
-    selector: "app-ordo-header",
-    styleUrl: "./header.component.scss",
-    templateUrl: "./header.component.html",
-    standalone: false
-})
+@Component ( {
+  selector: "app-ordo-header",
+  styleUrl: "./header.component.scss",
+  templateUrl: "./header.component.html",
+} )
 export class HeaderComponent {
-  @Input() index: number = 0
+  public readonly index: InputSignal<number> = input<number> ( 0 )
 }

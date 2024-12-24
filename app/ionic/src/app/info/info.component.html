@@ -58,9 +58,9 @@
             <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
               <div class="card-header">Votive Masses Of Particular Piety</div>
               <ul class="list-group">
-              @for ( detail of this.votives_of_piety; track detail ) {
+              @for ( detail of this.votivesOfPiety; track detail ) {
                 <li class="list-group-item">
-                  <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_of_piety, detail.title )">
+                  <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votivesOfPiety, detail.title )">
                     {{detail.title}}
                   </a>
                 </li>
@@ -71,41 +71,41 @@
             <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
               <div class="card-header">The Most Fitting Votive Masses for Particular Days of the Week</div>
               <ul class="list-group">
-                @for ( detail of this.votives_monday; track detail ) {
+                @for ( detail of this.monday; track detail ) {
                   <li class="list-group-item">
-                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_monday, detail.title )">
+                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.monday, detail.title )">
                       {{detail.title}}
                     </a>
                   </li>
                 }
                 <div class="card-footer">Monday</div>
-                @for ( detail of this.votives_tuesday; track detail ) {
+                @for ( detail of this.tuesday; track detail ) {
                   <li class="list-group-item">
-                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_tuesday, detail.title )">
+                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.tuesday, detail.title )">
                       {{detail.title}}
                     </a>
                   </li>
                 }
                 <div class="card-footer">Tuesday</div>
-                @for ( detail of this.votives_wednesday; track detail ) {
+                @for ( detail of this.wednesday; track detail ) {
                   <li class="list-group-item">
-                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_wednesday, detail.title )">
+                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.wednesday, detail.title )">
                       {{detail.title}}
                     </a>
                   </li>
                 }
                 <div class="card-footer">Wednesday</div>
-                @for ( detail of this.votives_thursday; track detail ) {
+                @for ( detail of this.thursday; track detail ) {
                   <li class="list-group-item">
-                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_thursday, detail.title )">
+                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.thursday, detail.title )">
                       {{detail.title}}
                     </a>
                   </li>
                 }
                 <div class="card-footer">Thursday</div>
-                @for ( detail of this.votives_friday; track detail ) {
+                @for ( detail of this.friday; track detail ) {
                   <li class="list-group-item">
-                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_friday, detail.title )">
+                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.friday, detail.title )">
                       {{detail.title}}
                     </a>
                   </li>
@@ -116,9 +116,9 @@
             <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
               <div class="card-header">Votive Masses Of Our Lady</div>
               <ul class="list-group">
-              @for ( detail of this.votives_our_lady; track detail ) {
+              @for ( detail of this.ourLady; track detail ) {
                   <li class="list-group-item">
-                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.votives_our_lady, detail.title )">
+                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.ourLady, detail.title )">
                       {{detail.title}}
                     </a>
                   </li>
@@ -129,9 +129,9 @@
             <div class="card" style="width: 18rem; margin: 20px; vertical-align: top;">
               <div class="card-header">Other Votive Masses</div>
               <ul class="list-group">
-              @for ( detail of this.other_votives; track detail ) {
+              @for ( detail of this.otherVotives; track detail ) {
                   <li class="list-group-item">
-                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.other_votives, detail.title )">
+                    <a href="javascript:void(0);" style="text-decoration: none;" (click)="OpenPropers ( this.otherVotives, detail.title )">
                       {{detail.title}}
                     </a>
                   </li>

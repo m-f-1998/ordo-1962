@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: "locale/:country", component: LocaleComponent },
 ]
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
-  exports: [RouterModule],
-})
+@NgModule ( {
+  imports: [ RouterModule.forRoot ( routes, { preloadingStrategy: PreloadAllModules } ) ],
+  exports: [ RouterModule ],
+} )
 export class AppRoutingModule {}

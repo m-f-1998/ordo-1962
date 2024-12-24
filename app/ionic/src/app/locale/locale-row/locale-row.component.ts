@@ -1,19 +1,18 @@
-import { Component, Input } from "@angular/core"
+import { Component, input, InputSignal } from "@angular/core"
 import { ColorsService } from "src/app/colors.service"
 
-@Component({
-    selector: "app-locale-row",
-    templateUrl: "./locale-row.component.html",
-    styleUrl: "./locale-row.component.css",
-    standalone: false
-})
+@Component ( {
+  selector: "app-locale-row",
+  templateUrl: "./locale-row.component.html",
+  styleUrl: "./locale-row.component.css",
+} )
 export class LocaleRowComponent {
 
-  @Input() public date: string = ""
-  @Input() public title: string = ""
-  @Input() public colors: string = ""
+  public readonly date: InputSignal<string> = input<string> ( "" )
+  public readonly title: InputSignal<string> = input<string> ( "" )
+  public readonly colors: InputSignal<string> = input<string> ( "" )
 
-  constructor (
+  public constructor (
     public colorSvc: ColorsService
   ) { }
 

@@ -7,7 +7,7 @@
         <ion-item>
           <ion-toggle
             [disabled]="this.disabled"
-            [checked]="this.active_notifications.includes ( 1 )"
+            [checked]="this.activeNotifications.includes ( 1 )"
             (ionChange)="TurnOnNotifications ( 1, '6AM Angelus', 6, 0, $event )">
             6AM Angelus
           </ion-toggle>
@@ -15,7 +15,7 @@
         <ion-item>
           <ion-toggle
             [disabled]="this.disabled"
-            [checked]="this.active_notifications.includes ( 2 )"
+            [checked]="this.activeNotifications.includes ( 2 )"
             (ionChange)="TurnOnNotifications ( 2, 'Noon Angelus', 12, 0, $event )">
             Noon Angelus
           </ion-toggle>
@@ -23,7 +23,7 @@
         <ion-item>
           <ion-toggle
             [disabled]="this.disabled"
-            [checked]="this.active_notifications.includes ( 3 )"
+            [checked]="this.activeNotifications.includes ( 3 )"
             (ionChange)="TurnOnNotifications ( 3, '6PM Angelus', 18, 0, $event )">
             6PM Angelus
           </ion-toggle>

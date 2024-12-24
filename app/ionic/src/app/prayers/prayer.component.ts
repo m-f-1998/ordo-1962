@@ -3,10 +3,10 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap"
 import { ModalTextComponent } from "../modal-text/modal-text.component"
 import { DataService } from "../data.service"
 
-@Component({
-    templateUrl: "./prayer.component.html",
-    standalone: false
-})
+@Component ( {
+  templateUrl: "./prayer.component.html",
+  selector: "app-ordo-prayer",
+} )
 export class PrayerComponent {
   public prayers: any = { }
 
@@ -16,11 +16,11 @@ export class PrayerComponent {
   public error = false
   public loading = true
 
-  constructor (
+  public constructor (
     private modalService: NgbModal,
     private apiRequests: DataService
   ) {
-    this.apiRequests.GetPrayers ( ).then( prayers => {
+    this.apiRequests.GetPrayers ( ).then ( prayers => {
       this.prayers = prayers
       this.loading = false
       this.error = false
@@ -31,23 +31,23 @@ export class PrayerComponent {
     } )
   }
 
-  public UpdateLanguage(event: Event) {
-    this.language = (<HTMLInputElement>event.target).value
+  public UpdateLanguage ( event: Event ) {
+    this.language = ( <HTMLInputElement>event.target ).value
   }
 
-  public GetKeys(data: any) {
-    if (!data) {
+  public GetKeys ( data: any ) {
+    if ( !data ) {
       return []
     }
-    return Object.keys(data)
+    return Object.keys ( data )
   }
 
-  public OpenPrayer(title: string, body: string) {
-    const propers = this.modalService.open (ModalTextComponent, {
+  public OpenPrayer ( title: string, body: string ) {
+    const propers = this.modalService.open ( ModalTextComponent, {
       size: "lg",
       keyboard: false,
       centered: true,
-    })
+    } )
     propers.componentInstance.title = title
     propers.componentInstance.body = body
   }

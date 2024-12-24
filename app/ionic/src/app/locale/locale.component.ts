@@ -6,14 +6,14 @@ import { ScrollCustomEvent } from "@ionic/angular"
 import { ColorsService } from "../colors.service"
 import { Location } from "@angular/common"
 
-@Component({
-    templateUrl: "./locale.component.html",
-    styleUrl: "./locale.component.css",
-    standalone: false
-})
+@Component ( {
+  templateUrl: "./locale.component.html",
+  styleUrl: "./locale.component.css",
+  selector: "app-locale",
+} )
 export class LocaleComponent {
   public locale: any = {}
-  public in_certain_locations: any = []
+  public inCertainLocations: any = []
 
   public faArrow = faArrowUp
   public faBack = faArrowLeft
@@ -24,7 +24,7 @@ export class LocaleComponent {
 
   public country: string | null = null
 
-  constructor(
+  public constructor (
     private apiRequests: DataService,
     private route: ActivatedRoute,
     private _location: Location,
@@ -34,13 +34,13 @@ export class LocaleComponent {
     this.getLocale ( )
   }
 
-  private getLocale() {
+  private getLocale () {
     this.apiRequests.GetLocale ( ).then ( locale => {
       if ( this.country ) {
         this.locale = locale.feasts.locale [ this.country ]
-        this.in_certain_locations = [ ]
+        this.inCertainLocations = [ ]
       } else {
-        this.in_certain_locations = locale.in_certain_locations
+        this.inCertainLocations = locale.in_certain_locations
         this.locale = { }
       }
       this.loading = false
@@ -56,7 +56,7 @@ export class LocaleComponent {
     try {
       const obj = document.querySelector ( id )
       if ( obj ) {
-        obj.scrollIntoView ( { behavior: 'smooth' } )
+        obj.scrollIntoView ( { behavior: "smooth" } )
       }
     } catch ( err ) {
       console.error ( err )

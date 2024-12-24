@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core"
 
-@Injectable({
+@Injectable ( {
   providedIn: "root",
-})
+} )
 export class ColorsService {
 
-  constructor ( ) { }
+  public constructor ( ) { }
 
   public getBackgroundColor ( id: string ) {
     switch ( id.split ( "," ) [ 0 ] ) {

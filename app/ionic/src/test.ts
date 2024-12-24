@@ -8,7 +8,7 @@ import {
 } from "@angular/platform-browser-dynamic/testing"
 
 // First, initialize the Angular testing environment.
-getTestBed().initTestEnvironment(
+getTestBed ().initTestEnvironment (
   BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting()
+  platformBrowserDynamicTesting ()
 )
