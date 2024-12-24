@@ -18,38 +18,32 @@ import { TabBarComponent } from './tabbar/tabbar.component';
 import { FormsModule } from '@angular/forms';
 import { DataService } from './data.service';
 
-import { HttpClientModule } from "@angular/common/http"
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http"
 import { HeaderComponent } from './header/header.component';
 import { LocaleRowComponent } from './locale/locale-row/locale-row.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    OrdoComponent,
-    InfoComponent,
-    LocaleComponent,
-    ModalPropersComponent,
-    ModalTextComponent,
-    PrayerComponent,
-    SettingsComponent,
-    TabBarComponent,
-    HeaderComponent,
-    LocaleRowComponent
-  ],
-  imports: [
-    FormsModule,
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    FontAwesomeModule,
-    HttpClientModule
-  ],
-  providers: [
-    DataService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [
-    AppComponent
-  ],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        OrdoComponent,
+        InfoComponent,
+        LocaleComponent,
+        ModalPropersComponent,
+        ModalTextComponent,
+        PrayerComponent,
+        SettingsComponent,
+        TabBarComponent,
+        HeaderComponent,
+        LocaleRowComponent
+    ],
+    bootstrap: [
+        AppComponent
+    ], imports: [FormsModule,
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        FontAwesomeModule], providers: [
+        DataService,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {}
