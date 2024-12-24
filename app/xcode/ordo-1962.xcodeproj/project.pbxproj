@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C8022BB22B2E5CB500921A27 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
 		C8022BB32B2E5CB600921A27 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
-		C80655BF2B5D285200051AF8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C80655BE2B5D285200051AF8 /* OrderedCollections */; };
 		C80655C12B5D942600051AF8 /* RenderMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C02B5D942600051AF8 /* RenderMarkdown.swift */; };
 		C80655C22B5D942600051AF8 /* RenderMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C02B5D942600051AF8 /* RenderMarkdown.swift */; };
 		C80655C32B5D942600051AF8 /* RenderMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80655C02B5D942600051AF8 /* RenderMarkdown.swift */; };
@@ -73,18 +72,19 @@
 		C8ADAC492B60627C001EE81B /* OrdoEventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ADAC482B60627C001EE81B /* OrdoEventList.swift */; };
 		C8ADAC4B2B606406001EE81B /* OrdoToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ADAC4A2B606406001EE81B /* OrdoToolbar.swift */; };
 		C8ADAC4D2B60651F001EE81B /* OrdoFeast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ADAC4C2B60651F001EE81B /* OrdoFeast.swift */; };
-		C8ADAC4F2B606EE2001EE81B /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8ADAC4E2B606EE2001EE81B /* OrderedCollections */; };
 		C8AE1DD92A2125D000B36A2C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DD82A2125D000B36A2C /* Tag.swift */; };
 		C8AE1DDB2A21260500B36A2C /* DisplayDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DDA2A21260500B36A2C /* DisplayDate.swift */; };
 		C8AE1DE42A21275F00B36A2C /* SendEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DE32A21275F00B36A2C /* SendEmail.swift */; };
 		C8AE1DE82A214B7D00B36A2C /* iCal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE1DE72A214B7D00B36A2C /* iCal.swift */; };
+		C8B20D3A2D1AC68F0065A78E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8B20D392D1AC68F0065A78E /* OrderedCollections */; };
+		C8B20D3C2D1AC6940065A78E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C8B20D3B2D1AC6940065A78E /* AlertToast */; };
+		C8B20D3E2D1AC6A60065A78E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8B20D3D2D1AC6A60065A78E /* OrderedCollections */; };
+		C8B20D402D1AC6AA0065A78E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8B20D3F2D1AC6AA0065A78E /* OrderedCollections */; };
 		C8B374602A23A2040024E930 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B3745F2A23A2040024E930 /* LaunchScreen.storyboard */; };
 		C8B61D142B3F71E000CF74CB /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B61D132B3F71E000CF74CB /* InfoView.swift */; };
-		C8B61D172B3F881E00CF74CB /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = C8B61D162B3F881E00CF74CB /* OrderedCollections */; };
 		C8B7FBC02A715BDE0026107C /* DisplayText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FBBF2A715BDE0026107C /* DisplayText.swift */; };
 		C8C3A85E2C87A5F6005F663A /* FastingNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C3A85D2C87A5F6005F663A /* FastingNotification.swift */; };
 		C8C6CEFD2A8260610010EEDE /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C6CEFC2A8260610010EEDE /* Gradient.swift */; };
-		C8C904B32A377EF100BB6872 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C8C904B22A377EF100BB6872 /* AlertToast */; };
 		C8CB0D792A478EEA00B2CB95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CB0D782A478EEA00B2CB95 /* Extensions.swift */; };
 		C8D4DCC02A3610E50049C042 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D4DCBF2A3610E50049C042 /* App.swift */; };
 		C8D4DCC22A3610E50049C042 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D4DCC12A3610E50049C042 /* ContentView.swift */; };
@@ -230,7 +230,7 @@
 			files = (
 				C85DEB4A2A34A9D5005269E3 /* SwiftUI.framework in Frameworks */,
 				C85DEB492A34A9D5005269E3 /* WidgetKit.framework in Frameworks */,
-				C8ADAC4F2B606EE2001EE81B /* OrderedCollections in Frameworks */,
+				C8B20D3E2D1AC6A60065A78E /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,8 +238,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8B61D172B3F881E00CF74CB /* OrderedCollections in Frameworks */,
-				C8C904B32A377EF100BB6872 /* AlertToast in Frameworks */,
+				C8B20D3A2D1AC68F0065A78E /* OrderedCollections in Frameworks */,
+				C8B20D3C2D1AC6940065A78E /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C80655BF2B5D285200051AF8 /* OrderedCollections in Frameworks */,
+				C8B20D402D1AC6AA0065A78E /* OrderedCollections in Frameworks */,
 				C8D4DCCF2A3616D90049C042 /* SwiftUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,7 +489,7 @@
 			);
 			name = "ordo-1962-widget";
 			packageProductDependencies = (
-				C8ADAC4E2B606EE2001EE81B /* OrderedCollections */,
+				C8B20D3D2D1AC6A60065A78E /* OrderedCollections */,
 			);
 			productName = CalendarWidgetExtension;
 			productReference = C844736E2A9000A1005E2E9D /* ordo-1962-widget.appex */;
@@ -513,8 +513,8 @@
 			);
 			name = "ordo-1962";
 			packageProductDependencies = (
-				C8C904B22A377EF100BB6872 /* AlertToast */,
-				C8B61D162B3F881E00CF74CB /* OrderedCollections */,
+				C8B20D392D1AC68F0065A78E /* OrderedCollections */,
+				C8B20D3B2D1AC6940065A78E /* AlertToast */,
 			);
 			productName = "ordo-1962";
 			productReference = C87DF9D82A4086FD00AD1D88 /* ordo-1962.app */;
@@ -535,7 +535,7 @@
 			);
 			name = "ordo-1962-watch";
 			packageProductDependencies = (
-				C80655BE2B5D285200051AF8 /* OrderedCollections */,
+				C8B20D3F2D1AC6AA0065A78E /* OrderedCollections */,
 			);
 			productName = "Ordo62 Watch App";
 			productReference = C89213992A8FDCA2000ED8E1 /* 1962 Ordo.app */;
@@ -572,8 +572,8 @@
 			);
 			mainGroup = C8A3595F29EF06220018F6B7;
 			packageReferences = (
-				C8C904B12A377EF100BB6872 /* XCRemoteSwiftPackageReference "AlertToast" */,
-				C8B61D152B3F881E00CF74CB /* XCRemoteSwiftPackageReference "swift-collections" */,
+				C8B20D372D1A22E90065A78E /* XCRemoteSwiftPackageReference "swift-collections" */,
+				C8B20D382D1A22FA0065A78E /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = C8A3595F29EF06220018F6B7;
 			projectDirPath = "";
@@ -1110,44 +1110,44 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C8B61D152B3F881E00CF74CB /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+		C8B20D372D1A22E90065A78E /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.6;
+				minimumVersion = 1.1.4;
 			};
 		};
-		C8C904B12A377EF100BB6872 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+		C8B20D382D1A22FA0065A78E /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.3.9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C80655BE2B5D285200051AF8 /* OrderedCollections */ = {
+		C8B20D392D1AC68F0065A78E /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C8B61D152B3F881E00CF74CB /* XCRemoteSwiftPackageReference "swift-collections" */;
+			package = C8B20D372D1A22E90065A78E /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
 		};
-		C8ADAC4E2B606EE2001EE81B /* OrderedCollections */ = {
+		C8B20D3B2D1AC6940065A78E /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C8B61D152B3F881E00CF74CB /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		C8B61D162B3F881E00CF74CB /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C8B61D152B3F881E00CF74CB /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		C8C904B22A377EF100BB6872 /* AlertToast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C8C904B12A377EF100BB6872 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			package = C8B20D382D1A22FA0065A78E /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
+		};
+		C8B20D3D2D1AC6A60065A78E /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8B20D372D1A22E90065A78E /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		C8B20D3F2D1AC6AA0065A78E /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8B20D372D1A22E90065A78E /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
