@@ -117,7 +117,7 @@ class Ordo {
         $results = $this->db->Query (
             "SELECT c.`id`, f.`title`, f.`rank`, f.`colors`,
                 cp.`category`, pt.`english`, pt.`latin`
-            FROM `CommemorationsV2` c
+            FROM `Commemorations` c
                 LEFT JOIN `CommemorationPropers` cp ON cp.`commemoration` = c.`id`
                 LEFT JOIN `ProperText` pt ON pt.`id` = cp.`text`
                 INNER JOIN `Feast` f ON f.`id` = c.`feast`
