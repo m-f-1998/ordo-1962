@@ -7,8 +7,9 @@ import { ColorsService } from "../colors.service"
 import { Location } from "@angular/common"
 
 @Component({
-  templateUrl: "./locale.component.html",
-  styleUrl: "./locale.component.css",
+    templateUrl: "./locale.component.html",
+    styleUrl: "./locale.component.css",
+    standalone: false
 })
 export class LocaleComponent {
   public locale: any = {}

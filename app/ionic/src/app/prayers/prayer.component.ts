@@ -4,7 +4,8 @@ import { ModalTextComponent } from "../modal-text/modal-text.component"
 import { DataService } from "../data.service"
 
 @Component({
-  templateUrl: "./prayer.component.html",
+    templateUrl: "./prayer.component.html",
+    standalone: false
 })
 export class PrayerComponent {
   public prayers: any = { }

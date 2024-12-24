@@ -5,8 +5,9 @@ import * as marked from "marked"
 import { Subscription } from "rxjs"
 
 @Component({
-  templateUrl: "./modal-text.component.html",
-  styleUrl: "./modal-text.component.css",
+    templateUrl: "./modal-text.component.html",
+    styleUrl: "./modal-text.component.css",
+    standalone: false
 })
 export class ModalTextComponent {
   public title = ""

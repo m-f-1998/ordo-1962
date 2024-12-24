@@ -5,8 +5,9 @@ import * as marked from "marked"
 import { Subscription } from "rxjs"
 
 @Component({
-  templateUrl: "./modal-propers.component.html",
-  styleUrl: "./modal-propers.component.css",
+    templateUrl: "./modal-propers.component.html",
+    styleUrl: "./modal-propers.component.css",
+    standalone: false
 })
 export class ModalPropersComponent {
   public celebration: any = null

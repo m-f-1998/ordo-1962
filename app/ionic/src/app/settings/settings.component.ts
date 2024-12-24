@@ -3,7 +3,8 @@ import { LocalNotifications, PendingLocalNotificationSchema } from "@capacitor/l
 import { Toast } from "@capacitor/toast"
 
 @Component({
-  templateUrl: "./settings.component.html",
+    templateUrl: "./settings.component.html",
+    standalone: false
 })
 export class SettingsComponent {
   public disabled = false

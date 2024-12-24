@@ -9,8 +9,9 @@ import { Platform, ScrollCustomEvent } from "@ionic/angular"
 import { ColorsService } from "../colors.service"
 
 @Component({
-  templateUrl: "./ordo.component.html",
-  styleUrl: "./ordo.component.scss",
+    templateUrl: "./ordo.component.html",
+    styleUrl: "./ordo.component.scss",
+    standalone: false
 })
 export class OrdoComponent {
   public ordo: any = {}

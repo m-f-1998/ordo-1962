@@ -6,8 +6,9 @@ import { DataService } from '../data.service'
 import { ModalPropersComponent } from '../modal-propers/modal-propers.component'
 
 @Component({
-  templateUrl: './info.component.html',
-  styleUrl: './info.component.css'
+    templateUrl: './info.component.html',
+    styleUrl: './info.component.css',
+    standalone: false
 })
 export class InfoComponent {
   public details: any = { }
