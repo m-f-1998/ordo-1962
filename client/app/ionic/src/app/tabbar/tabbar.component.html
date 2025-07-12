@@ -1,0 +1,18 @@
+<div class="section" style="z-index: 3;">
+  <div class="container">
+    <div class="button-container">
+      <button class="btn btn-default btn-round btn-lg btn-icon" [style.background-color]="index === 0 ? 'red' : 'var(--bs-success)'" routerLink="/ordo">
+        <fa-icon [icon]="faCalendar" size="lg"/>
+      </button>
+      <button class="btn btn-default btn-round btn-lg btn-icon" [style.background-color]="index === 1 ? 'red' : 'var(--bs-success)'" routerLink="/prayers">
+        <fa-icon [icon]="faPray" size="lg"/>
+      </button>
+      <button class="btn btn-default btn-round btn-lg btn-icon" [style.background-color]="index === 2 ? 'red' : 'var(--bs-success)'" routerLink="/info">
+        <fa-icon [icon]="faInfo" size="lg"/>
+      </button>
+      <button class="btn btn-default btn-round btn-lg btn-icon" [style.background-color]="index === 3 ? 'red' : 'var(--bs-success)'" routerLink="/settings">
+        <fa-icon [icon]="faCog" size="lg"/>
+      </button>
+    </div>
+  </div>
+</div>
