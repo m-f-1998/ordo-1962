@@ -38,13 +38,15 @@ The backend server requires the following environment variables to function prop
 
 | Variable              | Description                         |
 |-----------------------|-------------------------------------|
-| `DB` | The name of the connected postgres database |
-| `USER`           | The user connected to the database |
-| `PASS`           | The password for the database |
+| MONGO_USER            | MongoDB username                    |
+| MONGO_PASS            | MongoDB password                    |
+| MONGO_PORT            | MongoDB port (default: 27017)       |
+| MONGO_HOST            | MongoDB host (e.g., localhost)      |
 
 ## 📁 Example `.env` (for local dev)
 
 ```env
-DB=ordo-1962
-USER=your@email.com
-PASS=yourpassword
+MONGO_USER=your_mongo_username
+MONGO_PASS=your_mongo_password
+MONGO_PORT=27017
+MONGO_HOST=localhost
