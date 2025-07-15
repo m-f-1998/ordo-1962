@@ -1,0 +1,46 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">{{this.title}}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    @if ( celebration.title === this.title ) {
+      @for ( proper of celebration.propers; track proper ) {
+        <div>
+          <h1 class="modal-title fs-5" id="{{proper.title}}">{{proper.title}}</h1>
+          @if ( this.language === "Latin" ) {
+            <p style="white-space: pre-line;" [innerHTML]="this.marked(proper.latin)">
+              {{proper.latin}}
+            </p>
+          } @else {
+            <p style="white-space: pre-line;" [innerHTML]="this.marked(proper.english)">
+              {{proper.english}}
+            </p>
+          }
+        </div>
+        @if ( proper.title === "Collect" || proper.title === "Secret" || proper.title === "Postcommunion" ) {
+          <div>
+            @for ( commem of celebration.commemorations; track commem ) {
+              @if (commem.propers.length > 0 ) {
+                <hr>
+                <h1 class="modal-title fs-5" id="Commem-{{proper.title}}">{{proper.title}}</h1>
+                @if ( this.language === "Latin" ) {
+                  <p style="white-space: pre-line;" [innerHTML]="this.marked(commem.propers[0].latin)">
+                    {{commem.propers[0].latin}}
+                  </p>
+                } @else {
+                  <p style="white-space: pre-line;" [innerHTML]="this.marked(commem.propers[0].english)">
+                    {{commem.propers[0].english}}
+                  </p>
+                }
+              }
+            }
+          </div>
+        }
+        @if ( proper.title !== celebration.propers [ celebration.propers.length - 1 ].title ) {
+          <hr>
+        }
+      }
+    }
+  </div>
+</div>

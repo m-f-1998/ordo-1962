@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "original-app-icon-blurred.jpeg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

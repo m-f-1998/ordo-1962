@@ -1,0 +1,23 @@
+.dot {
+  height: 17px;
+  width: 17px;
+  background-color: #bbb;
+  border-radius: 50%;
+  border: 2px solid var(--bs-emphasis-color);
+  display: inline-block;
+}
+
+.date-field {
+  background: linear-gradient(0deg, rgb(62, 98, 68) 11.2%, rgb(42, 119, 129) 91.1%);
+}
+
+.today {
+  background: linear-gradient(0deg, rgb(156, 140, 51) 11.2%, rgb(98, 40, 40) 91.1%);
+}
+
+.tag {
+  padding: 10px;
+  font-size: small;
+  border: 1px solid black;
+  text-transform: uppercase;
+}

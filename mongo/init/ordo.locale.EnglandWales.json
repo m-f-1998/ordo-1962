@@ -1,0 +1,57 @@
+{
+  "location": "England & Wales",
+  "locale": {
+    "dioceses": [
+      "All Dioceses"
+    ],
+    "locale": {
+      "All Dioceses": [
+        {
+          "date": "12 Mar",
+          "title": "St Gregory",
+          "colors": "w"
+        },
+        {
+          "date": "23 Apr",
+          "title": "St George",
+          "colors": "r"
+        },
+        {
+          "date": "4 May",
+          "title": "The Blessed Martyrs of England and Wales",
+          "colors": "r"
+        },
+        {
+          "date": "26 May",
+          "title": "St Augustine of Canterbury",
+          "colors": "w"
+        },
+        {
+          "date": "27 May",
+          "title": "St Bede the Venerable",
+          "colors": "w"
+        },
+        {
+          "date": "22 Jun",
+          "title": "St Alban",
+          "colors": "r"
+        },
+        {
+          "date": "9 Jul",
+          "title": "St John Fisher & St Thomas More",
+          "colors": "r"
+        },
+        {
+          "title": "St Edward the Confessor",
+          "date": "13 Oct",
+          "colors": "w"
+        },
+        {
+          "date": "29 Dec",
+          "title": "St Thomas of Canterbury",
+          "colors": "r"
+        }
+      ]
+    }
+  }
+}

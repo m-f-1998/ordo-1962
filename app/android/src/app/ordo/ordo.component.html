@@ -1,0 +1,103 @@
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="detectScroll($event)">
+  <app-ordo-header id="top-ordo" [index]="0" />
+  <div style="padding-top: 70px; text-align: center;">
+    @if ( this.loading() ) {
+      <ion-spinner></ion-spinner>
+      <p style="padding-top: 20px;">Loading...</p>
+    } @else if ( this.error() ) {
+      <p>Ordo could not be fetched.</p>
+    } @else if ( !this.loading() && !this.error() ) {
+      <div class="btn-group" style="gap: 20px; display: flex; justify-content: center;">
+        <ion-select [value]="year" (ionChange)="UpdateYear($event)" style="width: auto;">
+          @for ( index of this.YearRange(); track index ) {
+            <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+          }
+        </ion-select>
+        <ion-select [value]="language" (ionChange)="UpdateLanguage($event)" style="width: auto;">
+          @for ( index of this.languages; track index ) {
+            <ion-select-option value="{{index}}">{{index}}</ion-select-option>
+          }
+        </ion-select>
+      </div>
+      <div style="margin: 30px;">
+        @for ( month of months; track month ) {
+          <span>
+            <a href="javascript:void(0)" (click)="GoTo('#' + month.substring(0,3))" class="link-primary" style="text-decoration: none; margin: 5; font-size: large;">{{month}}</a>
+            @if ( month !== "December" ) {
+              &nbsp;&nbsp;
+            }
+          </span>
+        }
+      </div>
+      @for ( month of this.ordo [ this.year ]; track month ) {
+        <div class="section" id="{{month [ 0 ].date.month}}" [style.padding-top]="(month [ 0 ].date.month==='Jan') ? 0 : 30" style="text-align: left;">
+          <div class="container">
+            @for ( day of month; track day ) {
+              <div class="card mb-3" style="cursor: pointer; border: 1px solid var(--bs-emphasis-color);">
+                <div class="row g-0 rounded-2">
+                  <div class="col-md-4">
+                    <div class="img-fluid h-100 h2 date-field" [class.today]="IsToday ( day.date )" id="{{IsToday ( day.date ) ? 'today' : ''}}">
+                      <div style="display: flex; height: 100%; justify-content: center; align-items: center; color: white; font-weight: bold;">
+                        <p style="text-align: center; margin: 0;">{{day.date.weekday}} {{day.date.day}}<br />{{day.date.month}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="card-body">
+                      @for ( celeb of day.celebrations; track celeb ) {
+                        <div style="margin-bottom: 10px;">
+                          <div style="display: flex; align-items: baseline;">
+                            <h5 class="card-title" style="margin-bottom: 5px;">
+                              <span class="dot" [style.color]="this.colorSvc.getForegroundColor(celeb.colors)" [style.background-color]="this.colorSvc.getBackgroundColor(celeb.colors)"></span>
+                              <strong style="margin-left: 5px;">
+                                {{celeb.title}}
+                              </strong>
+                            </h5>
+                          </div>
+                          @for ( commem of celeb.commemorations; track commem ) {
+                            <div style="display: flex; align-items: baseline;">
+                              <span>
+                                <span class="dot" style="width: 13px; height: 13px;" [style.color]="this.colorSvc.getForegroundColor(commem.colors)" [style.background-color]="this.colorSvc.getBackgroundColor(commem.colors)"></span>
+                                <strong style="margin-left: 5px">
+                                  {{commem.title}}
+                                </strong>
+                              </span>
+                            </div>
+                          }
+                        </div>
+                        <div>Class {{celeb.rank}}</div>
+                        <p style="white-space: pre-wrap;">{{celeb.options}}</p>
+                        <ion-button (click)="OpenPropers(celeb)" style="margin-bottom: 20px;">
+                          Open Propers
+                        </ion-button>
+                      }
+                      <div>
+                        <ion-badge class="tag"
+                          style="--background: {{this.colorSvc.getBackgroundColor(day.season.colors)}};
+                          --color: {{this.colorSvc.getForegroundColor(day.season.colors)}};">
+                          {{day.season.title}}
+                        </ion-badge>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+      <div style="position: fixed; bottom: 15px; right: 15px; padding: 0; z-index: 1000">
+        @if ( this.IsCurrentYear ( ) ) {
+          <ion-button (click)="this.GoTo ( '#today' )" class="scroll-to-today">
+            Go To Today
+          </ion-button>
+        }
+        @if ( this.scrolled ) {
+          <ion-button (click)="this.GoTo ( '#top-ordo' )" class="scroll-to-top">
+            <fa-icon [icon]="faArrow" />
+          </ion-button>
+        }
+      </div>
+    }
+  </div>
+</ion-content>

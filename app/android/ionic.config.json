@@ -1,0 +1,8 @@
+{
+  "name": "1962 Ordo",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

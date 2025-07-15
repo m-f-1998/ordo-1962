@@ -1,0 +1,105 @@
+{
+  "location": "USA",
+  "locale": {
+    "dioceses": [
+      "All Dioceses",
+      "In Certain Dioceses"
+    ],
+    "locale": {
+      "All Dioceses": [
+        {
+          "date": "12 Dec",
+          "title": "Our Lady of Guadalupe, Patroness of the Americas",
+          "colors": "w"
+        },
+        {
+          "date": "5 Jan",
+          "title": "St John Neuman",
+          "colors": "w"
+        },
+        {
+          "date": "22 Jan",
+          "title": "Votive Mass for Peace",
+          "colors": "v"
+        },
+        {
+          "date": "Sunday after Corpus Christi",
+          "title": "External Solemnity of Corpus Christi",
+          "colors": "w"
+        },
+        {
+          "date": "Sunday after Ss Peter & Paul",
+          "title": "External Solemnity of Ss Peter & Paul",
+          "colors": "r"
+        },
+        {
+          "date": "9 Sept",
+          "title": "St Peter Claver",
+          "colors": "w"
+        },
+        {
+          "date": "25 Oct",
+          "title": "St Isidore the Farmer",
+          "colors": "w"
+        },
+        {
+          "date": "13 Nov",
+          "title": "St Frances Xavier Cabrini",
+          "colors": "w"
+        }
+      ],
+      "In Certain Dioceses": [
+        {
+          "date": "4 Jan",
+          "title": "St Elizabeth Ann Seton (Optional)",
+          "colors": "w"
+        },
+        {
+          "date": "26 Sept or 13 Oct",
+          "title": "Ss Jean de Brebeuf, Isaac Jogues & Companions",
+          "colors": "r"
+        },
+        {
+          "date": "1 Feb",
+          "title": "St Bridget of Ireland",
+          "colors": "w"
+        },
+        {
+          "date": "26 Apr",
+          "title": "Our Lady of Good Counsel",
+          "colors": "w"
+        },
+        {
+          "date": "22 Mar",
+          "title": "St Catherine Fiesca Adorna",
+          "colors": "w"
+        },
+        {
+          "date": "16 May",
+          "title": "St John Nepomucene",
+          "colors": "r"
+        },
+        {
+          "date": "16 May",
+          "title": "St Brendan",
+          "colors": "w"
+        },
+        {
+          "date": "11 Aug",
+          "title": "St Philomena",
+          "colors": "r"
+        },
+        {
+          "date": "7 Nov",
+          "title": "St Leonard",
+          "colors": "w"
+        },
+        {
+          "date": "27 Nov",
+          "title": "St Virgilius",
+          "colors": "w"
+        }
+      ]
+    }
+  }
+}

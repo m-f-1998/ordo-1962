@@ -1,0 +1,47 @@
+{
+  "location": "Scotland",
+  "locale": {
+    "dioceses": [
+      "All Dioceses"
+    ],
+    "locale": {
+      "All Dioceses": [
+        {
+          "date": "30 Nov",
+          "title": "St Andrew, Patron of Scotland",
+          "colors": "w"
+        },
+        {
+          "date": "14 Jan",
+          "title": "St Kentigern/Mungo",
+          "colors": "w"
+        },
+        {
+          "date": "10 Mar",
+          "title": "St John Ogilvie",
+          "colors": "r"
+        },
+        {
+          "date": "17 Mar",
+          "title": "St Patrick",
+          "colors": "w"
+        },
+        {
+          "date": "9 Jun",
+          "title": "St Columba",
+          "colors": "w"
+        },
+        {
+          "date": "16 Sep",
+          "title": "St Ninian",
+          "colors": "w"
+        },
+        {
+          "date": "16 Nov",
+          "title": "St Margaret, Patroness of Scotland",
+          "colors": "w"
+        }
+      ]
+    }
+  }
+}

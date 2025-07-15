@@ -1,0 +1,74 @@
+.card {
+  border-radius: 0.1875rem;
+  box-shadow: 0 5px 25px #0003;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  margin-bottom: 1rem !important;
+}
+
+.dot {
+  height: 17px;
+  width: 17px;
+  background-color: #bbb;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+}
+
+.container {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  margin-top: 0px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+  max-width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgb(62, 98, 68) 11.2%, rgb(42, 119, 129) 91.1%);
+}
+
+.row {
+  gap: 0;
+  border-radius: 0.375rem !important;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.date-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+}
+
+.col-md-8 {
+  display: flex;
+}
+
+.card-body {
+  min-height: fit-content;
+  align-self: center;
+}
+
+.card-title {
+  padding: 30px;
+}
+
+.date {
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  font-size: 22px;
+}
+
+.col-md-4 {
+  padding: 0;
+}
