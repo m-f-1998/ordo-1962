@@ -9,8 +9,8 @@ import Foundation
 import SwiftData
 import OrderedCollections
 
-@Model class OrdoYear: Codable, ObservableObject, Hashable, Identifiable {
-    let id: String = UUID ( ).uuidString
+@Model class OrdoYear: Codable, ObservableObject, Hashable, Identifiable, @unchecked Sendable {
+    var id: String = UUID ( ).uuidString
     public private(set) var ordo: [ [ OrdoDay ] ]
     public private(set) var year: Int
     public private(set) var date: Date = Date()

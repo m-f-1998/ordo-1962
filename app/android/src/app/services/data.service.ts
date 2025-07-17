@@ -29,7 +29,7 @@ export class DataService {
           throw new Error ( `Ordo for year ${i} is expired or not available` )
         }
       } catch {
-        const response = await this.httpRequest ( "ordo.php", new HttpParams ( ).set ( "year", String ( i ) ) )
+        const response = await this.httpRequest ( `ordo/${String ( i )}` )
         ordo [ response.Year ] = response.Ordo
         await Filesystem.writeFile ( {
           path: `ordo-${response.Year}.json`,
@@ -55,7 +55,7 @@ export class DataService {
       return decompress ( JSON.parse ( ( value.value as string ) ) )
     }
     console.log ( "Fetching new locale data" )
-    const response = await this.httpRequest ( "locale.php" )
+    const response = await this.httpRequest ( "locale" )
     await Preferences.set ( {
       key: "locale",
       value: JSON.stringify ( compress ( response ) )
@@ -75,9 +75,32 @@ export class DataService {
           resolve ( decompress ( JSON.parse ( ( value.value as string ) ) ) )
           return
         }
-        this.httpRequest ( "prayers.php" ).then ( response => {
+        this.httpRequest ( "prayers" ).then ( response => {
           Preferences.set ( {
             key: "prayers",
+            value: JSON.stringify ( compress ( response ) )
+          } )
+          resolve ( response )
+        } ).catch ( e => reject ( e ) )
+      } )
+    } )
+  }
+
+  public async GetVotives ( ): Promise<any> {
+    return new Promise<void> ( ( resolve, reject ) => {
+      Preferences.get ( {
+        key: "votives"
+      } ).then ( value => {
+        if (
+          !this.checkExpired ( value.value )
+          && !( new Date ( ).getMonth ( ) === 1 && new Date ( ).getDate ( ) === 1 )
+        ) {
+          resolve ( decompress ( JSON.parse ( ( value.value as string ) ) ) )
+          return
+        }
+        this.httpRequest ( "votives" ).then ( response => {
+          Preferences.set ( {
+            key: "votives",
             value: JSON.stringify ( compress ( response ) )
           } )
           resolve ( response )
@@ -90,7 +113,14 @@ export class DataService {
     return new Promise<any> ( ( resolve, reject ) => {
       this.http.get<any> ( this.getURL ( page ), { params } ).subscribe ( {
         next: response => {
-          response.date = format ( addWeeks ( new Date ( ), 2 ), "dd MMM yyyy" )
+          if ( Array.isArray ( response ) ) {
+            resolve ( {
+              data: response,
+              date: format ( addWeeks ( new Date ( ), 2 ), "dd MMM yyyy" )
+            } )
+          } else {
+            response.date = format ( addWeeks ( new Date ( ), 2 ), "dd MMM yyyy" )
+          }
           resolve ( response )
         },
         error: e => reject ( e )
@@ -118,7 +148,7 @@ export class DataService {
     return true
   }
 
-  private getURL ( file: string ): string {
-    return `https://www.matthewfrankland.co.uk/ordo-1962/v${this.APIVERSION}/${file}`
+  private getURL ( path: string ): string {
+    return `https://ordo.matthewfrankland.co.uk/api/v${this.APIVERSION}/${path}`
   }
 }

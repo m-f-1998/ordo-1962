@@ -19,7 +19,9 @@ struct ContentView: View {
                 if ordo.count > 0 {
                     if let prayers = try self.api.cache.GetPrayers ( ) {
                         if let locale = try self.api.cache.GetLocale ( ) {
-                            return self.activeData.SetSuccess ( ordo: ordo, locale: locale, prayers: prayers )
+                            if let votives = try self.api.cache.GetVotives ( ) {
+                                return self.activeData.SetSuccess ( ordo: ordo, locale: locale, prayers: prayers, votives: votives )
+                            }
                         }
                     }
                 }

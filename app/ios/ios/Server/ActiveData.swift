@@ -18,12 +18,14 @@ class ActiveData: ObservableObject {
     public private(set) var ordo: [ OrdoYear ] = []
     public private(set) var prayers: PrayerLanguageData? = nil
     public private(set) var locale: LocaleOrdo? = nil
+    public private(set) var votives: [ VotiveData ]? = nil
 
-    func SetSuccess ( ordo: [ OrdoYear ], locale: LocaleOrdo?, prayers: PrayerLanguageData? ) {
+    func SetSuccess ( ordo: [ OrdoYear ], locale: LocaleOrdo?, prayers: PrayerLanguageData?, votives: [ VotiveData ]? ) {
         DispatchQueue.main.async {
             self.ordo = ordo
             self.prayers = prayers
             self.locale = locale
+            self.votives = votives
             self.SetStatus ( )
         }
     }

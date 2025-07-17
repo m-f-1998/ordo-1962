@@ -19,7 +19,7 @@ class Cache {
     init ( ) {
         do {
             let configuration = ModelConfiguration ( groupContainer: .identifier ( "group.mfrankland.ordo-62.contents" ) )
-            self.container = try ModelContainer ( for: OrdoYear.self, PrayerLanguageData.self, LocaleOrdo.self, configurations: configuration )
+            self.container = try ModelContainer ( for: OrdoYear.self, PrayerLanguageData.self, LocaleOrdo.self, VotiveData.self, configurations: configuration )
             self.context = ModelContext ( container )
         } catch {
             print ( error )
@@ -56,6 +56,12 @@ class Cache {
         return nil
     }
     
+    func GetVotives ( ) throws -> [VotiveData]? {
+        let descriptor = FetchDescriptor <VotiveData> ( )
+        let data = try self.context.fetch ( descriptor )
+        return data
+    }
+    
     func GetContainer ( ) -> ModelContainer {
         return container
     }
@@ -67,7 +73,9 @@ class Cache {
             if !version.isEmpty && version == Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? "" {
                 if try GetPrayers ( ) != nil {
                     if try GetLocale ( ) != nil {
-                        return ordo.count == 6 && ordo [ 0 ].year == CurrentYear ( )
+                        if try GetVotives ( ) != nil {
+                            return ordo.count == 6 && ordo [ 0 ].year == CurrentYear ( )
+                        }
                     }
                 }
             }
@@ -85,6 +93,7 @@ class Cache {
             try self.context.delete ( model: PrayerLanguageData.self )
             try self.context.delete ( model: OrdoYear.self )
             try self.context.delete ( model: LocaleOrdo.self )
+            try self.context.delete ( model: VotiveData.self )
         } catch {
             print ( "Failed to clear all data" )
         }
@@ -101,6 +110,10 @@ class Cache {
     
     func Insert ( locale: LocaleOrdo ) {
         self.context.insert ( locale )
+    }
+    
+    func Insert ( votives: [ VotiveData ] ) {
+        votives.forEach { self.context.insert($0) }
     }
     
     func Save ( ) {

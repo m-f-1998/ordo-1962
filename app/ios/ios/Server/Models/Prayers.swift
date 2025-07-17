@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-@Model class PrayerLanguageData: Decodable {
+@Model final class PrayerLanguageData: Decodable, @unchecked Sendable {
     private var res: [ String : PrayerCategoryData ] = [ : ]
     
     required init ( from decoder: Decoder ) throws {

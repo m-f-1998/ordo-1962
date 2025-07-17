@@ -55,7 +55,7 @@ struct Settings: View {
                 Section {
                     SendEmail ( )
                     MakeReview ( )
-                    Link ( "Privacy Policy", destination: URL ( string: "https://matthewfrankland.co.uk/ordo-1962/support/privacy.html" )! )
+                    Link ( "Privacy Policy", destination: URL ( string: "https://ordo.matthewfrankland.co.uk" )! )
                 }
             }
                 .toast ( isPresenting: self.$notification_alert.show ) {

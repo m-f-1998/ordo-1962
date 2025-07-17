@@ -6,9 +6,7 @@ import cors from "cors"
 import { randomBytes } from "crypto"
 
 import { router as staticRouter } from "./routes/static.js"
-import { router as prayersRouter } from "./routes/prayers.js"
-import { router as localeRouter } from "./routes/locale.js"
-import { router as ordoRouter } from "./routes/ordo.js"
+import { router as v1_3Router } from "./v1_3/router.js"
 
 import { connect } from "./db.js"
 
@@ -22,7 +20,7 @@ app.use ( express.urlencoded ( { limit: "1mb", extended: true } ) )
 
 app.use ( cors ( {
   origin: [
-    "http://localhost:3000",
+    "http://localhost:4200",
     "https://ordo.matthewfrankland.co.uk"
   ],
   methods: [ "GET", "POST" ],
@@ -58,6 +56,7 @@ app.use ( helmet ( {
       styleSrc: [
         "'self'",
         ( _req, res ) => `'nonce-${( res as Response ).locals[ "cspNonce" ]}'`,
+        "https://fonts.googleapis.com",
       ],
       scriptSrcElem: [
         ( _req, res ) => `'nonce-${( res as Response ).locals[ "cspNonce" ]}'`,
@@ -88,9 +87,7 @@ app.use ( helmet ( {
   ieNoOpen: true
 } ) )
 
-app.use ( "/api/prayers", prayersRouter )
-app.use ( "/api/locale", localeRouter )
-app.use ( "/api/ordo", ordoRouter )
+app.use ( "/api/v1.3", v1_3Router )
 app.use ( staticRouter )
 
 await connect ( )

@@ -7,7 +7,6 @@ import { ModalPropersComponent } from "../modal-propers/modal-propers.component"
 import { IonContent, IonSelect, IonSelectOption, IonSpinner } from "@ionic/angular/standalone"
 import { HeaderComponent } from "../header/header.component"
 import { RouterLink } from "@angular/router"
-import { forkJoin } from "rxjs"
 
 @Component ( {
   selector: "app-info",
@@ -107,33 +106,26 @@ export class InfoComponent {
     } )
   }
 
-  private getVotives ( ) {
-    return new Promise<void> ( ( resolve, reject ) => {
-      forkJoin ( {
-        otherVotives: this.httpClient.get ( "/assets/votives/other-votive-masses.json" ),
-        ourLady: this.httpClient.get ( "/assets/votives/votive-our-lady.json" ),
-        friday: this.httpClient.get ( "/assets/votives/votive-friday.json" ),
-        thursday: this.httpClient.get ( "/assets/votives/votive-thursday.json" ),
-        wednesday: this.httpClient.get ( "/assets/votives/votive-wednesday.json" ),
-        tuesday: this.httpClient.get ( "/assets/votives/votive-tuesday.json" ),
-        monday: this.httpClient.get ( "/assets/votives/votive-monday.json" ),
-        votivesOfPiety: this.httpClient.get ( "/assets/votives/votive-of-particular-piety.json" )
-      } ).subscribe ( {
-        next: data => {
-          this.otherVotives = data.otherVotives
-          this.ourLady = data.ourLady
-          this.friday = data.friday
-          this.thursday = data.thursday
-          this.wednesday = data.wednesday
-          this.tuesday = data.tuesday
-          this.monday = data.monday
-          this.votivesOfPiety = data.votivesOfPiety
-          resolve ( )
-        },
-        error: err => {
-          reject ( err )
-        }
-      } )
+  private async getVotives ( ) {
+    const res = await this.apiRequests.GetVotives ( )
+    res.data.forEach ( ( data: any ) => {
+      switch ( data.title ) {
+        case "Weekly Cycle":
+          this.monday = data.masses.find ( ( x: any ) => x.day === "Monday" ).votives
+          this.tuesday = data.masses.find ( ( x: any ) => x.day === "Tuesday" ).votives
+          this.wednesday = data.masses.find ( ( x: any ) => x.day === "Wednesday" ).votives
+          this.thursday = data.masses.find ( ( x: any ) => x.day === "Thursday" ).votives
+          this.friday = data.masses.find ( ( x: any ) => x.day === "Friday" ).votives
+          break
+        case "Our Lady":
+          this.ourLady = data.masses
+          break
+        case "Others":
+          this.otherVotives = data.masses
+          break
+        case "Particular Piety":
+          this.votivesOfPiety = data.masses
+      }
     } )
   }
 

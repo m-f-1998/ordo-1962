@@ -1,0 +1,722 @@
+{
+  "title": "Weekly Cycle",
+  "masses": [
+    {
+      "day": "Monday",
+      "votives": [
+        {
+          "rank": 4,
+          "title": "The Holy Trinity",
+          "colors": "w",
+          "propers": [
+            {
+              "title": "Introit",
+              "english": "*Tob 36:18*\nBlessed be the holy Trinity, and undivided unity: we will give glory to him, because he hath shown his mercy to us. (P.T. Alleluia, alleluia.)\n*Ps 8:2*\nO Lord, our Lord : how wonderful is thy name in the whole earth.\nGlory be to the Father...\nBlessed be the holy Trinity, and undivided unity: we will give glory to him, because he hath shown his mercy to us. (P.T. Alleluia, alleluia.)",
+              "latin": "*Tob 36:18*\nBenedicta sit sancta Trinitas, atque indivisa Unitas: confitebimur ei, quia fecit nobiscum misericordiam suam. (T.P. Allelúja, allelúja.)\n*Ps 8:2*\nDomine Dominus noster: quam admirabile est nomen tuum in universa terra.\nGlória Patri...\nBenedicta sit sancta Trinitas, atque indivisa Unitas: confitebimur ei, quia fecit nobiscum misericordiam suam. (T.P. Allelúja, allelúja.)"
+            },
+            {
+              "title": "Collect",
+              "english": "O almighty and everlasting God, who hast granted thy servants, in the confession of the true faith, to acknowledge the glory of the eternal Trinity and, in the power of majesty, to adore the unity : we beseech thee that, by steadfastness in this faith we may be evermore defended from all adversity.\nThrough our Lord...",
+              "latin": "Omnipotens sempiterne Deus, qui dedisti famulis tuis in confessione veræ fidei æternæ Trinitatis gloriam agnoscere, et in potentia majestatis adorare Unitatem : quæsumus; ut ejusdem fidei firmitate, ab omnibus semper muniamur adversis.\nPer Dóminum..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*2 Cor 13:11,13*\nBrethren: Rejoice, be perfect, take exhortation, be of one mind, have peace : and the God of peace and of love shall be with you. The grace of our Lord Jesus Christ, and the charity of God, and the communication of the Holy Ghost be with you all. Amen.",
+              "latin": "*2 Cor 13:11,13*\nFratres: Gaudete, perfecti estote, exhortamini, idem sapite, pacem habete, et Deus pacis et dilectionis erit vobiscum. Gratia Domini nostri Jesu Christi, et caritas Dei, et communicatio Sancti Spiritus sit cum omnibus vobis. Amen."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Dan 3:55-56*\nBlessed art thou, O Lord, who beholdest the depths, and sittest upon the Cherubim. Blessed art thou, O Lord, in the firmament of heaven, and worthy of praise for ever.",
+              "latin": "*Dan 3:55-56*\nBenedictus es, Domine, qui intueris abyssos, et sedes super Cherubim. Benedictus es, Domine, in firmamento cæli, et laudabilis in sæcula."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "*Dan 3:52*\nAlleluia, alleluia.\nBlessed art thou, O Lord, God of our fathers, and worthy of praise for ever.\nAlleluia.",
+              "latin": "*Dan 3:52*\nAllelúja, allelúja.\nBenedictus es, Domine Deus patrum nostrorum, et laudabilis in sæcula.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "We glorify, praise and bless, with our whole hearts, thee, O God the Father, not begotten : thee, the onlybegotten Son, thee, the Holy Ghost, the Paraclete, the holy and undivided Trinity. For thou art great, and dost wonderful things: thou alone art God. To thee be praise, to thee glory, to thee thanksgiving for ever and ever, O blessed Trinity.",
+              "latin": "Te Deum Patrem ingenitum, te Filium unigenitum, te Spiritum Sanctum Paraclitum, sanctam et individuam Trinitatem, toto corde confitemur, laudamus, atque benedicimus. Quoniam magnus es tu, et faciens mirabilia: tu es Deus solus. Tibi laus, tibi gloria, tibi gratiarum actio, in sæcula sempiterna, O beata Trinitas."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "*Dan 3:52*\nAlleluia, alleluia.\nBlessed art thou, O Lord, God of our fathers, and worthy of praise for ever.\nAlleluia.\nLet us bless the Father and the Son with the Holy Ghost.\nAlleluia.",
+              "latin": "*Dan 3:52*\nAllelúja, allelúja.\nBenedictus es, Domine Deus patrum nostrorum, et laudabilis in sæcula.\nAllelúja.\nBenedicamus Patrem et Filium cum Sancto Spiritu.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Jn 15:26,27; 16:1-4*\nAt that time: Jesus said to his disciples: When the Paraclete cometh, whom I will send you from the Father, the Spirit of truth, who proceedeth from the Father, he shall give testimony of me; and you shall give testimony, because you are with me from the beginning. These things have I spoken to you, that you may not be scandalized. They will put you out of the synagogues; yea, the hour cometh, that whosoever killeth you will think that he doth a service to God. And these things will they do to you, because they have not known the Father, nor me. But these things I have told you, that, when the hour shall come, you may remember that I told you.",
+              "latin": "*Jn 15:26,27; 16:1-4*\nIn illo tempore: Dixit Jesus discipulis suis: Cum venerit Paraclitus, quem ego mittam vobis a Patre, Spiritum veritatis, qui a Patre procedit, ille testimonium perhibebit de me : et vos testimonium perhibebitis, quia ab initio mecum estis. Hæc locutus sum vobis, ut non scandalizemini. Absque synagogis facient vos : sed venit hora, ut omnis qui interficit vos, arbitretur obsequium se præstare Deo. Et hæc facient vobis, quia non noverunt Patrem, neque me: Sed hæc locutus sum vobis, ut, cum venerit hora eorum, reminiscamini, quia ego dixi vobis."
+            },
+            {
+              "title": "Offertory",
+              "english": "*cf. Tob 12:6, cf. Dan 3:55*\nBlessed be God the Father, and the only-begotten Son of God, and also the Holy Spirit: because he hath shown his mercy towards us, (P.T. Alleluia.) Let us bless the Father and the Son with the Holy Ghost: let us praise him and exalt him above all for ever. Because he hath. Blessed art thou, that beholdest the depth, and sittest upon the Cherubim: and worthy to be praised and exalted above all for ever. Because he hath.",
+              "latin": "*cf. Tob 12:6, cf. Dan 3:55*\nBenedictus sit Deus Pater, unigenitusque Dei Filius, sanctus quoque Spiritus: quia fecit nobiscum misericordiam suam. (T.P. Alleluia.) Benedicamus Patrem et Filium cum Sancto Spiritu: laudemus et superexaltemus eum in sæcula. Quia fecit nobiscum misericordiam suam. Benedictus es, qui intueris abyssos et sedes super Cherubim: et superlaudabilis et superexaltatus in sæcula. Quia fecit nobiscum misericordiam suam."
+            },
+            {
+              "title": "Secret",
+              "english": "Sanctify, we beseech thee, O Lord our God, by the invocation of thy holy name, the victim of this oblation : and through it make of us, too, an eternal offering to thee.\nThrough our Lord...",
+              "latin": "Sanctifica, quæsumus, Domine Deus noster, per tui sancti nominis invocationem hujus oblationis hostiam; et per eam nosmetipsos tibi perfice munus æternum.\nPer Dóminum..."
+            },
+            {
+              "title": "Preface of the Holy Trinity",
+              "english": "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God; Who, together with Thine only-begotten Son, and the Holy Ghost, art one God, one Lord: not in the oneness of a single Person, but in the Trinity of one substance. For what we believe by Thy revelation of Thy glory, the same do we believe of Thy Son, the same of the Holy Ghost, without difference or separation. So that in confessing the true and everlasting Godhead, distinction in persons, unity in essence, and equality in majesty may be adored. Which the Angels and Archangels, the Cherubim also and Seraphim do praise: who cease not daily to cry out, with one voice saying:",
+              "latin": "Vere dignum et justum est, æquum et salutáre, nos tibi semper et ubíque grátias ágere: Dómine sancte, Pater omnípotens, ætérne Deus: Qui cum unigénito Fílio tuo et Spíritu Sancto unus es Deus, unus es Dóminus: non in uníus singularitáte persónæ, sed in uníus Trinitáte substántiæ. Quod enim de tua glória, revelánte te, crédimus, hoc de Fílio tuo, hoc de Spíritu Sancto sine differéntia discretiónis sentímus. Ut in confessióne veræ sempiternǽque Deitátis, et in persónis propríetas, et in esséntia únitas, et in majestáte adorétur æquálitas. Quam laudant Angeli atque Archángeli, Chérubim quoque ac Séraphim: qui non cessant clamáre cotídie, una voce dicéntes:"
+            },
+            {
+              "title": "Communion",
+              "english": "*Tob 12:6*\nWe bless the God of heaven, and before all living we will praise him; because he hath shown his mercy to us. (P.T. Alleluia.)",
+              "latin": "*Tob 12:6*\nBenedicimus Deum cæli, et coram omnibus viventibus confitebimur ei : quia fecit nobiscum misericordiam suam. (T.P. Allelúja.)"
+            },
+            {
+              "title": "Postcommunion",
+              "english": "May the reception of this sacrament, O Lord our God, and the confession of the holy and eternal Trinity and its undivided unity, profit us to the salvation of body and soul.\nThrough our Lord...",
+              "latin": "Proficiat nobis ad salutem corporis et animæ, Domine Deus noster, hujus sacramenti susceptio : et sempiternæ sanctæ Trinitatis, ejusdemque individuæ unitatis confessio.\nPer Dóminum..."
+            }
+          ],
+          "commemorations" : []
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "votives": [
+        {
+          "rank": 4,
+          "title": "The Holy Angels",
+          "colors": "w",
+          "propers": [
+            {
+              "title": "Introit",
+              "english": "*Ps 102:20*\nBless the Lord, all ye His Angels: you that are mighty in strength, and execute His word, hearkening to the voice of His orders. (P.T. Aileluia, alleluia.)\n*Ps 102:1*\nBless the Lord, O my soul: and let all that is within me bless His holy Name.\nGlory be to the Father...\nBless the Lord, all ye His Angels: you that are mighty in strength, and execute His word, hearkening to the voice of His orders. (P.T. Alleluia, alleluia.)",
+              "latin": "*Ps 102:20*\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus, ad audiendam vocem sermonum ejus. (T.P. Allelúja, allelúja.)\n*Ps 102:1*\nBenedic, anima mea, Domino: et omnia, quae intra me sunt, nomini sancto ejus.\nGlória Patri...\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus, ad audiendam vocem sermonum ejus. (T.P. Allelúja, allelúja.)"
+            },
+            {
+              "title": "Collect",
+              "english": "O God, who hast constituted the services of Angels and of men in a wonderful order, mercifully grant, that they who ever stand before Thy face to do Thee service in heaven, may also defend our life upon earth.\nThrough our Lord...",
+              "latin": "Deus, qui, miro ordine, Angelorum ministerial hominumque dispensas: concede propitius; ut, a quibus tibi ministrantibus in cælo semper assistitur, ab his in terra vita nostra muniatur.\nPer Dóminum..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*Apoc 5:11-14*\nIn those days: I heard the voice of many Angels round about the throne, and the living creatures and the ancients; and the number of them was thousands of thou sands, saying with a loud voice: The Lamb that was slain is worthy to receive power, and divinity, and wisdom, and strength, and honor, and glory, and benediction. And every creature which is in heaven and on the earth, and under the earth, and such as are in the sea, and all that are in them, I heard all saying: To Him that sitteth on the throne, and to the Lamb, benediction, and honor, and glory, and power, for ever and ever. And the four living creatures said: Amen. And the four and twenty ancients fell down on their faces, and adored Him that liveth for ever and ever.",
+              "latin": "*Apoc 5:11-14*\nIn diebus illis: Audivi vocem Angelorum multorum in circuitu throni, et animalium, et seniorum, et erat numerus eorum milia milium, dicentium voce magna: Dignus est Agnus, qui occisus est, accipere virtutem, et divinitatem, et sapientiam, et fortitudinem, et honorem, et gloriam, et benedictionem. Et omnem creaturam, quae in coelo est, et super terram, et sub terra, et quae sunt in mari, et quae in eo: omnes audivi dicentes: Sedenti in throno, et Agno: benedictio, et honor, et gloria, et potestas in saecula saeculorum. Et quatuor animalia dicebant: Amen. Et viginti quatuor seniors ceciderunt in facies suas: et adoraverunt viventem in saecula saeculorum."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Ps 148:1,2*\nPraise ye the Lord from the heavens: praise Him, in the high places. Praise ye Him, all His angels: praise ye Him, all His hosts.",
+              "latin": "*Ps 148:1,2*\nLaudate Dominum de coelis: laudate eum in excelsis. Laudate eum, omnes Angeli ejus: laudate eum, omnes virtutes ejus."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "*Ps 137:1,2*\nAlleluia, alleluia.\nI will sing praise to Thee in the sight of the Angels: I will worship towards Thy holy temple, and I will give glory to Thy name.\nAlleluia.",
+              "latin": "*Ps 137:1,2*\nAllelúja, allelúja.\nIn conspectu Angelorum psallam tibi: adorabo ad templum sanctum tuum, et confitebor nomini tuo.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "*Ps 102:20-22*\nBless the Lord all ye His Angels: ye that are mighty in strength, and execute His word. Bless the Lord, all ye His hosts: ye ministers of His that do His will. Bless the Lord, all His works: in every place of His dominion, Oh my soul, bless thou the Lord.",
+              "latin": "*Ps 102:20-22*\nBenedicite Dominum, omnes Angeli ejus: potentes virtute, qui facitis verbum ejus. Benedicite Domino, omnes virtutes ejus: ministry ejus, qui facitis voluntatem ejus. Benedicite Domino, omnia opera ejus: in omni loco dominationis ejus, benedic, anima mea, Domino."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "*Ps 137:1,2*\nAlleluia, alleluia.\nI will sing praise to Thee in the sight of the Angels: I will worship towards Thy holy temple, and I will give glory to Thy name.\nAlleluia.\n*Matt 28:2*\nAn Angel of the Lord descended from heaven: and coming rolled back the stone, and sat upon it.\nAlleluia.",
+              "latin": "*Ps 137:1,2*\nAllelúja, allelúja.\nIn conspectu Angelorum psallam tibi: adorabo ad templum sanctum tuum, et confitebor nomini tuo.\nAllelúja.\n*Matt 28:2*\nAngelus Domini descendit de coelo, et accedens revolvit lapidem, et sedebat super eum.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Jn 1:47,51*\nAt that time: Jesus saw Nathanael coming to Him: and He saith of him: Behold an Israelite indeed, in whom there is no guile. Nathanael saith to Him: Whence knowest Thou me? Jesus answered, and said to him: Before that Philip called thee, when thou wast under the fig-tree, I saw thee. Nathanael answered Him, and said: Rabbi, Thou art the Son of God, Thou art the King of Israel. Jesus answered, and said to him: Because I said unto thee, I saw thee under the fig-tree, thou believest: greater things than these shalt thou see. And He said to him: Amen, amen I say to you, you shall see the heavens opened, and the Angels of God ascending and descending upon the Son of Man.",
+              "latin": "*Jn 1:47,51*\nIn illo tempore: Vidit Jesus Nathanaël venientem ad se, et dicit de eo: Ecce vere Israëlita, in quo dolus non est. Dicit ei Nathanaël: Unde me nosti? Respondit Jesus, et dixit ei: Priusquam te Philippus vocaret, cum esses sub ficu, vidi te. Respondit ei Nathanaël, et ait: Rabbi, tu es Filius Dei, tu es Rex Israël. Respondit Jesus, et dixit ei: Quia dixi tibi: Vidi te sub ficu, credis: majus his videbis. Et dicit ei: Amen, amen dico vobis, videbitis coelum apertum, et Angelos Dei ascendentes, et descendentes supra Filium hominis."
+            },
+            {
+              "title": "Offertory",
+              "english": "*Apoc 8:3-4*\nAn angel stood near the altar of the temple, having a golden censer in his hand: and there was given to him much incense, and the smoke of the perfumes ascended before God. (P.T. Alleluia.)",
+              "latin": "*Apoc 8:3-4*\nStetit Angelus juxta aram templi, habens thuribulum aureum in manu sua: et data sunt ei incensa multa: et ascendit fumus aromatum in conspectu Dei. (T.P. Alleluia.)"
+            },
+            {
+              "title": "Secret",
+              "english": "We offer unto Thee, O Lord, the Sacrifice of praise and humbly beseech Thee, that through the prayers of the Angels who plead for us, Thou wouldst graciously accept it and make it of avail to us for salvation.\nThrough our Lord...",
+              "latin": "Hostias tibi, Domine, laudis offerimus, suppliciter deprecantes: ut easdem, angelico pro nobis interveniente suffragio, et placatus accipias, et ad salute nostram provenire concedas.\nPer Dóminum..."
+            },
+            {
+              "title": "Preface of the Season",
+              "english": "",
+              "latin": ""
+            },
+            {
+              "title": "Communion",
+              "english": "Angels, Archangels, Thrones and Dominions, Principalities, and Powers, the Virtues of the heavens, Cherubim and Seraphim, bless ye the Lord for ever. (P.T. Alleluia.)",
+              "latin": "Angeli, Archangeli, Throni et Dominationes, Principatus et Potestates, Virtutes cœlorum, Cherubim atque Seraphim, Dominum benedicite in aeternum. (T.P. Allelúja.)"
+            },
+            {
+              "title": "Postcommunion",
+              "english": "We who are filled with the heavenly blessing, humbly beseech Thee, O Lord, that the Mysteries which we celebrate with this imperfect worship of ours may be profitable to us by the help of Thy holy Angels and Archangels.\nThrough our Lord...",
+              "latin": "Repleti, Domine, benedictione coelesti, suppliciter imploramus: ut, quod fragili celebramus officio, sanctorum Angelorum atque Archangelorum nobis prodesse sentiamus auxilio.\nPer Dóminum..."
+            }
+          ],
+          "commemorations" : []
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "votives": [
+        {
+          "rank": 4,
+          "title": "St Joseph",
+          "colors": "w",
+          "propers": [
+            {
+              "title": "Introit",
+              "english": "*Ps 32:20,21*\nThe Lord is our helper and protector: in Him our heart shall rejoice, and in His holy name we have trusted. (P.T. Aileluia, alleluia.)\n*Ps 79:2*\nGive ear, O Thou that rulest Israel: Thou that leadest Joseph like a sheep.\nGlory be to the Father...\nThe Lord is our helper and protector: in Him our heart shall rejoice, and in His holy name we have trusted. (P.T. Alleluia, alleluia.)",
+              "latin": "*Ps 32:20,21*\nAdjutor et protector noster est Dóminus: in eo lætábitur cor nostrum, et in nómine sancto ejus sperávimus. (T.P. Allelúja, allelúja.)\n*Ps 79:2*\nQui regis Israel, inténde: qui dedúcis, velut ovem, Joseph.\nGlória Patri...\nAdjutor et protector noster est Dóminus: in eo lætábitur cor nostrum, et in nómine sancto ejus sperávimus. (T.P. Allelúja, allelúja.)"
+            },
+            {
+              "title": "Collect",
+              "english": "O God, Who in Thine unspeakable providence didst vouchsafe to choose blessed Joseph for Thy most holy Mother's spouse; grant, we beseech Thee, that we who revere him as our protector upon earth, may become worthy to have him for our intercessor in heaven.\nWho livest and reignest...",
+              "latin": "Deus, qui ineffábili providéntia beátum Joseph sanctíssimæ Genetrícis tux sponsum elígere dignátus es: præsta, quæsumus; ut, quem protectórem venerámur in terris, intercessórem habére mereámur in cælis:\nQui vivis et regnas..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*Gen 49:22-26*\nJoseph was a growing son, a growing son, and comely to behold: the daughters run to and fro upon the wall. But they that held darts provoked him, and quarrelled with him, and envied him. His bow rested upon the strong, and the bands of his arms and his hands were loosed, by the hands of the mighty one of Jacob: thence he came forth a pastor, the stone of Israel. The God of thy father shall be thy helper, and the Almighty shall bless thee with the blessings of heaven above, with the blessings of the deep that lieth beneath, with the blessings of the breasts and of the womb. The blessings of thy father are strengthened with the blessings of his fathers: until the desire of the everlasting hills shall come; may they be upon the head of Joseph, and upon the crown of the Nazarite among his brethren.",
+              "latin": "*Gen 49:22-26*\nFilius accréscens Joseph, filius accréscens, et decórus aspéctu: fíliæ discurrérunt super murum. Sed exasperavérunt eum, et jurgáti sunt, inviderúntque illi habéntes jácula. Sedit in forti arcus ejus, et dissolúta sunt vincula bracchiórum et mánuum illíus per manus poténtis Jacob: inde pastor egréssus est, lapis Israel. Deus patris tui erit adjútor tuus, et Omnípotens benedícet tibi benedictiónibus cæli désuper, benedictiónibus abyssi jacéntis deórsum, benedictiónibus úberum et vulvæ. Benedictiónes patris tui confortátæ sunt benedictiónibus patrum ejus, donec veníret Desidérium cóllium æternórum: fiant in capite Joseph, et in vértice Nazaræi inter fratres suos."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Ps 20:4,5*\nThou hast prevented him with blessings of sweetness: Thou hast set on his head a crown of precious stones. He asked life of Thee, and Thou hast given him length of days for ever and ever.",
+              "latin": "*Ps 20:4,5*\nDomine, prævenisti eum in benedictionibus dulcedinis: posuisti in capite ejus coronam de lapide pretioso. Vitam petiit a te, et tribuisti et longitudinem dierum in sæculum sæculi."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "*Ps 137:1,2*\nAlleluia, alleluia.\nObtain for us, Joseph, grace to lead an innocent life; and may our life ever be shielded by thy patronage.\nAlleluia.",
+              "latin": "*Ps 137:1,2*\nAllelúja, allelúja.\nFac nos innócuam, Joseph, decúrrere vitam: sitque tuo semper tuta patrocínio.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "*Ps 111:1-3*\nBlessed is the man that feareth the Lord: he shall delight exceedingly in His commandments. His seed shall be mighty upon earth: the generation of the righteous shall be blessed. Glory and wealth shall be in his house: and his justice remaineth for ever and ever.",
+              "latin": "*Ps 111:1-3*\nBeatus vir, qui timet Dóminum: in mandátis ejus cupit nimis. Potens in terra erit semen ejus: generátio rectórum benedicétur. Glória et divítiæ in domo ejus: et justítia ejus manet in sæculum sæculi."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "*Ps 137:1,2*\nAlleluia, alleluia.\nIn whatever tribulation they shall cry to Me, I will hear them, and be their protector always.\nAlleluia.\n*Matt 28:2*\nObtain for us, Joseph, grace to lead an innocent life; and may our life ever be shielded by thy patronage.\nAlleluia.",
+              "latin": "*Ps 137:1,2*\nAllelúja, allelúja.\nDe quacúmque tribulatióne clamáverint ad me, exáudiam eos, et ero protéctor eórum semper.\nAllelúja.\n*Matt 28:2*\nFac nos innócuam, Joseph, decúrrere vitam: sitque tuo semper tuta patrocínio.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Lk 3:21-23*\nAt that time: It came to pass, when all the people were baptized, that Jesus also being baptized and praying, heaven was opened: and the Holy Ghost descended in a bodily shape as a dove upon Him: and a voice came from heaven: Thou art My beloved Son, in Thee I am well pleased. And Jesus Himself was beginning about the age of thirty years: being (as it was supposed) the son of Joseph.",
+              "latin": "*Lk 3:21-23*\nIn illo témpore: Factum est autem, cum baptizarétur omnis pópulus, et Jesu baptizáto et oránte, apértum est cælum: et descéndit Spiritus Sanctus corporáli spécie sirut colúmba in ipsum: et vox de cælo facta est: Tu es Filius meus diléctus, in te complácui mihi. Et ipse Jesus erat incípiens quasi annórum trigínta, ut putabátur, filius Joseph."
+            },
+            {
+              "title": "Offertory",
+              "english": "*Ps 147:12,13*\nPraise the Lord, O Jerusalem, because He hath strengthened the bolts of thy, gates: He hath blessed thy children within thee. (P.T. Alleluia.)",
+              "latin": "*Ps 147:12,13*\nLauda, Jerusalem, Dóminum: quóniam confortávit seras portárum tuárum, benedíxit fíliis tuis in te. (T.P. Alleluia.)"
+            },
+            {
+              "title": "Secret",
+              "english": "Supported by the patronage of the spouse of Thy most holy Mother, we beseech Thy clemency, O Lord: that Thou wouldst make our hearts despise all earthly things, and love Thee, the true God, with perfect charity.\nWho livest and reignest...",
+              "latin": "Sanctissimæ Genetrícis tua sponsi patrocínio suffúlti, rogámus, Dómine, cleméntiam tuam: ut corda nostra fácias terréna cuncta despícere, ac te verum Deum perfécta caritáte dilígere:\nQui vivis et regnas..."
+            },
+            {
+              "title": "Preface of St Joseph",
+              "english": "It is truly meet and just, right and for our salvation, that we should at all times and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God: and that we should magnify with due praises, bless and proclaim Thee on the solemnity of blessed Joseph; who, being a just man, was given by Thee as a Spouse to the Virgin Mother of God, and, as a faithful and prudent servant was set over Thy Family, that, with fatherly care, he might guard Thine only-begotten Son, conceived by the overshadowing of the Holy Ghost, even Jesus Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominations worship it, and the Powers stand in awe. The heavens and the heavenly hosts together with the blessed Seraphim in triumphant chorus unite to celebrate it. Together with them we entreat Thee that Thou mayest bid our voices also to be admitted, while we say with lowly praise:",
+              "latin": "Vere dignum et justum est, æquum et salutáre, nos tibi semper et ubíque grátias ágere: Dómine sancte, Pater omnípotens, ætérne Deus: Et te in *Veneratióne* beáti Joseph débitis magnificáre præcóniis, benedícere et prædicáre. Qui et vir justus, a te Deíparæ Vírgini Sponsus est datus: et fidélis servus ac prudens, super Famíliam tuam est constitútus: ut Unigénitum tuum, Sancti Spíritus obumbratióne concéptum, paterna vice custodíret, Jesum Christum, Dóminum nostrum. Per quem majestátem tuam laudant Angeli, adórant Dominatiónes, tremunt Potestátes. Cæli cælorúmque Virtútes ac beáta Séraphim sócia exsultatióne concélebrant. Cum quibus et nostras voces ut admítti júbeas, deprecámur, súpplici confessióne dicéntes:"
+            },
+            {
+              "title": "Communion",
+              "english": "*Matt 1:16*\nBut Jacob begot Joseph, the husband of Mary, of whom was born Jesus, who is called Christ. (P.T. Alleluia.)",
+              "latin": "*Tob 12:6*\nJacob autem génuit Joseph, virum Maria, de qua natos est Jesus, qui vocátur Christus. (T.P. Allelúja.)"
+            },
+            {
+              "title": "Postcommunion",
+              "english": "We who have been refreshed at the fountain of divine blessing, beseech Thee, O Lord our God: that as Thou dost gladden us by the protection of blessed Joseph, so by his merits and intercession Thou wouldst make us partakers of everlasting glory.\nThrough our Lord...",
+              "latin": "Divini múneris fonte refécti, quæsumus, Dómine, Deus noster: ut, sicut nos facis beáti Joseph protectióne gaudere; ita, ejus méritis et intercessióne, cæléstis gloria fácias esse partícipes.\nPer Dóminum..."
+            }
+          ],
+          "commemorations" : []
+        },
+        {
+          "rank": 4,
+          "title": "Ss Peter & Paul",
+          "colors": "r",
+          "propers": [
+            {
+              "title": "Introit (Outside Paschaltide)",
+              "english": "*Ps 138:17*\nThy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened.\n*Ps 138:1,2*\nLord, Thou hast proved me, and known me: Thou hast known my sitting down, and my rising up.\nGlory be to the Father...\nThy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened.",
+              "latin": "*Ps 138:17*\nMihi autem nimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum.\n*Ps 138:1,2*\nDómine, probásti me, et cognovísti me: tu cognovísti sessiónem meam, et resurrectiónem meam.\nGlória Patri...\nMihi autem nimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum."
+            },
+            {
+              "title": "Introit (Paschaltide)",
+              "english": "*Ps 63:3*\nThou last protected me, O God, from the assembly of the malignant, alleluia: from the multitude of the workers of iniquity, Alleluia. Alleluia.\n*Ps 63:2*\nHear, O God, my prayers, when I make supplication to Thee: deliver my soul from the fear of the enemy.\nGlory be to the Father...\nThou last protected me, O God, from the assembly of the malignant, Alleluia: from the multitude of the workers of iniquity, Alleluia. Alleluia.",
+              "latin": "*Ps 63:3*\nProtexisti me, Deus, a convéntu malignántium, allelúia: a multitúdine operántium iniquitátem, allelúia, allelúia.\n*Ps 63:2*\nExáudi, Deus, oratiónem meam cum déprecor: a timóre inimíci éripe ánimam meam.\nGlória Patri...\nProtexisti me, Deus, a convéntu malignántium, allelúia: a multitúdine operántium iniquitátem, allelúia, allelúia."
+            },
+            {
+              "title": "Collect",
+              "english": "O God, Whose right hand upheld blessed Peter walking upon the waves, lest he should sink, and delivered his fellow apostle Paul when shipwrecked for the third time from the depth of the sea; hear us in Thy mercy, and grant that through their merits we may obtain the glory of everlasting life.\nThou who are God...",
+              "latin": "Deus, cujus déxtera beátum Petrum ambulántem in flúctibus, ne mergerétur, eréxit, et coapóstolum ejus Paulum tértio naufragántem, de profúndo pélagi liberávit: exáudi nos propítius, et concede; ut, ambórum méritis, aternitátis glóriam consequámur:\nQui vivis et regnas..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*Acts 5:12-16*\nIn those days, by the hands of the apostles were many sings and wonders wrought among the people; and they were all with one accord in Solomon's porch. But of the rest no man durst join himself to them; but the people magnified them. And the multitude of men and women that believed in the Lord was more increased; insomuch, that they brought forth the sick into the streets, and laid them on beds and couches; that when Peter came, his shadow, at least, might overshadow any of them, and they might be delivered from their infirmities. And there came also together to Jerusalem a multitude out of the neighbouring cities, bringing sick persons, and such as were troubled with unclean spirits, who were all healed.",
+              "latin": "*Acts 5:12-16*\nIn diébus illis: Per manus Apostolórum fiébant signa, et prodígia multa in plebe. Et crant unanímiter omnes in pórticu Salomónis. Ceterórum autem nemo audébat se conjúngere illis: sed magnificábat eos pópulus. Magis autem augebátur credéntium in Dómino multitúdo virórum ac mulierum, ita ut in platéas ejícerent infírmos, et ponerent in léctulis ac grabátis, ut, veniénte Petro, saltem umbra illius obumbráret quemquam illórum, et liberarentur ab infirmitátibus suis. Concurrébat autem et multitúdo vicinárum civitátum Jerusalem, afferéntes agros, et vexátos a spirítibus immúndis: qui curabántur omnes."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Ps 44:17,18*\nThou shalt make them princes over all the earth: they shall be mindful of Thy name, O Lord. Instead of Thy fathers sons are born to Thee: therefore shall people praise Thee.",
+              "latin": "*Ps 44:17,18*\nConstítues eos príncipes super omnem terram: mémores erunt nóminis tui, Dómine. Pro pátribus tuis nati sunt tibi fílii: proptérea pópuli confitebúntur tibi."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "Alleluia, alleluia.\nThy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened.\nAlleluia.",
+              "latin": "Allelúja, allelúja.\nNimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "*Ps 125:5,6*\nThey that sow in tears shall reap in joy. Going, they went and wept, casting their seeds. They that sow in tears shall reap in joy. Going, they went and wept, casting their seeds. But coming, they shall come with joyfulness, carrying their sheaves.",
+              "latin": "*Ps 125:5,6*\nQui seminant in lácrimis, in gáudio metent. Eúntes ibant et flebant, mitténtes sémina sua. Veniéntes autem vénient cum exsultatióne, portántes manípulos suos."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "*Ps 88:6*\nAlleluia, alleluia.\nThe Heavens shall confess Thy wonders, O Lord; and Thy truth in the Church of the saints.\nAlleluia.\n*Ps 20:4*\nI have chosen you from the world, that thou should go, and should bring forth fruit, and your fruit should remain.\nAlleluia.",
+              "latin": "*Ps 88:6*\nAllelúja, allelúja.\nConfitebúntur cœli mirabília tua, Dómine: étenim veritátem tuam in ecclésia sanctórum.\nAllelúja.\n*Ps 20:4*\nEgo vos elegi di mundo, ut eatis, et fructum afferatis, et frucus vester maneat.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Matt 19:27-29*\nAt that time, Peter said to Jesus: Behold we have left all things, and have followed thee: what therefore shall we have? And Jesus said to them: Amen, I say to you, that you, who have followed me, in the regeneration when the Son of man shall sit on the seat of his majesty, you also shall sit on twelve seats, judging the twelve tribes of Israel. And every one that hath left house, or brethren, or sisters, or father, or mother, or wife, or children, or lands, for My Name's sake, shall receive an hundredfold, and shall possess life everlasting.",
+              "latin": "*Matt 19:27-29*\nIn illo tempore: Dixit Petrus ad Jesum: Ecce nos reliquimus omnia, et secuti sumus te: quid ergo erit nobis? Jesus autem dixit illis: Amen dico vobis, quod vos, qui secuti estis me, in regeneratione cum sederit Filius hominis in sede maiestatis suae, sedebitis et vos super sedes duodecim, iudicantes duodecim tribus Israel. Et omnis qui reliquerit domum, vel fratres, aut sorores, aut patrem, aut matrem, aut uxorem, aut filios, aut agros propter nomen meum, centuplum accipiet, et vitam aeternam possidebit."
+            },
+            {
+              "title": "Offertory (Outside Paschaltide)",
+              "english": "*Ps 18:5*\nTheir sound went forth into all the earth; and their words to the ends of the world.",
+              "latin": "*Ps 18:5*\nIn omnem terram exivit sonus eorum: et in fines orbis terræ vera eorum."
+            },
+            {
+              "title": "Offertory (Paschaltide)",
+              "english": "*Ps 88:6*\nThe Heavens shall confess Thy wonders, O Lord, and Thy truth in the Church of the Saints, alleluia, alleluia.",
+              "latin": "*Ps 88:6*\nConfitebúntur cœli mirabília tua, Dómine, et veritátem tuam in ecclésia sanctórum, alleluia, alleluia."
+            },
+            {
+              "title": "Secret",
+              "english": "We offer up to Thee, O Lord, our prayers and our gifts, that by the pleading of Thy holy apostles Peter and Paul, they may become worthy of Thy regard.\nThrough our Lord...",
+              "latin": "Offérimus tibi, Dómine, preces et múnera: gum ut tuo Sint digna conspéctu, Apostolórum tuórum Petri et Pauli précibus adjuvémur.\nPer Dóminum..."
+            },
+            {
+              "title": "Preface of the Apostles",
+              "english": "It is truly meet and just, right and for our salvation, to entreat Thee humbly, O Lord, that Thou wouldst not desert Thy flock, O everlasting Shepherd, but, through Thy blessed Apostles, wouldst keep it under Thy constant protection; that it may be governed by those same rulers, whom as vicars of Thy work, Thou didst set over it to be its pastors. And therefore with Angels and Archangels, with Thrones and Dominations, and with all the hosts of the heavenly army, we sing the hymn of Thy glory, evermore saying:\n\n*Preface of Easter during Paschaltide*",
+              "latin": "Vere dignum et justum est, æquum et salutáre: Te, Dómine, supplíciter exoráre, ut gregem tuum, Pastor ætérne, non déseras: sed per beátos Apóstolos tuos contínua protectióne custódias. Ut iísdem rectóribus gubernétur, quos óperis tui vicários eídem contulísti præésse pastóres. Et ídeo cum Angelis et Archángelis, cum Thronis et Dominatiónibus cumque omni milítia cœléstis exércitus hymnum glóriæ tuæ cánimus, sine fine dicéntes:\n\n*Preface of Easter during Paschaltide*"
+            },
+            {
+              "title": "Communion (Outside Paschaltide)",
+              "english": "*Matt 19:28*\nYou who have followed Me shall sit on seats judging the twelve tribes of Israel.",
+              "latin": "*Matt 19:28*\nVos, qui secuti estis me, sedebitis super sedes, judicantes duodecim tribus Israel."
+            },
+            {
+              "title": "Communion (Paschaltide)",
+              "english": "*Ps 63:11*\nThe just shall rejoice in the Lord, and shall hope in Him: and all the upright in heart shall be praised, Alleluia, alleluia.",
+              "latin": "*Ps 63:11*\nLætábitur justus in Dómino, et sperábit in eo: et laudabúntur omnes recti corde, Alleluia, alleluia."
+            },
+            {
+              "title": "Postcommunion",
+              "english": "Protect Thy people, O Lord, and evermore help those who put their trust in the patronage of Thy holy apostles Peter and Paul.\nThrough our Lord...",
+              "latin": "Protege, Dómine, pópulum tuum: et Apostolórum tuórum Petri et Pauli patrocínio confidéntem, perpétua defensióne consérva.\nPer Dóminum..."
+            }
+          ],
+          "commemorations" : []
+        },
+        {
+          "rank": 4,
+          "title": "The Holy Apostles",
+          "colors": "w",
+          "propers": [
+            {
+              "title": "Introit (Outside Paschaltide)",
+              "english": "*Ps 138:17*\nThy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened.\n*Ps 138:1,2*\nLord, Thou hast proved me, and known me: Thou hast known my sitting down, and my rising up.\nGlory be to the Father...\nThy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened.",
+              "latin": "*Ps 138:17*\nMihi autem nimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum.\n*Ps 138:1,2*\nDómine, probásti me, et cognovísti me: tu cognovísti sessiónem meam, et resurrectiónem meam.\nGlória Patri...\nMihi autem nimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum."
+            },
+            {
+              "title": "Introit (Paschaltide)",
+              "english": "*Ps 63:3*\nThou last protected me, O God, from the assembly of the malignant, alleluia: from the multitude of the workers of iniquity, Alleluia. Alleluia.\n*Ps 63:2*\nHear, O God, my prayers, when I make supplication to Thee: deliver my soul from the fear of the enemy.\nGlory be to the Father...\nThou last protected me, O God, from the assembly of the malignant, Alleluia: from the multitude of the workers of iniquity, Alleluia. Alleluia.",
+              "latin": "*Ps 63:3*\nProtexisti me, Deus, a convéntu malignántium, allelúia: a multitúdine operántium iniquitátem, allelúia, allelúia.\n*Ps 63:2*\nExáudi, Deus, oratiónem meam cum déprecor: a timóre inimíci éripe ánimam meam.\nGlória Patri...\nProtexisti me, Deus, a convéntu malignántium, allelúia: a multitúdine operántium iniquitátem, allelúia, allelúia."
+            },
+            {
+              "title": "Collect",
+              "english": "God, Who hast granted us to come to the knowledge of Thy name through Thy blessed Apostles, grant us to celebrate their everlasting glory by advancing in knowledge and to improve by this celebration.\nThrough our Lord...",
+              "latin": "Deus, qui nos per beátos Apóstolos tuos, ad agnitiónem tui nóminis veníre tribuísti: da nobis eórum glóriam sempitérnam et proficiéndo celebráre, et celebrándo profícere.\nPer Dóminum..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*Eph 4:7-13*\nTo each one of us grace was given according to the measure of Christ’s bestowal. Thus it says: Ascending on high, He led away captives; He gave gifts to men. Now this: He ascended, what does it mean but that He also first descended into the lower parts of the earth? He Who descended, He it is Who ascended also above all the heavens, that He might fill all things. And He Himself gave some men as apostles, and some as prophets, others again as evangelists, and others as pastors and teachers, in order to perfect the saints for a work of ministry, for building up the body of Christ, until we all attain to the unity of the faith and of the deep knowledge of the Son of God, to perfect manhood, to the mature measure of the fullness of Christ.",
+              "latin": "*Eph 4:7-13*\nFratres: Unicuíque nostrum data est grátia secúndum mensúram donatiónis Christi. Propter quod dicit: Ascéndens in altum, captívam duxit captivitátem: dedit dona homínibus. Quod autem ascéndit, quid est, nisi quia et descéndit primum in inferióres partes terræ? Qui descéndit, ipse est et qui ascéndit super omnes coelos, ut impléret ómnia. Et ipse dedit quosdam quidem apóstolos, quosdam autem prophétas, álios vero evangelístas, álios autem pastóres et doctóres, ad consummatiónem sanctórum in opus ministérii, in ædificatiónem córporis Christi: donec occurrámus omnes in unitátem fídei, et agnitiónis Fílii Dei, in virum perféctum, in mensúram ætátis plenitúdinis Christi."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Ps 44:17,18*\nThou shalt make them princes over all the earth: they shall be mindful of Thy name, O Lord. Instead of Thy fathers sons are born to Thee: therefore shall people praise Thee.",
+              "latin": "*Ps 44:17,18*\nConstítues eos príncipes super omnem terram: mémores erunt nóminis tui, Dómine. Pro pátribus tuis nati sunt tibi fílii: proptérea pópuli confitebúntur tibi."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "Alleluia, alleluia.\nThy friends, O God, are made exceedingly honourable: their principality is exceedingly strengthened.\nAlleluia.",
+              "latin": "Allelúja, allelúja.\nNimis honoráti sunt amíci tui, Deus: nimis confortátus est principátus eórum.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "*Ps 125:5,6*\nThey that sow in tears shall reap in joy. Going, they went and wept, casting their seeds. They that sow in tears shall reap in joy. Going, they went and wept, casting their seeds. But coming, they shall come with joyfulness, carrying their sheaves.",
+              "latin": "*Ps 125:5,6*\nQui seminant in lácrimis, in gáudio metent. Eúntes ibant et flebant, mitténtes sémina sua. Veniéntes autem vénient cum exsultatióne, portántes manípulos suos."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "*Ps 88:6*\nAlleluia, alleluia.\nThe Heavens shall confess Thy wonders, O Lord; and Thy truth in the Church of the saints.\nAlleluia.\n*Ps 20:4*\nI have chosen you from the world, that thou should go, and should bring forth fruit, and your fruit should remain.\nAlleluia.",
+              "latin": "*Ps 88:6*\nAllelúja, allelúja.\nConfitebúntur cœli mirabília tua, Dómine: étenim veritátem tuam in ecclésia sanctórum.\nAllelúja.\n*Ps 20:4*\nEgo vos elegi di mundo, ut eatis, et fructum afferatis, et frucus vester maneat.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Matt 19:27-29*\nAt that time, Peter said to Jesus: Behold we have left all things, and have followed thee: what therefore shall we have? And Jesus said to them: Amen, I say to you, that you, who have followed me, in the regeneration when the Son of man shall sit on the seat of his majesty, you also shall sit on twelve seats, judging the twelve tribes of Israel. And every one that hath left house, or brethren, or sisters, or father, or mother, or wife, or children, or lands, for My Name's sake, shall receive an hundredfold, and shall possess life everlasting.",
+              "latin": "*Matt 19:27-29*\nIn illo tempore: Dixit Petrus ad Jesum: Ecce nos reliquimus omnia, et secuti sumus te: quid ergo erit nobis? Jesus autem dixit illis: Amen dico vobis, quod vos, qui secuti estis me, in regeneratione cum sederit Filius hominis in sede maiestatis suae, sedebitis et vos super sedes duodecim, iudicantes duodecim tribus Israel. Et omnis qui reliquerit domum, vel fratres, aut sorores, aut patrem, aut matrem, aut uxorem, aut filios, aut agros propter nomen meum, centuplum accipiet, et vitam aeternam possidebit."
+            },
+            {
+              "title": "Offertory (Outside Paschaltide)",
+              "english": "*Ps 18:5*\nTheir sound went forth into all the earth; and their words to the ends of the world.",
+              "latin": "*Ps 18:5*\nIn omnem terram exivit sonus eorum: et in fines orbis terræ vera eorum."
+            },
+            {
+              "title": "Offertory (Paschaltide)",
+              "english": "*Ps 44:17,18*\nThou shalt make them princes over all the earth: they shall remember Thy name, O Lord, in every progeny and generation. Alleluia, alleluia.",
+              "latin": "*Ps 44:17,18*\nConstitues eos principes super omnem terram: memores erunt nominis tui, Dominie, in omni progenie et generatione. Alleluia, alleluia."
+            },
+            {
+              "title": "Secret",
+              "english": "Venerating the everlasting glory of Thy holy Apostles, we beseech Thee, O Lord, that, being purified by these sacred mysteries, it may the more worthily be celebrated by us.\nThrough our Lord...",
+              "latin": "Glóriam, Dómine, sanctórum Apostolórum tuórum perpétuam venerántes: quæsumus; ut eam, sacris mystériis expiáti, dignius celebrémus.\nPer Dóminum..."
+            },
+            {
+              "title": "Preface of the Apostles",
+              "english": "It is truly meet and just, right and for our salvation, to entreat Thee humbly, O Lord, that Thou wouldst not desert Thy flock, O everlasting Shepherd, but, through Thy blessed Apostles, wouldst keep it under Thy constant protection; that it may be governed by those same rulers, whom as vicars of Thy work, Thou didst set over it to be its pastors. And therefore with Angels and Archangels, with Thrones and Dominations, and with all the hosts of the heavenly army, we sing the hymn of Thy glory, evermore saying:\n\n*Preface of Easter during Paschaltide*",
+              "latin": "Vere dignum et justum est, æquum et salutáre: Te, Dómine, supplíciter exoráre, ut gregem tuum, Pastor ætérne, non déseras: sed per beátos Apóstolos tuos contínua protectióne custódias. Ut iísdem rectóribus gubernétur, quos óperis tui vicários eídem contulísti præésse pastóres. Et ídeo cum Angelis et Archángelis, cum Thronis et Dominatiónibus cumque omni milítia cœléstis exércitus hymnum glóriæ tuæ cánimus, sine fine dicéntes:\n\n*Preface of Easter during Paschaltide*"
+            },
+            {
+              "title": "Communion (Outside Paschaltide)",
+              "english": "*Matt 19:28*\nYou who have followed Me shall sit on seats judging the twelve tribes of Israel.",
+              "latin": "*Matt 19:28*\nVos, qui secuti estis me, sedebitis super sedes, judicantes duodecim tribus Israel."
+            },
+            {
+              "title": "Communion (Paschaltide)",
+              "english": "*Ps 18:5*\nTheir sound went forth into all the earth; and their words to the ends of the world. Alleluia, alleluia.",
+              "latin": "*Ps 18:5*\nIn omnem terram exivit sonus eorum: et in fines orbis terræ vera eorum. Alleluia, alleluia."
+            },
+            {
+              "title": "Postcommunion",
+              "english": "Having received Thy sacraments, we beseech and supplicate Thee, O Lord, that, by the intercession of Thy blessed Apostles, the things which we do for the veneration of their glory may profit us unto our healing.\nThrough our Lord...",
+              "latin": "Percéptis, Dómine, sacraméntis, supplíciter exorámus; ut, intercedéntibus beátis Apóstolis tuis, quæ pro illórum veneránda gérimus passióne, nobis profíciant ad medélam.\nPer Dóminum..."
+            }
+          ],
+          "commemorations" : []
+        }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "votives": [
+        {
+          "rank": 4,
+          "title": "The Holy Ghost",
+          "colors": "r",
+          "propers": [
+            {
+              "title": "Introit",
+              "english": "*Wis 1:7*\nThe Spirit of the Lord hath filled the whole world, alleluia; and that which containeth all things hath knowledge of the voice. (P.T. Aileluia, alleluia.)\n*Ps 67:2*\nLet God arise, and let His enemies be scattered: and let them that hate Him flee from before His face.\nGlory be to the Father...\nThe Spirit of the Lord hath filled the whole world, alleluia; and that which containeth all things hath knowledge of the voice. (P.T. Alleluia, alleluia.)",
+              "latin": "*Wis 1:7*\nSpiritus Dómini replévit orbem terrárum, allelúia: et hoc quod cóntinet ómnia, sciéntiam habet vocis. (T.P. Allelúja, allelúja.)\n*Ps 67:2*\nExsúrgat Deus, et dissipéntur in imíci ejus: et fúgiant, qui odérunt eum, a fácie ejus.\nGlória Patri...\nSpiritus Dómini replévit orbem terrárum, allelúia: et hoc quod cóntinet ómnia, sciéntiam habet vocis. (T.P. Allelúja, allelúja.)"
+            },
+            {
+              "title": "Collect",
+              "english": "O God, Thou didst teach the hearts of Thy faithful by the light of Thy Holy Spirit; grant that by the same Spirit we may be truly wise, and ever rejoice in His consolation.\nThrough our Lord...",
+              "latin": "Deus, qui corda fidélium Sancti Spiritus illustratióne docuísti: da nobis in eódem Spiritu recta sápere; et de ejus semper consolatióne gaudére.\nPer Dóminum..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*Acts 8:14-17*\nIn those days, when the apostles that were in Jerusalem had heard that Samaria had received the word of God, they sent unto them Peter and John; who, when they were come, prayed for them, that they might receive the Holy Ghost: for He was not as yet come upon any of them; but they were only baptized in the name of the Lord Jesus. Then they laid their hands upon them, and they received the Holy Ghost.",
+              "latin": "*Acts 8:14-17*\nIn diébus illis: Cum audíssent Apóstoli, qui erant Jerosólymis, quod recepíssent Samaria verbum Dei, misérunt ad eos Petrum, et Joánnem. Qui cum veníssent, oravérunt pro ipsis ut accíperent Spíritum Sanctum: nondum enim in quemquam illórum vénerat, sed baptizáti tantum erant in nómine Dómini Jesu. Tunc imponébant manus super illos, et accipiébant Spíritum Sanctum."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Ps 32:12,6*\nBlessed is the nation whose God is the Lord: the people whom He hath chosen for His inheritance. By the word of the Lord the heavens were established; and all the power of them by the spirit of His mouth.",
+              "latin": "*Ps 32:12,6*\nBeáta gens, cajus est Dóminus Deus eórum: pópulus, quem elégit Dóminus in hereditátem sibi. Verbo Dómini cæli firmáti sunt: et Spiritu oris ejus omnis virtus eórum."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "Alleluia, alleluia.\nCome, O Holy Spirit, fill the hearts of Thy faithful, and kindle in them the fire of Thy love.\nAlleluia.",
+              "latin": "Allelúja, allelúja.\nVeni, Sancte Spiritus, reple tuórum corda fidélium: et tui amóris in eis ignem accénde.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "*Ps 103:30*\nSend forth Thy Spirit, and they shall be created; and Thou shalt renew the face of the earth. V. O Lord, how good and sweet is Thy Spirit within us!\n*(Here Kneel)*\nCome, O Holy Spirit, fill the hearts of Thy faithful, and kindle in them the fire of Thy love.",
+              "latin": "*Ps 103:30*\nEmítte Spiritum tuum, et creabúntur: et renovábis fáciem terræ. V. O quam bonus et suávis est, Dómine, Spiritus tuus in nobis!\n*(Here Kneel)*\nVeni, Sancte Spiritus, reple tuórum corda fidélium: et tui amóris in eis ignem accénde."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "*Ps 103:30*\nAlleluia, alleluia.\nSend forth Thy Spirit, and they shall be created; and Thou shalt renew the face of the earth.\nAlleluia.\nCome, O Holy Spirit, fill the hearts of Thy faithful, and kindle in them the fire of Thy love.\nAlleluia.",
+              "latin": "*Ps 103:30*\nAllelúja, allelúja.\nEmítte Spiritum tuum, et creabúntur: et renovábis fáciem terræ.\nAllelúja.\nVeni, Sancte Spiritus, reple tuórum corda fidélium: et tui amóris in eis ignem accénde.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Jn 14:23-31*\nAt that time Jesus said to His disciples If any one love Me, he will keep My word, and My Father will love him, and We will come to him and will make Our abode in him: he that loveth Me not keepeth not My words. And the word which you have heard is not Mine; but the Father’s who sent Me. These things have I spoken to you, abiding with you. But the Paraclete, the Holy Ghost, whom the Father will send in My name, He will teach you all things, and bring all things to your mind, whatsoever I shall have said to you. Peace I leave with you, My peace I give unto you: not as the world giveth, do I give unto you. Let not your heart be troubled, nor let it be afraid. You have heard that I said to you: I go away, and I come unto you. If you loved Me, you would indeed be glad, because I go to the Father: for the Father is greater than I. And now I have told you before it come to pass: that when it shall come to pass you may believe. I will not now speak many things with you. For the prince of this world cometh, and in Me he hath not any thing. But that the world may know that I love the Father, and as the Father hath given Me commandment so do I.",
+              "latin": "*Jn 14:23-31*\nIn illo témpore: Dixit Jesus discípulis suis: Si quis díligit me, sermónem meum servábit, et Pater meus díliget eum, et ad eum veniémus et mansiónem apud eum faciémus: qui non díligit me, sermónes meos non servat. Et sermónem quem audístis, non est meus: sed ejus, qui misit me, Patris. Hæc locútus sum vobis, apud vos manens. Paráclitus autem Spíritus Sanctus, quem mittet Pater in nómine meo, illo vos docébit ómnia et súggeret quæcúmque díxero vobis. Pacem relínquo vobis, pacem  meam do vobis: non quómodo mundus dat, ego do vobis. Non turbétur cor vestrum neque formídet. Audístis quia ego dixi vobis: Vado et venio ad vos. Si diligerétis me, gauderétis útique, quia vado ad Patrem: quia Pater major me est. Et nunc dixi vobis priúsquam fiat: ut cum factum fúerit, credátis. Jam non multa loquar vobíscum. Venit enim princeps mundi hujus, et in me non habet quidquam. Sed ut cognóscat mundus, quia díligo Patrem, et sicut mandátum dedit mihi Pater, sic fácio."
+            },
+            {
+              "title": "Offertory",
+              "english": "*Ps 67:29,30*\nConfirm, O God, what Thou hast wrought in us; from Thy temple, which is in Jerusalem, kings shall offer presents to Thee.",
+              "latin": "*Ps 67:29,30*\nConfírma hoc, Deus, quod operátus es in nobis: a templo tuo, quod est in Jerúsalem, tibi ófferent reges múnera."
+            },
+            {
+              "title": "Secret",
+              "english": "Sanctify, we beseech Thee, O Lord, the gifts which we offer Thee, and cleanse our hearts by the light of the Holy Ghost.\nThrough our Lord...in the unity of the same Holy Ghost...",
+              "latin": "Múnera quǽsumus, Dómine, obláta sanctífica: et corda nostra Sancti Spíritus illustratióne emúnda.\nPer Dóminum...in unitáte ejúsdem Spíritus Sancti..."
+            },
+            {
+              "title": "Preface of the Holy Ghost",
+              "english": "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God: through Christ our Lord. Who ascending above all in the heavens and sitting at Thy Right Hand, poured out the Holy Spirit upon the children of adoption. Wherefore the whole world doth rejoice with overflowing joy; and the heavenly Hosts also and the angelic Powers sing together the hymn of Thy glory, evermore saying:",
+              "latin": "Vere dignum et justum est, æquum et salutáre, nos tibi semper et ubíque grátias ágere: Dómine sancte, Pater omnípotens, ætérne Deus: per Christum, Dóminum nostrum. Qui, ascéndens super omnes cælos sedénsque ad déxteram tuam, promíssum Spíritum Sanctum * * in fílios adoptiónis effúdit. Quaprópter profúsis gáudiis totus in orbe terrárum mundus exsúltat. Sed et supérnæ Virtútes atque angélicæ Potestátes hymnum glóriæ tuæ cóncinunt, sine fine dicéntes:"
+            },
+            {
+              "title": "Communion",
+              "english": "*Acts 2:2,4*\nSuddenly there came a sound from heaven, as of a mighty wind coming where they were sitting, alleluia; and they were all filled with the Holy Ghost, speaking the wonderful works of God.",
+              "latin": "*Acts 2:2,4*\nFactus est repénte de cœlo sonus, tamquam adveniéntis spíritus veheméntis, ubi erant sedéntes, allelúia: et repléti sunt omnes Spíritu Sancto, loquéntes magnália Dei."
+            },
+            {
+              "title": "Postcommunion",
+              "english": "May the outpouring of the Holy Ghost purify our hearts, O Lord, and by the inward sprinkling of His heavenly dew may they be made fruitful.\nThrough our Lord...in the unity of the same Holy Ghost...",
+              "latin": "Sancti Spíritus, Dómine, corda nostra mundet infúsio: et sui roris íntima aspersióne fœcúndet.\nPer Dóminum...in unitáte ejúsdem Spíritus Sancti..."
+            }
+          ],
+          "commemorations" : []
+        },
+        {
+          "rank": 4,
+          "title": "The Blessed Sacrament",
+          "colors": "w",
+          "propers": [
+            {
+              "title": "Introit",
+              "english": "*Ps 80:17*\nHe fed them with the fat of corn, alleluia, and filled them with honey out of the rock, alleluia, alleluia, alleluia.\n*Ps 80:2*\nRejoice to God our helper; sing aloud to the God of Jacob.\nGlory be to the Father...\nHe fed them with the fat of corn, alleluia, and filled them with honey out of the rock, alleluia, alleluia, alleluia.",
+              "latin": "*Ps 80:17*\nCibavit eos ex ádipe fruménti, allelúia: et de petra, melle saturávit eos, allelúia, allelúia, allelúia.\n*Ps 80:2*\nExsultáte Deo adjutório nostro; jubiláte Deo Jacob.\nGlória Patri...\nCibavit eos ex ádipe fruménti, allelúia: et de petra, melle saturávit eos, allelúia, allelúia, allelúia."
+            },
+            {
+              "title": "Collect",
+              "english": "O God, Who in this wonderful sacrament has left us a memorial of Thy passion: grant us, we beseech Thee, so to venerate the sacred mysteries of Thy Body and Blood, that we may ever perceive within us the fruit of Thy redemption.\nWho livest...",
+              "latin": "Deus, qui nobis sub Sacraménto mirábili passiónis tuæ memóriam reliquísti: tríbue, quǽsumus, ita nos Córporis et Sánguinis tui sacra mystéria venerári; ut redemptiónis tuæ fructum in nobis júgiter sentiámus:\nQui vivis..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*1 Cor 11:23-29*\nBrethren, I have received of the Lord, that which also I delivered to you, that the Lord Jesus, the same night in which He was betrayed, took bread, and giving thanks, broke, and said: Take ye and eat, this is My Body which shall be delivered for you; this do for the commemoration of Me. In like manner also the chalice, after He had supped, saying: This chalice is the new testament in My Blood; this do ye, as often as you shall drink, for the commemoration of Me. For as often as you shall eat this bread and drink this chalice, you shall show the death of the Lord until He come. Therefore whosoever shall eat this bread, or drink of the chalice of the Lord unworthily, shall be guilty of the Body and the Blood of the Lord. But let a man prove himself; and so let him eat of that bread, and drink of the chalice. For he that eateth and drinketh unworthily, eateth and drinketh judgment to himself, not discerning the Body of the Lord.",
+              "latin": "*1 Cor 11:23-29*\nFratres: Ego enim accépi a Dómino quod et trádidi vobis, quóniam Dóminus Jesus, in qua nocte tradebátur, accépit panem, et grátias agens, fregit, et dixit: Accípite et manducáte: hoc est corpus meum, quod pro vobis tradétur: hoc fácite in meam commemoratiónem. Simíliter et cálicem, postquam cœnávit, dicens: Hic calix novum testaméntum est in meo sánguine. Hoc fácite, quotiescúmque bibétis, in meam commemoratiónem. Quotiescúmque enim manducábitis panem hunc et cálicem bibétis, mortem Dómini annuntiábitis, donec véniat. Itaque quicúmque manducáverit panem hunc, vel bíberit cálicem Dómini indígne, reus erit córporis et sánguinis Dómini. Probet autem seípsum ho­ mo: et sic de pane illo edat et de cálice bibat. Qui enim mandúcat et bibit indígne, judícium sibi mandúcat et bibit: non dijúdicans corpus Dómini."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Ps 144:15-16*\nThe eyes of all hope in Thee, O Lord, and Thou givest them meat in due season. Thou openest Thy hand, and fillest every living creature with Thy blessing.",
+              "latin": "*Ps 144:15-16*\nOculi ómnium in te sperant, Dómine: et tu das illis escam in témpore opportuno. Aperis tu manum tuam: et imples omne ánimal benedictióne."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "*Jn 6:56,57*\nAlleluia, alleluia.\nMy Flesh is meat indeed, and My Blood is drink indeed: he that eateth My Flesh and drinketh My Blood, abideth in Me, and I in him.\nAlleluia.",
+              "latin": "*Jn 6:56,57*\nAllelúja, allelúja.\nCaro mea vere est cibus, et sanguis meus vere est potus: qui mandúcat meam carnem, et bibit meum sánguinem, in me manet et ego is eo.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "*Malachi 1:11; Prov 9:5*\nFrom the rising of the sun even to its going down, My name is great among the Gentiles. And in every place there is sacrifice, and there is offered to My name a clean oblation; for My name is great among the Gentiles. Come, eat My bread: and drink the wine, which I have mingled for you.",
+              "latin": "*Malachi 1:11; Prov 9:5*\nAb ortu solis usque ad occasum, magnum est nomen meum in gentibus. Et in omni loco sacrificatur, et offertur nomini meo oblatio munda: quia magnum est nomen meum in gentibus. Venite, comedite panem meum: et bibite vinium, quod miscue vobis."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "*Lk 24:35*\nAlleluia, alleluia.\nThe disciples knew the Lord Jesus in the breaking of bread.\nAlleluia.\n*Jn 6:56,57*\nLet us bless the Father and the Son with the Holy Ghost.\nAlleluia.",
+              "latin": "*Lk 24:35*\nAllelúja, allelúja.\nCognovérunt discípuli Dóminum Jesum in fractióne panis.\nAllelúja.\n*Jn 6:56,57*\nCaro mea vere est cibus, et sanguis meus vere est potus: qui mandúcat meam carnem, et bibit meum sánguinem, in me manet et ego is eo.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Jn 6:56-59*\nAt that time Jesus said to the multitudes of the Jews: My Flesh is meat indeed, and My Blood is drink indeed. He that eateth My Flesh, and drinketh My Blood, abideth in Me, and I in him. As the living Father hath sent Me, and I live by the Father, so he that eateth Me, the same also shall live by Me. This is the bread that came down from Heaven. Not as your fathers did eat manna and are dead. He that eateth this Bread shall live for ever.",
+              "latin": "*Jn 6:56-59*\nIn illo témpore: Dixit Jesus turbis Judæórum: Caro mea vere est cibus, et sanguis meus vere est potus. Qui mandúcat meam carnem et bibit meum sánguinem, in me manet et ego in illo. Sicut misit me vivens Pater, et ego vivo propter Patrem: et qui mandúcat me, et ipse vivet propter me. Hic est panis, qui de cælo descéndit. Non sicut manducavérunt patres vestri manna, et mórtui sunt. Qui mandúcat hunc panem, vivet in ætérnum."
+            },
+            {
+              "title": "Offertory",
+              "english": "*Lev 21:6*\nThe priests of the Lord offer incense and loaves to God, and therefore they shall be holy to their God, and shall not defile His name. Alleluia.",
+              "latin": "*Lev 21:6*\nSacerdótes Dómini incénsum et panes ófferunt Deo: et ídeo sancti erunt Deo suo, et non pólluent nomen ejus. Allelúia."
+            },
+            {
+              "title": "Secret",
+              "english": "We beseech Thee, O Lord, mercifully grant to Thy Church the gifts of unity and peace, which are mystically shown forth in the offerings now made.\nThrough our Lord...",
+              "latin": "Eeelésiæ tuæ, quǽsumus, Dómine, unitátis et pacis propítius dona concéde: quæ sub oblátis munéribus mýstice designántur.\nPer Dóminum..."
+            },
+            {
+              "title": "Preface of the Season",
+              "english": "",
+              "latin": ""
+            },
+            {
+              "title": "Communion",
+              "english": "*1 Cor 11:26,27*\nAs often as you shall eat this Bread and drink the Chalice, you shall show the death of the Lord until He come: therefore whosoever shall eat this Bread or drink the Chalice of the Lord unworthily, shall be guilty of the Body and Blood of the Lord. Allelluia.",
+              "latin": "*1 Cor 11:26,27*\nQuotiescúmque manducábitis panem hunc, et cálicem bibétis, mortem Dómini annuntiábitis donec véniat: ítaque quicúmque manducáverit panem vel bíberit cálicem Dómimi indígne: reus erit córporis et sánguinis Dómini. Allelúia."
+            },
+            {
+              "title": "Postcommunion",
+              "english": "Grant us, we beseech Thee, O Lord, to be filled with the everlasting enjoyment of Thy divinity which is prefigured by the reception in this life of Thy precious Body and Blood:\nWho livest...",
+              "latin": "Fac nos, quǽsumus, Dómine, divinitátis tuæ sempitérna fruitióne repléri: quam pretiósi Córporis et Sánguinis tui temporális percéptio præfigúrat:\nQui vivis..."
+            }
+          ],
+          "commemorations" : []
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "votives": [
+        {
+          "rank": 4,
+          "title": "The Passion",
+          "colors": "r",
+          "propers": [
+            {
+              "title": "Introit",
+              "english": "*Phil 2:8-9*\nThe Lord Jesus Christ humbled Himself unto death, even the death of the cross; wherefore God also exalted Him and hast given Him a name which is above every name.\n*Ps 88:2*\nThe mercies of the Lord I will sing for ever: to generation and generation.\nGlory be to the Father...\nThe Lord Jesus Christ humbled Himself unto death, even the death of the cross; wherefore God also exalted Him and hast given Him a name which is above every name.",
+              "latin": "*Phil 2:8-9*\nHumiliavit semetipsum Dominus Jesus Christus usque ad mortem, mortem autem crucis: propter quod et Deus exaltavit illum, et donavit illi nomen, quod est super omne nomen.\n*Ps 88:2*\nMisericordias Domini in æternum cantabo: in generationem et generationem.\nGlória Patri...\nHumiliavit semetipsum Dominus Jesus Christus usque ad mortem, mortem autem crucis: propter quod et Deus exaltavit illum, et donavit illi nomen, quod est super omne nomen."
+            },
+            {
+              "title": "Collect",
+              "english": "O Lord Jesus Christ, Who didst come down to earth from the bosom of Thy heavenly Father, and didst shed Thy precious Blood to wash away our sins: we humbly beseech Thee, that on the judgment day, at Thy right hand, we may be found worthy to hear from Thee those words: Come, ye blessed:\nWho with the same God the Father and the Holy Ghost, livest and reignest, God, world without end...",
+              "latin": "Domine Jesu Christe, qui de cælis ad terram de sinu Patris descendisti, et sanguinem tuum pretiosum in remissionem peccatorum nostrorum fudisti: te humiliter deprecamur; ut in die judicii, ad dexteram tuam audire mereamur: Venite benedicti:\nQui cum eodem Deo Patre et Spiritu Sancto vivis et regnas, Deus, per omnia sæcula sæculorum..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*Zach 12:10-11; 13:6-7*\nThus saith the Lord: I will pour out upon the house of David, and upon the inhabitants of Jerusalem, the spirit of grace and of prayers: and they shall look upon Me, Whom they have pierced: and they shall mourn for Him as one mourneth for an only son, and they shall grieve over Him as the manner is to grieve for the death of the first-born. In that day there shall be a great lamentation in Jerusalem, and it shall be said: What are these wounds in the midst of Thy hands? And He shall say: With these I was wounded in the house of them that loved Me. Awake, O sword, against my Shepherd, and against the man that cleaveth to Me, saith the Lord of hosts: strike the shepherd, and the sheep shall be scattered: saith the Lord almighty.",
+              "latin": "*Zach 12:10-11; 13:6-7*\nHæc dicit Dominus: Effundam super domum David, et super habitatores Jerusalem, spiritum gratiæ et precum: et aspiciem ad me, quem confixerunt: et plangent eum planctu quasi super unigenitum et dolebunt super eum, ut doleri solet in morte primogeniti. In die illa magnus erit planctus in Jerusalem, et dicetur: Quid sunt plagæ istæ in medio manuum tuarum? Et dicet: His plagatus sum in domo eorum, qui diligebant me. Framea suscitare super pastorem meum, et super virum cohærentem mihi, dicit Dominus exercituum: percute pastorem, et dispergentur oves, ait Dominus omnipotens."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Ps 68:21,22*\nMy heart hath expected reproach and misery: and I looked for one that would grieve together with Me, and there was none: I sought one that would comfort Me, and I found none. They gave Me gall for My food, and in My thirst they gave Me vinegar to drink.",
+              "latin": "*Ps 68:21,22*\nImproperium exspectavit cor meum, et miseriam: et sustinui, qui simul mecum contristaretur, et non fuit: consolantem me quæsivi, et non inveni. Dederunt in escam meam fei, et in siti mea potaverunt me aceto."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "Alleluia, alleluia.\nHail, Thou our King: Thou alone hast had compassion on our errors: obedient to the Father, Thou wert led to be crucified like a meek lamb to the slaughter.\nAlleluia.",
+              "latin": "Allelúja, allelúja.\nAve, Rex noster, tu solus nostros es miseratus errores: Patri obediens, ductus es ad crucifigendum, ut agnus mansuetus ad occisionem.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "*Is 52:4-5*\nSurely He hath borne our infirmities, and carried our sorrows. And we have thought Him as it were a leper, and as one struck by God and afflicted. But He was wounded for our iniquities, He was bruised for our sins. The chastisement of our peace was upon Him: and by His bruises we are healed.",
+              "latin": "*Is 52:4-5*\nVere languores nostros ipse tulit, et dolores nostros ipse portavit. Et nos putavimus eum quasi leprosum, et percussum Deo, et humiliatum. Ipse autem vulneratus est, propter iniquitates nostras, attritus est propter scelera nostra. Disciplina pacis nostræ super eum: et livore ejus sanati sumus."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "Alleluia, alleluia.\nHail, Thou our King: Thou alone hast had compassion on our errors: obedient to the Father, Thou wert led to be crucified like a meek lamb to the slaughter.\nAlleluia.\nTo thee be glory, hosanna: to Thee be triumph and victory: to Thee a crown of highest praise and honour.\nAlleluia.",
+              "latin": "Allelúja, allelúja.\nAve, Rex noster, tu solus nostros es miseratus errores: Patri obediens, ductus es ad crucifigendum, ut agnus mansuetus ad occisionem.\nAllelúja.\nTibi gloria, hosanna: tibi triumphus et victoria: tibi summæ laudis et honoris corona.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Jn 19:28-35*\nAt that time: Jesus knowing that all things were now accomplished, that the Scripture might be fulfilled, said: I thirst. Now there was a vessel set there full of vinegar. And they putting a sponge full of vinegar about hyssop, put it to His mouth. Jesus therefore when He had taken the vinegar, said: It is consummated. And bowing His head He gave up the ghost. Then the Jews (because it was the parasceve), that the bodies might not remain upon the cross on the sabbath day (for that was the great sabbath day), besought Pilate that their legs might be broken, and that they might be taken away. The soldiers, therefore, came: and they broke the legs of the first, and of the other that was crucified with Him. But after they were come to Jesus, when they saw that He was already dead, they did not break His legs. But one of the soldiers with a spear opened His side, and immediately there came out blood and water. And he that saw it hath given testimony, and his testimony is true.",
+              "latin": "*Jn 19:28-35*\nIn illo tempore: Sciens Jesus quia omnia consummata sunt, ut consummaretur Scriptura, dixit: Sitio. Vas ergo erat positum aceto plenum. Illi autem spongiam plenum aceto, hyssopo circumponentes, obtulerunt ori ejus. Cum ergo accepisset Jesus acetum, dixit: Consummatum est. Et inclinato capite tradidit spiritum. Judaei ergo (quoniam Parasceve erat) ut non remanerent in cruce corpora sabbato (erat enim magnus dies ille sabbati), rogaverunt Pilatum ut frangerentur eorum crura, et tollerentur. Venerunt ergo milites: et primi quidem fregerunt crura, et alterius qui crucifixus est cum eo. Ad Jesum autem cum venissent, ut viderunt eum jam mortuum, non fregerunt ejus crura, sed unus militum lancea latus ejus aperuit, et continuo exivit sanguis et aqua. Et qui vidit, testimonium perhibuit: et verum est testimonium ejus."
+            },
+            {
+              "title": "Offertory",
+              "english": "Wicked men rose up against Me: pitilessly they sought to kill Me: they even spat in My face; with their spears they wounded Me, and all My bones were shaken.",
+              "latin": "Insurrexerunt in me viri iniqui: absque misericordia quæsierunt me interficere: et non pepercerunt in faciem meam spuere: lanceis suis vulneraverunt me, et concussa sunt omnia ossa mea."
+            },
+            {
+              "title": "Secret",
+              "english": "May the Sacrifice which we offer up to Thee, O Lord, ever quicken and guard us through the Passion of Thine only-begotten Son.\nWho with Thee liveth and reigneth...",
+              "latin": "Oblatum tibi Domine sacrificium, intercedente unigeniti Filii tui Passione, vivificet nos semper et muniat:\nQui tecum vivit et regnat..."
+            },
+            {
+              "title": "Preface of the Holy Cross",
+              "english": "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God; Who didst establish the salvation of mankind on the tree of the Cross; that whence death came, thence also life might arise again, and that he, who overcame by the tree, by the tree also might be overcome: Through Christ our Lord. Through whom the Angels praise Thy Majesty, the Dominations worship it, the Powers stand in awe. The Heavens and the heavenly hosts together with the blessed Seraphim in triumphant chorus unite to celebrate it. Together with these we entreat Thee that Thou mayest bid our voices also to be admitted while we say with lowly praise:",
+              "latin": "Vere dignum et justum est, æquum et salutáre, nos tibi semper et ubíque grátias ágere: Dómine sancte, Pater omnípotens, ætérne Deus: Qui salútem humáni géneris in ligno Crucis constituísti: ut, unde mors oriebátur, inde vita resúrgeret: et, qui in ligno vincébat, in ligno quoque vincerétur: per Christum, Dóminum nostrum. Per quem majestátem tuam laudant Angeli, adórant Dominatiónes, tremunt Potestátes. Cæli cælorúmque Virtútes ac beáta Séraphim sócia exsultatióne concélebrant. Cum quibus et nostras voces ut admítti júbeas, deprecámur, súpplici confessióne dicéntes:"
+            },
+            {
+              "title": "Communion",
+              "english": "*Ps 21:1,8*\nThey have pierced My hands and My feet: they have numbered all My bones.",
+              "latin": "*Ps 21:1,8*\nFoderunt manus meas, et pedes meos: dinumeraverunt omnia ossa mea."
+            },
+            {
+              "title": "Postcommunion",
+              "english": "O Lord Jesus Christ, Son of the living God, Who at the sixth hour didst mount the gibbet of the cross for the redemption of the world, and didst shed Thy precious Blood that our sins might be washed away: we humbly entreat Thee that after our death Thou wouldst grant us joyfully to enter the gates of heaven:\nWho livest and reignest...",
+              "latin": "Domine Jesu Christe, Fili Dei vivi, qui hora sexta pro redemptione mundi crucis patibulum ascendisti, et sanguinem tuum pretiosum in remissionem peccatorum nostrorum fudisti: te humilter deprecamur; ut post obitum nostrum paradisi januas nos gaudenter introire concedas:\nQui vivis et regnas..."
+            }
+          ],
+          "commemorations" : []
+        },
+        {
+          "rank": 4,
+          "title": "The Holy Cross",
+          "colors": "r",
+          "propers": [
+            {
+              "title": "Introit",
+              "english": "*Gal 6:14*\nBut it behooves us to glory in the cross of Our Lord Jesus Christ: in Whom is our salvation, life, and resurrection; by Whom we are saved and delivered, (P.T. Alleluia, alleluia.)\n*Ps 66:2*\nMay God have mercy on us, and bless us; may He cause the light of His countenance to shine upon us, and may He have mercy on us.\nGlory be to the Father...\nBut it behooves us to glory in the cross of Our Lord Jesus Christ: in Whom is our salvation, life, and resurrection; by Whom we are saved and delivered. (P.T. Alleluia, alleluia.)",
+              "latin": "*Gal 6:14*\nNos autem gloriári opórtet in Cruce Dómini nostri Jesu Christi: in quo est salus, vita et resurréctio nostra: per quem salváti et liberáti sumus. (T.P. Allelúja, allelúja.)\n*Ps 66:2*\nDeus misereátur nostri, et benedícat nobis: illúminet vultum suum super nos, et misereátur nostri.\nGlória Patri...\nNos autem gloriári opórtet in Cruce Dómini nostri Jesu Christi: in quo est salus, vita et resurréctio nostra: per quem salváti et liberáti sumus. (T.P. Allelúja, allelúja.)"
+            },
+            {
+              "title": "Collect (Paschaltide)",
+              "english": "O God, Who wast pleased to sanctify the standard of the life-giving cross with the blood of Thine only-begottten Son, Grant, we beseech Thee, that those who rejoice in honoring the same holy cross may also everywhere rejoice in Thy protection.\nThrough the same Jesus Christ, Thy Son, our Lord...",
+              "latin": "Deus, qui unigéniti Fílii tui pretióso sanguine vivíficæ Crucis vexíllum sanctificáre voluísti: concéde, quǽsumus; eos, qui ejusdem sanctæ Crucis gaudent honóre, tua quoque ubíque protectióne gaudére.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
+            },
+            {
+              "title": "Collect (Not Paschaltide)",
+              "english": "O God, Who didst will that for our sakes Thy Son should undergo the torment of the cross, to free us from the power of the enemy, grant us, Thy servants, that we may attain unto the glory of the resurrection.\nThrough the same Jesus Christ, Thy Son, our Lord...",
+              "latin": "Deus, qui pro nobis Fílium tuum Crucis patíbulum subíre voluísti, ut inimíci a nobis expélleres potestátem: concéde nobis, fámulis tuis; ut resurrectiónis grátiam consequámur.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
+            },
+            {
+              "title": "Lesson",
+              "english": "*Phil 2:8-11*\nBrethren: Christ became for us obedient unto death, even to the death of the cross. For which cause God also hath exalted Him, and hath given Him a Name which is above all names:\n\n(here all kneel)\n\nthat in the Name of Jesus every knee should bow, of those that are in Heaven, on earth, and under the earth and that every tongue should confess that the Lord Jesus Christ is in the glory of God the Father.",
+              "latin": "*Phil 2:8-11*\nFratres: Christus factus est pro nobis obǿdiens usque ad mortem, mortem autem crucis. Propter quod et Deus exaltávit illum, et donávit illi nomen, quod est super omne nomen:\n\n(hic genuflectitur)\n\nut in nómine Jesu omne genu flectátur coeléstium, terréstrium et infernórum, et omnis lingua confiteátur, quia Dóminus Jesus Christus in glória est Dei Patris."
+            },
+            {
+              "title": "Gradual",
+              "english": "*Phil 2:8,9*\nChrist became obedient for us unto death: even the death of the cross. For which cause also God hath exalted Him and hath given Him a name which is above all names.",
+              "latin": "*Phil 2:8,9*\nChristus factus est pro nobis obǿdiens usque ad mortem, mortem autem crucis. Propter quod et Deus exaltávit illum, et dedit illi nomen, quod est super omne nomen."
+            },
+            {
+              "title": "Lesser Alleluia",
+              "english": "Alleluia, alleluia.\nSweet the wood, sweet the nails, sweet the load that hangs thereon: to bear up the King and Lord of Heaven nought was worthy save thou, O holy cross.\nAlleluia.",
+              "latin": "Allelúja, allelúja.\nDulce lignum, dulces clavos, dúlcia ferens póndera: quæ sola fuísti digna sustinére Regem coelórum et Dóminum.\nAllelúja."
+            },
+            {
+              "title": "Tract",
+              "english": "We adore Thee, O Christ, and we bless Thee, because by Thy cross Thou didst redeem the world. We adore Thy cross, O Lord, we commemorate Thy glorious passion; have mercy on us, Thou Who didst suffer for us. O blessed cross, that alone wast worthy to bear the Lord and king of the heavens.",
+              "latin": "Adorámus te, Christe, et benedícimus tibi: quia per Crucem tuam redemísti mundum. Tuam Crucem adorámus, Dómine, tuam gloriósam recólimus passiónem: miserére nostri, qui passus es pro nobis. O Crux benedícta, quæ sola fuisti digna portáre Regem cælórum et Dóminum."
+            },
+            {
+              "title": "Greater Alleluia",
+              "english": "*Ps 95:10*\nAlleluia, alleluia.\nSay ye among the gentiles, that the Lord hath reigned from the wood.\nAlleluia.\nSweet the wood, sweet the nails, sweet the burden they bore, for thou alone, O Tree, wast deemed worthy to bear Him Who is Lord and king of heaven.\nAlleluia.",
+              "latin": "*Ps 95:10*\nAllelúja, allelúja.\nDícite in géntibus, quia Dóminus regnávit a ligno.\nAllelúja.\nDulce lignum, dulces clavos, dúlcia ferens póndera: quæ sola fuísti digna sustinére Regem cælórum et Dóminum.\nAllelúja."
+            },
+            {
+              "title": "Gospel",
+              "english": "*Matt 20:17-19*\nAt that time: Jesus took the twelve disciples apart, and said to them: Behold we go up to Jerusalem, and the Son of man shall be betrayed to the chief priests and the scribes, and they shall condemn Him to death. And shall deliver Him to the gentiles to be mocked, and scourged, and crucified, and the third day He shall rise again.",
+              "latin": "*Matt 20:17-19*\nIn illo témpore: Assúmpsit Jesus duódecim discípulos secréto, et ait illis: Ecce, ascéndimus Jerosólymam, et Fílius hóminis tradétur princípibus sacerdótum et scribis, et condemnábunt eum morte, et tradent eum Géntibus ad illudéndum, et flagellándum, et crucifigéndum, et tértia die resúrget."
+            },
+            {
+              "title": "Offertory",
+              "english": "Through the sign of the holy cross, protect Thy people, O Lord, from the snares of all enemies, that we may pay Thee a pleasing service, and our sacrifice be acceptable, (P.T. Alleluia.)",
+              "latin": "Prótege, Dómine, plebem tuam per signum sanctæ Crucis ab ómnibus insídiis inimicórum ómnium: ut tibi gratam exhibeámus servitútem, et acceptábile fiat sacrifícium nostrum. (T.P. Allelúja.)"
+            },
+            {
+              "title": "Secret",
+              "english": "May this oblation, we beseech Thee, O Lord, purge us of all our offenses, as upon the altar of the cross, it took away the sins of the whole world.\nThrough the same Jesus Christ, Thy Son, our Lord...",
+              "latin": "Hæc oblátio, Dómine, quǽsumus, ab ómnibus nos purget offénsis: quæ in ara Crucis étiam totíus mundi tulit offénsam.\nPer eúndem Dóminum nostrum Jesum Christum, Fílium tuum..."
+            },
+            {
+              "title": "Preface of the Holy Cross",
+              "english": "It is truly meet and just, right and for our salvation, that we should at all times and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God Who didst establish the salvation of mankind on the tree of the Cross that whence death came, thence also life might rise again, and that he, who overcame by the tree, by the tree also might be overcome: Through Christ our Lord. Through Whom the Angels praise Thy majesty, the Dóminations worship it, the Powers stand in awe. The heavens and the heavenly hosts together with the blessed Seraphim in triumphant chorus unite to celebrate it. Together with these we entreat Thee, that Thou mayest bid our voices also to be admitted while we say with lowly praise:",
+              "latin": "Vere dignum et justum est, æqum et salutáre, nos tibi semper, et ubique grátias ágere: Dómine sancte, Pater omnípotens, ætérne Deus. Qui salútem húmani géneris in ligno crucis constituísti: ut, unde mors oriebátur, inde vita resúrgeret: et qui in ligno vincébat, in ligno quoque vincerétur, per Christum Dóminum nostrum. Per quem majestátem tuam laudant Angeli, adórant Dóminatiónes, tremunt Potestátes coeli coelorúmque Virtútes, ac beáta Séraphim, sócia exsultatióne concélebrant. Cum quibus et nostras voces ut admitti júbeas deprecámur, súpplici confessióne dicéntes:"
+            },
+            {
+              "title": "Communion",
+              "english": "*Ps 78:2,11*\nThrough the sign of the cross deliver us from our enemies, O our God. (P.T. Alleluia.)",
+              "latin": "*Ps 78:2,11*\nPer signum Crucis de inimícis nostris líbera nos, Deus noster. (T.P. Allelúja.)"
+            },
+            {
+              "title": "Postcommunion",
+              "english": "Be Thou with us, O Lord. our God, and as Thou dost make us rejoice in honor of the holy cross, defend us also by its perpetual assistance.\nThrough our Lord...",
+              "latin": "Adésto nobis, Dómine, Deus noster: et quos sanctæ Crucis lætári facis honóre, ejus quoque perpétuis defénde subsídiis.\nPer Dóminum..."
+            }
+          ],
+          "commemorations" : []
+        }
+      ]
+    }
+  ]
+}

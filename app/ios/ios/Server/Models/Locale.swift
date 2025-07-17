@@ -25,8 +25,10 @@ struct LocaleDioceses: Codable, Hashable {
     var locale: [ String: [ LocaleData ] ]
 }
 
-@Model class LocaleOrdo: Decodable, Hashable, Identifiable {
-    let id: String = UUID ( ).uuidString
+@Model final class LocaleOrdo: Decodable, Hashable, Identifiable, @unchecked Sendable {
+    var id: String {
+        UUID ( ).uuidString
+    }
     public private(set) var certain_locations: [ LocaleData ]
     public private(set) var feasts: LocaleCountries
 

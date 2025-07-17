@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocalFeast: View {
     var data: LocaleData
-    @Environment ( \.colorScheme ) var colorScheme
+    @Environment( \.colorScheme ) var colorScheme
 
     var body: some View {
         VStack {

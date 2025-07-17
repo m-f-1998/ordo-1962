@@ -10,7 +10,7 @@ import SwiftUI
 struct FeastInfo: View {
     var title, colors: String
     var title_size: Double
-    @Environment ( \.colorScheme ) var colorScheme
+    @Environment( \.colorScheme ) var colorScheme
 
     var body: some View {
         HStack {
