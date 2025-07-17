@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 echo "🔄 Updating client packages..."
 cd client
 npm update --save
@@ -19,4 +17,14 @@ if [ -n "$(npm outdated)" ]; then
   npm outdated
 fi
 
+echo ""
+echo "🔄 Updating android packages..."
+cd ../app/android
+npm update --save
+if [ -n "$(npm outdated)" ]; then
+  echo "Some packages have major updates and need to be checked manually."
+  npm outdated
+fi
+
+echo ""
 read -p "Press any key to exit..." -n1 -s
