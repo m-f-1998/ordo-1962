@@ -1,9 +1,9 @@
 import { Db, MongoClient } from "mongodb"
 
-const user = process.env [ "MONGO_USER" ] || "admin"
-const pass = encodeURIComponent ( process.env [ "MONGO_PASS" ] || "" )
-const host = process.env [ "MONGO_HOST" ] || "localhost"
-const port = process.env [ "MONGO_PORT" ] || "27017"
+const user = process.env [ "MONGO_INITDB_ROOT_USERNAME" ] || "admin"
+const pass = encodeURIComponent ( process.env [ "MONGO_INITDB_ROOT_PASSWORD" ] || "" )
+const host = process.env [ "MONGO_INITDB_HOST" ] || "localhost"
+const port = process.env [ "MONGO_INITDB_PORT" ] || "27017"
 
 const uri = `mongodb://${user}:${pass}@${host}:${port}/?authSource=admin&retryWrites=true&w=majority`
 

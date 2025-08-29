@@ -38,15 +38,15 @@ The backend server requires the following environment variables to function prop
 
 | Variable              | Description                         |
 |-----------------------|-------------------------------------|
-| MONGO_USER            | MongoDB username                    |
-| MONGO_PASS            | MongoDB password                    |
-| MONGO_PORT            | MongoDB port (default: 27017)       |
-| MONGO_HOST            | MongoDB host (e.g., localhost)      |
+| MONGO_INITDB_ROOT_USERNAME            | MongoDB username                    |
+| MONGO_INITDB_ROOT_PASSWORD            | MongoDB password                    |
+| MONGO_INITDB_PORT            | MongoDB port (default: 27017)       |
+| MONGO_INITDB_HOST            | MongoDB host (e.g., localhost)      |
 
 ## 📁 Example `.env` (for local dev)
 
 ```env
-MONGO_USER=your_mongo_username
-MONGO_PASS=your_mongo_password
-MONGO_PORT=27017
-MONGO_HOST=localhost
+MONGO_INITDB_ROOT_USERNAME=your_mongo_username
+MONGO_INITDB_ROOT_PASSWORD=your_mongo_password
+MONGO_INITDB_PORT=27017
+MONGO_INITDB_HOST=localhost

@@ -1,5 +1,5 @@
 import express from "express"
-import type { Response } from "express"
+// import type { Response } from "express"
 
 import helmet from "helmet"
 import cors from "cors"
@@ -55,11 +55,13 @@ app.use ( helmet ( {
       ],
       styleSrc: [
         "'self'",
-        ( _req, res ) => `'nonce-${( res as Response ).locals[ "cspNonce" ]}'`,
+        "'unsafe-inline'",
+        // ( _req, res ) => `'nonce-${( res as Response ).locals[ "cspNonce" ]}'`,
         "https://fonts.googleapis.com",
       ],
       scriptSrcElem: [
-        ( _req, res ) => `'nonce-${( res as Response ).locals[ "cspNonce" ]}'`,
+        "'unsafe-inline'",
+        // ( _req, res ) => `'nonce-${( res as Response ).locals[ "cspNonce" ]}'`,
         "'self'"
       ],
       imgSrc: [
