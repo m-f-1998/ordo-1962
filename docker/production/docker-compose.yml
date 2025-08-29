@@ -17,7 +17,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD:
       MONGO_INITDB_HOST:
       MONGO_INITDB_PORT:
-  db:
+  mongo:
     build:
       context: ../..
       dockerfile: docker/production/Dockerfile.mongo
