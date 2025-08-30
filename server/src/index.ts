@@ -62,7 +62,10 @@ app.use ( helmet ( {
       scriptSrcElem: [
         "'unsafe-inline'",
         // ( _req, res ) => `'nonce-${( res as Response ).locals[ "cspNonce" ]}'`,
-        "'self'"
+        "'self'",
+        "https://www.youtube.com",
+        "https://www.googletagmanager.com",
+        "https://static.cloudflareinsights.com"
       ],
       imgSrc: [
         "'self'",
