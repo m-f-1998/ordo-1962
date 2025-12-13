@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common"
+
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core"
 import { IconService } from "@app/services/icons.service"
 import { FaIconComponent } from "@fortawesome/angular-fontawesome"
@@ -8,9 +8,8 @@ import { NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap"
   selector: "app-navbar",
   imports: [
     FaIconComponent,
-    NgbTooltipModule,
-    CommonModule
-  ],
+    NgbTooltipModule
+],
   templateUrl: "./navbar.component.html",
   styleUrl: "./navbar.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush
