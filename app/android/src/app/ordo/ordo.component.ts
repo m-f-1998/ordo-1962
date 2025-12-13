@@ -52,7 +52,7 @@ export class OrdoComponent {
     this.apiRequests.GetOrdo ( ).then ( ordo => {
       this.ordo = ordo
 
-      if ( !( this.router.getCurrentNavigation ()?.previousNavigation ) ) {
+      if ( !( this.router.currentNavigation ()?.previousNavigation ) ) {
         this.loading.set ( false )
         this.error.set ( false )
       }
