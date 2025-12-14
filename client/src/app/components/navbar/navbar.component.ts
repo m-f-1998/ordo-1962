@@ -9,7 +9,7 @@ import { NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap"
   imports: [
     FaIconComponent,
     NgbTooltipModule
-],
+  ],
   templateUrl: "./navbar.component.html",
   styleUrl: "./navbar.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush
