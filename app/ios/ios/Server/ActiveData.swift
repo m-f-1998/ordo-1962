@@ -91,24 +91,10 @@ class ActiveData {
         return nil
     }
     
-    func GetFilteredOrdo ( search: String = "", year: Int = CurrentYear ( ) ) -> [ [ OrdoDay ] ] {
+    // Snapshot for off-main-thread search
+    func getSearchSnapshot ( year: Int ) -> ( entries: [ (text: String, month: Int, day: Int) ], months: [ [ OrdoDay ] ] )? {
         guard let ordoYear = GetYear ( year: year ),
-              let entries = searchIndex [ year ] else { return [ ] }
-        let lower = search.lowercased ( )
-        var result: [ [ OrdoDay ] ] = [ ]
-        var currentMonth = -1
-        var currentGroup: [ OrdoDay ] = [ ]
-        for entry in entries where entry.text.contains ( lower ) {
-            let day = ordoYear.ordo [ entry.month ] [ entry.day ]
-            if entry.month != currentMonth {
-                if !currentGroup.isEmpty { result.append ( currentGroup ) }
-                currentGroup = [ day ]
-                currentMonth = entry.month
-            } else {
-                currentGroup.append ( day )
-            }
-        }
-        if !currentGroup.isEmpty { result.append ( currentGroup ) }
-        return result
+              let entries = searchIndex [ year ] else { return nil }
+        return ( entries, ordoYear.ordo )
     }
 }

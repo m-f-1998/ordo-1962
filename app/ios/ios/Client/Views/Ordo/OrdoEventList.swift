@@ -63,13 +63,14 @@ struct OrdoEventList: View, KeyboardReadable {
     @Environment(ActiveData.self) var activeData
     @Binding var search: String
     @Binding var year: Int
+    @Binding var searchIsActive: Bool
     @State private var isKeyboardVisible = false
     @State private var searchResults: [ [ OrdoDay ] ] = []
 
     private var isCurrentYear: Bool { year == CurrentYear ( ) }
 
     private var today: OrdoDay? {
-        guard isCurrentYear, search.isEmpty else { return nil }
+        guard isCurrentYear, search.isEmpty, !searchIsActive else { return nil }
         return activeData.GetYear ( year: year )?.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) )
     }
 
@@ -107,10 +108,41 @@ struct OrdoEventList: View, KeyboardReadable {
                     ContentUnavailableView.search ( text: self.search )
                 }
             }
+            // When search activates with empty query, clear list immediately so keyboard
+            // animation isn't fighting 365 rows being laid out
+            .onChange ( of: searchIsActive ) { _, active in
+                if active && search.isEmpty {
+                    searchResults = []
+                } else if !active {
+                    searchResults = activeData.GetYear ( year: year )?.ordo ?? []
+                }
+            }
             .task ( id: search ) {
-                let filtered = search.isEmpty
-                    ? activeData.GetYear ( year: year )?.ordo ?? []
-                    : activeData.GetFilteredOrdo ( search: search, year: year )
+                guard !search.isEmpty else { return }
+                // Debounce — cancels on next keystroke
+                try? await Task.sleep ( for: .milliseconds ( 150 ) )
+                guard !Task.isCancelled else { return }
+                // Snapshot on @MainActor, then filter on background thread
+                guard let snapshot = activeData.getSearchSnapshot ( year: year ) else { return }
+                let lower = search.lowercased ( )
+                let filtered: [ [ OrdoDay ] ] = await Task.detached ( priority: .userInitiated ) {
+                    var result: [ [ OrdoDay ] ] = []
+                    var currentMonth = -1
+                    var currentGroup: [ OrdoDay ] = []
+                    for entry in snapshot.entries where entry.text.contains ( lower ) {
+                        let day = snapshot.months [ entry.month ] [ entry.day ]
+                        if entry.month != currentMonth {
+                            if !currentGroup.isEmpty { result.append ( currentGroup ) }
+                            currentGroup = [ day ]
+                            currentMonth = entry.month
+                        } else {
+                            currentGroup.append ( day )
+                        }
+                    }
+                    if !currentGroup.isEmpty { result.append ( currentGroup ) }
+                    return result
+                }.value
+                guard !Task.isCancelled else { return }
                 searchResults = filtered
             }
             .task ( id: year ) {

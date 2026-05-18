@@ -19,7 +19,7 @@ struct OrdoView: View {
         ScrollViewReader { proxy in
             NavigationStack {
                 VStack ( spacing: 0 ) {
-                    OrdoEventList ( search: self.$search, year: self.$year )
+                    OrdoEventList ( search: self.$search, year: self.$year, searchIsActive: self.$searchIsActive )
                     OrdoBar ( searchIsActive: self.$searchIsActive, search: self.$search, year: self.$year, proxy: proxy )
                 }
                     .searchable ( text: self.$search, isPresented: $searchIsActive )
