@@ -8,9 +8,10 @@
 import SwiftUI
 import AlertToast
 
-class AlertViewModel: ObservableObject {
-    @Published var show = false
-    @Published var alertToast = AlertToast ( type: .regular, title: "" ) {
+@Observable
+class AlertViewModel {
+    var show = false
+    var alertToast = AlertToast ( type: .regular, title: "" ) {
         didSet {
             show.toggle ( )
         }
@@ -18,16 +19,16 @@ class AlertViewModel: ObservableObject {
 }
 
 struct Settings: View {
-    private var ical: iCal
+    @State private var ical: iCal
     
-    @ObservedObject public var notification_alert: AlertViewModel = AlertViewModel ( )
-    @ObservedObject public var ical_alert: AlertViewModel
+    @State var notification_alert: AlertViewModel = AlertViewModel ( )
+    @State var ical_alert: AlertViewModel
     @State private var iCalLoading: Bool = false
 
     init ( current_ordo: OrdoYear ) {
         let alert = AlertViewModel ( )
-        self.ical_alert = alert
-        self.ical = iCal ( current_ordo: current_ordo, alert: alert )
+        _ical_alert = State ( initialValue: alert )
+        _ical = State ( initialValue: iCal ( current_ordo: current_ordo, alert: alert ) )
     }
 
     var body: some View {
@@ -44,7 +45,7 @@ struct Settings: View {
                         self.iCalLoading = true
                         self.ical.GenerateCalendar ( ) {
                             Task {
-                                try await Task.sleep ( nanoseconds: 1_000_000_000 )
+                                try? await Task.sleep ( for: .seconds ( 1 ) )
                                 self.iCalLoading = false
                             }
                         }
@@ -55,7 +56,7 @@ struct Settings: View {
                 Section {
                     SendEmail ( )
                     MakeReview ( )
-                    Link ( "Privacy Policy", destination: URL ( string: "https://ordo.matthewfrankland.co.uk" )! )
+                    Link ( "Privacy Policy", destination: URL ( string: "https://m-f-1998.github.io/ordo-1962/" ) ?? URL ( string: "https://github.com/m-f-1998/ordo-1962" )! )
                 }
             }
                 .toast ( isPresenting: self.$notification_alert.show ) {
@@ -71,7 +72,7 @@ struct Settings: View {
                     }
                 }
                 .navigationBarTitleDisplayMode ( .inline )
-                .tint ( .blue )
+                .tint ( .primary )
         }
     }
 }

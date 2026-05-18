@@ -35,7 +35,7 @@ struct FixedTimeNotification: View {
         .onChange ( of: self.toggled ) {
             if toggled {
                 self.notifications.RequestNotification ( title: self.title, body: self.label, hour: self.hour, minute: self.minute, id: self.id, repeats: true ) { res in
-                    self.toggled = res
+                    Task { @MainActor in self.toggled = res }
                 }
             } else {
                 UNUserNotificationCenter.current ( ).removePendingNotificationRequests ( withIdentifiers: [ self.id ] )

@@ -1,52 +1,32 @@
-## 1962 Liturgical Ordo (iOS & Android)
+## 1962 Liturgical Ordo (iOS)
 
-Available on the [Apple App Store](https://apps.apple.com/gb/app/1962-liturgical-ordo/id6450934181) and [Google Play Store](https://play.google.com/store/apps/details?id=com.mfrankland.ordo_1962&hl=en_US).
+Available on the [Apple App Store](https://apps.apple.com/gb/app/1962-liturgical-ordo/id6450934181).
 
-“If you want a church full of Catholics who know their faith, love their faith and practice their faith, give them a liturgy that is demanding, profound and rigourous. They will rise to the challenge.”  Peter Kwasniewski
+*"If you want a church full of Catholics who know their faith, love their faith and practice their faith, give them a liturgy that is demanding, profound and rigourous. They will rise to the challenge."*  
+— Peter Kwasniewski
 
-A Traditional Catholic Liturgical Calendar for the Holy Sacrifice of the Mass according to the 1962 Missale Romanum issued by Pope St. John XXIII. This App is designed for the easy accessibility of the faithful and an increase of awareness regarding the Traditional Mass. Features include:
+A Traditional Catholic Liturgical Calendar for the Holy Sacrifice of the Mass according to the 1962 Missale Romanum issued by Pope St. John XXIII. Designed for the easy accessibility of the faithful and an increase of awareness regarding the Traditional Mass.
 
-This Repository is for contributing more data to the app, including for individual locales and languages. Propers have a required format - see the universal calendar - and are ready in markdown format. New Locale Data is welcome for countries or dioceses. Or both :)
+This repository is open for data contributions — new locale data (countries or dioceses), additional prayers, or corrections to existing propers are all welcome.
 
 ## 🌱 Features
 
-- Ordo Implementation
-- Lock Screen Widgets
-- Home Screen Widgets
+- Liturgical Ordo (2023–2123)
+- Lock Screen & Home Screen Widgets
+- watchOS Support
+- Propers of the Mass (English & Latin)
 - Basic Prayers
 - Changeable Years
-- Propers of the Mass
-- Localization Support
 - Votive Masses
+- Localisation Support (country & diocesan feasts)
 
-## 🚀 Deployment
+## 🗂️ Data
 
-Images are published to:
-- `ghcr.io/m-f-1998/ordo-1962:dev` – Dev (`beta.*`)
-- `ghcr.io/m-f-1998/ordo-1962:latest` – Production
+All liturgical data lives in `data/` as individual JSON files. On every push to `main`, a GitHub Actions workflow merges and publishes them to [GitHub Pages](https://m-f-1998.github.io/ordo-1962/) — this is what the iOS app fetches.
 
-## 🐳 Local Development
+**Adding locale data:** Add a new file in `data/locale/` following the existing format.  
+**Adding propers:** Edit the relevant file in `data/ordo/`.
 
-```bash
-./dev.sh # Docker Compose Local Development Server on Port 3000
-./deploy.sh ${dev|latest} # Deploy Package (Requires GHCR Access Token)
-```
+## 📄 Privacy Policy
 
-## 🔧 Required Environment Variables
-
-The backend server requires the following environment variables to function properly:
-
-| Variable              | Description                         |
-|-----------------------|-------------------------------------|
-| MONGO_INITDB_ROOT_USERNAME            | MongoDB username                    |
-| MONGO_INITDB_ROOT_PASSWORD            | MongoDB password                    |
-| MONGO_INITDB_PORT            | MongoDB port (default: 27017)       |
-| MONGO_INITDB_HOST            | MongoDB host (e.g., localhost)      |
-
-## 📁 Example `.env` (for local dev)
-
-```env
-MONGO_INITDB_ROOT_USERNAME=your_mongo_username
-MONGO_INITDB_ROOT_PASSWORD=your_mongo_password
-MONGO_INITDB_PORT=27017
-MONGO_INITDB_HOST=localhost
+[https://m-f-1998.github.io/ordo-1962/](https://m-f-1998.github.io/ordo-1962/)

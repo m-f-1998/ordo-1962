@@ -19,9 +19,7 @@ struct OrdoToolbar: View {
                         Menu {
                             ForEach ( 0...11, id: \.self ) { index in
                                 Button ( Calendar.current.monthSymbols [ index ] ) {
-                                    DispatchQueue.main.async {
-                                        self.proxy.scrollTo ( Calendar.current.shortMonthSymbols [ index ], anchor: .top )
-                                    }
+                                    self.proxy.scrollTo ( Calendar.current.shortMonthSymbols [ index ], anchor: .top )
                                 }
                             }
                         } label: {

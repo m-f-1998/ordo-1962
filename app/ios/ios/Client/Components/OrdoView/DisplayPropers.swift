@@ -23,13 +23,15 @@ struct DisplayPropers: View {
     ) {
         self.celebrations = celebrations
         self.lang = lang
-        self.propers = celebrations [ 0 ].GetPropers ( lang: lang )
+        self.propers = celebrations.first?.GetPropers ( lang: lang ) ?? [ : ]
     }
     
     private func SetLanguage ( new: String ) {
         self.lang = new
         UserDefaults.standard.set ( new, forKey: "propers-lang" )
-        self.propers = celebrations [ self.celeb ].GetPropers ( lang: new )
+        if self.celeb < celebrations.count {
+            self.propers = celebrations [ self.celeb ].GetPropers ( lang: new )
+        }
     }
     
     private func PickCelebration ( ) -> some View {
@@ -42,13 +44,15 @@ struct DisplayPropers: View {
             }
         }
         .onChange ( of: self.celeb ) { old, new in
-            self.propers = celebrations [ new ].GetPropers ( lang: self.lang )
+            if new < celebrations.count {
+                self.propers = celebrations [ new ].GetPropers ( lang: self.lang )
+            }
         }
         .pickerStyle ( .menu )
         .padding ( [ .vertical ], 4 )
         .frame ( maxWidth: .infinity )
         .background ( Color ( .systemGray6 ) )
-        .tint ( .blue )
+        .tint ( .primary )
     }
     
     private func Toolbar ( scroll: ScrollViewProxy ) -> some View {
@@ -87,10 +91,23 @@ struct DisplayPropers: View {
             ScrollViewReader { proxy in
                 VStack ( spacing: 0 ) {
                     ScrollView ( .vertical, showsIndicators: false ) {
-                        ForEach ( Array ( self.propers.keys ), id: \.self ) { title in
-                            RenderMarkdown ( text: self.propers [ title ]! )
-                            if self.propers.keys.last != title {
-                                Divider ( )
+                        LazyVStack ( alignment: .center, spacing: 0, pinnedViews: .sectionHeaders ) {
+                            ForEach ( Array ( self.propers.keys ), id: \.self ) { title in
+                                Section {
+                                    RenderMarkdown ( text: self.propers [ title ] ?? "" )
+                                } header: {
+                                    Text ( title )
+                                        .font ( .system ( .subheadline, design: .serif ) )
+                                        .fontWeight ( .semibold )
+                                        .foregroundStyle ( .secondary )
+                                        .frame ( maxWidth: .infinity )
+                                        .padding ( .vertical, 6 )
+                                        .background ( .regularMaterial )
+                                        .id ( title )
+                                }
+                                if self.propers.keys.last != title {
+                                    Divider ( ).padding ( .horizontal )
+                                }
                             }
                         }
                     }
@@ -100,7 +117,9 @@ struct DisplayPropers: View {
                             Toolbar ( scroll: proxy )
                         }
                     }
-                    PickCelebration ( )
+                    if celebrations.count > 1 {
+                        PickCelebration ( )
+                    }
                 }
             }
         }

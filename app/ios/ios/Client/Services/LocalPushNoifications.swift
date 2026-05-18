@@ -9,7 +9,7 @@ import SwiftUI
 import AlertToast
 
 class LocalPushNoifications {
-    @ObservedObject public var status: AlertViewModel
+    var status: AlertViewModel
 
     init ( status: AlertViewModel ) {
         self.status = status
@@ -22,9 +22,9 @@ class LocalPushNoifications {
             center.requestAuthorization ( options: [ .alert, .badge, .sound ], completionHandler: { ( granted, error ) in
                 if error != nil {
                     DispatchQueue.main.async {
-                        self.status.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occured" )
+                        self.status.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occurred" )
                     }
-                    result ( false )
+                    DispatchQueue.main.async { result ( false ) }
                 } else if granted {
                     result ( true )
                 } else {
@@ -35,7 +35,7 @@ class LocalPushNoifications {
                             }
                         }
                     }
-                    result ( false )
+                    DispatchQueue.main.async { result ( false ) }
                 }
             } )
         }
@@ -48,7 +48,7 @@ class LocalPushNoifications {
         center.add ( request ) { ( error : Error? ) in
             if let theError = error {
                 DispatchQueue.main.async {
-                    self.status.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occured" )
+                    self.status.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occurred" )
                     print ( theError.localizedDescription )
                 }
                 action ( false )

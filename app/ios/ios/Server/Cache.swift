@@ -8,17 +8,12 @@
 import SwiftUI
 import SwiftData
 
-enum CacheStatus {
-    case valid ( OrdoYear, PrayerLanguageData ), deleted, missing
-}
-
 class Cache {
     private var container: ModelContainer!
     private var context: ModelContext!
-        
     init ( ) {
         do {
-            let configuration = ModelConfiguration ( groupContainer: .identifier ( "group.mfrankland.ordo-62.contents" ) )
+            let configuration = ModelConfiguration ( )
             self.container = try ModelContainer ( for: OrdoYear.self, PrayerLanguageData.self, LocaleOrdo.self, VotiveData.self, configurations: configuration )
             self.context = ModelContext ( container )
         } catch {
@@ -31,7 +26,9 @@ class Cache {
         let descriptor = FetchDescriptor <OrdoYear> ( predicate: predicate, sortBy: [ SortDescriptor ( \.year ) ] )
         let data = try self.context.fetch ( descriptor )
         if data.count > 0 && data [ 0 ].year == CurrentYear ( ) {
-            if Calendar.current.dateComponents ( [ .month ], from: data [ 0 ].date, to: Date ( ) ).month ?? 0 < 2 {
+            let components = Calendar.current.dateComponents ( [ .year, .month ], from: data [ 0 ].date, to: Date ( ) )
+            let totalMonths = ( components.year ?? 0 ) * 12 + ( components.month ?? 0 )
+            if totalMonths < 2 {
                 return data
             }
         }
@@ -59,7 +56,7 @@ class Cache {
     func GetVotives ( ) throws -> [VotiveData]? {
         let descriptor = FetchDescriptor <VotiveData> ( )
         let data = try self.context.fetch ( descriptor )
-        return data
+        return data.isEmpty ? nil : data
     }
     
     func GetContainer ( ) -> ModelContainer {

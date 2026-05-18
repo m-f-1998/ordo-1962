@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct InfoView: View {
-    @EnvironmentObject var activeData: ActiveData
+    @Environment(ActiveData.self) var activeData
     
     var body: some View {
         NavigationStack {
@@ -33,7 +33,7 @@ struct InfoView: View {
                 Section ( header: Text ( "Local Feast Days" ), footer: Text ( "Additional Country/Diocesean Feasts Can Be Added Upon Request." ) ) {
                     NavigationLink {
                         List {
-                            ForEach ( self.activeData.locale!.certain_locations, id: \.self ) { locale in
+                            ForEach ( self.activeData.locale?.certain_locations ?? [], id: \.self ) { locale in
                                 LocalFeast ( data: locale )
                             }
                         }

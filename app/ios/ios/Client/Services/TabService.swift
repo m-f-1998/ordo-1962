@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-class TabStateHandler: ObservableObject {
-    @Published var selected: Int = 0
+@Observable
+class TabStateHandler {
+    var selected: Int = 0
 
     private func IsSelected ( tab: Int ) -> Bool {
         return selected == tab

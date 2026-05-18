@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CommonView: View {
-    @EnvironmentObject private var tabStateHanlder: TabStateHandler
-    @EnvironmentObject var activeData: ActiveData
+    @Environment(TabStateHandler.self) private var tabStateHanlder
+    @Environment(ActiveData.self) var activeData
     @Environment(\.colorScheme) var colorScheme
 
     init ( ) {
@@ -25,17 +25,18 @@ struct CommonView: View {
 
     var body: some View {
         VStack ( spacing: 0 ) {
-            TabView ( selection: $tabStateHanlder.selected ) {
+            TabView ( selection: Bindable ( tabStateHanlder ).selected ) {
                 OrdoView ( )
                     .tag ( 0 )
                 Prayer ( )
                     .tag ( 1 )
-                Settings ( current_ordo: self.activeData.GetYear ( )! )
-                    .tag ( 2 )
+                if let currentYear = activeData.GetYear ( ) {
+                    Settings ( current_ordo: currentYear )
+                        .tag ( 2 )
+                }
             }
                 .tint ( colorScheme == .dark ? .white : .black )
             TabBar ( )
         }
-        .background ( LinearGradient ( colors: [ .green.opacity ( 0.5 ), .blue.opacity( 0.3 ) ] )?.ignoresSafeArea ( ) )
     }
 }

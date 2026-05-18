@@ -12,9 +12,9 @@ struct RenderMarkdown: View {
 
     var body: some View {
         Text (
-            try! AttributedString (
+            ( try? AttributedString (
                 markdown: self.text, options: .init ( interpretedSyntax: .inlineOnlyPreservingWhitespace )
-            )
+            ) ) ?? AttributedString ( self.text )
         )
             .lineSpacing ( 10 )
             .font ( .system ( .body, design: .monospaced ) )

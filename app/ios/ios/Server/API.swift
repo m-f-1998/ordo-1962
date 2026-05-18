@@ -13,7 +13,7 @@ enum APIError: Error {
 }
 
 class API {
-    @State var cache: Cache = Cache ( )
+    var cache: Cache = Cache ( )
     private var activeData: ActiveData
     
     init ( activeData: ActiveData ) {
@@ -58,49 +58,48 @@ class API {
     }
     
     private func OrdoRequest ( year: String ) async throws -> OrdoYear {
-        let data = try await self.HTTP ( queries: [], url: "ordo/" + year )
+        let data = try await self.HTTP ( url: "ordo/\(year).json" )
         let json: OrdoYear = try self.Decode ( data: data, type: OrdoYear.self )
         cache.Insert ( ordo: json )
         return json
     }
     
     private func PrayerRequest ( ) async throws -> PrayerLanguageData {
-        let data = try await self.HTTP ( queries: [], url: "prayers" )
+        let data = try await self.HTTP ( url: "prayers.json" )
         let json: PrayerLanguageData = try self.Decode ( data: data, type: PrayerLanguageData.self )
         cache.Insert ( prayers: json )
         return json
     }
     
     private func LocaleRequest ( ) async throws -> LocaleOrdo {
-        let data = try await self.HTTP ( queries: [], url: "locale" )
+        let data = try await self.HTTP ( url: "locale.json" )
         let json: LocaleOrdo = try self.Decode ( data: data, type: LocaleOrdo.self )
         cache.Insert ( locale: json )
         return json
     }
     
     private func VotiveRequest ( ) async throws -> [ VotiveData ] {
-        let data = try await self.HTTP ( queries: [], url: "votives" )
+        let data = try await self.HTTP ( url: "votives.json" )
         let json: [ VotiveData ] = try self.Decode ( data: data, type: [ VotiveData ].self )
         cache.Insert ( votives: json )
         return json
     }
 
-    private func HTTP ( queries: [ URLQueryItem ], url: String ) async throws -> Data {
-        print(url)
-        var body: URLComponents = URLComponents ( string: "https://ordo.matthewfrankland.co.uk/api/v1.3/\(url)" )!
-        body.queryItems = queries
-        body.percentEncodedQuery = body.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-        
-        var request = URLRequest(url: body.url!)
-        request.setValue ( "application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type" )
+    private func HTTP ( url: String ) async throws -> Data {
+        let base = "https://m-f-1998.github.io/ordo-1962/data/"
+        guard let requestURL = URL ( string: base + url ) else {
+            throw APIError.fetching ( "Invalid URL: \(url)" )
+        }
+
+        var request = URLRequest ( url: requestURL )
         request.setValue ( "application/json", forHTTPHeaderField: "Accept" )
         request.timeoutInterval = 25
-        
+
         do {
             let ( data, response ) = try await URLSession.shared.data ( for: request )
-            let status_code: Int? = ( response as? HTTPURLResponse )?.statusCode
+            let statusCode: Int? = ( response as? HTTPURLResponse )?.statusCode
 
-            guard status_code == 200 else { throw APIError.fetching ( "HTTP Status Code \(status_code ?? -1)" ) }
+            guard statusCode == 200 else { throw APIError.fetching ( "HTTP Status Code \(statusCode ?? -1)" ) }
             return data
         } catch {
             throw APIError.fetching ( "Network Timeout" )

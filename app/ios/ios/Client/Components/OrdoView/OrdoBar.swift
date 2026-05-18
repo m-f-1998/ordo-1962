@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OrdoBar: View {
-    @EnvironmentObject var activeData: ActiveData
+    @Environment(ActiveData.self) var activeData
 
     @Binding var searchIsActive: Bool
     @Binding var search: String
@@ -18,14 +18,12 @@ struct OrdoBar: View {
 
     var body: some View {
         HStack {
-            if CurrentYear ( ) == self.year && self.search == "" && !searchIsActive {
+            if CurrentYear ( ) == self.year && self.search.isEmpty && !searchIsActive {
                 Button ( "Go To Today" ) {
-                    DispatchQueue.main.async {
-                        proxy.scrollTo ( self.activeData.GetIDToday ( ), anchor: .top )
-                    }
+                    proxy.scrollTo ( self.activeData.GetIDToday ( ), anchor: .top )
                 }
                     .bold ( )
-                    .foregroundColor ( .blue )
+                    .foregroundStyle ( .blue )
                 Text ( " | " )
             }
             Text ( "Year: \( String ( self.year ) )" )
@@ -36,6 +34,6 @@ struct OrdoBar: View {
             .frame ( maxWidth: .infinity, alignment: .center )
             .padding ( [ .vertical ], 8 )
             .background ( Color ( .systemGray6 ) )
-            .foregroundColor ( .secondary )
+            .foregroundStyle ( .secondary )
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CountryFeastDates: View {
     var country: String
-    @EnvironmentObject var activeData: ActiveData
+    @Environment(ActiveData.self) var activeData
 
     var body: some View {
         NavigationLink {
@@ -26,9 +26,7 @@ struct CountryFeastDates: View {
                     Menu {
                         ForEach ( Array ( self.activeData.GetDioceses ( country: country ) ), id: \.self ) { diocese in
                             Button ( diocese ) {
-                                DispatchQueue.main.async {
-                                    proxy.scrollTo ( diocese, anchor: .top )
-                                }
+                                proxy.scrollTo ( diocese, anchor: .top )
                             }
                         }
                     } label: {

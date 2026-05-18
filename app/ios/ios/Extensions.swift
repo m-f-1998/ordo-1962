@@ -25,15 +25,9 @@ extension Color {
         case "v":
             self = Color ( red: 191/255, green: 139/255, blue: 1 )
         case "p":
-            self = Color ( red: 2.55, green: 0, blue: 1.27 )
+            self = Color ( red: 0.78, green: 0.36, blue: 0.60 )
         default:
-            self = .white
+            return nil
         }
-    }
-}
-
-extension LinearGradient {
-    init? ( colors: [ Color ] = [ .green.opacity ( 0.3 ), .blue.opacity ( 0.5 ) ] ) {
-        self = LinearGradient ( colors: colors, startPoint: .topLeading, endPoint: .bottomTrailing )
     }
 }

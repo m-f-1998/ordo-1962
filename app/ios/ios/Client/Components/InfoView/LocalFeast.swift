@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LocalFeast: View {
     var data: LocaleData
-    @Environment( \.colorScheme ) var colorScheme
 
     var body: some View {
         VStack {
@@ -22,24 +21,12 @@ struct LocalFeast: View {
                         .lineLimit ( nil )
                 }
                 .frame ( maxWidth: 120, maxHeight: .infinity )
-                .background ( LinearGradient ( ) )
+                .background ( LiturgicalTheme ( colors: "w" ).accentSubtle )
                 .clipShape ( RoundedRectangle ( cornerRadius: 8 ) )
                 VStack ( alignment: .leading ) {
-                    HStack {
-                        Text ( data.title )
-                            .frame ( alignment: .leading )
-                            .font ( .system ( size: 14.0 ) )
-                            .bold ( )
-                        ForEach ( data.colors.components ( separatedBy: "," ), id: \.self ) {
-                            Circle ( )
-                                .strokeBorder ( colorScheme == .dark ? .white : .black, lineWidth: 1 )
-                                .background (
-                                    Circle ( )
-                                        .foregroundColor ( Color ( word: $0 ) )
-                                )
-                                .frame ( width: 15, height: 15 )
-                        }
-                    }
+                    Text ( data.title )
+                        .frame ( alignment: .leading )
+                        .font ( .system ( size: 14.0, weight: .semibold, design: .serif ) )
                 }
             }
         }

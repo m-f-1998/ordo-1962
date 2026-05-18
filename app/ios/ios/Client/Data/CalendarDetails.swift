@@ -23,15 +23,15 @@ var calendar_details = [
     """,
 
     "Feasts In Certain Locations": """
-    The 1962 Missale Romanum contains a supplement of feasts approved for celebration in certain places; this incorporated changed mandated by Pope John XXIII regarding the suppresssion of some local feasts. Masses listed in this supplement may nowadays be said anywhere on days of the IV class. Some saints are also in the General Calendar; these saints have proper Masses in the supplement that may be said Ad Libitum in place of the Masses listed in the main body of the Missa.
+    The 1962 Missale Romanum contains a supplement of feasts approved for celebration in certain places; this incorporated changed mandated by Pope John XXIII regarding the suppression of some local feasts. Masses listed in this supplement may nowadays be said anywhere on days of the IV class. Some saints are also in the General Calendar; these saints have proper Masses in the supplement that may be said Ad Libitum in place of the Masses listed in the main body of the Missa.
 
     The rubrics stipulate that each diocese should have its own particular calendar, in which must be inscribed the following feasts: the feast of its principal Patron duly consecrated (1 cl.); the anniversary of Dedication of its Cathedral Church (1 cl.); and the feast of its secondary Patron duly consecrated (2 cl.). Certain feasts may have a higher rank or exist only in a particular country, diocese or congregation. Examples include the Dedication of a Cathedral or the Mass of a Patron Saint. These will appear as geographical data is added however they will not appear by default in the Universal Calendar.
     """,
 
-    "Neo-Galacian Prefaces": """
-    The "Neo-Galacian" prefaces are taken from 17th century French Altar Missals, though the texts themselves are far more ancient. They were, once, proper to France and have slowly become incorporated into the Roman Rite.
+    "Neo-Gallican Prefaces": """
+    The "Neo-Gallican" prefaces are taken from 17th century French Altar Missals, though the texts themselves are far more ancient. They were, once, proper to France and have slowly become incorporated into the Roman Rite.
 
-    Some are dead set against their use, however, in new editions of the 1962 Missale Romanum they are included. They are “ad libitum”, which means that the priest can choose whether to use them. The "Neo-Galacian" prefaces are shown by default in this app and the alternative is listed in the options for the days feast.
+    Some are dead set against their use, however, in new editions of the 1962 Missale Romanum they are included. They are "ad libitum", which means that the priest can choose whether to use them. The "Neo-Gallican" prefaces are shown by default in this app and the alternative is listed in the options for the days feast.
     """,
 
     "Votive Masses": """
@@ -50,7 +50,7 @@ var calendar_details = [
 
     A Votive Mass may be offered on any day by indult.
 
-    The Mass “Saturday of Our Lady” is not a Votive Mass. It is is proper to every Saturday which is not of the 1st, 2nd or 3rd class. On a Saturday when this Mass is proper, if a 4th class commemoration also falls on that date, the Priest may either offer the Mass “Saturday of Our Lady” and include that commemoration, or he may choose to offer the Mass from the Proper of Saints which corresponds to that commemoration.
+    The Mass "Saturday of Our Lady" is not a Votive Mass. It is proper to every Saturday which is not of the 1st, 2nd or 3rd class. On a Saturday when this Mass is proper, if a 4th class commemoration also falls on that date, the Priest may either offer the Mass “Saturday of Our Lady” and include that commemoration, or he may choose to offer the Mass from the Proper of Saints which corresponds to that commemoration.
 
     The “Daily Mass for the Dead” is of the 3rd class from November 3 through November 8, and on those dates it may be offered on any liturgical day of the 3rd or 4th class. On other days of the year, it is of the 4th class and can only be offered on 4th class ferias.
     """
