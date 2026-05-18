@@ -101,7 +101,7 @@ class iCal {
                     }
                 }
             } else {
-                if let settings = URL ( string: UIApplication.openSettingsURLString ), UIApplication.shared.canOpenURL ( settings ) {
+                if let settings = URL ( string: UIApplication.openNotificationSettingsURLString ), UIApplication.shared.canOpenURL ( settings ) {
                     DispatchQueue.main.async {
                         UIApplication.shared.open ( settings )
                     }

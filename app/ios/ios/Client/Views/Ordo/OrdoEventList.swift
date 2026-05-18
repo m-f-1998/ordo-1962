@@ -64,20 +64,13 @@ struct OrdoEventList: View, KeyboardReadable {
     @Binding var search: String
     @Binding var year: Int
     @State private var isKeyboardVisible = false
+    @State private var searchResults: [ [ OrdoDay ] ] = []
 
     private var isCurrentYear: Bool { year == CurrentYear ( ) }
 
     private var today: OrdoDay? {
         guard isCurrentYear, search.isEmpty else { return nil }
         return activeData.GetYear ( year: year )?.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) )
-    }
-
-    var searchResults: [ [ OrdoDay ] ] {
-        if search.isEmpty {
-            return self.activeData.GetYear ( year: self.year )?.ordo ?? []
-        } else {
-            return self.activeData.GetFilteredOrdo ( search: self.search, year: self.year )
-        }
     }
 
     var body: some View {
@@ -113,6 +106,15 @@ struct OrdoEventList: View, KeyboardReadable {
                 if self.searchResults.isEmpty, !self.search.isEmpty {
                     ContentUnavailableView.search ( text: self.search )
                 }
+            }
+            .task ( id: search ) {
+                let filtered = search.isEmpty
+                    ? activeData.GetYear ( year: year )?.ordo ?? []
+                    : activeData.GetFilteredOrdo ( search: search, year: year )
+                searchResults = filtered
+            }
+            .task ( id: year ) {
+                searchResults = activeData.GetYear ( year: year )?.ordo ?? []
             }
     }
 }

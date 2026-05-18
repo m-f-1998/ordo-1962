@@ -45,7 +45,8 @@ struct InfoView: View {
                     }
                 }
             }
+            .navigationTitle ( "1962 Liturgical Ordo" )
+            .navigationBarTitleDisplayMode ( .inline )
         }
-        .navigationBarTitleDisplayMode ( .inline )
     }
 }

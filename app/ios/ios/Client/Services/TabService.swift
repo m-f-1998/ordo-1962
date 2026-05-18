@@ -26,6 +26,7 @@ class TabStateHandler {
 enum TabService: Int, CaseIterable {
     case ordo = 0
     case prayer
+    case info
     case settings
     
     var systemImage: Bool {
@@ -43,6 +44,8 @@ enum TabService: Int, CaseIterable {
                 return "Ordo"
             case .prayer:
                 return "Prayer"
+            case .info:
+                return "Info"
             case .settings:
                 return "Settings"
         }
@@ -54,6 +57,8 @@ enum TabService: Int, CaseIterable {
                 return "calendar"
             case .prayer:
                 return "pray"
+            case .info:
+                return "info.circle"
             case .settings:
                 return "gear"
         }

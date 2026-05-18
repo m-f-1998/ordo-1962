@@ -27,13 +27,18 @@ struct OrdoView: View {
                     .scrollIndicators ( .hidden )
                     .toolbar {
                         ToolbarItem ( placement: .automatic ) {
-                            OrdoToolbar ( proxy: proxy, year: self.$year )
-                        }
-                        ToolbarItem ( placement: .topBarLeading ) {
-                            Text ( "1962 Liturgical Ordo" )
-                                .bold ( )
+                            HStack {
+                                Button {
+                                    searchIsActive = true
+                                } label: {
+                                    Image ( systemName: "magnifyingglass" )
+                                }
+                                OrdoToolbar ( proxy: proxy, year: self.$year )
+                            }
                         }
                     }
+                    .navigationTitle ( "1962 Liturgical Ordo" )
+                    .navigationBarTitleDisplayMode ( .inline )
                     .onChange ( of: self.search ) { old, new in
                         if new.isEmpty && !searchIsActive {
                             proxy.scrollTo ( "Jan" )

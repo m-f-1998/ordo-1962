@@ -39,7 +39,7 @@ struct FastingNotification: View {
                     result ( true )
                 } else {
                     if !notDetermined {
-                        if let settings = URL ( string: UIApplication.openSettingsURLString ), UIApplication.shared.canOpenURL ( settings ) {
+                        if let settings = URL ( string: UIApplication.openNotificationSettingsURLString ), UIApplication.shared.canOpenURL ( settings ) {
                             DispatchQueue.main.async {
                                 UIApplication.shared.open ( settings )
                             }
@@ -140,7 +140,8 @@ struct FastingNotification: View {
                 if res {
                     if toggled {
                         BGTaskScheduler.shared.register ( forTaskWithIdentifier: "com.mfrankland.ordo1962.fasting", using: nil ) { task in
-                            self.handleBackgroundTask ( task: task as! BGProcessingTask )
+                            guard let processingTask = task as? BGProcessingTask else { return }
+                            self.handleBackgroundTask ( task: processingTask )
                         }
                         scheduleBackgroundTask ( )
                     } else {

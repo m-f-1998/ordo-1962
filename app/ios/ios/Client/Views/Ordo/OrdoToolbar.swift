@@ -34,9 +34,6 @@ struct OrdoToolbar: View {
             } label: {
                 Label ( "Change Date", systemImage: "arrow.up.arrow.down" )
             }
-            NavigationLink ( destination: InfoView ( ) ) {
-                Label ( "Information", systemImage: "info.circle" )
-            }
         }
     }
 }

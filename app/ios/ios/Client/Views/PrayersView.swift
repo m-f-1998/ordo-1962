@@ -43,16 +43,14 @@ struct Prayer: View {
                         }
                     }
                 }
-                    .toolbar {
-                        ToolbarItem ( placement: .automatic ) {
-                            ChangeLanguage ( data: prayers )
-                        }
-                        ToolbarItem ( placement: .topBarLeading ) {
-                            Text ( "1962 Liturgical Ordo" ).bold ( )
-                        }
+                .toolbar {
+                    ToolbarItem ( placement: .automatic ) {
+                        ChangeLanguage ( data: prayers )
                     }
+                }
+                .navigationTitle ( "1962 Liturgical Ordo" )
+                .navigationBarTitleDisplayMode ( .inline )
             }
         }
-        .navigationBarTitleDisplayMode ( .inline )
     }
 }

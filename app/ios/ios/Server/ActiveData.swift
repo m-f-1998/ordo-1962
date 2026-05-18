@@ -22,12 +22,31 @@ class ActiveData {
     private(set) var locale: LocaleOrdo? = nil
     private(set) var votives: [ VotiveData ]? = nil
 
+    // Pre-built search index: year → flat array of (lowercased combined text, monthIdx, dayIdx)
+    private var searchIndex: [ Int: [ (text: String, month: Int, day: Int) ] ] = [ : ]
+
     func SetSuccess ( ordo: [ OrdoYear ], locale: LocaleOrdo?, prayers: PrayerLanguageData?, votives: [ VotiveData ]? ) {
         self.ordo = ordo
         self.prayers = prayers
         self.locale = locale
         self.votives = votives
+        self.buildSearchIndex ( )
         self.SetStatus ( )
+    }
+
+    private func buildSearchIndex ( ) {
+        searchIndex = [ : ]
+        for ordoYear in ordo {
+            let entries = ordoYear.ordo.enumerated ( ).flatMap { ( mi, month ) in
+                month.enumerated ( ).map { ( di, day ) in
+                    let titles = [ day.season.title ] + day.celebrations.flatMap { c in
+                        [ c.title ] + c.commemorations.map { $0.title }
+                    }
+                    return ( text: titles.joined ( separator: " " ).lowercased ( ), month: mi, day: di )
+                }
+            }
+            searchIndex [ ordoYear.year ] = entries
+        }
     }
     
     func SetDownload ( download: Int ) {
@@ -73,31 +92,23 @@ class ActiveData {
     }
     
     func GetFilteredOrdo ( search: String = "", year: Int = CurrentYear ( ) ) -> [ [ OrdoDay ] ] {
-        if let year = self.GetYear ( year: year ) {
-            return year.ordo.map {
-                return self.Filter ( search: search, data: $0 )
-            }.filter {
-                return !$0.isEmpty
+        guard let ordoYear = GetYear ( year: year ),
+              let entries = searchIndex [ year ] else { return [ ] }
+        let lower = search.lowercased ( )
+        var result: [ [ OrdoDay ] ] = [ ]
+        var currentMonth = -1
+        var currentGroup: [ OrdoDay ] = [ ]
+        for entry in entries where entry.text.contains ( lower ) {
+            let day = ordoYear.ordo [ entry.month ] [ entry.day ]
+            if entry.month != currentMonth {
+                if !currentGroup.isEmpty { result.append ( currentGroup ) }
+                currentGroup = [ day ]
+                currentMonth = entry.month
+            } else {
+                currentGroup.append ( day )
             }
         }
-        return [ ]
-    }
-
-    private func Filter ( search: String = "", data: [ OrdoDay ] ) -> [ OrdoDay ] {
-        return data.filter {
-            if $0.season.title.localizedCaseInsensitiveContains ( search ) {
-                return true
-            }
-            for celebration in $0.celebrations {
-                if celebration.title.localizedCaseInsensitiveContains ( search ) {
-                    return true
-                }
-                
-                if celebration.commemorations.contains ( where: { $0.title.localizedCaseInsensitiveContains ( search ) } ) {
-                    return true
-                }
-            }
-            return false
-        }
+        if !currentGroup.isEmpty { result.append ( currentGroup ) }
+        return result
     }
 }

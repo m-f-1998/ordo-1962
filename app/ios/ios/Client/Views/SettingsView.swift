@@ -65,12 +65,7 @@ struct Settings: View {
                 .toast ( isPresenting: self.$ical_alert.show ) {
                     self.ical_alert.alertToast
                 }
-                .toolbar {
-                    ToolbarItem ( placement: .topBarLeading ) {
-                        Text ( "1962 Liturgical Ordo" )
-                            .bold ( )
-                    }
-                }
+                .navigationTitle ( "1962 Liturgical Ordo" )
                 .navigationBarTitleDisplayMode ( .inline )
                 .tint ( .primary )
         }

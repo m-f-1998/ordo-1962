@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AlertToast
+import UserNotifications
 
 class LocalPushNoifications {
     var status: AlertViewModel
@@ -29,7 +30,7 @@ class LocalPushNoifications {
                     result ( true )
                 } else {
                     if !notDetermined {
-                        if let settings = URL ( string: UIApplication.openSettingsURLString ), UIApplication.shared.canOpenURL ( settings ) {
+                        if let settings = URL ( string: UIApplication.openNotificationSettingsURLString ), UIApplication.shared.canOpenURL ( settings ) {
                             DispatchQueue.main.async {
                                 UIApplication.shared.open ( settings )
                             }

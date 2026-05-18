@@ -10,7 +10,6 @@ import SwiftUI
 struct CommonView: View {
     @Environment(TabStateHandler.self) private var tabStateHanlder
     @Environment(ActiveData.self) var activeData
-    @Environment(\.colorScheme) var colorScheme
 
     init ( ) {
         CreateUserDefault ( key: "prayers-lang", value: "English" )
@@ -25,17 +24,23 @@ struct CommonView: View {
 
     var body: some View {
         VStack ( spacing: 0 ) {
-            TabView ( selection: Bindable ( tabStateHanlder ).selected ) {
+            ZStack {
                 OrdoView ( )
-                    .tag ( 0 )
+                    .opacity ( tabStateHanlder.selected == 0 ? 1 : 0 )
+                    .allowsHitTesting ( tabStateHanlder.selected == 0 )
                 Prayer ( )
-                    .tag ( 1 )
+                    .opacity ( tabStateHanlder.selected == 1 ? 1 : 0 )
+                    .allowsHitTesting ( tabStateHanlder.selected == 1 )
+                InfoView ( )
+                    .opacity ( tabStateHanlder.selected == 2 ? 1 : 0 )
+                    .allowsHitTesting ( tabStateHanlder.selected == 2 )
                 if let currentYear = activeData.GetYear ( ) {
                     Settings ( current_ordo: currentYear )
-                        .tag ( 2 )
+                        .opacity ( tabStateHanlder.selected == 3 ? 1 : 0 )
+                        .allowsHitTesting ( tabStateHanlder.selected == 3 )
                 }
             }
-                .tint ( colorScheme == .dark ? .white : .black )
+            .frame ( maxWidth: .infinity, maxHeight: .infinity )
             TabBar ( )
         }
     }
