@@ -17,7 +17,7 @@ class iCal {
     var current_ordo: OrdoYear
     private let title: String = "Liturgical Ordo (1962)"
     private let store: EKEventStore = EKEventStore ( )
-    @ObservedObject public var status: AlertViewModel
+    var status: AlertViewModel
 
     init ( current_ordo: OrdoYear, alert: AlertViewModel ) {
         self.current_ordo = current_ordo
@@ -43,7 +43,10 @@ class iCal {
 
         let calendar = EKCalendar ( for: .event, eventStore: self.store )
         calendar.title = title
-        calendar.source = self.store.defaultCalendarForNewEvents!.source
+        guard let source = self.store.defaultCalendarForNewEvents?.source else {
+            throw iCalError.calendar
+        }
+        calendar.source = source
 
         do {
             try self.store.saveCalendar ( calendar, commit: true )
@@ -69,8 +72,10 @@ class iCal {
                                     let event = EKEvent ( eventStore: self.store )
                                     event.title = feast.title + " (Class \(String(feast.rank)))"
                                     event.isAllDay = true
-                                    event.startDate = FormatDate ( date: .short, time: .none ).date ( from: "\(day.date.day) \(day.date.month) \(CurrentYear ( ))" )
-                                    event.endDate = event.startDate
+                                    let formatter = FormatDate ( date: .short, time: .none )
+                                    guard let eventDate = formatter.date ( from: "\(day.date.day) \(day.date.month) \(CurrentYear ( ))" ) else { continue }
+                                    event.startDate = eventDate
+                                    event.endDate = eventDate
                                     event.notes = feast.commemorations.map { ( x ) -> String in
                                         return "Commemoration Today: " + x.title
                                     }.joined ( separator: "\n" )
@@ -99,9 +104,9 @@ class iCal {
                 if let settings = URL ( string: UIApplication.openSettingsURLString ), UIApplication.shared.canOpenURL ( settings ) {
                     DispatchQueue.main.async {
                         UIApplication.shared.open ( settings )
-                        completion ( )
                     }
                 }
+                DispatchQueue.main.async { completion ( ) }
             }
         }
     }

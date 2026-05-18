@@ -11,7 +11,7 @@ import UserNotifications
 import BackgroundTasks
 
 struct FastingNotification: View {
-    @EnvironmentObject var activeData: ActiveData
+    @Environment(ActiveData.self) var activeData
     @State private var toggled = false
 
     public var title: String
@@ -32,7 +32,7 @@ struct FastingNotification: View {
             center.requestAuthorization ( options: [ .alert, .badge, .sound ], completionHandler: { ( granted, error ) in
                 if error != nil {
                     DispatchQueue.main.async {
-                        self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occured" )
+                        self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occurred" )
                     }
                     result ( false )
                 } else if granted {
@@ -65,13 +65,11 @@ struct FastingNotification: View {
     
     private func scheduleBackgroundTask ( ) {
         #if !targetEnvironment(simulator)
-            let request = BGProcessingTaskRequest ( identifier: "com.mfrankland.ordo-62.fasting" )
+            let request = BGProcessingTaskRequest ( identifier: "com.mfrankland.ordo1962.fasting" )
             let hour = Calendar.current.component ( .hour, from: Date ( ) )
             let minute = Calendar.current.component ( .minute, from: Date( ) )
             
             request.earliestBeginDate = Calendar.current.date ( bySettingHour: hour, minute: minute + 1, second: 0, of: Date ( ).addingTimeInterval ( 86400 ) )
-//            request.earliestBeginDate = Calendar.current.date ( bySettingHour: 6, minute: 0, second: 0, of: Date ( ).addingTimeInterval ( 86400 ) )
-
 
             request.requiresNetworkConnectivity = false
             request.requiresExternalPower = false
@@ -81,7 +79,7 @@ struct FastingNotification: View {
             } catch {
                 print ( "Could not schedule background task: \(error)" )
                 DispatchQueue.main.async {
-                    self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occured" )
+                    self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occurred" )
                     self.toggled = false
                 }
             }
@@ -95,7 +93,7 @@ struct FastingNotification: View {
 
     private func stopBackgroundTask ( ) {
         UNUserNotificationCenter.current ( ).removePendingNotificationRequests ( withIdentifiers: [ self.id ] )
-        BGTaskScheduler.shared.cancel ( taskRequestWithIdentifier: "com.mfrankland.ordo-62.fasting" )
+        BGTaskScheduler.shared.cancel ( taskRequestWithIdentifier: "com.mfrankland.ordo1962.fasting" )
     }
 
     private func handleBackgroundTask ( task: BGProcessingTask ) {
@@ -112,7 +110,7 @@ struct FastingNotification: View {
         task.setTaskCompleted ( success: true )
         
         DispatchQueue.main.async {
-            self.alert.alertToast = AlertToast ( type: .error ( .green ), title: "Notification Scheduled" )
+            self.alert.alertToast = AlertToast ( type: .complete ( .green ), title: "Notification Scheduled" )
             self.toggled = true
         }
     }
@@ -129,7 +127,7 @@ struct FastingNotification: View {
             if let error = error {
                 print ( "Error scheduling notification: \(error)" )
                 DispatchQueue.main.async {
-                    self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occured" )
+                    self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occurred" )
                     self.toggled = false
                 }
             }
@@ -141,9 +139,10 @@ struct FastingNotification: View {
             CheckNotificationSettings ( ) { res in
                 if res {
                     if toggled {
-                        BGTaskScheduler.shared.register ( forTaskWithIdentifier: "com.mfrankland.ordo-62.fasting", using: nil ) { task in
-                            scheduleBackgroundTask ( )
+                        BGTaskScheduler.shared.register ( forTaskWithIdentifier: "com.mfrankland.ordo1962.fasting", using: nil ) { task in
+                            self.handleBackgroundTask ( task: task as! BGProcessingTask )
                         }
+                        scheduleBackgroundTask ( )
                     } else {
                         stopBackgroundTask ( )
                     }

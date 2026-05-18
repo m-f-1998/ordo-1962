@@ -7,84 +7,116 @@
 
 import SwiftUI
 
-struct Ordo: View {
-    let ordo: [ OrdoDay ]
+struct WatchOrdoRow: View {
+    let day: OrdoDay
+
+    private var theme: LiturgicalTheme { LiturgicalTheme ( day: day ) }
 
     var body: some View {
-        List ( self.ordo, id: \.self ) { feast in
-            VStack ( alignment: .leading, spacing: 3 ) {
-                Text ( "\(feast.date.combined)" ).bold ( )
-                ForEach ( feast.celebrations, id: \.id ) { celebration in
-                    Text ( celebration.title )
-                    Text ( "Class \(celebration.rank)" )
-                        .italic ( )
-                        .font ( .system ( size: 14 ) )
-                }
-            }.padding ( )
-        }.safeAreaInset ( edge: .bottom ) {
-            EmptyView ( ).frame ( height: 8 )
+        VStack ( alignment: .leading, spacing: 4 ) {
+            Text ( day.date.combined )
+                .font ( .system ( .caption2, design: .serif ) )
+                .foregroundStyle ( theme.accent )
+            ForEach ( day.celebrations, id: \.id ) { celebration in
+                Text ( celebration.title )
+                    .font ( .system ( .body, design: .serif ) )
+                    .fontWeight ( .semibold )
+                Text ( "Class \(celebration.rank)" )
+                    .font ( .caption2 )
+                    .foregroundStyle ( .secondary )
+            }
         }
+        .padding ( .vertical, 4 )
     }
 }
 
-struct ErrorView: View {
-    let error: String
+struct WatchOrdoList: View {
+    let ordo: [ OrdoDay ]
+
+    var body: some View {
+        List ( ordo, id: \.id ) { day in
+            WatchOrdoRow ( day: day )
+        }
+        .listStyle ( .carousel )
+    }
+}
+
+struct WatchErrorView: View {
+    let message: String
     let api: API
 
     var body: some View {
-        VStack ( alignment: .center ) {
-            Text ( error ).multilineTextAlignment ( .center ).padding ( )
-            Button ( action: {
+        VStack ( spacing: 12 ) {
+            Image ( systemName: "exclamationmark.triangle" )
+                .font ( .title2 )
+                .foregroundStyle ( .yellow )
+            Text ( message )
+                .font ( .caption )
+                .multilineTextAlignment ( .center )
+            Button {
                 Task {
                     do {
-                        try await self.api.UpdateCache ( )
+                        try await api.UpdateCache ( )
                     } catch {
-                        print ( "Can't Update Cache" )
+                        print ( "Cache update failed: \(error)" )
                     }
                 }
-            } ) {
-                Label ( "Try Again", systemImage: "arrow.clockwise" )
+            } label: {
+                Label ( "Retry", systemImage: "arrow.clockwise" )
             }
+            .buttonStyle ( .borderedProminent )
         }
+        .padding ( )
     }
 }
 
 struct ContentView: View {
-    @ObservedObject var activeData: ActiveData
-    @State var api: API
+    @State private var activeData: ActiveData
+    @State private var api: API
 
     init ( ) {
         let activeData = ActiveData ( )
-        self.activeData = activeData
-        self.api = API ( activeData: activeData )
+        _activeData = State ( initialValue: activeData )
+        _api = State ( initialValue: API ( activeData: activeData ) )
     }
 
     var body: some View {
-        VStack {
-            if self.activeData.loading {
-                ProgressView ( ).onAppear {
-                    do {
-                        if try self.api.cache.CurrentCacheExists ( predicate: #Predicate<OrdoYear> { year in true } ) {
-                            self.activeData.SetSuccess ( ordo: try self.api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { year in true } ), locale: try self.api.cache.GetLocale ( ), prayers: nil, votives: nil )
-                        } else {
-                            Task {
-                                self.activeData.SetSuccess ( ordo: [ try await self.api.GetCurrent ( ) ], locale: try self.api.cache.GetLocale ( ), prayers: nil, votives: nil )
-                            }
-                        }
-                    } catch {
-                        print ( error )
-                    }
+        Group {
+            if activeData.loading {
+                VStack ( spacing: 8 ) {
+                    ProgressView ( )
+                    Text ( "Loading…" )
+                        .font ( .caption )
+                        .foregroundStyle ( .secondary )
                 }
-            } else if self.activeData.error {
-                ErrorView ( error: "An Unknown Error Occured", api: api )
+                .onAppear { loadData ( ) }
+            } else if activeData.error {
+                WatchErrorView ( message: activeData.last_err, api: api )
+            } else if let year = activeData.GetYear ( ) {
+                WatchOrdoList ( ordo: year.getMonth ( month: CurrentMonth ( ) ) )
             } else {
-                if self.activeData.ordo.count > 0 {
-                    Ordo ( ordo: self.activeData.ordo[ 0 ].getMonth ( month: CurrentMonth ( ) ) )
-                } else {
-                    ErrorView ( error: "No Data is Available", api: api )
-                }
+                WatchErrorView ( message: "No data available", api: api )
             }
         }
-        .padding ( )
+    }
+
+    private func loadData ( ) {
+        do {
+            if try api.cache.CurrentCacheExists ( predicate: #Predicate<OrdoYear> { _ in true } ) {
+                let ordo = try api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { _ in true } )
+                activeData.SetSuccess ( ordo: ordo, locale: try api.cache.GetLocale ( ), prayers: nil, votives: nil )
+            } else {
+                Task {
+                    do {
+                        let year = try await api.GetCurrent ( )
+                        activeData.SetSuccess ( ordo: [ year ], locale: try api.cache.GetLocale ( ), prayers: nil, votives: nil )
+                    } catch {
+                        activeData.SetError ( error: "Could not load data" )
+                    }
+                }
+            }
+        } catch {
+            activeData.SetError ( error: "Could not load data" )
+        }
     }
 }

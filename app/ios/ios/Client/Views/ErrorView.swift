@@ -21,11 +21,10 @@ struct ErrorView: View {
                     .tint ( .white )
                     .foregroundStyle ( .white )
                     .background ( .black )
-                    .cornerRadius ( 10 )
+                    .clipShape ( RoundedRectangle ( cornerRadius: 10 ) )
             }
                 .navigationTitle ( "1962 Liturgical Ordo" )
         }
-            .SetGradient ( from: .blue.opacity ( 0.3 ), to: .green.opacity ( 0.5 ) )
     }
 
 }

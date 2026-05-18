@@ -6,39 +6,27 @@
 //
 
 import SwiftUI
-import BackgroundTasks
 
 @main
 struct OrdoiOS: App {
-    @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
-    @ObservedObject var activeData: ActiveData
-    @ObservedObject var tabStateHanlder: TabStateHandler = TabStateHandler ( )
-    @State var api: API
-    
+    @State private var activeData: ActiveData
+    @State private var api: API
+    @State private var tabStateHandler = TabStateHandler ( )
+    let net = NetworkMonitor ( )
+
     init ( ) {
         let activeData = ActiveData ( )
-        self.activeData = activeData
-        self.api = API ( activeData: activeData )
-//        registerBackgroundTask()
+        _activeData = State ( initialValue: activeData )
+        _api = State ( initialValue: API ( activeData: activeData ) )
     }
-
-//    private func registerBackgroundTask() {
-//        BGTaskScheduler.shared.register ( forTaskWithIdentifier: "com.mfrankland.ordo-62", using: nil ) { task in
-//            handleBackgroundTask ( task: task as! BGProcessingTask )
-//        }
-//    }
 
     var body: some Scene {
         WindowGroup {
             ContentView ( api: api )
         }
-        .environmentObject ( self.activeData )
-        .environmentObject ( self.tabStateHanlder )
-        .modelContainer ( self.api.cache.GetContainer ( ) )
+        .environment ( activeData )
+        .environment ( tabStateHandler )
+        .environment ( net )
+        .modelContainer ( api.cache.GetContainer ( ) )
     }
-    
-//    private func handleBackgroundTask(task: BGProcessingTask) {
-//        // Your background task logic
-//        task.setTaskCompleted(success: true)
-//    }
 }

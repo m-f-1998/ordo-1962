@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AdditionalMassPropers: View {
-    @EnvironmentObject var activeData: ActiveData
+    @Environment(ActiveData.self) var activeData
 
     var body: some View {
         List {
@@ -27,7 +27,6 @@ struct AdditionalMassPropers: View {
 }
 
 struct VotiveMasses: View {
-    @Environment(\.colorScheme) var colorScheme
     let votives: [ Masses ]
     
     var body: some View {
@@ -38,7 +37,7 @@ struct VotiveMasses: View {
                 }, commemorations: [])
                 DisplayPropers(celebrations: [celeb])
             } label: {
-                MassRow(key: mass.title, colorsString: mass.colors, colorScheme: colorScheme)
+                MassRow ( key: mass.title, colorsString: mass.colors )
             }
         }
     }
@@ -59,20 +58,19 @@ struct VotiveDays: View {
 struct MassRow: View {
     let key: String
     let colorsString: String
-    let colorScheme: ColorScheme
 
     var body: some View {
         HStack {
-            Text(key)
-            let colors = colorsString.components(separatedBy: ",")
-            ForEach(colors, id: \.self) { colorName in
-                Circle()
-                    .strokeBorder(colorScheme == .dark ? .white : .black, lineWidth: 1)
-                    .background(
-                        Circle()
-                            .foregroundColor(Color(word: colorName))
+            Text ( key )
+            let colors = colorsString.components ( separatedBy: "," )
+            ForEach ( colors, id: \.self ) { colorName in
+                Circle ( )
+                    .strokeBorder ( .primary.opacity ( 0.3 ), lineWidth: 1 )
+                    .background (
+                        Circle ( )
+                            .foregroundStyle ( Color ( word: colorName ) ?? .white )
                     )
-                    .frame(width: 15, height: 15)
+                    .frame ( width: 15, height: 15 )
             }
         }
     }

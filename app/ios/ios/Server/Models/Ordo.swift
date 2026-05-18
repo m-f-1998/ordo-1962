@@ -9,8 +9,8 @@ import Foundation
 import SwiftData
 import OrderedCollections
 
-@Model class OrdoYear: Codable, ObservableObject, Hashable, Identifiable, @unchecked Sendable {
-    var id: String = UUID ( ).uuidString
+@Model class OrdoYear: Codable, Hashable, Identifiable, @unchecked Sendable {
+    let id: String = UUID ( ).uuidString
     public private(set) var ordo: [ [ OrdoDay ] ]
     public private(set) var year: Int
     public private(set) var date: Date = Date()
@@ -45,7 +45,8 @@ import OrderedCollections
     }
 
     func getMonth ( month: String ) -> [ OrdoDay ] {
-        return self.ordo [ Calendar.current.shortMonthSymbols.firstIndex ( of: month )! ]
+        guard let index = Calendar.current.shortMonthSymbols.firstIndex ( of: month ) else { return [] }
+        return self.ordo [ index ]
     }
 
     func getDay ( month: String, day: Int ) -> OrdoDay {
@@ -134,20 +135,19 @@ struct CelebrationData: Codable, Hashable, Identifiable {
     }
     
     private func FormatProperString ( proper: PropersData, lang: String, first: Bool = false ) -> String {
-        var res = "**\( String ( describing: proper.GetTitle ( )! ) )**\n"
-        res += proper.GetPrayer ( lang: lang )
-        return res
+        return proper.GetPrayer ( lang: lang )
     }
     
     public func GetPropers ( lang: String ) -> OrderedDictionary<String, String> {
         var res: OrderedDictionary<String, String> = [ : ]
         propers.forEach { proper in
-            res [ proper.GetTitle ( )! ] = FormatProperString ( proper: proper, lang: lang, first: res.isEmpty )
-            if let index = [ "Collect", "Secret", "Postcommunion" ].firstIndex ( where: { $0 == proper.GetTitle ( )! } ) {
+            guard let title = proper.GetTitle ( ) else { return }
+            res [ title ] = FormatProperString ( proper: proper, lang: lang, first: res.isEmpty )
+            if let index = [ "Collect", "Secret", "Postcommunion" ].firstIndex ( where: { $0 == title } ) {
                 var id_index = 2
                 commemorations.forEach { commem in
-                    if commem.propers.count > 0 {
-                        res [ "\(id_index.ordinal ?? "Commemoration") \(proper.GetTitle ( )!)" ] = FormatProperString ( proper: commem.propers [ index ], lang: lang )
+                    if commem.propers.count > 0 && index < commem.propers.count {
+                        res [ "\(id_index.ordinal ?? "Commemoration") \(title)" ] = FormatProperString ( proper: commem.propers [ index ], lang: lang )
                         id_index += 1
                     }
                 }

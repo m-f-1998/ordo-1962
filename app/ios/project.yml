@@ -1,0 +1,117 @@
+name: ordo-1962
+
+options:
+  bundleIdPrefix: com.mfrankland
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "17.0"
+    watchOS: "10.0"
+
+packages:
+  swift-collections:
+    url: https://github.com/apple/swift-collections
+    from: 1.1.0
+  AlertToast:
+    url: https://github.com/elai950/AlertToast
+    from: 1.3.9
+
+schemes:
+  ordo-1962:
+    build:
+      targets:
+        ordo-1962: all
+        widget: [build]
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Release
+    archive:
+      config: Release
+
+targets:
+
+  ordo-1962:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    bundleId: com.mfrankland.ordo-62
+    entitlements:
+      path: ios/app-ent.entitlements
+    sources:
+      - ios
+      - PrivacyInfo.xcprivacy
+    dependencies:
+      - package: swift-collections
+        product: OrderedCollections
+      - package: AlertToast
+        product: AlertToast
+      - target: widget
+        embed: true
+    settings:
+      base:
+        PRODUCT_NAME: ordo-1962
+        INFOPLIST_FILE: ordo-1962-Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        SWIFT_VERSION: "5.9"
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGNING_REQUIRED: NO
+        DEVELOPMENT_TEAM: ""
+
+  watchos:
+    type: application
+    platform: watchOS
+    deploymentTarget: "10.0"
+    bundleId: com.mfrankland.ordo-62.watchkitapp
+    entitlements:
+      path: ordo-1962-watch.entitlements
+    info:
+      path: watchos/Info.plist
+      properties:
+        WKApplication: true
+    sources:
+      - watchos
+      - path: ios/Server
+        createIntermediateGroups: true
+      - path: ios/Extensions.swift
+      - path: ios/Client/Style/LiturgicalTheme.swift
+      - path: ios/Client/Services/DateFormatter.swift
+    dependencies:
+      - package: swift-collections
+        product: OrderedCollections
+    settings:
+      base:
+        PRODUCT_NAME: ordo-1962-watch
+        SWIFT_VERSION: "5.9"
+        TARGETED_DEVICE_FAMILY: "4"
+        CODE_SIGNING_REQUIRED: NO
+        DEVELOPMENT_TEAM: ""
+
+  widget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    bundleId: com.mfrankland.ordo-62.widget
+    entitlements:
+      path: widget/widget-ent.entitlements
+    sources:
+      - widget
+      - path: ios/Server
+        createIntermediateGroups: true
+      - path: ios/Extensions.swift
+      - path: ios/Client/Style/LiturgicalTheme.swift
+      - path: ios/Client/Services/DateFormatter.swift
+    dependencies:
+      - package: swift-collections
+        product: OrderedCollections
+      - sdk: WidgetKit.framework
+    settings:
+      base:
+        PRODUCT_NAME: ordo-1962-widget
+        INFOPLIST_FILE: widget/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        SWIFT_VERSION: "5.9"
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGNING_REQUIRED: NO
+        DEVELOPMENT_TEAM: ""

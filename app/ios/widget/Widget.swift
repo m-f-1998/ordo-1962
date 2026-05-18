@@ -8,134 +8,159 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
-    @ObservedObject var activeData: ActiveData
-    @State var api: API
-    @ObservedObject var net: NetworkMonitor = NetworkMonitor ( )
+// MARK: - Timeline Provider
 
-    init ( ) {
-        let activeData = ActiveData ( )
-        self.activeData = activeData
-        self.api = API ( activeData: activeData )
+struct Provider: TimelineProvider {
+    func placeholder ( in context: Context ) -> SimpleEntry {
+        SimpleEntry ( date: .now, day: nil )
     }
-        
-    func getEntry ( ) async -> [ SimpleEntry ] {
+
+    func getSnapshot ( in context: Context, completion: @escaping ( SimpleEntry ) -> Void ) {
+        Task {
+            completion ( SimpleEntry ( date: .now, day: await fetchToday ( ) ) )
+        }
+    }
+
+    func getTimeline ( in context: Context, completion: @escaping ( Timeline<SimpleEntry> ) -> Void ) {
+        Task {
+            let day = await fetchToday ( )
+            let entry = SimpleEntry ( date: .now, day: day )
+            // Refresh at midnight so the widget updates to the new day automatically
+            let midnight = Calendar.current.startOfDay ( for: Date ( timeIntervalSinceNow: 86400 ) )
+            completion ( Timeline ( entries: [ entry ], policy: .after ( midnight ) ) )
+        }
+    }
+
+    private func fetchToday ( ) async -> OrdoDay? {
+        let activeData = await ActiveData ( )
+        let api = API ( activeData: activeData )
         do {
             let current = CurrentYear ( )
-            let data = try self.api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { year in
+            let data = try api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { year in
                 year.year == current
             } )
-            if data.count > 0 {
-                let entry = SimpleEntry ( date: .now, feast: data [ 0 ].getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ).celebrations [ 0 ], loading: false )
-                return [ entry ]
-            }
+            return data.first?.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) )
         } catch {
-            print ( error )
-        }
-        return [ SimpleEntry ( date: .now, feast: CelebrationData ( ), loading: true ) ]
-    }
-
-    /*
-     Provides a timeline entry representing a placeholder version of the widget.
-     */
-    func placeholder ( in context: Context ) -> SimpleEntry {
-        SimpleEntry ( date: .now, feast: CelebrationData ( ), loading: true )
-    }
-
-    /*
-        Provides a timeline entry that represents the current time and state of a widget.
-     */
-    func getSnapshot ( in context: Context, completion: @escaping ( SimpleEntry ) -> ( ) ) {
-        Task {
-            completion ( await getEntry ( ) [ 0 ] )
-        }
-    }
-
-    /*
-     Refreshes after last element in timeline has passed i.e. per day
-     */
-    func getTimeline ( in context: Context, completion: @escaping ( Timeline<Entry> ) -> ( ) ) {
-        Task {
-            let entry = await getEntry ( )
-            let entryDate = Calendar.current.date ( byAdding: .minute, value: 1, to: .now )!
-            completion ( Timeline ( entries: entry, policy: entry [ 0 ].loading ? .after ( entryDate ) : .atEnd ) )
+            print ( "Widget cache fetch failed: \(error)" )
+            return nil
         }
     }
 }
+
+// MARK: - Entry
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let feast: CelebrationData
-    let loading: Bool
+    let day: OrdoDay?
+
+    var feast: CelebrationData { day?.celebrations.first ?? CelebrationData ( ) }
+    var isLoading: Bool { day == nil }
+    var theme: LiturgicalTheme { day.map { LiturgicalTheme ( day: $0 ) } ?? LiturgicalTheme ( colors: "g" ) }
 }
 
-struct SystemWidget : View {
-    var entry: Provider.Entry
+// MARK: - Widget Views
+
+struct SystemWidgetView: View {
+    let entry: SimpleEntry
 
     var body: some View {
-        VStack {
+        VStack ( alignment: .leading, spacing: 4 ) {
             Text ( entry.feast.title )
-                .padding ( [ .bottom ], 1 )
-                .font ( .system ( size: 14 ) )
-                .redacted ( reason: entry.loading ? .placeholder : [ ] )
-            Text ( "Class \( entry.feast.rank )" )
-                .padding ( [ .bottom ], 1 )
-                .redacted ( reason: entry.loading ? .placeholder : [ ] )
-            Text ( .now, style: .date )
+                .font ( .system ( .caption, design: .serif ) )
+                .fontWeight ( .semibold )
+                .lineLimit ( 3 )
+                .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
+            Spacer ( minLength: 0 )
+            HStack ( alignment: .bottom ) {
+                VStack ( alignment: .leading, spacing: 2 ) {
+                    Text ( "Class \(entry.feast.rank)" )
+                        .font ( .caption2 )
+                        .foregroundStyle ( entry.theme.accent )
+                        .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
+                    Text ( .now, format: .dateTime.day ( .defaultDigits ).month ( .abbreviated ) )
+                        .font ( .caption2 )
+                        .foregroundStyle ( .secondary )
+                }
+            }
         }
-            .font ( .system ( size: 12 ) )
-            .frame ( maxWidth: .infinity, maxHeight: .infinity )
-            .bold ( )
-            .multilineTextAlignment ( .center )
-            .foregroundColor ( entry.feast.colors.components ( separatedBy: "," ) [ 0 ] == "b" ? .white : .black )
-            .containerBackground ( Color ( word: entry.feast.colors.components ( separatedBy: "," ) [ 0 ] )!, for: .widget )
+        .frame ( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading )
+        .padding ( 12 )
+        .containerBackground ( entry.theme.accentSubtle, for: .widget )
     }
 }
 
-struct RectangularWidgetView : View {
-    var entry: Provider.Entry
+struct RectangularWidgetView: View {
+    let entry: SimpleEntry
+
+    var body: some View {
+        VStack ( alignment: .leading, spacing: 2 ) {
+            Text ( entry.feast.title )
+                .font ( .system ( .caption, design: .serif ) )
+                .fontWeight ( .semibold )
+                .lineLimit ( 2 )
+                .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
+            Text ( "Class \(entry.feast.rank)" )
+                .font ( .caption2 )
+                .foregroundStyle ( .secondary )
+                .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
+        }
+        .frame ( maxWidth: .infinity, alignment: .leading )
+        .containerBackground ( .clear, for: .widget )
+    }
+}
+
+struct InlineWidgetView: View {
+    let entry: SimpleEntry
 
     var body: some View {
         Text ( entry.feast.title )
-            .font ( .system ( size: 15 ) )
-            .redacted ( reason: entry.loading ? .placeholder : [ ] )
-            .multilineTextAlignment ( .center )
-            .bold ( )
-            .containerBackground ( Color ( word: entry.feast.colors.components ( separatedBy: "," ) [ 0 ] )!, for: .widget )
+            .font ( .system ( .caption2, design: .serif ) )
+            .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
+            .containerBackground ( .clear, for: .widget )
     }
 }
 
-struct InlineWidgetView : View {
-    var entry: Provider.Entry
+struct CircularWidgetView: View {
+    let entry: SimpleEntry
 
     var body: some View {
-        Text ( entry.feast.title )
-            .redacted ( reason: entry.loading ? .placeholder : [ ] )
-            .bold ( )
-            .multilineTextAlignment ( .center )
-            .containerBackground ( Color ( word: entry.feast.colors.components ( separatedBy: "," ) [ 0 ] )!, for: .widget )
+        ZStack {
+            AccessoryWidgetBackground ( )
+            VStack ( spacing: 1 ) {
+                Text ( entry.feast.title )
+                    .font ( .system ( size: 9, design: .serif ) )
+                    .fontWeight ( .semibold )
+                    .lineLimit ( 3 )
+                    .multilineTextAlignment ( .center )
+                    .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
+            }
+            .padding ( 4 )
+        }
+        .containerBackground ( .clear, for: .widget )
     }
 }
+
+// MARK: - Entry Router
 
 struct EntryView: View {
-    // Obtain the widget family value
-    @Environment(\.widgetFamily) var family
+    @Environment ( \.widgetFamily ) var family
     let entry: SimpleEntry
 
     var body: some View {
         switch family {
         case .accessoryRectangular:
-            // Rectangular Lock Screen UI
             RectangularWidgetView ( entry: entry )
         case .accessoryInline:
-            // Inline Lock Screen  UI
             InlineWidgetView ( entry: entry )
+        case .accessoryCircular:
+            CircularWidgetView ( entry: entry )
         default:
-            // UI for Home Screen widget
-            SystemWidget ( entry: entry )
+            SystemWidgetView ( entry: entry )
         }
     }
 }
+
+// MARK: - Widget Declaration
 
 struct CalendarWidget: Widget {
     let kind: String = "CalendarWidget"
@@ -144,9 +169,10 @@ struct CalendarWidget: Widget {
         StaticConfiguration ( kind: kind, provider: Provider ( ) ) { entry in
             EntryView ( entry: entry )
         }
-            .supportedFamilies ( [ .systemSmall, .systemMedium, .accessoryRectangular, .accessoryInline ] )
-            .configurationDisplayName ( "Liturgical Calendar" )
-            .description ( "Feast of the Day" )
+        .supportedFamilies ( [ .systemSmall, .systemMedium, .accessoryRectangular, .accessoryInline, .accessoryCircular ] )
+        .configurationDisplayName ( "Liturgical Calendar" )
+        .description ( "Today's feast from the 1962 Roman Rite." )
+        .contentMarginsDisabled ( )
     }
 }
 

@@ -23,5 +23,3 @@ build
 
 .DS_Store
 Thumbs.db
-
-!app/android

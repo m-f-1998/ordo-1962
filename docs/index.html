@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1962 Liturgical Ordo</title>
+  <style>
+    :root {
+      --bg: #faf8f4;
+      --surface: #ffffff;
+      --text: #1a1208;
+      --muted: #6b5e45;
+      --accent: #8b1a1a;
+      --gold: #b8922a;
+      --border: #e2d9c8;
+      --radius: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #110f0a;
+        --surface: #1c1810;
+        --text: #f0ead8;
+        --muted: #a89070;
+        --accent: #c4433a;
+        --gold: #c8a84b;
+        --border: #2e2820;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px 36px;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    header .cross {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    header .year {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    header blockquote {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin: 0 auto;
+      border-left: 3px solid var(--gold);
+      padding-left: 16px;
+      text-align: left;
+    }
+
+    header blockquote cite {
+      display: block;
+      margin-top: 6px;
+      font-style: normal;
+      font-size: 0.82rem;
+      color: var(--gold);
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 36px 0;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      font-size: 0.9rem;
+    }
+
+    .feature-card .icon {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .feature-card strong {
+      display: block;
+      font-size: 0.88rem;
+      margin-bottom: 2px;
+    }
+
+    .feature-card span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 28px 0 40px;
+      flex-wrap: wrap;
+    }
+
+    .badge-row a {
+      display: inline-block;
+    }
+
+    .badge-row img {
+      height: 44px;
+      border-radius: 8px;
+    }
+
+    section {
+      margin-top: 40px;
+    }
+
+    section h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+    }
+
+    section p strong {
+      color: var(--text);
+    }
+
+    section a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    section a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="cross">✝</div>
+  <div class="year">Traditional Latin Mass</div>
+  <h1>1962 Liturgical Ordo</h1>
+  <blockquote>
+    "If you want a church full of Catholics who know their faith, love their faith and practice their faith, give them a liturgy that is demanding, profound and rigourous. They will rise to the challenge."
+    <cite>— Peter Kwasniewski</cite>
+  </blockquote>
+</header>
+
+<main>
+  <div class="badge-row">
+    <a href="https://apps.apple.com/gb/app/1962-liturgical-ordo/id6450934181" target="_blank" rel="noopener">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" />
+    </a>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">📅</div>
+      <strong>Liturgical Ordo</strong>
+      <span>Full calendar 2023–2123</span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📖</div>
+      <strong>Propers of the Mass</strong>
+      <span>English &amp; Latin</span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🙏</div>
+      <strong>Prayers</strong>
+      <span>Traditional Catholic prayers</span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⌚</div>
+      <strong>Widgets &amp; watchOS</strong>
+      <span>Lock screen &amp; home screen</span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🌍</div>
+      <strong>Localisation</strong>
+      <span>Country &amp; diocesan feasts</span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">✝</div>
+      <strong>Votive Masses</strong>
+      <span>Full votive Mass propers</span>
+    </div>
+  </div>
+
+  <section>
+    <h2>Privacy Policy</h2>
+    <p><strong>Last Updated:</strong> May 2026</p>
+    <p>
+      1962 Liturgical Ordo does not collect any user data, device information, or analytics.
+      No data collection software is used in this app.
+    </p>
+    <p>
+      You may use this app according to standard App Store terms.
+      For content errors or support, please contact us.
+    </p>
+  </section>
+
+  <section>
+    <h2>Support</h2>
+    <p>
+      <strong>Email:</strong>
+      <a href="mailto:ordo62@matthewfrankland.co.uk">ordo62@matthewfrankland.co.uk</a>
+    </p>
+    <p>
+      <strong>Source:</strong>
+      <a href="https://github.com/m-f-1998/ordo-1962" target="_blank" rel="noopener">github.com/m-f-1998/ordo-1962</a>
+    </p>
+  </section>
+</main>
+
+<footer>
+  A Traditional Catholic Liturgical Calendar for the Holy Sacrifice of the Mass<br />
+  according to the 1962 Missale Romanum issued by Pope St. John XXIII.
+</footer>
+
+</body>
+</html>

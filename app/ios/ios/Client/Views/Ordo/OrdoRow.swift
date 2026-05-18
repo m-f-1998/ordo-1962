@@ -10,32 +10,38 @@ import SwiftUI
 struct OrdoRow: View {
     let feast: OrdoDay
     let year: String
-    @State private var menu_expanded: Bool = false
-    
+
+    private var theme: LiturgicalTheme {
+        LiturgicalTheme ( day: feast )
+    }
+
     var body: some View {
-        HStack ( spacing: 10 ) {
+        HStack ( spacing: 0 ) {
+            Rectangle ( )
+                .fill ( theme.accent )
+                .frame ( width: 4 )
+                .clipShape ( RoundedRectangle ( cornerRadius: 2 ) )
+                .padding ( .trailing, 10 )
+
             DisplayDate ( date: feast.date )
-            VStack ( alignment: .leading ) {
-                OrdoFeast ( data: self.feast.celebrations )
+                .padding ( .trailing, 10 )
+
+            VStack ( alignment: .leading, spacing: 4 ) {
+                OrdoFeast ( data: self.feast.celebrations, theme: theme )
                 HStack ( spacing: 5 ) {
                     Tag (
                         title: self.feast.season.title,
-                        colors: self.feast.season.colors.components ( separatedBy: "," ).map {
-                            Color ( word: $0 )!
-                        }
+                        accent: theme.accent
                     )
-                }.padding ( [ .top ], 5 )
-                if !self.feast.fasting.isEmpty {
-                    HStack ( spacing: 5 ) {
-                        ForEach ( self.feast.fasting, id: \.self ) { fast in
-                            Tag (
-                                title: fast,
-                                colors: [ Color ( word: "v" )! ]
-                            )
-                        }
-                    }.padding ( [ .top ], 5 )
-                }
+                    ForEach ( self.feast.fasting, id: \.self ) { fast in
+                        Tag (
+                            title: fast,
+                            accent: LiturgicalTheme ( colors: "v" ).accent
+                        )
+                    }
+                }.padding ( [ .top ], 4 )
             }
         }
+        .padding ( .vertical, 4 )
     }
 }

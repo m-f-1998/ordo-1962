@@ -8,26 +8,26 @@
 import SwiftUI
 import OrderedCollections
 
-class ActiveData: ObservableObject {
-    @Published private(set) var loading: Bool = true
-    @Published private(set) var downloading: Bool = false
-    @Published private(set) var error: Bool = false
-    @Published private(set) var percentage = 0
+@MainActor
+@Observable
+class ActiveData {
+    private(set) var loading: Bool = true
+    private(set) var downloading: Bool = false
+    private(set) var error: Bool = false
+    private(set) var percentage = 0
 
-    public private(set) var last_err = ""
-    public private(set) var ordo: [ OrdoYear ] = []
-    public private(set) var prayers: PrayerLanguageData? = nil
-    public private(set) var locale: LocaleOrdo? = nil
-    public private(set) var votives: [ VotiveData ]? = nil
+    private(set) var last_err = ""
+    private(set) var ordo: [ OrdoYear ] = []
+    private(set) var prayers: PrayerLanguageData? = nil
+    private(set) var locale: LocaleOrdo? = nil
+    private(set) var votives: [ VotiveData ]? = nil
 
     func SetSuccess ( ordo: [ OrdoYear ], locale: LocaleOrdo?, prayers: PrayerLanguageData?, votives: [ VotiveData ]? ) {
-        DispatchQueue.main.async {
-            self.ordo = ordo
-            self.prayers = prayers
-            self.locale = locale
-            self.votives = votives
-            self.SetStatus ( )
-        }
+        self.ordo = ordo
+        self.prayers = prayers
+        self.locale = locale
+        self.votives = votives
+        self.SetStatus ( )
     }
     
     func SetDownload ( download: Int ) {
@@ -53,15 +53,15 @@ class ActiveData: ObservableObject {
     }
     
     func GetCountries ( ) -> OrderedSet<String> {
-        return OrderedSet ( locale!.feasts.countries )
+        return OrderedSet ( locale?.feasts.countries ?? [] )
     }
     
     func GetDioceses ( country: String ) -> OrderedSet<String> {
-        return OrderedSet ( locale!.feasts.locale [ country ]!.dioceses )
+        return OrderedSet ( locale?.feasts.locale [ country ]?.dioceses ?? [] )
     }
     
     func GetDioceseLocale ( country: String, diocese: String ) -> [ LocaleData ] {
-        return self.locale!.feasts.locale [ country ]!.locale [ diocese ]!
+        return locale?.feasts.locale [ country ]?.locale [ diocese ] ?? []
     }
     
     func GetYear ( year: Int = CurrentYear ( ) ) -> OrdoYear? {

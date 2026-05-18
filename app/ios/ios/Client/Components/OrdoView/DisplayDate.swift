@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DisplayDate: View {
+    @Environment(ActiveData.self) var activeData
+
     let day, date, month: String
     var today: Bool = false
 
@@ -15,23 +17,31 @@ struct DisplayDate: View {
         self.day = date.weekday
         self.date = date.day
         self.month = date.month
-        
+
         let formatter = FormatDate ( date: .medium, time: .none )
-        self.today = Calendar.current.isDateInToday ( formatter.date ( from: date.combined )! )
+        self.today = formatter.date ( from: date.combined ).map { Calendar.current.isDateInToday ( $0 ) } ?? false
+    }
+
+    private var theme: LiturgicalTheme {
+        if today, let day = activeData.GetYear ( )?.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ) {
+            return LiturgicalTheme ( day: day )
+        }
+        return LiturgicalTheme ( colors: "g" )
     }
 
     var body: some View {
-        VStack {
+        VStack ( spacing: 2 ) {
             Text ( self.day )
+                .font ( .system ( size: 11 ) )
             Text ( self.date )
-                .font ( .system ( size: 24 ) )
-                .bold ( )
+                .font ( .system ( size: 22, weight: .bold ) )
             Text ( self.month )
+                .font ( .system ( size: 11 ) )
         }
-            .frame ( maxWidth: 60, maxHeight: .infinity )
-            .font ( .system ( size: 14 ) )
+            .frame ( maxWidth: 52, maxHeight: .infinity )
             .multilineTextAlignment ( .center )
-            .background ( self.today ? LinearGradient ( colors: [ .red, .orange ] ) : LinearGradient ( ) )
+            .foregroundStyle ( today ? .white : .primary )
+            .background ( today ? theme.accent : Color.clear )
             .clipShape ( RoundedRectangle ( cornerRadius: 8 ) )
     }
 }

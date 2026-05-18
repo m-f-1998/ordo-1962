@@ -9,21 +9,16 @@ import SwiftUI
 
 struct Tag: View {
     let title: String
-    let colors: [ Color ]
+    let accent: Color
 
     var body: some View {
         Text ( self.title )
-            .font ( .system ( size: 12 ) )
-            .bold ( )
-            .padding ( 5 )
-            .background ( self.colors [ 0 ] )
-            .foregroundStyle ( self.colors [ 0 ] == .black ? .white : .black )
-            .cornerRadius ( 8 )
-            .overlay (
-                RoundedRectangle ( cornerRadius: 8 )
-                    .stroke ( .black, lineWidth: 1 )
-                    .padding ( [ .top, .bottom ], 0.5 )
-            )
+            .font ( .system ( size: 11, weight: .semibold ) )
+            .padding ( .horizontal, 8 )
+            .padding ( .vertical, 4 )
+            .background ( accent.opacity ( 0.12 ) )
+            .foregroundStyle ( accent )
+            .clipShape ( Capsule ( ) )
             .multilineTextAlignment ( .center )
             .lineLimit ( 2 )
     }

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Prayer: View {
-    @EnvironmentObject var activeData: ActiveData
-    @State private var lang: String = UserDefaults.standard.string ( forKey: "prayers-lang" )!
+    @Environment(ActiveData.self) var activeData
+    @State private var lang: String = UserDefaults.standard.string ( forKey: "prayers-lang" ) ?? "English"
     
     func ChangeLanguage ( data: PrayerLanguageData ) -> some View {
         Menu {

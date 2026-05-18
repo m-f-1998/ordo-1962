@@ -11,14 +11,17 @@ struct PlaceholderList: View {
     var body: some View {
         List ( Calendar.current.shortMonthSymbols, id: \.self ) { month in
             Section ( header: Spacer ( minLength: 0 ) ) {
-                HStack ( spacing: 10 ) {
+                HStack ( spacing: 0 ) {
+                    Rectangle ( )
+                        .fill ( Color.secondary.opacity ( 0.3 ) )
+                        .frame ( width: 4 )
+                        .clipShape ( RoundedRectangle ( cornerRadius: 2 ) )
+                        .padding ( .trailing, 10 )
                     DisplayDate ( date: DateInfo ( ) )
+                        .padding ( .trailing, 10 )
                     VStack ( alignment: .leading ) {
-                        OrdoFeast ( data: [ CelebrationData ( ) ] )
-                        Tag (
-                            title: String ( repeating: "*", count: 10 ),
-                            colors: [ .green.opacity ( 0.5 ) ]
-                        )
+                        OrdoFeast ( data: [ CelebrationData ( ) ], theme: LiturgicalTheme ( colors: "g" ) )
+                        Tag ( title: String ( repeating: "*", count: 10 ), accent: .secondary )
                             .padding ( [ .trailing, .leading ], 2 )
                     }
                 }

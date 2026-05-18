@@ -22,13 +22,10 @@ struct PropersData: Codable {
     
     init ( from decoder: Decoder ) throws {
         let values = try decoder.container ( keyedBy: CodingKeys.self )
-        self.title = try values.decode ( String.self, forKey: .title )
+        self.title = try values.decodeIfPresent ( String.self, forKey: .title )
         self.english = try values.decode ( String.self, forKey: .english )
         self.latin = try values.decode ( String.self, forKey: .latin )
-        self.prayers = [
-            "English": try values.decode ( String.self, forKey: .english ),
-            "Latin": try values.decode ( String.self, forKey: .latin )
-        ]
+        self.prayers = [ "English": self.english, "Latin": self.latin ]
     }
     
     enum CodingKeys: String, CodingKey {

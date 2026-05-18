@@ -8,17 +8,18 @@
 import Network
 import SwiftUI
 
-class NetworkMonitor: ObservableObject {
+@Observable
+class NetworkMonitor {
     private let monitor = NWPathMonitor ( )
     private let worker = DispatchQueue ( label: "NetMonitor" )
-    @Published var connected: Bool = true
+    var connected: Bool = true
 
     init ( ) {
         self.monitor.start ( queue: self.worker )
 
-        self.monitor.pathUpdateHandler = { path in
-            DispatchQueue.main.async {
-                self.connected = path.status == .satisfied
+        self.monitor.pathUpdateHandler = { [weak self] path in
+            Task { @MainActor [weak self] in
+                self?.connected = path.status == .satisfied
             }
         }
     }

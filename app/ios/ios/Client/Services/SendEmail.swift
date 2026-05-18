@@ -18,14 +18,12 @@ struct SendEmail: View {
 
     private func send_email ( ) {
         let to = "ordo62@matthewfrankland.co.uk", subject = "Customer Feedback - 1962 Liturgical Ordo".addingPercentEncoding ( withAllowedCharacters: .urlQueryAllowed )
-        guard let url = URL ( string: "mailto:\(to)?subject=\(subject ?? "")" ) else {
-            fatalError ( "URL Invalid" )
-        }
+        guard let url = URL ( string: "mailto:\(to)?subject=\(subject ?? "")" ) else { return }
 
         if UIApplication.shared.canOpenURL ( url ) {
-            UIApplication.shared.open ( url )  { success in
+            UIApplication.shared.open ( url ) { success in
                 if success {
-                    print ( "Successfuly Opened Default Mail Application" )
+                    print ( "Successfully Opened Default Mail Application" )
                 }
             }
         }

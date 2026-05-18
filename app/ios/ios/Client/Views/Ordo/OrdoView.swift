@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OrdoView: View {
-    @EnvironmentObject var activeData: ActiveData
+    @Environment(ActiveData.self) var activeData
     
     @State var search: String = ""
     @State var first_load: Bool = true
@@ -36,18 +36,14 @@ struct OrdoView: View {
                     }
                     .onChange ( of: self.search ) { old, new in
                         if new.isEmpty && !searchIsActive {
-                            DispatchQueue.main.async {
-                                proxy.scrollTo ( "Jan" )
-                            }
+                            proxy.scrollTo ( "Jan" )
                         }
                     }
                     .onAppear {
                         if self.first_load {
                             if !( CurrentMonth ( ) == "Jan" && CurrentDay ( ) == 1 ) {
-                                DispatchQueue.main.async {
-                                    withAnimation {
-                                        proxy.scrollTo ( self.activeData.GetIDToday ( ), anchor: .top )
-                                    }
+                                withAnimation {
+                                    proxy.scrollTo ( self.activeData.GetIDToday ( ), anchor: .top )
                                 }
                             }
                             self.first_load = false
