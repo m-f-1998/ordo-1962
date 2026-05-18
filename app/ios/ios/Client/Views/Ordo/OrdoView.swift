@@ -26,15 +26,13 @@ struct OrdoView: View {
                     .scrollDismissesKeyboard ( .immediately )
                     .scrollIndicators ( .hidden )
                     .toolbar {
-                        ToolbarItem ( placement: .automatic ) {
-                            HStack {
-                                Button {
-                                    searchIsActive = true
-                                } label: {
-                                    Image ( systemName: "magnifyingglass" )
-                                }
-                                OrdoToolbar ( proxy: proxy, year: self.$year )
+                        ToolbarItemGroup ( placement: .topBarTrailing ) {
+                            Button {
+                                searchIsActive = true
+                            } label: {
+                                Image ( systemName: "magnifyingglass" )
                             }
+                            OrdoToolbar ( proxy: proxy, year: self.$year )
                         }
                     }
                     .navigationTitle ( "1962 Liturgical Ordo" )
