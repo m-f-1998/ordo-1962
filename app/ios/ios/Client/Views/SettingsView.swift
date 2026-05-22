@@ -65,7 +65,6 @@ struct Settings: View {
                 .toast ( isPresenting: self.$ical_alert.show ) {
                     self.ical_alert.alertToast
                 }
-                .navigationTitle ( "1962 Liturgical Ordo" )
                 .navigationBarTitleDisplayMode ( .inline )
                 .tint ( .primary )
         }

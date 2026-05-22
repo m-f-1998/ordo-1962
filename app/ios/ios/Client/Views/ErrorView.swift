@@ -23,7 +23,6 @@ struct ErrorView: View {
                     .background ( .black )
                     .clipShape ( RoundedRectangle ( cornerRadius: 10 ) )
             }
-                .navigationTitle ( "1962 Liturgical Ordo" )
         }
     }
 

@@ -24,27 +24,31 @@ struct OrdoView: View {
                     .scrollDismissesKeyboard ( .immediately )
                     .scrollIndicators ( .hidden )
                     .navigationBarTitleDisplayMode ( .inline )
-                    // Search bar slides in when active
-                    .safeAreaInset ( edge: .top, spacing: 0 ) {
+                    .toolbar {
                         if searchIsActive {
-                            HStack ( spacing: 10 ) {
-                                Image ( systemName: "magnifyingglass" )
-                                    .foregroundStyle ( .secondary )
-                                    .font ( .system ( size: 15 ) )
-                                TextField ( "Search feasts and seasons…", text: $search )
-                                    .textFieldStyle ( .plain )
-                                    .autocorrectionDisabled ( )
-                                    .textInputAutocapitalization ( .never )
-                                    .focused ( $searchFocused )
-                                    .submitLabel ( .search )
-                                if !search.isEmpty {
-                                    Button {
-                                        search = ""
-                                    } label: {
-                                        Image ( systemName: "xmark.circle.fill" )
-                                            .foregroundStyle ( .secondary )
+                            // Search field expands across the nav bar
+                            ToolbarItem ( placement: .principal ) {
+                                HStack ( spacing: 8 ) {
+                                    Image ( systemName: "magnifyingglass" )
+                                        .foregroundStyle ( .secondary )
+                                        .font ( .system ( size: 15 ) )
+                                    TextField ( "Search feasts and seasons…", text: $search )
+                                        .textFieldStyle ( .plain )
+                                        .autocorrectionDisabled ( )
+                                        .textInputAutocapitalization ( .never )
+                                        .focused ( $searchFocused )
+                                        .submitLabel ( .search )
+                                    if !search.isEmpty {
+                                        Button {
+                                            search = ""
+                                        } label: {
+                                            Image ( systemName: "xmark.circle.fill" )
+                                                .foregroundStyle ( .secondary )
+                                        }
                                     }
                                 }
+                            }
+                            ToolbarItem ( placement: .topBarTrailing ) {
                                 Button ( "Cancel" ) {
                                     search = ""
                                     searchIsActive = false
@@ -52,28 +56,17 @@ struct OrdoView: View {
                                 }
                                 .font ( .system ( size: 15 ) )
                             }
-                            .padding ( .horizontal, 14 )
-                            .padding ( .vertical, 9 )
-                            .background ( .regularMaterial )
-                            .overlay ( Rectangle ( ).frame ( height: 0.5 ).foregroundStyle ( Color ( .systemGray4 ) ), alignment: .bottom )
-                            .transition ( .move ( edge: .top ).combined ( with: .opacity ) )
-                        }
-                    }
-                    .toolbar {
-                        ToolbarItemGroup ( placement: .topBarTrailing ) {
-                            Button {
-                                withAnimation ( .spring ( response: 0.3, dampingFraction: 0.8 ) ) {
+                        } else {
+                            ToolbarItemGroup ( placement: .topBarTrailing ) {
+                                Button {
                                     searchIsActive = true
+                                } label: {
+                                    Image ( systemName: "magnifyingglass" )
+                                        .fontWeight ( .medium )
                                 }
-                            } label: {
-                                Image ( systemName: "magnifyingglass" )
-                                    .fontWeight ( .medium )
+                                OrdoToolbar ( proxy: proxy, year: self.$year )
                             }
-                            OrdoToolbar ( proxy: proxy, year: self.$year )
-                        }
-
-                        ToolbarItemGroup ( placement: .topBarLeading ) {
-                            if self.search.isEmpty && !searchIsActive {
+                            ToolbarItemGroup ( placement: .topBarLeading ) {
                                 if CurrentYear ( ) == self.year {
                                     Menu {
                                         Button {
@@ -104,9 +97,7 @@ struct OrdoView: View {
                         }
                     }
                     .onChange ( of: searchIsActive ) { _, active in
-                        if active {
-                            searchFocused = true
-                        }
+                        if active { searchFocused = true }
                     }
                     .onChange ( of: self.search ) { old, new in
                         if new.isEmpty && !searchIsActive {

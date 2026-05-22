@@ -54,7 +54,7 @@ struct TodayCard: View {
                 )
             }
             .buttonStyle ( .plain )
-            .padding ( [ .horizontal, .top ] )
+            .padding ( .horizontal )
         }
     }
 }
@@ -77,12 +77,10 @@ struct OrdoEventList: View, KeyboardReadable {
     var body: some View {
         List {
             if let todayDay = today {
-                Section {
-                    TodayCard ( day: todayDay )
-                        .listRowInsets ( EdgeInsets ( ) )
-                        .listRowBackground ( Color.clear )
-                        .listRowSeparator ( .hidden )
-                }
+                TodayCard ( day: todayDay )
+                    .listRowInsets ( EdgeInsets ( ) )
+                    .listRowBackground ( Color.clear )
+                    .listRowSeparator ( .hidden )
             }
             ForEach ( searchResults, id: \.self ) { month in
                 Section ( header: Spacer ( minLength: 0 ) ) {
@@ -100,6 +98,7 @@ struct OrdoEventList: View, KeyboardReadable {
                     .id ( month.first?.date.month ?? "" )
             }
         }
+            .listSectionSpacing ( .compact )
             .onReceive ( keyboardPublisher ) { newIsKeyboardVisible in
                 isKeyboardVisible = newIsKeyboardVisible
             }
@@ -109,15 +108,15 @@ struct OrdoEventList: View, KeyboardReadable {
                 }
             }
             .onChange ( of: searchIsActive ) { _, active in
-                if active && search.isEmpty {
-                    searchResults = []
-                } else if !active {
+                if !active {
                     searchResults = activeData.GetYear ( year: year )?.ordo ?? []
                 }
             }
             .task ( id: search ) {
-                guard !search.isEmpty else { return }
-                // Short debounce — cancels on next keystroke
+                if search.isEmpty {
+                    searchResults = activeData.GetYear ( year: year )?.ordo ?? []
+                    return
+                }
                 try? await Task.sleep ( for: .milliseconds ( 80 ) )
                 guard !Task.isCancelled else { return }
                 guard let snapshot = activeData.getSearchSnapshot ( year: year ) else { return }

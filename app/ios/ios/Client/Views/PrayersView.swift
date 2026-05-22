@@ -48,7 +48,6 @@ struct Prayer: View {
                         ChangeLanguage ( data: prayers )
                     }
                 }
-                .navigationTitle ( "1962 Liturgical Ordo" )
                 .navigationBarTitleDisplayMode ( .inline )
             }
         }
