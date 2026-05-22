@@ -44,7 +44,14 @@ struct LiturgicalTheme {
     }
 
     /// Convenience initialiser from today's `OrdoDay`.
+    /// The primary celebration's colour takes precedence over the season colour,
+    /// so e.g. Christmas Day (celebration: w) overrides a green season.
     init ( day: OrdoDay ) {
-        self.init ( season: day.season )
+        let celebrationColors = day.celebrations.first?.colors ?? ""
+        if !celebrationColors.isEmpty {
+            self.init ( colors: celebrationColors )
+        } else {
+            self.init ( season: day.season )
+        }
     }
 }
