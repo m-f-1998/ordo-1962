@@ -46,7 +46,7 @@ struct TodayCard: View {
                 }
                 .padding ( )
                 .frame ( maxWidth: .infinity, alignment: .leading )
-                .background ( .secondarySystemGroupedBackground )
+                .background ( Color ( UIColor.secondarySystemGroupedBackground ) )
                 .clipShape ( RoundedRectangle ( cornerRadius: 12 ) )
                 .overlay (
                     RoundedRectangle ( cornerRadius: 12 )
