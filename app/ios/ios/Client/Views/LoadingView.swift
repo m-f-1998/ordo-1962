@@ -14,7 +14,7 @@ struct LoadingView: View {
 
     var body: some View {
         ZStack {
-            // Deep parchment-dark background
+            // Deep dark background
             LinearGradient (
                 colors: [
                     Color ( red: 0.08, green: 0.06, blue: 0.12 ),
@@ -29,7 +29,7 @@ struct LoadingView: View {
             // Soft radial glow behind the cross
             RadialGradient (
                 colors: [
-                    Color ( red: 0.72, green: 0.56, blue: 0.16 ).opacity ( 0.18 ),
+                    Color.white.opacity ( 0.06 ),
                     Color.clear
                 ],
                 center: .center,
@@ -43,7 +43,6 @@ struct LoadingView: View {
 
                 // Cross with glass card backdrop
                 ZStack {
-                    // Frosted glass card
                     RoundedRectangle ( cornerRadius: 36 )
                         .fill ( .ultraThinMaterial )
                         .frame ( width: 180, height: 200 )
@@ -52,8 +51,8 @@ struct LoadingView: View {
                                 .stroke (
                                     LinearGradient (
                                         colors: [
-                                            Color ( red: 0.96, green: 0.88, blue: 0.72 ).opacity ( 0.50 ),
-                                            Color.white.opacity ( 0.08 )
+                                            Color.white.opacity ( 0.30 ),
+                                            Color.white.opacity ( 0.05 )
                                         ],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
@@ -61,7 +60,7 @@ struct LoadingView: View {
                                     lineWidth: 1.5
                                 )
                         )
-                        .shadow ( color: Color ( red: 0.72, green: 0.56, blue: 0.16 ).opacity ( 0.30 ), radius: 40, y: 12 )
+                        .shadow ( color: Color.white.opacity ( 0.08 ), radius: 40, y: 12 )
 
                     Image ( "christian-cross" )
                         .resizable ( )
@@ -73,23 +72,14 @@ struct LoadingView: View {
 
                 Spacer ( ).frame ( height: 36 )
 
-                // App title with glass treatment
+                // App title
                 VStack ( spacing: 6 ) {
                     Text ( "1962 Liturgical Ordo" )
                         .font ( .system ( size: 26, weight: .bold, design: .serif ) )
-                        .foregroundStyle (
-                            LinearGradient (
-                                colors: [
-                                    Color ( red: 0.96, green: 0.88, blue: 0.72 ),
-                                    Color ( red: 0.85, green: 0.72, blue: 0.50 )
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
+                        .foregroundStyle ( Color.white.opacity ( 0.92 ) )
                     Text ( "Traditional Roman Calendar" )
                         .font ( .system ( size: 13, weight: .regular, design: .serif ) )
-                        .foregroundStyle ( Color ( red: 0.75, green: 0.70, blue: 0.60 ) )
+                        .foregroundStyle ( Color.white.opacity ( 0.50 ) )
                         .tracking ( 1.5 )
                         .textCase ( .uppercase )
                 }
@@ -103,16 +93,16 @@ struct LoadingView: View {
                         VStack ( spacing: 8 ) {
                             ProgressView ( value: Double ( activeData.percentage ), total: 100 )
                                 .progressViewStyle ( .linear )
-                                .tint ( Color ( red: 0.72, green: 0.56, blue: 0.16 ) )
+                                .tint ( Color.white.opacity ( 0.70 ) )
                                 .frame ( width: 180 )
                             Text ( "Downloading \(activeData.percentage)%…" )
                                 .font ( .caption )
-                                .foregroundStyle ( Color ( red: 0.75, green: 0.70, blue: 0.60 ) )
+                                .foregroundStyle ( Color.white.opacity ( 0.50 ) )
                         }
                     } else {
                         ProgressView ( )
                             .progressViewStyle ( .circular )
-                            .tint ( Color ( red: 0.72, green: 0.56, blue: 0.16 ) )
+                            .tint ( Color.white.opacity ( 0.70 ) )
                     }
                 }
                 .opacity ( titleOpacity )
