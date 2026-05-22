@@ -14,27 +14,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross-blurred" translatesAutoresizingMaskIntoConstraints="NO" id="bg-image">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross-blurred" alpha="0.35" translatesAutoresizingMaskIntoConstraints="NO" id="bg-image">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dark-overlay">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" red="0.04" green="0.03" blue="0.08" alpha="0.72"/>
-                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross" translatesAutoresizingMaskIntoConstraints="NO" id="cross-image">
-                                <rect key="frame" x="131" y="270" width="130" height="159"/>
+                                <rect key="frame" x="147.5" y="280" width="98" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" secondItem="cross-image" secondAttribute="width" multiplier="1.22" id="cross-aspect"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1962 Liturgical Ordo" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="main-label">
-                                <rect key="frame" x="56.5" y="455" width="280" height="30"/>
+                                <rect key="frame" x="56.5" y="428" width="280" height="30"/>
                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="24"/>
                                 <color key="textColor" red="0.96" green="0.88" blue="0.72" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRADITIONAL ROMAN CALENDAR" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sub-label">
-                                <rect key="frame" x="56.5" y="491" width="280" height="16"/>
+                                <rect key="frame" x="56.5" y="465" width="280" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.80" green="0.73" blue="0.60" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -47,15 +43,11 @@
                             <constraint firstItem="bg-image" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="bg-trail"/>
                             <constraint firstItem="bg-image" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bg-top"/>
                             <constraint firstItem="bg-image" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="bg-bot"/>
-                            <constraint firstItem="dark-overlay" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ov-lead"/>
-                            <constraint firstItem="dark-overlay" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="ov-trail"/>
-                            <constraint firstItem="dark-overlay" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ov-top"/>
-                            <constraint firstItem="dark-overlay" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="ov-bot"/>
                             <constraint firstItem="cross-image" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cross-cx"/>
                             <constraint firstItem="cross-image" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-60" id="cross-cy"/>
-                            <constraint firstItem="cross-image" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.33" id="cross-w"/>
+                            <constraint firstItem="cross-image" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.25" id="cross-w"/>
                             <constraint firstItem="main-label" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="label-cx"/>
-                            <constraint firstItem="main-label" firstAttribute="top" secondItem="cross-image" secondAttribute="bottom" constant="26" id="label-top"/>
+                            <constraint firstItem="main-label" firstAttribute="top" secondItem="cross-image" secondAttribute="bottom" constant="28" id="label-top"/>
                             <constraint firstItem="main-label" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.82" id="label-w"/>
                             <constraint firstItem="sub-label" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sub-cx"/>
                             <constraint firstItem="sub-label" firstAttribute="top" secondItem="main-label" secondAttribute="bottom" constant="6" id="sub-top"/>
