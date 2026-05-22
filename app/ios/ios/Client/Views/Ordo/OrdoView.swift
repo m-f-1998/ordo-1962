@@ -107,21 +107,28 @@ struct OrdoView: View {
                         }
                     }
                     .sheet ( isPresented: $showGoToDate ) {
-                        GoToDateSheet ( onSelect: { chosenYear, date in
-                            showGoToDate = false
-                            let cal = Calendar.current
-                            let month = cal.shortMonthSymbols [ cal.component ( .month, from: date ) - 1 ]
-                            let day   = cal.component ( .day, from: date )
-                            self.year = chosenYear
-                            DispatchQueue.main.asyncAfter ( deadline: .now ( ) + 0.1 ) {
-                                let target = activeData.GetYear ( year: chosenYear )?.getDay ( month: month, day: day )
-                                if let id = target?.date.combined {
-                                    withAnimation {
-                                        proxy.scrollTo ( id, anchor: .top )
+                        GoToDateSheet (
+                            initialDate: Calendar.current.date ( from: DateComponents (
+                                year: self.year,
+                                month: self.year == CurrentYear ( ) ? Calendar.current.component ( .month, from: .now ) : 1,
+                                day:   self.year == CurrentYear ( ) ? Calendar.current.component ( .day,   from: .now ) : 1
+                            ) ) ?? .now,
+                            onSelect: { chosenYear, date in
+                                showGoToDate = false
+                                let cal = Calendar.current
+                                let month = cal.shortMonthSymbols [ cal.component ( .month, from: date ) - 1 ]
+                                let day   = cal.component ( .day, from: date )
+                                self.year = chosenYear
+                                DispatchQueue.main.asyncAfter ( deadline: .now ( ) + 0.1 ) {
+                                    let target = activeData.GetYear ( year: chosenYear )?.getDay ( month: month, day: day )
+                                    if let id = target?.date.combined {
+                                        withAnimation {
+                                            proxy.scrollTo ( id, anchor: .top )
+                                        }
                                     }
                                 }
                             }
-                        } )
+                        )
                     }
             }
         }
