@@ -38,6 +38,7 @@ struct OrdoView: View {
                                         .textInputAutocapitalization ( .never )
                                         .focused ( $searchFocused )
                                         .submitLabel ( .search )
+                                        .task { searchFocused = true }
                                     if !search.isEmpty {
                                         Button {
                                             search = ""
@@ -60,11 +61,6 @@ struct OrdoView: View {
                             ToolbarItemGroup ( placement: .topBarTrailing ) {
                                 Button {
                                     searchIsActive = true
-                                    // Set focus in the same runloop pass so the keyboard
-                                    // starts animating the moment the TextField appears.
-                                    DispatchQueue.main.async {
-                                        searchFocused = true
-                                    }
                                 } label: {
                                     Image ( systemName: "magnifyingglass" )
                                         .fontWeight ( .medium )
