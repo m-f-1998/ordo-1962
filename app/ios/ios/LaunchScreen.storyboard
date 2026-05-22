@@ -14,39 +14,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross-blurred" alpha="0.10" translatesAutoresizingMaskIntoConstraints="NO" id="cross-watermark">
-                                <rect key="frame" x="0" y="126" width="393" height="480"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross-blurred" translatesAutoresizingMaskIntoConstraints="NO" id="bg-image">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dark-overlay">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" red="0.04" green="0.03" blue="0.08" alpha="0.72"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross" translatesAutoresizingMaskIntoConstraints="NO" id="cross-image">
-                                <rect key="frame" x="162" y="320" width="68" height="83"/>
+                                <rect key="frame" x="131" y="270" width="130" height="159"/>
                                 <constraints>
                                     <constraint firstAttribute="height" secondItem="cross-image" secondAttribute="width" multiplier="1.22" id="cross-aspect"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1962 Liturgical Ordo" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="main-label">
-                                <rect key="frame" x="56.5" y="430" width="280" height="28"/>
-                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
+                                <rect key="frame" x="56.5" y="455" width="280" height="30"/>
+                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="24"/>
                                 <color key="textColor" red="0.96" green="0.88" blue="0.72" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRADITIONAL ROMAN CALENDAR" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sub-label">
-                                <rect key="frame" x="56.5" y="462" width="280" height="16"/>
+                                <rect key="frame" x="56.5" y="491" width="280" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" red="0.72" green="0.66" blue="0.55" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.80" green="0.73" blue="0.60" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" red="0.08" green="0.06" blue="0.12" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.04" green="0.03" blue="0.08" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="cross-watermark" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wm-cx"/>
-                            <constraint firstItem="cross-watermark" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="wm-cy"/>
-                            <constraint firstItem="cross-watermark" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="1.0" id="wm-w"/>
+                            <constraint firstItem="bg-image" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="bg-lead"/>
+                            <constraint firstItem="bg-image" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="bg-trail"/>
+                            <constraint firstItem="bg-image" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bg-top"/>
+                            <constraint firstItem="bg-image" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="bg-bot"/>
+                            <constraint firstItem="dark-overlay" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ov-lead"/>
+                            <constraint firstItem="dark-overlay" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="ov-trail"/>
+                            <constraint firstItem="dark-overlay" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ov-top"/>
+                            <constraint firstItem="dark-overlay" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="ov-bot"/>
                             <constraint firstItem="cross-image" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cross-cx"/>
-                            <constraint firstItem="cross-image" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="cross-cy"/>
-                            <constraint firstItem="cross-image" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.21" id="cross-w"/>
+                            <constraint firstItem="cross-image" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-60" id="cross-cy"/>
+                            <constraint firstItem="cross-image" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.33" id="cross-w"/>
                             <constraint firstItem="main-label" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="label-cx"/>
-                            <constraint firstItem="main-label" firstAttribute="top" secondItem="cross-image" secondAttribute="bottom" constant="24" id="label-top"/>
+                            <constraint firstItem="main-label" firstAttribute="top" secondItem="cross-image" secondAttribute="bottom" constant="26" id="label-top"/>
                             <constraint firstItem="main-label" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.82" id="label-w"/>
                             <constraint firstItem="sub-label" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sub-cx"/>
                             <constraint firstItem="sub-label" firstAttribute="top" secondItem="main-label" secondAttribute="bottom" constant="6" id="sub-top"/>
@@ -61,6 +70,6 @@
     </scenes>
     <resources>
         <image name="christian-cross" width="1234" height="1505"/>
-        <image name="christian-cross-blurred" width="1234" height="1505"/>
+        <image name="christian-cross-blurred" width="1740" height="3013"/>
     </resources>
 </document>

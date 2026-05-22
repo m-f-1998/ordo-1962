@@ -65,20 +65,9 @@ struct LoadingView: View {
 
                     Image ( "christian-cross" )
                         .resizable ( )
-                        .renderingMode ( .template )
-                        .scaledToFit ( )
-                        .frame ( width: 88, height: 107 )
-                        .foregroundStyle (
-                            LinearGradient (
-                                colors: [
-                                    Color ( red: 0.96, green: 0.88, blue: 0.72 ),
-                                    Color ( red: 0.72, green: 0.56, blue: 0.16 )
-                                ],
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                        )
-                        .shadow ( color: Color ( red: 0.72, green: 0.56, blue: 0.16 ).opacity ( 0.40 ), radius: 12, y: 4 )
+                        .scaledToFill ( )
+                        .frame ( width: 148, height: 168 )
+                        .clipShape ( RoundedRectangle ( cornerRadius: 30 ) )
                 }
                 .opacity ( crossOpacity )
 

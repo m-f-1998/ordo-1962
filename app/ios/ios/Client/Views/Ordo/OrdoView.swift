@@ -17,13 +17,6 @@ struct OrdoView: View {
     @State private var showGoToDate = false
     @FocusState private var searchFocused: Bool
 
-    private var theme: LiturgicalTheme {
-        if let today = activeData.GetYear ( )?.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ) {
-            return LiturgicalTheme ( day: today )
-        }
-        return LiturgicalTheme ( colors: "g" )
-    }
-
     var body: some View {
         ScrollViewReader { proxy in
             NavigationStack {
@@ -31,59 +24,39 @@ struct OrdoView: View {
                     .scrollDismissesKeyboard ( .immediately )
                     .scrollIndicators ( .hidden )
                     .navigationBarTitleDisplayMode ( .inline )
-                    // Title + search bar pinned below the nav bar
+                    // Search bar slides in when active
                     .safeAreaInset ( edge: .top, spacing: 0 ) {
-                        VStack ( spacing: 0 ) {
-                            // Title row — always visible
-                            HStack ( spacing: 8 ) {
-                                Image ( "christian-cross" )
-                                    .resizable ( )
-                                    .renderingMode ( .template )
-                                    .scaledToFit ( )
-                                    .frame ( width: 11, height: 14 )
-                                    .foregroundStyle ( theme.accent )
-                                Text ( "1962 Liturgical Ordo" )
-                                    .font ( .system ( size: 16, weight: .semibold, design: .serif ) )
-                                    .foregroundStyle ( .primary )
-                            }
-                            .frame ( maxWidth: .infinity )
-                            .padding ( .vertical, 10 )
-                            .background ( .regularMaterial )
-                            .overlay ( Rectangle ( ).frame ( height: 0.5 ).foregroundStyle ( theme.accent.opacity ( 0.25 ) ), alignment: .bottom )
-
-                            // Search bar — slides in when active
-                            if searchIsActive {
-                                HStack ( spacing: 10 ) {
-                                    Image ( systemName: "magnifyingglass" )
-                                        .foregroundStyle ( .secondary )
-                                        .font ( .system ( size: 15 ) )
-                                    TextField ( "Search feasts and seasons…", text: $search )
-                                        .textFieldStyle ( .plain )
-                                        .autocorrectionDisabled ( )
-                                        .textInputAutocapitalization ( .never )
-                                        .focused ( $searchFocused )
-                                        .submitLabel ( .search )
-                                    if !search.isEmpty {
-                                        Button {
-                                            search = ""
-                                        } label: {
-                                            Image ( systemName: "xmark.circle.fill" )
-                                                .foregroundStyle ( .secondary )
-                                        }
-                                    }
-                                    Button ( "Cancel" ) {
-                                        search = ""
-                                        searchIsActive = false
-                                        searchFocused = false
-                                    }
+                        if searchIsActive {
+                            HStack ( spacing: 10 ) {
+                                Image ( systemName: "magnifyingglass" )
+                                    .foregroundStyle ( .secondary )
                                     .font ( .system ( size: 15 ) )
+                                TextField ( "Search feasts and seasons…", text: $search )
+                                    .textFieldStyle ( .plain )
+                                    .autocorrectionDisabled ( )
+                                    .textInputAutocapitalization ( .never )
+                                    .focused ( $searchFocused )
+                                    .submitLabel ( .search )
+                                if !search.isEmpty {
+                                    Button {
+                                        search = ""
+                                    } label: {
+                                        Image ( systemName: "xmark.circle.fill" )
+                                            .foregroundStyle ( .secondary )
+                                    }
                                 }
-                                .padding ( .horizontal, 14 )
-                                .padding ( .vertical, 9 )
-                                .background ( .regularMaterial )
-                                .overlay ( Rectangle ( ).frame ( height: 0.5 ).foregroundStyle ( Color ( .systemGray4 ) ), alignment: .bottom )
-                                .transition ( .move ( edge: .top ).combined ( with: .opacity ) )
+                                Button ( "Cancel" ) {
+                                    search = ""
+                                    searchIsActive = false
+                                    searchFocused = false
+                                }
+                                .font ( .system ( size: 15 ) )
                             }
+                            .padding ( .horizontal, 14 )
+                            .padding ( .vertical, 9 )
+                            .background ( .regularMaterial )
+                            .overlay ( Rectangle ( ).frame ( height: 0.5 ).foregroundStyle ( Color ( .systemGray4 ) ), alignment: .bottom )
+                            .transition ( .move ( edge: .top ).combined ( with: .opacity ) )
                         }
                     }
                     .toolbar {
