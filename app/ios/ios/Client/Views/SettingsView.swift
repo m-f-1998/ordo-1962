@@ -20,7 +20,6 @@ class AlertViewModel {
 
 struct Settings: View {
     @State private var ical: iCal
-    
     @State var notification_alert: AlertViewModel = AlertViewModel ( )
     @State var ical_alert: AlertViewModel
     @State private var iCalLoading: Bool = false

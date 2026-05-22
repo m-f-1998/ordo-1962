@@ -40,8 +40,8 @@ struct DisplayDate: View {
         }
             .frame ( maxWidth: 52, maxHeight: .infinity )
             .multilineTextAlignment ( .center )
-            .foregroundStyle ( today ? .white : .primary )
-            .background ( today ? theme.accent : Color.clear )
+            .foregroundStyle ( .primary )
+            .background ( Color.clear )
             .clipShape ( RoundedRectangle ( cornerRadius: 8 ) )
     }
 }
