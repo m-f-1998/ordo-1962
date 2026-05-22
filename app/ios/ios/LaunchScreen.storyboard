@@ -7,7 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
@@ -15,45 +14,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <!-- Dark background -->
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bg-view">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" red="0.08" green="0.06" blue="0.12" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <!-- Large blurred cross watermark -->
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross-blurred" alpha="0.09" translatesAutoresizingMaskIntoConstraints="NO" id="cross-watermark">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross-blurred" alpha="0.10" translatesAutoresizingMaskIntoConstraints="NO" id="cross-watermark">
                                 <rect key="frame" x="0" y="126" width="393" height="480"/>
                             </imageView>
-                            <!-- Glass card background -->
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="glass-card" layer.cornerRadius="36">
-                                <rect key="frame" x="116.5" y="290" width="160" height="180"/>
-                                <color key="backgroundColor" red="1.0" green="1.0" blue="1.0" alpha="0.07"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <real key="value" value="36"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <!-- Cross logo -->
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross" translatesAutoresizingMaskIntoConstraints="NO" id="cross-image">
                                 <rect key="frame" x="162" y="320" width="68" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="height" secondItem="cross-image" secondAttribute="width" multiplier="1.22" id="cross-aspect"/>
                                 </constraints>
                             </imageView>
-                            <!-- App title -->
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1962 Liturgical Ordo" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="main-label">
-                                <rect key="frame" x="56.5" y="494" width="280" height="28"/>
+                                <rect key="frame" x="56.5" y="430" width="280" height="28"/>
                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                 <color key="textColor" red="0.96" green="0.88" blue="0.72" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <!-- Subtitle -->
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRADITIONAL ROMAN CALENDAR" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sub-label">
-                                <rect key="frame" x="56.5" y="528" width="280" height="16"/>
+                                <rect key="frame" x="56.5" y="462" width="280" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.72" green="0.66" blue="0.55" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -62,29 +39,15 @@
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" red="0.08" green="0.06" blue="0.12" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <!-- Background fills screen -->
-                            <constraint firstItem="bg-view" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="bg-lead"/>
-                            <constraint firstItem="bg-view" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="bg-trail"/>
-                            <constraint firstItem="bg-view" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bg-top"/>
-                            <constraint firstItem="bg-view" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="bg-bot"/>
-                            <!-- Watermark -->
                             <constraint firstItem="cross-watermark" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wm-cx"/>
                             <constraint firstItem="cross-watermark" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="wm-cy"/>
                             <constraint firstItem="cross-watermark" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="1.0" id="wm-w"/>
-                            <!-- Glass card centred slightly above middle -->
-                            <constraint firstItem="glass-card" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="card-cx"/>
-                            <constraint firstItem="glass-card" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="card-cy"/>
-                            <constraint firstItem="glass-card" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.41" id="card-w"/>
-                            <constraint firstItem="glass-card" firstAttribute="height" secondItem="glass-card" secondAttribute="width" multiplier="1.12" id="card-h"/>
-                            <!-- Cross centred in the card -->
-                            <constraint firstItem="cross-image" firstAttribute="centerX" secondItem="glass-card" secondAttribute="centerX" id="cross-cx"/>
-                            <constraint firstItem="cross-image" firstAttribute="centerY" secondItem="glass-card" secondAttribute="centerY" id="cross-cy"/>
-                            <constraint firstItem="cross-image" firstAttribute="width" secondItem="glass-card" secondAttribute="width" multiplier="0.43" id="cross-w"/>
-                            <!-- Title below card -->
+                            <constraint firstItem="cross-image" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cross-cx"/>
+                            <constraint firstItem="cross-image" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="cross-cy"/>
+                            <constraint firstItem="cross-image" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.21" id="cross-w"/>
                             <constraint firstItem="main-label" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="label-cx"/>
-                            <constraint firstItem="main-label" firstAttribute="top" secondItem="glass-card" secondAttribute="bottom" constant="26" id="label-top"/>
+                            <constraint firstItem="main-label" firstAttribute="top" secondItem="cross-image" secondAttribute="bottom" constant="24" id="label-top"/>
                             <constraint firstItem="main-label" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.82" id="label-w"/>
-                            <!-- Subtitle -->
                             <constraint firstItem="sub-label" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sub-cx"/>
                             <constraint firstItem="sub-label" firstAttribute="top" secondItem="main-label" secondAttribute="bottom" constant="6" id="sub-top"/>
                             <constraint firstItem="sub-label" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.82" id="sub-w"/>
