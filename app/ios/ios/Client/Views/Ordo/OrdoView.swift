@@ -65,11 +65,8 @@ struct OrdoView: View {
                                     Image ( systemName: "magnifyingglass" )
                                         .fontWeight ( .medium )
                                 }
-                            }
-                            ToolbarItemGroup ( placement: .topBarLeading ) {
                                 Menu {
                                     Button {
-                                        // Go To Today — always navigate to current year + today
                                         let todayID = self.activeData.GetIDToday ( )
                                         if self.year != CurrentYear ( ) {
                                             self.year = CurrentYear ( )
