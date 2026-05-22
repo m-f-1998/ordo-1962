@@ -6,15 +6,19 @@
 import SwiftUI
 
 struct GoToDateSheet: View {
-    let initialDate: Date
     let onSelect: ( Int, Date ) -> Void
 
-    @State private var selectedDate: Date = .now
+    @State private var selectedDate: Date
     @State private var isReverting = false
     @Environment ( \.dismiss ) private var dismiss
 
     private let minYear = CurrentYear ( )
     private let maxYear = CurrentYear ( ) + 5
+
+    init ( initialDate: Date, onSelect: @escaping ( Int, Date ) -> Void ) {
+        self.onSelect = onSelect
+        _selectedDate = State ( initialValue: initialDate )
+    }
 
     var body: some View {
         DatePicker (
@@ -28,9 +32,6 @@ struct GoToDateSheet: View {
         .padding ( )
         .presentationDetents ( [ .medium ] )
         .presentationDragIndicator ( .visible )
-        .onAppear {
-            selectedDate = initialDate
-        }
         .onChange ( of: selectedDate ) { oldDate, newDate in
             if isReverting {
                 isReverting = false
@@ -38,7 +39,6 @@ struct GoToDateSheet: View {
             }
             let year = Calendar.current.component ( .year, from: newDate )
             guard year >= minYear && year <= maxYear else {
-                // Out of range — snap back silently, don't navigate
                 isReverting = true
                 selectedDate = oldDate
                 return

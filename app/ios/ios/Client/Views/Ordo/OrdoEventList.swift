@@ -46,11 +46,11 @@ struct TodayCard: View {
                 }
                 .padding ( )
                 .frame ( maxWidth: .infinity, alignment: .leading )
-                .background ( theme.accentSubtle )
+                .background ( .secondarySystemGroupedBackground )
                 .clipShape ( RoundedRectangle ( cornerRadius: 12 ) )
                 .overlay (
                     RoundedRectangle ( cornerRadius: 12 )
-                        .stroke ( theme.accent.opacity ( 0.25 ), lineWidth: 1 )
+                        .stroke ( theme.accent.opacity ( 0.60 ), lineWidth: 2 )
                 )
             }
             .buttonStyle ( .plain )
