@@ -16,27 +16,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gradient-bg">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.08" green="0.06" blue="0.12" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross-blurred" alpha="0.12" translatesAutoresizingMaskIntoConstraints="NO" id="cross-bg">
+                                <rect key="frame" x="46.5" y="176" width="300" height="366"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="christian-cross" translatesAutoresizingMaskIntoConstraints="NO" id="cross-image">
-                                <rect key="frame" x="141.33333333333334" y="299" width="110.33333333333334" height="134"/>
+                                <rect key="frame" x="155.5" y="310" width="82" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" secondItem="cross-image" secondAttribute="width" multiplier="1.22" id="cross-aspect"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1962 Liturgical Calendar" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="main-label">
-                                <rect key="frame" x="96.5" y="453" width="200" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" systemColor="labelColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1962 Liturgical Ordo" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="main-label">
+                                <rect key="frame" x="96.5" y="430" width="200" height="28"/>
+                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
+                                <color key="textColor" red="0.96" green="0.88" blue="0.72" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Traditional Roman Calendar" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sub-label">
+                                <rect key="frame" x="96.5" y="462" width="200" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.75" green="0.70" blue="0.60" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.08" green="0.06" blue="0.12" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="gradient-bg" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="bg-lead"/>
+                            <constraint firstItem="gradient-bg" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="bg-trail"/>
+                            <constraint firstItem="gradient-bg" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bg-top"/>
+                            <constraint firstItem="gradient-bg" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="bg-bot"/>
+                            <constraint firstItem="cross-bg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cross-bg-cx"/>
+                            <constraint firstItem="cross-bg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="cross-bg-cy"/>
+                            <constraint firstItem="cross-bg" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.76" id="cross-bg-w"/>
                             <constraint firstItem="cross-image" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cross-cx"/>
-                            <constraint firstItem="cross-image" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-60" id="cross-cy"/>
-                            <constraint firstItem="cross-image" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.28" id="cross-w"/>
+                            <constraint firstItem="cross-image" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="cross-cy"/>
+                            <constraint firstItem="cross-image" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.21" id="cross-w"/>
                             <constraint firstItem="main-label" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="label-cx"/>
                             <constraint firstItem="main-label" firstAttribute="top" secondItem="cross-image" secondAttribute="bottom" constant="20" id="label-top"/>
+                            <constraint firstItem="main-label" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.8" id="label-w"/>
+                            <constraint firstItem="sub-label" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sub-cx"/>
+                            <constraint firstItem="sub-label" firstAttribute="top" secondItem="main-label" secondAttribute="bottom" constant="4" id="sub-top"/>
+                            <constraint firstItem="sub-label" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.8" id="sub-w"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -47,11 +72,6 @@
     </scenes>
     <resources>
         <image name="christian-cross" width="1234" height="1505"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="christian-cross-blurred" width="1234" height="1505"/>
     </resources>
 </document>
