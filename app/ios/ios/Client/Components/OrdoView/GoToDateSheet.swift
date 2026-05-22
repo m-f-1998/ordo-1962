@@ -9,7 +9,6 @@ struct GoToDateSheet: View {
     let onSelect: ( Int, Date ) -> Void
 
     @State private var selectedDate: Date
-    @State private var isReverting = false
     @Environment ( \.dismiss ) private var dismiss
 
     private let minYear = CurrentYear ( )
@@ -20,44 +19,44 @@ struct GoToDateSheet: View {
         _selectedDate = State ( initialValue: initialDate )
     }
 
+    private var selectedYear: Int {
+        Calendar.current.component ( .year, from: selectedDate )
+    }
+
+    private var isInRange: Bool {
+        selectedYear >= minYear && selectedYear <= maxYear
+    }
+
     var body: some View {
-        DatePicker (
-            "",
-            selection: $selectedDate,
-            displayedComponents: .date
-        )
-        .datePickerStyle ( .graphical )
-        .labelsHidden ( )
-        .tint ( .red )
-        .padding ( )
-        .presentationDetents ( [ .medium ] )
-        .presentationDragIndicator ( .visible )
-        .onChange ( of: selectedDate ) { oldDate, newDate in
-            if isReverting {
-                isReverting = false
-                return
+        VStack ( spacing: 0 ) {
+            // Minimal header — no title, just dismiss controls
+            HStack {
+                Button ( "Cancel" ) { dismiss ( ) }
+                    .foregroundStyle ( .secondary )
+                Spacer ( )
+                Button ( "Go" ) {
+                    dismiss ( )
+                    onSelect ( selectedYear, selectedDate )
+                }
+                .fontWeight ( .semibold )
+                .disabled ( !isInRange )
             }
+            .padding ( .horizontal )
+            .padding ( .vertical, 10 )
 
-            let cal = Calendar.current
-            let newYear  = cal.component ( .year,  from: newDate )
+            Divider ( )
 
-            // Always check year range first — revert regardless of what else changed
-            guard newYear >= minYear && newYear <= maxYear else {
-                isReverting = true
-                selectedDate = oldDate
-                return
-            }
-
-            let oldDay   = cal.component ( .day,   from: oldDate )
-            let oldMonth = cal.component ( .month, from: oldDate )
-            let newDay   = cal.component ( .day,   from: newDate )
-            let newMonth = cal.component ( .month, from: newDate )
-
-            // Ignore year-wheel scrolling (only year changed, day+month stayed the same)
-            guard newDay != oldDay || newMonth != oldMonth else { return }
-
-            dismiss ( )
-            onSelect ( newYear, newDate )
+            DatePicker (
+                "",
+                selection: $selectedDate,
+                displayedComponents: .date
+            )
+            .datePickerStyle ( .graphical )
+            .labelsHidden ( )
+            .tint ( .red )
+            .padding ( .horizontal )
         }
+        .presentationDetents ( [ .medium ] )
+        .presentationDragIndicator ( .hidden )
     }
 }

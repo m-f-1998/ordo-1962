@@ -46,6 +46,7 @@ struct TodayCard: View {
                 }
                 .padding ( )
                 .frame ( maxWidth: .infinity, alignment: .leading )
+                .background ( .clear )
                 .clipShape ( RoundedRectangle ( cornerRadius: 12 ) )
                 .overlay (
                     RoundedRectangle ( cornerRadius: 12 )
