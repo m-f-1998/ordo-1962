@@ -44,30 +44,30 @@ struct LoadingView: View {
                 // Cross with glass card backdrop
                 ZStack {
                     // Frosted glass card
-                    RoundedRectangle ( cornerRadius: 32 )
+                    RoundedRectangle ( cornerRadius: 36 )
                         .fill ( .ultraThinMaterial )
-                        .frame ( width: 160, height: 180 )
+                        .frame ( width: 180, height: 200 )
                         .overlay (
-                            RoundedRectangle ( cornerRadius: 32 )
+                            RoundedRectangle ( cornerRadius: 36 )
                                 .stroke (
                                     LinearGradient (
                                         colors: [
-                                            Color ( red: 0.96, green: 0.88, blue: 0.72 ).opacity ( 0.35 ),
-                                            Color.white.opacity ( 0.05 )
+                                            Color ( red: 0.96, green: 0.88, blue: 0.72 ).opacity ( 0.50 ),
+                                            Color.white.opacity ( 0.08 )
                                         ],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     ),
-                                    lineWidth: 1
+                                    lineWidth: 1.5
                                 )
                         )
-                        .shadow ( color: Color ( red: 0.72, green: 0.56, blue: 0.16 ).opacity ( 0.25 ), radius: 30, y: 10 )
+                        .shadow ( color: Color ( red: 0.72, green: 0.56, blue: 0.16 ).opacity ( 0.30 ), radius: 40, y: 12 )
 
                     Image ( "christian-cross" )
                         .resizable ( )
                         .renderingMode ( .template )
                         .scaledToFit ( )
-                        .frame ( width: 70, height: 85 )
+                        .frame ( width: 88, height: 107 )
                         .foregroundStyle (
                             LinearGradient (
                                 colors: [
@@ -78,6 +78,7 @@ struct LoadingView: View {
                                 endPoint: .bottom
                             )
                         )
+                        .shadow ( color: Color ( red: 0.72, green: 0.56, blue: 0.16 ).opacity ( 0.40 ), radius: 12, y: 4 )
                 }
                 .opacity ( crossOpacity )
 

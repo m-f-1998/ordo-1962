@@ -108,8 +108,6 @@ struct OrdoEventList: View, KeyboardReadable {
                     ContentUnavailableView.search ( text: self.search )
                 }
             }
-            // When search activates with empty query, clear list immediately so keyboard
-            // animation isn't fighting 365 rows being laid out
             .onChange ( of: searchIsActive ) { _, active in
                 if active && search.isEmpty {
                     searchResults = []
@@ -119,10 +117,9 @@ struct OrdoEventList: View, KeyboardReadable {
             }
             .task ( id: search ) {
                 guard !search.isEmpty else { return }
-                // Debounce — cancels on next keystroke
-                try? await Task.sleep ( for: .milliseconds ( 150 ) )
+                // Short debounce — cancels on next keystroke
+                try? await Task.sleep ( for: .milliseconds ( 80 ) )
                 guard !Task.isCancelled else { return }
-                // Snapshot on @MainActor, then filter on background thread
                 guard let snapshot = activeData.getSearchSnapshot ( year: year ) else { return }
                 let lower = search.lowercased ( )
                 let filtered: [ [ OrdoDay ] ] = await Task.detached ( priority: .userInitiated ) {

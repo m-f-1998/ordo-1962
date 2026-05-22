@@ -15,7 +15,7 @@ struct OrdoView: View {
     @State var year: Int = CurrentYear ( )
     @State var searchIsActive = false
     @State private var showGoToDate = false
-    @State private var goToDate: Date = .now
+    @FocusState private var searchFocused: Bool
 
     private var theme: LiturgicalTheme {
         if let today = activeData.GetYear ( )?.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ) {
@@ -28,20 +28,68 @@ struct OrdoView: View {
         ScrollViewReader { proxy in
             NavigationStack {
                 OrdoEventList ( search: self.$search, year: self.$year, searchIsActive: self.$searchIsActive )
-                    .searchable ( text: self.$search, isPresented: $searchIsActive, placement: .navigationBarDrawer ( displayMode: .always ) )
                     .scrollDismissesKeyboard ( .immediately )
                     .scrollIndicators ( .hidden )
                     .navigationBarTitleDisplayMode ( .inline )
-                    .toolbar {
-                        // Glass title in the centre
-                        ToolbarItem ( placement: .principal ) {
-                            GlassTitleBar ( accent: theme.accent )
-                        }
+                    // Title + search bar pinned below the nav bar
+                    .safeAreaInset ( edge: .top, spacing: 0 ) {
+                        VStack ( spacing: 0 ) {
+                            // Title row — always visible
+                            HStack ( spacing: 8 ) {
+                                Image ( "christian-cross" )
+                                    .resizable ( )
+                                    .renderingMode ( .template )
+                                    .scaledToFit ( )
+                                    .frame ( width: 11, height: 14 )
+                                    .foregroundStyle ( theme.accent )
+                                Text ( "1962 Liturgical Ordo" )
+                                    .font ( .system ( size: 16, weight: .semibold, design: .serif ) )
+                                    .foregroundStyle ( .primary )
+                            }
+                            .frame ( maxWidth: .infinity )
+                            .padding ( .vertical, 10 )
+                            .background ( .regularMaterial )
+                            .overlay ( Rectangle ( ).frame ( height: 0.5 ).foregroundStyle ( theme.accent.opacity ( 0.25 ) ), alignment: .bottom )
 
+                            // Search bar — slides in when active
+                            if searchIsActive {
+                                HStack ( spacing: 10 ) {
+                                    Image ( systemName: "magnifyingglass" )
+                                        .foregroundStyle ( .secondary )
+                                        .font ( .system ( size: 15 ) )
+                                    TextField ( "Search feasts and seasons…", text: $search )
+                                        .textFieldStyle ( .plain )
+                                        .autocorrectionDisabled ( )
+                                        .textInputAutocapitalization ( .never )
+                                        .focused ( $searchFocused )
+                                        .submitLabel ( .search )
+                                    if !search.isEmpty {
+                                        Button {
+                                            search = ""
+                                        } label: {
+                                            Image ( systemName: "xmark.circle.fill" )
+                                                .foregroundStyle ( .secondary )
+                                        }
+                                    }
+                                    Button ( "Cancel" ) {
+                                        search = ""
+                                        searchIsActive = false
+                                        searchFocused = false
+                                    }
+                                    .font ( .system ( size: 15 ) )
+                                }
+                                .padding ( .horizontal, 14 )
+                                .padding ( .vertical, 9 )
+                                .background ( .regularMaterial )
+                                .overlay ( Rectangle ( ).frame ( height: 0.5 ).foregroundStyle ( Color ( .systemGray4 ) ), alignment: .bottom )
+                                .transition ( .move ( edge: .top ).combined ( with: .opacity ) )
+                            }
+                        }
+                    }
+                    .toolbar {
                         ToolbarItemGroup ( placement: .topBarTrailing ) {
-                            // Smooth search activation
                             Button {
-                                withAnimation ( .spring ( response: 0.35, dampingFraction: 0.75 ) ) {
+                                withAnimation ( .spring ( response: 0.3, dampingFraction: 0.8 ) ) {
                                     searchIsActive = true
                                 }
                             } label: {
@@ -51,7 +99,6 @@ struct OrdoView: View {
                             OrdoToolbar ( proxy: proxy, year: self.$year )
                         }
 
-                        // Go To Today + Go To Date on the leading side
                         ToolbarItemGroup ( placement: .topBarLeading ) {
                             if self.search.isEmpty && !searchIsActive {
                                 if CurrentYear ( ) == self.year {
@@ -64,7 +111,6 @@ struct OrdoView: View {
                                             Label ( "Go To Today", systemImage: "calendar.circle.fill" )
                                         }
                                         Button {
-                                            goToDate = .now
                                             showGoToDate = true
                                         } label: {
                                             Label ( "Go To Date…", systemImage: "calendar.badge.clock" )
@@ -75,7 +121,6 @@ struct OrdoView: View {
                                     }
                                 } else {
                                     Button {
-                                        goToDate = .now
                                         showGoToDate = true
                                     } label: {
                                         Image ( systemName: "calendar" )
@@ -83,6 +128,11 @@ struct OrdoView: View {
                                     }
                                 }
                             }
+                        }
+                    }
+                    .onChange ( of: searchIsActive ) { _, active in
+                        if active {
+                            searchFocused = true
                         }
                     }
                     .onChange ( of: self.search ) { old, new in
