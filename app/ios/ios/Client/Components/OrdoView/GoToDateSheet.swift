@@ -37,14 +37,25 @@ struct GoToDateSheet: View {
                 isReverting = false
                 return
             }
-            let year = Calendar.current.component ( .year, from: newDate )
-            guard year >= minYear && year <= maxYear else {
+
+            let cal = Calendar.current
+            let oldDay   = cal.component ( .day,   from: oldDate )
+            let oldMonth = cal.component ( .month, from: oldDate )
+            let newDay   = cal.component ( .day,   from: newDate )
+            let newMonth = cal.component ( .month, from: newDate )
+            let newYear  = cal.component ( .year,  from: newDate )
+
+            // Ignore year-wheel scrolling (only year changed, day+month stayed the same)
+            guard newDay != oldDay || newMonth != oldMonth else { return }
+
+            guard newYear >= minYear && newYear <= maxYear else {
                 isReverting = true
                 selectedDate = oldDate
                 return
             }
+
             dismiss ( )
-            onSelect ( year, newDate )
+            onSelect ( newYear, newDate )
         }
     }
 }
