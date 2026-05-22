@@ -6,22 +6,33 @@
 import SwiftUI
 
 struct GoToDateSheet: View {
-    let year: Int
-    let onSelect: ( Date ) -> Void
+    /// Called with the chosen year and date when the user confirms.
+    let onSelect: ( Int, Date ) -> Void
 
+    @State private var selectedYear: Int = CurrentYear ( )
     @State private var selectedDate: Date = .now
     @Environment ( \.dismiss ) private var dismiss
 
+    private let years: [ Int ] = Array ( CurrentYear ( )...CurrentYear ( ) + 5 )
+
     private var minDate: Date {
-        Calendar.current.date ( from: DateComponents ( year: year, month: 1, day: 1 ) ) ?? .now
+        Calendar.current.date ( from: DateComponents ( year: selectedYear, month: 1, day: 1 ) ) ?? .now
     }
     private var maxDate: Date {
-        Calendar.current.date ( from: DateComponents ( year: year, month: 12, day: 31 ) ) ?? .now
+        Calendar.current.date ( from: DateComponents ( year: selectedYear, month: 12, day: 31 ) ) ?? .now
     }
 
     var body: some View {
         NavigationStack {
-            VStack ( spacing: 24 ) {
+            VStack ( spacing: 0 ) {
+                Picker ( "Year", selection: $selectedYear ) {
+                    ForEach ( years, id: \.self ) { year in
+                        Text ( String ( year ) ).tag ( year )
+                    }
+                }
+                .pickerStyle ( .segmented )
+                .padding ( [ .horizontal, .top ] )
+
                 DatePicker (
                     "Select a date",
                     selection: $selectedDate,
@@ -30,9 +41,13 @@ struct GoToDateSheet: View {
                 )
                 .datePickerStyle ( .graphical )
                 .padding ( .horizontal )
+                .onChange ( of: selectedYear ) { _, _ in
+                    if selectedDate < minDate { selectedDate = minDate }
+                    if selectedDate > maxDate { selectedDate = maxDate }
+                }
 
                 Button {
-                    onSelect ( selectedDate )
+                    onSelect ( selectedYear, selectedDate )
                 } label: {
                     Text ( "Go To Date" )
                         .font ( .system ( size: 16, weight: .semibold ) )
@@ -42,7 +57,7 @@ struct GoToDateSheet: View {
                         .foregroundStyle ( .white )
                         .clipShape ( RoundedRectangle ( cornerRadius: 14 ) )
                 }
-                .padding ( .horizontal )
+                .padding ( [ .horizontal, .bottom ] )
 
                 Spacer ( )
             }
@@ -58,14 +73,8 @@ struct GoToDateSheet: View {
         .presentationDetents ( [ .medium ] )
         .presentationDragIndicator ( .visible )
         .onAppear {
-            // Clamp today into the displayed year's bounds
-            let cal = Calendar.current
-            let todayYear = cal.component ( .year, from: .now )
-            if todayYear == year {
-                selectedDate = .now
-            } else {
-                selectedDate = minDate
-            }
+            selectedYear = CurrentYear ( )
+            selectedDate = .now
         }
     }
 }

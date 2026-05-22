@@ -65,34 +65,31 @@ struct OrdoView: View {
                                     Image ( systemName: "magnifyingglass" )
                                         .fontWeight ( .medium )
                                 }
-                                OrdoToolbar ( proxy: proxy, year: self.$year )
                             }
                             ToolbarItemGroup ( placement: .topBarLeading ) {
-                                if CurrentYear ( ) == self.year {
-                                    Menu {
-                                        Button {
-                                            withAnimation {
-                                                proxy.scrollTo ( self.activeData.GetIDToday ( ), anchor: .top )
-                                            }
-                                        } label: {
-                                            Label ( "Go To Today", systemImage: "calendar.circle.fill" )
+                                Menu {
+                                    Button {
+                                        // Go To Today — always navigate to current year + today
+                                        let todayID = self.activeData.GetIDToday ( )
+                                        if self.year != CurrentYear ( ) {
+                                            self.year = CurrentYear ( )
                                         }
-                                        Button {
-                                            showGoToDate = true
-                                        } label: {
-                                            Label ( "Go To Date…", systemImage: "calendar.badge.clock" )
+                                        DispatchQueue.main.asyncAfter ( deadline: .now ( ) + 0.1 ) {
+                                            withAnimation {
+                                                proxy.scrollTo ( todayID, anchor: .top )
+                                            }
                                         }
                                     } label: {
-                                        Image ( systemName: "calendar" )
-                                            .fontWeight ( .medium )
+                                        Label ( "Go To Today", systemImage: "calendar.circle.fill" )
                                     }
-                                } else {
                                     Button {
                                         showGoToDate = true
                                     } label: {
-                                        Image ( systemName: "calendar" )
-                                            .fontWeight ( .medium )
+                                        Label ( "Go To Date…", systemImage: "calendar.badge.clock" )
                                     }
+                                } label: {
+                                    Image ( systemName: "calendar" )
+                                        .fontWeight ( .medium )
                                 }
                             }
                         }
@@ -113,15 +110,18 @@ struct OrdoView: View {
                         }
                     }
                     .sheet ( isPresented: $showGoToDate ) {
-                        GoToDateSheet ( year: self.year, onSelect: { date in
+                        GoToDateSheet ( onSelect: { chosenYear, date in
                             showGoToDate = false
                             let cal = Calendar.current
                             let month = cal.shortMonthSymbols [ cal.component ( .month, from: date ) - 1 ]
                             let day   = cal.component ( .day, from: date )
-                            let target = activeData.GetYear ( year: year )?.getDay ( month: month, day: day )
-                            if let id = target?.date.combined {
-                                withAnimation {
-                                    proxy.scrollTo ( id, anchor: .top )
+                            self.year = chosenYear
+                            DispatchQueue.main.asyncAfter ( deadline: .now ( ) + 0.1 ) {
+                                let target = activeData.GetYear ( year: chosenYear )?.getDay ( month: month, day: day )
+                                if let id = target?.date.combined {
+                                    withAnimation {
+                                        proxy.scrollTo ( id, anchor: .top )
+                                    }
                                 }
                             }
                         } )
