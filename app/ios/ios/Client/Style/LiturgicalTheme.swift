@@ -7,7 +7,7 @@ import SwiftUI
 
 /// Derives a semantic accent colour from a liturgical colour string.
 /// Colour codes used in the data:
-///   r = red, w = white, g = green, v = violet/purple, b = black, p = pink/rose
+///   r = red, w = white, y = gold, g = green, v = violet/purple, b = black, p = pink/rose
 struct LiturgicalTheme {
     let accent: Color
     let accentSubtle: Color
@@ -24,6 +24,8 @@ struct LiturgicalTheme {
                     ? UIColor ( red: 0.88, green: 0.88, blue: 0.90, alpha: 1 )   // bright silver-white
                     : UIColor ( red: 0.38, green: 0.38, blue: 0.42, alpha: 1 )   // pewter
             } )
+        case "y":
+            accent = Color ( red: 0.72, green: 0.56, blue: 0.16 )   // gold
         case "g":
             accent = Color ( red: 0.13, green: 0.42, blue: 0.22 )   // forest green
         case "v":
