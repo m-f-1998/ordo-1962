@@ -1,5 +1,5 @@
 //
-//  Ordo.swift
+//  OrdoView.swift
 //  ordo-1962
 //
 //  Created by Matthew Frankland on 19/04/2023.
@@ -9,91 +9,65 @@ import SwiftUI
 
 struct OrdoView: View {
     @Environment(ActiveData.self) var activeData
-    
+    @Environment(TabStateHandler.self) private var tabState
+
     @State var search: String = ""
     @State var first_load: Bool = true
     @State var year: Int = CurrentYear ( )
-    @State var searchIsActive = false
     @State private var showGoToDate = false
-    @FocusState private var searchFocused: Bool
+    @State private var currentlyViewingDate: Date = .now
 
     var body: some View {
         ScrollViewReader { proxy in
             NavigationStack {
-                OrdoEventList ( search: self.$search, year: self.$year, searchIsActive: self.$searchIsActive )
+                OrdoEventList ( search: self.$search, year: self.$year, searchIsActive: Binding (
+                    get: { tabState.isSearching },
+                    set: { tabState.isSearching = $0 }
+                ) )
                     .scrollDismissesKeyboard ( .immediately )
                     .scrollIndicators ( .hidden )
                     .navigationBarTitleDisplayMode ( .inline )
+                    .searchable ( text: $search, isPresented: Binding (
+                        get: { tabState.isSearching },
+                        set: { tabState.isSearching = $0 }
+                    ), prompt: "Search feasts and seasons…" )
                     .toolbar {
-                        if searchIsActive {
-                            // Search field expands across the nav bar
-                            ToolbarItem ( placement: .principal ) {
-                                HStack ( spacing: 8 ) {
-                                    Image ( systemName: "magnifyingglass" )
-                                        .foregroundStyle ( .secondary )
-                                        .font ( .system ( size: 15 ) )
-                                    TextField ( "Search feasts and seasons…", text: $search )
-                                        .textFieldStyle ( .plain )
-                                        .autocorrectionDisabled ( )
-                                        .textInputAutocapitalization ( .never )
-                                        .focused ( $searchFocused )
-                                        .submitLabel ( .search )
-                                        .task { searchFocused = true }
-                                    if !search.isEmpty {
-                                        Button {
-                                            search = ""
-                                        } label: {
-                                            Image ( systemName: "xmark.circle.fill" )
-                                                .foregroundStyle ( .secondary )
-                                        }
-                                    }
-                                }
-                            }
-                            ToolbarItem ( placement: .topBarTrailing ) {
-                                Button ( "Cancel" ) {
-                                    search = ""
-                                    searchIsActive = false
-                                    searchFocused = false
-                                }
-                                .font ( .system ( size: 15 ) )
-                            }
-                        } else {
-                            ToolbarItemGroup ( placement: .topBarTrailing ) {
+                        ToolbarItemGroup ( placement: .topBarTrailing ) {
+                            Menu {
                                 Button {
-                                    searchIsActive = true
-                                } label: {
-                                    Image ( systemName: "magnifyingglass" )
-                                        .fontWeight ( .medium )
-                                }
-                                Menu {
-                                    Button {
-                                        let todayID = self.activeData.GetIDToday ( )
-                                        if self.year != CurrentYear ( ) {
-                                            self.year = CurrentYear ( )
-                                        }
-                                        DispatchQueue.main.asyncAfter ( deadline: .now ( ) + 0.1 ) {
-                                            withAnimation {
-                                                proxy.scrollTo ( todayID, anchor: .top )
-                                            }
-                                        }
-                                    } label: {
-                                        Label ( "Go To Today", systemImage: "calendar.circle.fill" )
+                                    if self.year != CurrentYear ( ) {
+                                        self.year = CurrentYear ( )
                                     }
-                                    Button {
-                                        showGoToDate = true
-                                    } label: {
-                                        Label ( "Go To Date…", systemImage: "calendar.badge.clock" )
+                                    currentlyViewingDate = .now
+                                    DispatchQueue.main.asyncAfter ( deadline: .now ( ) + 0.1 ) {
+                                        withAnimation {
+                                            proxy.scrollTo ( "today-card", anchor: .top )
+                                        }
                                     }
                                 } label: {
-                                    Image ( systemName: "calendar" )
-                                        .fontWeight ( .medium )
+                                    Label ( "Go To Today", systemImage: "calendar.circle.fill" )
                                 }
+                                Button {
+                                    showGoToDate = true
+                                } label: {
+                                    Label ( "Go To Date…", systemImage: "calendar.badge.clock" )
+                                }
+                            } label: {
+                                Image ( systemName: "calendar" )
+                                    .fontWeight ( .medium )
                             }
                         }
                     }
                     .onChange ( of: self.search ) { old, new in
-                        if new.isEmpty && !searchIsActive {
+                        if new.isEmpty && !tabState.isSearching {
                             proxy.scrollTo ( "Jan" )
+                        }
+                    }
+                    .onChange ( of: self.year ) { _, newYear in
+                        if newYear == CurrentYear ( ) {
+                            currentlyViewingDate = .now
+                        } else {
+                            currentlyViewingDate = Calendar.current.date ( from: DateComponents ( year: newYear, month: 1, day: 1 ) ) ?? .now
                         }
                     }
                     .onAppear {
@@ -108,13 +82,9 @@ struct OrdoView: View {
                     }
                     .sheet ( isPresented: $showGoToDate ) {
                         GoToDateSheet (
-                            initialDate: Calendar.current.date ( from: DateComponents (
-                                year: self.year,
-                                month: self.year == CurrentYear ( ) ? Calendar.current.component ( .month, from: .now ) : 1,
-                                day:   self.year == CurrentYear ( ) ? Calendar.current.component ( .day,   from: .now ) : 1
-                            ) ) ?? .now,
+                            initialDate: currentlyViewingDate,
                             onSelect: { chosenYear, date in
-                                showGoToDate = false
+                                currentlyViewingDate = date
                                 let cal = Calendar.current
                                 let month = cal.shortMonthSymbols [ cal.component ( .month, from: date ) - 1 ]
                                 let day   = cal.component ( .day, from: date )

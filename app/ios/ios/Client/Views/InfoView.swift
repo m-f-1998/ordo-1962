@@ -32,11 +32,15 @@ struct InfoView: View {
                 }
                 Section ( header: Text ( "Local Feast Days" ), footer: Text ( "Additional Country/Diocesean Feasts Can Be Added Upon Request." ) ) {
                     NavigationLink {
-                        List {
-                            ForEach ( self.activeData.locale?.certain_locations ?? [], id: \.self ) { locale in
-                                LocalFeast ( data: locale )
+                        ScrollView ( .vertical, showsIndicators: false ) {
+                            VStack ( spacing: 8 ) {
+                                ForEach ( self.activeData.locale?.certain_locations ?? [], id: \.self ) { locale in
+                                    LocalFeast ( data: locale )
+                                }
                             }
+                            .padding ( .vertical, 16 )
                         }
+                        .navigationTitle ( "In Certain Locations" )
                     } label: {
                         Text ( "In Certain Locations" )
                     }

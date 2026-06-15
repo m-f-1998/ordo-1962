@@ -15,6 +15,7 @@ struct DisplayText: View {
             ScrollView ( .vertical, showsIndicators: false ) {
                 RenderMarkdown ( text: self.text )
                     .frame ( minHeight: proxy.size.height )
+                    .padding ( .bottom, 40 )
             }
                 .multilineTextAlignment ( .center )
                 .frame ( maxWidth: .infinity, maxHeight: proxy.size.height )

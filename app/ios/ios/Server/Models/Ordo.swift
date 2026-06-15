@@ -10,7 +10,7 @@ import SwiftData
 import OrderedCollections
 
 @Model class OrdoYear: Codable, Hashable, Identifiable, @unchecked Sendable {
-    let id: String = UUID ( ).uuidString
+    var id: String = UUID ( ).uuidString
     public private(set) var ordo: [ [ OrdoDay ] ]
     public private(set) var year: Int
     public private(set) var date: Date = Date()
@@ -59,7 +59,7 @@ import OrderedCollections
 }
 
 struct DateInfo: Codable, Hashable, Identifiable {
-    let id: String = UUID ( ).uuidString
+    var id: String { combined }
     let weekday: String
     let day: String
     let month: String
@@ -78,7 +78,7 @@ struct DateInfo: Codable, Hashable, Identifiable {
 }
 
 struct OrdoDay: Codable, Hashable, Identifiable {
-    let id: String = UUID ( ).uuidString
+    var id: String { date.combined }
     let date: DateInfo
     let celebrations: [ CelebrationData ]
     let season: SeasonData
@@ -105,7 +105,7 @@ struct OrdoDay: Codable, Hashable, Identifiable {
 }
 
 struct CelebrationData: Codable, Hashable, Identifiable {
-    let id: String = UUID ( ).uuidString
+    var id: String { title + "_" + String ( rank ) }
     let rank: Int
     let title: String
     let colors: String
@@ -170,7 +170,7 @@ extension Int {
 }
 
 struct CommemorationData: Codable, Hashable, Identifiable {
-    let id: String = UUID ( ).uuidString
+    var id: String { title + "_" + String ( rank ) }
     let title: String
     let rank: Int
     let colors: String

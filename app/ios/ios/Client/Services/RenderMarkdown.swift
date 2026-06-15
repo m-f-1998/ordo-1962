@@ -17,7 +17,7 @@ struct RenderMarkdown: View {
             ) ) ?? AttributedString ( self.text )
         )
             .lineSpacing ( 10 )
-            .font ( .system ( .body, design: .monospaced ) )
+            .font ( .system ( .body, design: .serif ) )
             .padding ( 20 )
     }
 }

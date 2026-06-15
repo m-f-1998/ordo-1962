@@ -22,8 +22,11 @@ struct DisplayPropers: View {
         lang: String = UserDefaults.standard.string ( forKey: "propers-lang" ) ?? "English"
     ) {
         self.celebrations = celebrations
-        self.lang = lang
-        self.propers = celebrations.first?.GetPropers ( lang: lang ) ?? [ : ]
+        
+        let initialIndex = celebrations.firstIndex { $0.propers.count > 0 } ?? 0
+        _celeb = State ( initialValue: initialIndex )
+        _lang = State ( initialValue: lang )
+        _propers = State ( initialValue: (initialIndex < celebrations.count ? celebrations [ initialIndex ].GetPropers ( lang: lang ) : [ : ]) )
     }
     
     private func SetLanguage ( new: String ) {
@@ -49,9 +52,9 @@ struct DisplayPropers: View {
             }
         }
         .pickerStyle ( .menu )
-        .padding ( [ .vertical ], 4 )
+        .padding ( .vertical, 8 )
         .frame ( maxWidth: .infinity )
-        .background ( Color ( .systemGray6 ) )
+        .background ( .ultraThinMaterial )
         .tint ( .primary )
     }
     
@@ -87,39 +90,48 @@ struct DisplayPropers: View {
     }
 
     var body: some View {
-        VStack ( spacing: 0 ) {
-            ScrollViewReader { proxy in
-                VStack ( spacing: 0 ) {
-                    ScrollView ( .vertical, showsIndicators: false ) {
-                        LazyVStack ( alignment: .center, spacing: 0, pinnedViews: .sectionHeaders ) {
-                            ForEach ( Array ( self.propers.keys ), id: \.self ) { title in
-                                Section {
-                                    RenderMarkdown ( text: self.propers [ title ] ?? "" )
-                                } header: {
-                                    Text ( title )
-                                        .font ( .system ( .subheadline, design: .serif ) )
-                                        .fontWeight ( .semibold )
-                                        .foregroundStyle ( .secondary )
-                                        .frame ( maxWidth: .infinity )
-                                        .padding ( .vertical, 6 )
-                                        .background ( .regularMaterial )
-                                        .id ( title )
-                                }
-                                if self.propers.keys.last != title {
-                                    Divider ( ).padding ( .horizontal )
-                                }
+        ScrollViewReader { proxy in
+            ZStack ( alignment: .bottom ) {
+                ScrollView ( .vertical, showsIndicators: false ) {
+                    VStack ( spacing: 20 ) {
+                        ForEach ( Array ( self.propers.keys ), id: \.self ) { title in
+                            VStack ( alignment: .leading, spacing: 8 ) {
+                                // Sleek Red Header
+                                Text ( title.uppercased ( ) )
+                                    .font ( .system ( size: 13, weight: .bold, design: .serif ) )
+                                    .foregroundStyle ( Color ( red: 0.65, green: 0.08, blue: 0.08 ) )
+                                    .tracking ( 1.2 )
+                                    .padding ( .top, 14 )
+                                    .padding ( .horizontal, 16 )
+                                
+                                Divider ( )
+                                    .background ( Color ( red: 0.65, green: 0.08, blue: 0.08 ).opacity ( 0.15 ) )
+                                    .padding ( .horizontal, 16 )
+                                
+                                // Sleek left-aligned text content
+                                RenderMarkdown ( text: self.propers [ title ] ?? "" )
+                                    .padding ( .horizontal, 16 )
+                                    .padding ( .bottom, 14 )
                             }
+                            .frame ( maxWidth: .infinity, alignment: .leading )
+                            .background ( Color ( .secondarySystemBackground ) )
+                            .clipShape ( RoundedRectangle ( cornerRadius: 16 ) )
+                            .padding ( .horizontal, 16 )
+                            .id ( title )
                         }
                     }
-                    .multilineTextAlignment ( .center )
-                    .toolbar {
-                        ToolbarItem ( placement: .automatic ) {
-                            Toolbar ( scroll: proxy )
-                        }
+                    .padding ( .top, 16 )
+                    .padding ( .bottom, celebrations.count > 1 ? 80 : 40 )
+                }
+                .multilineTextAlignment ( .center )
+                .toolbar {
+                    ToolbarItem ( placement: .automatic ) {
+                        Toolbar ( scroll: proxy )
                     }
-                    if celebrations.count > 1 {
-                        PickCelebration ( )
-                    }
+                }
+                
+                if celebrations.count > 1 {
+                    PickCelebration ( )
                 }
             }
         }

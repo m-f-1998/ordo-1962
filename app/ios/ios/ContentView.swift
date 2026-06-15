@@ -12,6 +12,10 @@ struct ContentView: View {
     @Environment(NetworkMonitor.self) var net
     var api: API
 
+    init ( api: API ) {
+        self.api = api
+    }
+
     func GetData ( ) {
         do {
             guard try self.api.cache.CacheExists ( predicate: #Predicate<OrdoYear> { year in true } ) else {
@@ -23,6 +27,8 @@ struct ContentView: View {
                         print ( error )
                         if self.net.connected {
                             self.activeData.SetError ( error: "Ordo Update Could Not Be Fetched." )
+                        } else {
+                            self.activeData.SetError ( error: "No Internet Connection. Initial setup requires active internet." )
                         }
                     }
                 }
@@ -43,20 +49,19 @@ struct ContentView: View {
     }
 
     var body: some View {
-        if !self.net.connected && self.activeData.downloading {
-            ErrorView ( description: "No Internet Connection" )
-        } else if self.activeData.error {
-            ErrorView ( description: self.activeData.last_err )
-        } else if self.activeData.loading {
-            LoadingView ( ).onAppear {
-                self.activeData.SetDownload ( download: 0 )
-                Task {
-                    try? await Task.sleep ( for: .seconds ( 1 ) )
-                    self.GetData ( )
-                }
+        Group {
+            if !self.net.connected && self.activeData.downloading {
+                ErrorView ( description: "No Internet Connection", retryAction: { self.GetData ( ) } )
+            } else if self.activeData.error {
+                ErrorView ( description: self.activeData.last_err, retryAction: { self.GetData ( ) } )
+            } else if self.activeData.loading {
+                LoadingView ( )
+            } else {
+                CommonView ( )
             }
-        } else {
-            CommonView ( )
+        }
+        .onAppear {
+            self.GetData ( )
         }
     }
 }

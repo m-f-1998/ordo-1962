@@ -11,18 +11,34 @@ struct AdditionalMassPropers: View {
     @Environment(ActiveData.self) var activeData
 
     var body: some View {
-        List {
-            ForEach(activeData.votives ?? [], id: \.id) { info in
-                if let days = info.days {
-                    VotiveDays ( days: days )
-                } else if let masses = info.masses {
-                    Section(header: Text(info.title), footer: Text("")) {
+        ScrollView ( .vertical, showsIndicators: false ) {
+            VStack ( spacing: 8 ) {
+                ForEach(activeData.votives ?? [], id: \.id) { info in
+                    if let days = info.days {
+                        VotiveDays ( days: days )
+                    } else if let masses = info.masses {
+                        SectionHeader ( title: info.title )
                         VotiveMasses ( votives: masses )
                     }
                 }
             }
+            .padding ( .top, 16 )
+            .padding ( .bottom, 40 )
         }
-        .listRowSpacing(0)
+    }
+}
+
+struct SectionHeader: View {
+    let title: String
+    
+    var body: some View {
+        Text ( title.uppercased ( ) )
+            .font ( .system ( size: 13, weight: .bold, design: .serif ) )
+            .foregroundStyle ( .red )
+            .tracking ( 1.2 )
+            .frame ( maxWidth: .infinity, alignment: .leading )
+            .padding ( .horizontal, 16 )
+            .padding ( .top, 14 )
     }
 }
 
@@ -37,9 +53,59 @@ struct VotiveMasses: View {
                 }, commemorations: [])
                 DisplayPropers(celebrations: [celeb])
             } label: {
-                MassRow ( key: mass.title, colorsString: mass.colors )
+                SleekVotiveRow ( mass: mass )
             }
+            .buttonStyle ( .plain )
         }
+    }
+}
+
+struct SleekVotiveRow: View {
+    let mass: Masses
+
+    var body: some View {
+        VStack ( alignment: .leading, spacing: 8 ) {
+            HStack {
+                Text ( "CLASS \(mass.rank)" )
+                    .font ( .system ( size: 10, weight: .bold, design: .serif ) )
+                    .foregroundStyle ( Color ( red: 0.65, green: 0.08, blue: 0.08 ) )
+                    .tracking ( 1.2 )
+                
+                Spacer ( )
+                
+                // Color Indicators
+                let colors = mass.colors.components ( separatedBy: "," )
+                HStack ( spacing: 4 ) {
+                    ForEach ( colors, id: \.self ) { colorName in
+                        Circle ( )
+                            .strokeBorder ( .primary.opacity ( 0.3 ), lineWidth: 1 )
+                            .background (
+                                Circle ( )
+                                    .foregroundStyle ( Color ( word: colorName ) ?? .white )
+                            )
+                            .frame ( width: 12, height: 12 )
+                    }
+                }
+            }
+            .padding ( .top, 14 )
+            .padding ( .horizontal, 16 )
+            
+            Divider ( )
+                .background ( Color ( red: 0.65, green: 0.08, blue: 0.08 ).opacity ( 0.15 ) )
+                .padding ( .horizontal, 16 )
+            
+            Text ( mass.title )
+                .font ( .system ( size: 14, weight: .semibold, design: .serif ) )
+                .foregroundStyle ( .primary )
+                .multilineTextAlignment ( .leading )
+                .padding ( .horizontal, 16 )
+                .padding ( .bottom, 14 )
+        }
+        .frame ( maxWidth: .infinity, alignment: .leading )
+        .background ( Color ( .secondarySystemBackground ) )
+        .clipShape ( RoundedRectangle ( cornerRadius: 16 ) )
+        .padding ( .horizontal, 16 )
+        .padding ( .vertical, 6 )
     }
 }
 
@@ -48,30 +114,8 @@ struct VotiveDays: View {
 
     var body: some View {
         ForEach(days, id: \.self) { day in
-            Section(header: Text(day.day == "Monday" ? "The Most Fitting Votive Masses for Particular Days of the Week" : ""), footer: Text(day.day)) {
-                VotiveMasses(votives: day.votives)
-            }
-        }
-    }
-}
-
-struct MassRow: View {
-    let key: String
-    let colorsString: String
-
-    var body: some View {
-        HStack {
-            Text ( key )
-            let colors = colorsString.components ( separatedBy: "," )
-            ForEach ( colors, id: \.self ) { colorName in
-                Circle ( )
-                    .strokeBorder ( .primary.opacity ( 0.3 ), lineWidth: 1 )
-                    .background (
-                        Circle ( )
-                            .foregroundStyle ( Color ( word: colorName ) ?? .white )
-                    )
-                    .frame ( width: 15, height: 15 )
-            }
+            SectionHeader ( title: day.day )
+            VotiveMasses(votives: day.votives)
         }
     }
 }

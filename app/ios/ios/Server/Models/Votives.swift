@@ -10,7 +10,7 @@ import SwiftData
 import OrderedCollections
 
 @Model final class VotiveData: Decodable, @unchecked Sendable {
-    let id: String = UUID ( ).uuidString
+    var id: String = UUID ( ).uuidString
     var title: String
     var masses: Array<Masses>?
     var days: Array<DayGroup>?

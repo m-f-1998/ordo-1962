@@ -10,6 +10,7 @@ import SwiftUI
 @Observable
 class TabStateHandler {
     var selected: Int = 0
+    var isSearching: Bool = false
 
     private func IsSelected ( tab: Int ) -> Bool {
         return selected == tab

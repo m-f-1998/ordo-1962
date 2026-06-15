@@ -36,12 +36,10 @@ struct Provider: TimelineProvider {
         let api = API ( activeData: activeData )
         do {
             let current = CurrentYear ( )
-            let data = try api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { year in
-                year.year == current
-            } )
-            return data.first?.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) )
+            let data = try await api.FetchOrdo ( year: String ( current ) )
+            return data.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) )
         } catch {
-            print ( "Widget cache fetch failed: \(error)" )
+            print ( "Widget local fetch failed: \(error)" )
             return nil
         }
     }
@@ -64,28 +62,35 @@ struct SystemWidgetView: View {
     let entry: SimpleEntry
 
     var body: some View {
-        VStack ( alignment: .leading, spacing: 4 ) {
+        VStack ( alignment: .leading, spacing: 6 ) {
+            // Header: Today's date with thin tracked red design
+            HStack {
+                Text ( Date.now.formatted ( .dateTime.weekday ( .abbreviated ).day ( ).month ( .abbreviated ) ).uppercased ( ) )
+                    .font ( .system ( size: 10, weight: .bold, design: .serif ) )
+                    .foregroundStyle ( Color ( red: 0.65, green: 0.08, blue: 0.08 ) )
+                    .tracking ( 1.2 )
+                Spacer ( )
+            }
+            
+            Divider ( )
+                .background ( Color ( red: 0.65, green: 0.08, blue: 0.08 ).opacity ( 0.15 ) )
+            
             Text ( entry.feast.title )
-                .font ( .system ( .caption, design: .serif ) )
-                .fontWeight ( .semibold )
+                .font ( .system ( size: 13, weight: .semibold, design: .serif ) )
+                .foregroundStyle ( .primary )
                 .lineLimit ( 3 )
                 .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
+            
             Spacer ( minLength: 0 )
-            HStack ( alignment: .bottom ) {
-                VStack ( alignment: .leading, spacing: 2 ) {
-                    Text ( "Class \(entry.feast.rank)" )
-                        .font ( .caption2 )
-                        .foregroundStyle ( entry.theme.accent )
-                        .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
-                    Text ( .now, format: .dateTime.day ( .defaultDigits ).month ( .abbreviated ) )
-                        .font ( .caption2 )
-                        .foregroundStyle ( .secondary )
-                }
-            }
+            
+            Text ( "CLASS \(entry.feast.rank)" )
+                .font ( .system ( size: 10, weight: .bold, design: .serif ) )
+                .foregroundStyle ( .secondary )
+                .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
         }
         .frame ( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading )
-        .padding ( 12 )
-        .containerBackground ( entry.theme.accentSubtle, for: .widget )
+        .padding ( 14 )
+        .containerBackground ( Color ( .secondarySystemBackground ), for: .widget )
     }
 }
 
@@ -143,7 +148,7 @@ struct CircularWidgetView: View {
 // MARK: - Entry Router
 
 struct EntryView: View {
-    @Environment ( \.widgetFamily ) var family
+    @Environment( \.widgetFamily ) var family
     let entry: SimpleEntry
 
     var body: some View {

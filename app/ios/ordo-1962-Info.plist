@@ -30,5 +30,9 @@
 	<array>
 		<string>fetch</string>
 	</array>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+	<string>This app requires write access to your calendar to export the 1962 Liturgical Ordo feasts and fasts.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>This app requires calendar access to create, write, and synchronize the 1962 Liturgical Ordo calendar events on your device.</string>
 </dict>
 </plist>

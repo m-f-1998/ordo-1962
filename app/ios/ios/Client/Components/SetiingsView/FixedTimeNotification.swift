@@ -32,8 +32,12 @@ struct FixedTimeNotification: View {
 
     var body: some View {
         Toggle ( self.title, isOn: $toggled )
-        .onChange ( of: self.toggled ) {
-            if toggled {
+        .onAppear {
+            self.toggled = UserDefaults.standard.bool ( forKey: self.id )
+        }
+        .onChange ( of: self.toggled ) { old, new in
+            UserDefaults.standard.set ( new, forKey: self.id )
+            if new {
                 self.notifications.RequestNotification ( title: self.title, body: self.label, hour: self.hour, minute: self.minute, id: self.id, repeats: true ) { res in
                     Task { @MainActor in self.toggled = res }
                 }

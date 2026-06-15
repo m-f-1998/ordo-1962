@@ -13,19 +13,41 @@ struct WatchOrdoRow: View {
     private var theme: LiturgicalTheme { LiturgicalTheme ( day: day ) }
 
     var body: some View {
-        VStack ( alignment: .leading, spacing: 4 ) {
-            Text ( day.date.combined )
-                .font ( .system ( .caption2, design: .serif ) )
-                .foregroundStyle ( theme.accent )
+        VStack ( alignment: .leading, spacing: 6 ) {
+            // Sleek Header: Date info
+            HStack {
+                Text ( day.date.combined.uppercased ( ) )
+                    .font ( .system ( size: 10, weight: .bold, design: .serif ) )
+                    .foregroundStyle ( Color ( red: 0.65, green: 0.08, blue: 0.08 ) )
+                    .tracking ( 1.2 )
+                
+                Spacer ( )
+            }
+            .padding ( .top, 8 )
+            .padding ( .horizontal, 10 )
+            
+            Divider ( )
+                .background ( Color ( red: 0.65, green: 0.08, blue: 0.08 ).opacity ( 0.15 ) )
+                .padding ( .horizontal, 10 )
+            
             ForEach ( day.celebrations, id: \.id ) { celebration in
-                Text ( celebration.title )
-                    .font ( .system ( .body, design: .serif ) )
-                    .fontWeight ( .semibold )
-                Text ( "Class \(celebration.rank)" )
-                    .font ( .caption2 )
-                    .foregroundStyle ( .secondary )
+                VStack ( alignment: .leading, spacing: 2 ) {
+                    Text ( celebration.title )
+                        .font ( .system ( size: 13, weight: .semibold, design: .serif ) )
+                        .foregroundStyle ( .primary )
+                        .minimumScaleFactor ( 0.8 )
+                        .lineLimit ( 3 )
+                    Text ( "CLASS \(celebration.rank)" )
+                        .font ( .system ( size: 9, weight: .bold, design: .serif ) )
+                        .foregroundStyle ( .secondary )
+                }
+                .padding ( .horizontal, 10 )
+                .padding ( .bottom, 8 )
             }
         }
+        .frame ( maxWidth: .infinity, alignment: .leading )
+        .background ( Color.white.opacity ( 0.1 ) )
+        .clipShape ( RoundedRectangle ( cornerRadius: 12 ) )
         .padding ( .vertical, 4 )
     }
 }
@@ -34,10 +56,13 @@ struct WatchOrdoList: View {
     let ordo: [ OrdoDay ]
 
     var body: some View {
-        List ( ordo, id: \.id ) { day in
-            WatchOrdoRow ( day: day )
+        ScrollView ( .vertical, showsIndicators: false ) {
+            LazyVStack ( spacing: 8 ) {
+                ForEach ( ordo, id: \.id ) { day in
+                    WatchOrdoRow ( day: day )
+                }
+            }
         }
-        .listStyle ( .carousel )
     }
 }
 
@@ -102,14 +127,15 @@ struct ContentView: View {
 
     private func loadData ( ) {
         do {
-            if try api.cache.CurrentCacheExists ( predicate: #Predicate<OrdoYear> { _ in true } ) {
+            if try api.cache.CacheExists ( predicate: #Predicate<OrdoYear> { _ in true } ) {
                 let ordo = try api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { _ in true } )
                 activeData.SetSuccess ( ordo: ordo, locale: try api.cache.GetLocale ( ), prayers: nil, votives: nil )
             } else {
                 Task {
                     do {
-                        let year = try await api.GetCurrent ( )
-                        activeData.SetSuccess ( ordo: [ year ], locale: try api.cache.GetLocale ( ), prayers: nil, votives: nil )
+                        try await api.UpdateCache ( )
+                        let ordo = try api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { _ in true } )
+                        activeData.SetSuccess ( ordo: ordo, locale: try api.cache.GetLocale ( ), prayers: nil, votives: nil )
                     } catch {
                         activeData.SetError ( error: "Could not load data" )
                     }

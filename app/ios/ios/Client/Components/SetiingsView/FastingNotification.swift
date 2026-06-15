@@ -2,13 +2,84 @@
 //  FastingNotification.swift
 //  ordo-1962
 //
-//  Created by Matthew Frankland on 03/09/2024.
-//
 
 import SwiftUI
 import AlertToast
 import UserNotifications
 import BackgroundTasks
+
+class FastingNotificationManager {
+    static let shared = FastingNotificationManager ( )
+    
+    func register ( ) {
+        #if !targetEnvironment(simulator)
+        BGTaskScheduler.shared.register ( forTaskWithIdentifier: "com.mfrankland.ordo1962.fasting", using: nil ) { task in
+            guard let processingTask = task as? BGProcessingTask else { return }
+            self.handleBackgroundTask ( task: processingTask )
+        }
+        #endif
+    }
+    
+    private func handleBackgroundTask ( task: BGProcessingTask ) {
+        scheduleNextTask ( )
+        showNotification ( )
+        
+        task.expirationHandler = {
+            task.setTaskCompleted ( success: false )
+        }
+        task.setTaskCompleted ( success: true )
+    }
+    
+    func scheduleNextTask ( ) {
+        #if !targetEnvironment(simulator)
+        let request = BGProcessingTaskRequest ( identifier: "com.mfrankland.ordo1962.fasting" )
+        let hour = Calendar.current.component ( .hour, from: Date ( ) )
+        let minute = Calendar.current.component ( .minute, from: Date( ) )
+        
+        request.earliestBeginDate = Calendar.current.date ( bySettingHour: hour, minute: minute + 1, second: 0, of: Date ( ).addingTimeInterval ( 86400 ) )
+
+        request.requiresNetworkConnectivity = false
+        request.requiresExternalPower = false
+
+        do {
+            try BGTaskScheduler.shared.submit ( request )
+        } catch {
+            print ( "Could not schedule background task: \(error)" )
+        }
+        #endif
+    }
+    
+    func cancelTask ( ) {
+        #if !targetEnvironment(simulator)
+        BGTaskScheduler.shared.cancel ( taskRequestWithIdentifier: "com.mfrankland.ordo1962.fasting" )
+        #endif
+    }
+    
+    private func showNotification ( ) {
+        guard UserDefaults.standard.bool ( forKey: "fasting_notification_enabled" ) else { return }
+        
+        let cache = Cache ( )
+        guard let ordo = try? cache.GetOrdo ( predicate: #Predicate<OrdoYear> { _ in true } ),
+              !ordo.isEmpty else { return }
+        
+        let todayMonth = Calendar.current.shortMonthSymbols [ Calendar.current.component ( .month, from: .now ) - 1 ]
+        let todayDay = Calendar.current.component ( .day, from: .now )
+        let day = ordo [ 0 ].getDay ( month: todayMonth, day: todayDay )
+        guard !day.fasting.isEmpty else { return }
+        
+        let content = UNMutableNotificationContent ( )
+        content.title = "Fasting Reminder"
+        content.body = day.fasting.joined ( separator: ", " )
+        content.sound = .default
+
+        let request = UNNotificationRequest ( identifier: "Fasting_Notification", content: content, trigger: nil )
+        UNUserNotificationCenter.current ( ).add ( request ) { error in
+            if let error = error {
+                print ( "Error scheduling notification: \(error)" )
+            }
+        }
+    }
+}
 
 struct FastingNotification: View {
     @Environment(ActiveData.self) var activeData
@@ -50,103 +121,27 @@ struct FastingNotification: View {
             } )
         }
     }
-    
-    private func generateBody ( ) -> String {
-        guard let current_day = self.activeData.GetYear ( )?.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ) else {
-            return ""
-        }
-        
-        return current_day.fasting.joined ( separator: ", " )
-    }
-    
-    private func generateTitle ( ) -> String {
-       return self.title
-    }
-    
-    private func scheduleBackgroundTask ( ) {
-        #if !targetEnvironment(simulator)
-            let request = BGProcessingTaskRequest ( identifier: "com.mfrankland.ordo1962.fasting" )
-            let hour = Calendar.current.component ( .hour, from: Date ( ) )
-            let minute = Calendar.current.component ( .minute, from: Date( ) )
-            
-            request.earliestBeginDate = Calendar.current.date ( bySettingHour: hour, minute: minute + 1, second: 0, of: Date ( ).addingTimeInterval ( 86400 ) )
-
-            request.requiresNetworkConnectivity = false
-            request.requiresExternalPower = false
-
-            do {
-                try BGTaskScheduler.shared.submit ( request )
-            } catch {
-                print ( "Could not schedule background task: \(error)" )
-                DispatchQueue.main.async {
-                    self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occurred" )
-                    self.toggled = false
-                }
-            }
-        #else
-            DispatchQueue.main.async {
-                self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "Notification can not be set on a Simulator" )
-                self.toggled = false
-            }
-        #endif
-    }
-
-    private func stopBackgroundTask ( ) {
-        UNUserNotificationCenter.current ( ).removePendingNotificationRequests ( withIdentifiers: [ self.id ] )
-        BGTaskScheduler.shared.cancel ( taskRequestWithIdentifier: "com.mfrankland.ordo1962.fasting" )
-    }
-
-    private func handleBackgroundTask ( task: BGProcessingTask ) {
-        showNotification ( )
-        
-        if !toggled {
-            scheduleBackgroundTask ( )
-        }
-
-        task.expirationHandler = {
-            task.setTaskCompleted ( success: false )
-        }
-
-        task.setTaskCompleted ( success: true )
-        
-        DispatchQueue.main.async {
-            self.alert.alertToast = AlertToast ( type: .complete ( .green ), title: "Notification Scheduled" )
-            self.toggled = true
-        }
-    }
-
-    private func showNotification ( ) {
-        let content = UNMutableNotificationContent ( )
-        content.title = generateTitle ( )
-        content.body = generateBody()
-        content.sound = .default
-
-        let request = UNNotificationRequest ( identifier: self.id, content: content, trigger: nil )
-
-        UNUserNotificationCenter.current ( ).add ( request ) { error in
-            if let error = error {
-                print ( "Error scheduling notification: \(error)" )
-                DispatchQueue.main.async {
-                    self.alert.alertToast = AlertToast ( type: .error ( .red ), title: "An Error Occurred" )
-                    self.toggled = false
-                }
-            }
-        }
-    }
 
     var body: some View {
-        Toggle ( "Fasting Notification", isOn: $toggled ).onChange ( of: self.toggled ) {
+        Toggle ( "Fasting Notification", isOn: $toggled )
+        .onAppear {
+            self.toggled = UserDefaults.standard.bool ( forKey: "fasting_notification_enabled" )
+        }
+        .onChange ( of: self.toggled ) { old, new in
+            UserDefaults.standard.set ( new, forKey: "fasting_notification_enabled" )
             CheckNotificationSettings ( ) { res in
                 if res {
-                    if toggled {
-                        BGTaskScheduler.shared.register ( forTaskWithIdentifier: "com.mfrankland.ordo1962.fasting", using: nil ) { task in
-                            guard let processingTask = task as? BGProcessingTask else { return }
-                            self.handleBackgroundTask ( task: processingTask )
+                    if new {
+                        FastingNotificationManager.shared.scheduleNextTask ( )
+                        DispatchQueue.main.async {
+                            self.alert.alertToast = AlertToast ( type: .complete ( .green ), title: "Notification Scheduled" )
                         }
-                        scheduleBackgroundTask ( )
                     } else {
-                        stopBackgroundTask ( )
+                        FastingNotificationManager.shared.cancelTask ( )
+                        UNUserNotificationCenter.current ( ).removePendingNotificationRequests ( withIdentifiers: [ self.id ] )
                     }
+                } else {
+                    self.toggled = false
                 }
             }
         }

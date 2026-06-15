@@ -20,33 +20,52 @@ class API {
         self.activeData = activeData
     }
 
+    @MainActor
     func UpdateCache ( ) async throws {
         try cache.DeleteAll ( )
         let locale = try await LocaleRequest ( )
         let votives = try await VotiveRequest ( )
-        await MainActor.run {
-            self.activeData.SetDownload ( download: 4 )
-        }
+        self.activeData.SetDownload ( download: 4 )
 
         let prayers = try await PrayerRequest ( )
-        await MainActor.run {
-            self.activeData.SetDownload ( download: 8 )
-        }
-        var ordo: [ OrdoYear ] = []
-        for i in CurrentYear ( )...CurrentYear ( ) + 5 {
-            print ( "Downloading \(i)..." )
-            ordo.append ( try await self.OrdoRequest ( year: String ( i ) ) )
-            await MainActor.run {
-                self.activeData.SetDownload ( download: ( i + 1 - CurrentYear ( ) ) * 16 )
+        self.activeData.SetDownload ( download: 8 )
+
+        let startYear = 2023
+        let endYear = 2123
+        var ordoMap: [ Int : OrdoYear ] = [ : ]
+        
+        try await withThrowingTaskGroup ( of: ( Int, OrdoYear ).self ) { group in
+            for i in startYear...endYear {
+                group.addTask {
+                    let res = try await self.FetchOrdo ( year: String ( i ) )
+                    return ( i, res )
+                }
+            }
+            
+            var completedCount = 0
+            for try await ( year, yearOrdo ) in group {
+                ordoMap [ year ] = yearOrdo
+                completedCount += 1
+                let progress = Int ( ( Double ( completedCount ) / Double ( endYear - startYear + 1 ) ) * 90.0 ) + 8
+                self.activeData.SetDownload ( download: progress )
             }
         }
+        
+        let ordo = ( startYear...endYear ).compactMap { ordoMap [ $0 ] }
+        for o in ordo {
+            cache.Insert ( ordo: o )
+        }
+        
         cache.Save ( )
         let version = Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? ""
         UserDefaults.standard.set ( version, forKey: "version" )
-        await MainActor.run { [ ordo, prayers, locale, votives ] in
-            self.activeData.SetSuccess ( ordo: ordo, locale: locale, prayers: prayers, votives: votives )
-            WidgetCenter.shared.reloadAllTimelines ( )
-        }
+        self.activeData.SetSuccess ( ordo: ordo, locale: locale, prayers: prayers, votives: votives )
+        WidgetCenter.shared.reloadAllTimelines ( )
+    }
+    
+    func FetchOrdo ( year: String ) async throws -> OrdoYear {
+        let data = try await self.HTTP ( url: "ordo/\(year).json" )
+        return try self.Decode ( data: data, type: OrdoYear.self )
     }
     
     func GetCurrent ( ) async throws -> OrdoYear {
@@ -86,23 +105,40 @@ class API {
     }
 
     private func HTTP ( url: String ) async throws -> Data {
-        let base = "https://m-f-1998.github.io/ordo-1962/data/"
-        guard let requestURL = URL ( string: base + url ) else {
-            throw APIError.fetching ( "Invalid URL: \(url)" )
+        let cleanPath = url.replacingOccurrences ( of: ".json", with: "" )
+        let components = cleanPath.components ( separatedBy: "/" )
+        let resourceName = components.last ?? ""
+        
+        var fileURL: URL? = nil
+        
+        // 1. Try absolute root bundle
+        fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json" )
+        
+        // 2. Try target folder reference (like "data/ordo")
+        if fileURL == nil {
+            let subDirectory = "data" + ( components.count > 1 ? "/" + components.dropLast ( ).joined ( separator: "/" ) : "" )
+            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: subDirectory )
         }
-
-        var request = URLRequest ( url: requestURL )
-        request.setValue ( "application/json", forHTTPHeaderField: "Accept" )
-        request.timeoutInterval = 25
-
+        
+        // 3. Try direct subdirectory (like "ordo" or "data")
+        if fileURL == nil && components.count > 1 {
+            let subDirectory = components.dropLast ( ).joined ( separator: "/" )
+            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: subDirectory )
+        }
+        
+        // 4. Try inside "data" folder directly
+        if fileURL == nil {
+            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: "data" )
+        }
+        
+        guard let finalURL = fileURL else {
+            throw APIError.fetching ( "Local file not found: \(url)" )
+        }
+        
         do {
-            let ( data, response ) = try await URLSession.shared.data ( for: request )
-            let statusCode: Int? = ( response as? HTTPURLResponse )?.statusCode
-
-            guard statusCode == 200 else { throw APIError.fetching ( "HTTP Status Code \(statusCode ?? -1)" ) }
-            return data
+            return try Data ( contentsOf: finalURL )
         } catch {
-            throw APIError.fetching ( "Network Timeout" )
+            throw APIError.fetching ( "Could not read file: \(error.localizedDescription)" )
         }
     }
 }

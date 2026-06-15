@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+private let todayString: String = {
+    let formatter = DateFormatter ( )
+    formatter.locale = Locale ( identifier: "en_GB" )
+    formatter.dateFormat = "dd MMM yyyy"
+    return formatter.string ( from: .now )
+} ( )
+
 struct DisplayDate: View {
     @Environment(ActiveData.self) var activeData
 
@@ -17,9 +24,7 @@ struct DisplayDate: View {
         self.day = date.weekday
         self.date = date.day
         self.month = date.month
-
-        let formatter = FormatDate ( date: .medium, time: .none )
-        self.today = formatter.date ( from: date.combined ).map { Calendar.current.isDateInToday ( $0 ) } ?? false
+        self.today = ( date.combined == todayString )
     }
 
     private var theme: LiturgicalTheme {

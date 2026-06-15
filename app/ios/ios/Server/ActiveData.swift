@@ -39,9 +39,15 @@ class ActiveData {
         for ordoYear in ordo {
             let entries = ordoYear.ordo.enumerated ( ).flatMap { ( mi, month ) in
                 month.enumerated ( ).map { ( di, day ) in
-                    let titles = [ day.season.title ] + day.celebrations.flatMap { c in
-                        [ c.title ] + c.commemorations.map { $0.title }
-                    }
+                    let titles = [ 
+                        day.date.day, 
+                        day.date.month, 
+                        day.date.weekday, 
+                        day.date.combined, 
+                        day.season.title 
+                    ] + day.celebrations.flatMap { c in
+                        [ c.title, "class \(c.rank)" ] + c.commemorations.map { $0.title }
+                    } + day.fasting
                     return ( text: titles.joined ( separator: " " ).lowercased ( ), month: mi, day: di )
                 }
             }
@@ -84,8 +90,8 @@ class ActiveData {
     }
     
     func GetYear ( year: Int = CurrentYear ( ) ) -> OrdoYear? {
-        let index = year - CurrentYear ( )
-        if index < self.ordo.count {
+        let index = year - 2023
+        if index >= 0 && index < self.ordo.count {
             return self.ordo [ index ]
         }
         return nil

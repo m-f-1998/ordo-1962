@@ -65,6 +65,7 @@ class iCal {
                 do {
                     let calendar = try self.GetCalendar ( title: self.title )
                     Task {
+                        let formatter = FormatDate ( date: .short, time: .none )
                         for MonthName in Calendar.current.shortMonthSymbols {
                             let month = self.current_ordo.getMonth ( month: MonthName )
                             for day in month {
@@ -72,8 +73,7 @@ class iCal {
                                     let event = EKEvent ( eventStore: self.store )
                                     event.title = feast.title + " (Class \(String(feast.rank)))"
                                     event.isAllDay = true
-                                    let formatter = FormatDate ( date: .short, time: .none )
-                                    guard let eventDate = formatter.date ( from: "\(day.date.day) \(day.date.month) \(CurrentYear ( ))" ) else { continue }
+                                    guard let eventDate = formatter.date ( from: "\(day.date.day) \(day.date.month) \(self.current_ordo.year)" ) else { continue }
                                     event.startDate = eventDate
                                     event.endDate = eventDate
                                     event.notes = feast.commemorations.map { ( x ) -> String in

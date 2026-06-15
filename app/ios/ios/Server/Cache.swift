@@ -26,11 +26,7 @@ class Cache {
         let descriptor = FetchDescriptor <OrdoYear> ( predicate: predicate, sortBy: [ SortDescriptor ( \.year ) ] )
         let data = try self.context.fetch ( descriptor )
         if data.count > 0 && data [ 0 ].year == CurrentYear ( ) {
-            let components = Calendar.current.dateComponents ( [ .year, .month ], from: data [ 0 ].date, to: Date ( ) )
-            let totalMonths = ( components.year ?? 0 ) * 12 + ( components.month ?? 0 )
-            if totalMonths < 2 {
-                return data
-            }
+            return data
         }
         return [ ]
     }
@@ -71,7 +67,7 @@ class Cache {
                 if try GetPrayers ( ) != nil {
                     if try GetLocale ( ) != nil {
                         if try GetVotives ( ) != nil {
-                            return ordo.count == 6 && ordo [ 0 ].year == CurrentYear ( )
+                            return ordo.count == 101 && ordo [ 0 ].year == 2023
                         }
                     }
                 }

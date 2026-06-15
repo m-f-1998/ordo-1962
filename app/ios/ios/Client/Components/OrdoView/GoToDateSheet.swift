@@ -9,10 +9,10 @@ struct GoToDateSheet: View {
     let onSelect: ( Int, Date ) -> Void
 
     @State private var selectedDate: Date
-    @Environment ( \.dismiss ) private var dismiss
+    @Environment( \.dismiss ) private var dismiss
 
-    private let minYear = CurrentYear ( )
-    private let maxYear = CurrentYear ( ) + 5
+    private let minYear = 2023
+    private let maxYear = 2123
 
     init ( initialDate: Date, onSelect: @escaping ( Int, Date ) -> Void ) {
         self.onSelect = onSelect
@@ -27,19 +27,31 @@ struct GoToDateSheet: View {
         selectedYear >= minYear && selectedYear <= maxYear
     }
 
+    private var minDate: Date {
+        Calendar.current.date ( from: DateComponents ( year: minYear, month: 1, day: 1 ) ) ?? .now
+    }
+
+    private var maxDate: Date {
+        Calendar.current.date ( from: DateComponents ( year: maxYear, month: 12, day: 31 ) ) ?? .now
+    }
+
     var body: some View {
         VStack ( spacing: 0 ) {
-            // Minimal header — no title, just dismiss controls
             HStack {
                 Button ( "Cancel" ) { dismiss ( ) }
                     .foregroundStyle ( .secondary )
                 Spacer ( )
-                Button ( "Go" ) {
+                Text ( "Go To Date" )
+                    .fontWeight ( .semibold )
+                Spacer ( )
+                Button ( "Select" ) {
+                    let cal = Calendar.current
+                    let year = cal.component ( .year, from: selectedDate )
                     dismiss ( )
-                    onSelect ( selectedYear, selectedDate )
+                    onSelect ( year, selectedDate )
                 }
-                .fontWeight ( .semibold )
-                .disabled ( !isInRange )
+                .bold ( )
+                .foregroundStyle ( .red )
             }
             .padding ( .horizontal )
             .padding ( .vertical, 10 )
@@ -49,6 +61,7 @@ struct GoToDateSheet: View {
             DatePicker (
                 "",
                 selection: $selectedDate,
+                in: minDate...maxDate,
                 displayedComponents: .date
             )
             .datePickerStyle ( .graphical )
@@ -58,5 +71,6 @@ struct GoToDateSheet: View {
         }
         .presentationDetents ( [ .medium ] )
         .presentationDragIndicator ( .hidden )
+        .interactiveDismissDisabled ( )
     }
 }

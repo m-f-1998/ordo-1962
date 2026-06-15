@@ -2,8 +2,6 @@
 //  OrdoEventList.swift
 //  ordo-1962
 //
-//  Created by Matthew Frankland on 23/01/2024.
-//
 
 import SwiftUI
 
@@ -59,13 +57,14 @@ struct TodayCard: View {
     }
 }
 
-struct OrdoEventList: View, KeyboardReadable {
+struct OrdoEventList: View {
     @Environment(ActiveData.self) var activeData
     @Binding var search: String
     @Binding var year: Int
     @Binding var searchIsActive: Bool
-    @State private var isKeyboardVisible = false
+    
     @State private var searchResults: [ [ OrdoDay ] ] = []
+    @State private var flatSearchResults: [ OrdoDay ] = []
 
     private var isCurrentYear: Bool { year == CurrentYear ( ) }
 
@@ -78,13 +77,37 @@ struct OrdoEventList: View, KeyboardReadable {
         List {
             if let todayDay = today {
                 TodayCard ( day: todayDay )
+                    .id ( "today-card" )
                     .listRowInsets ( EdgeInsets ( ) )
                     .listRowBackground ( Color.clear )
                     .listRowSeparator ( .hidden )
             }
-            ForEach ( searchResults, id: \.self ) { month in
-                Section ( header: Spacer ( minLength: 0 ) ) {
-                    ForEach ( month ) { day in
+            
+            if search.isEmpty {
+                ForEach ( searchResults, id: \.self ) { month in
+                    Section ( header: Text ( month.first?.date.month.uppercased ( ) ?? "" )
+                        .font ( .system ( size: 14, weight: .bold, design: .serif ) )
+                        .foregroundStyle ( .red )
+                        .padding ( .top, 10 )
+                    ) {
+                        ForEach ( month ) { day in
+                            NavigationLink {
+                                DisplayPropers ( celebrations: day.celebrations.filter { $0.propers.count > 0 } )
+                            } label: {
+                                OrdoRow ( feast: day, year: String ( self.year ) )
+                            }
+                            .id ( day.date.combined )
+                            .padding ( [ .vertical ], 8 )
+                        }
+                    }
+                    .id ( month.first?.date.month ?? "" )
+                }
+            } else {
+                Section ( header: Text ( "SEARCH RESULTS" )
+                    .font ( .system ( size: 12, weight: .bold, design: .serif ) )
+                    .foregroundStyle ( .red )
+                ) {
+                    ForEach ( flatSearchResults ) { day in
                         NavigationLink {
                             DisplayPropers ( celebrations: day.celebrations.filter { $0.propers.count > 0 } )
                         } label: {
@@ -92,57 +115,50 @@ struct OrdoEventList: View, KeyboardReadable {
                         }
                         .id ( day.date.combined )
                         .padding ( [ .vertical ], 8 )
-                        .disabled ( isKeyboardVisible )
                     }
                 }
-                    .id ( month.first?.date.month ?? "" )
             }
         }
             .listSectionSpacing ( .compact )
-            .onReceive ( keyboardPublisher ) { newIsKeyboardVisible in
-                isKeyboardVisible = newIsKeyboardVisible
-            }
             .overlay {
-                if self.searchResults.isEmpty, !self.search.isEmpty {
+                if self.flatSearchResults.isEmpty, !self.search.isEmpty {
                     ContentUnavailableView.search ( text: self.search )
                 }
             }
             .onChange ( of: searchIsActive ) { _, active in
                 if !active {
                     searchResults = activeData.GetYear ( year: year )?.ordo ?? []
+                    flatSearchResults = []
                 }
             }
             .task ( id: search ) {
                 if search.isEmpty {
                     searchResults = activeData.GetYear ( year: year )?.ordo ?? []
+                    flatSearchResults = []
                     return
                 }
-                try? await Task.sleep ( for: .milliseconds ( 80 ) )
-                guard !Task.isCancelled else { return }
+                
                 guard let snapshot = activeData.getSearchSnapshot ( year: year ) else { return }
-                let lower = search.lowercased ( )
-                let filtered: [ [ OrdoDay ] ] = await Task.detached ( priority: .userInitiated ) {
-                    var result: [ [ OrdoDay ] ] = []
-                    var currentMonth = -1
-                    var currentGroup: [ OrdoDay ] = []
-                    for entry in snapshot.entries where entry.text.contains ( lower ) {
-                        let day = snapshot.months [ entry.month ] [ entry.day ]
-                        if entry.month != currentMonth {
-                            if !currentGroup.isEmpty { result.append ( currentGroup ) }
-                            currentGroup = [ day ]
-                            currentMonth = entry.month
-                        } else {
-                            currentGroup.append ( day )
+                let queryWords = search.lowercased ( ).components ( separatedBy: .whitespacesAndNewlines ).filter { !$0.isEmpty }
+                
+                let filtered: [ OrdoDay ] = await Task.detached ( priority: .userInitiated ) {
+                    var result: [ OrdoDay ] = []
+                    for entry in snapshot.entries {
+                        let matchesAll = queryWords.allSatisfy { entry.text.contains ( $0 ) }
+                        if matchesAll {
+                            let day = snapshot.months [ entry.month ] [ entry.day ]
+                            result.append ( day )
                         }
                     }
-                    if !currentGroup.isEmpty { result.append ( currentGroup ) }
                     return result
                 }.value
+                
                 guard !Task.isCancelled else { return }
-                searchResults = filtered
+                flatSearchResults = filtered
             }
             .task ( id: year ) {
                 searchResults = activeData.GetYear ( year: year )?.ordo ?? []
+                flatSearchResults = []
             }
     }
 }
