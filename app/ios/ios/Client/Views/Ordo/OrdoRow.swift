@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OrdoRow: View {
+    @Environment(\.colorScheme) var colorScheme
     let feast: OrdoDay
     let year: String
 
@@ -16,11 +17,17 @@ struct OrdoRow: View {
     }
 
     var body: some View {
+        let isLightModeWhite = (colorScheme == .light && theme.isWhite)
+
         HStack ( spacing: 0 ) {
             Rectangle ( )
                 .fill ( theme.accent )
                 .frame ( width: 4 )
                 .clipShape ( RoundedRectangle ( cornerRadius: 2 ) )
+                .overlay (
+                    RoundedRectangle ( cornerRadius: 2 )
+                        .stroke ( Color.secondary.opacity ( 0.4 ), lineWidth: isLightModeWhite ? 0.5 : 0 )
+                )
                 .padding ( .trailing, 10 )
 
             DisplayDate ( date: feast.date )
@@ -31,7 +38,8 @@ struct OrdoRow: View {
                 HStack ( spacing: 5 ) {
                     Tag (
                         title: self.feast.season.title,
-                        accent: theme.accent
+                        accent: theme.accent,
+                        isWhite: theme.isWhite
                     )
                     ForEach ( self.feast.fasting, id: \.self ) { fast in
                         Tag (

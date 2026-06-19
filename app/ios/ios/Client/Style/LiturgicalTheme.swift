@@ -11,23 +11,17 @@ import SwiftUI
 struct LiturgicalTheme {
     let accent: Color
     let accentSubtle: Color
+    let isWhite: Bool
 
     init ( colors: String ) {
         let primary = colors.components ( separatedBy: "," ).first ?? "g"
+        self.isWhite = (primary == "w")
         switch primary {
         case "r":
             accent = Color ( red: 0.72, green: 0.10, blue: 0.10 )   // deep crimson
         case "w":
-            // White vestments — adaptive so it reads in both light and dark mode
-            #if os(watchOS)
-                accent = Color ( red: 0.88, green: 0.88, blue: 0.90 )   // bright silver-white
-            #else
-                accent = Color ( UIColor { traits in
-                    traits.userInterfaceStyle == .dark
-                        ? UIColor ( red: 0.88, green: 0.88, blue: 0.90, alpha: 1 )   // bright silver-white
-                        : UIColor ( red: 0.38, green: 0.38, blue: 0.42, alpha: 1 )   // pewter
-                } )
-            #endif
+            // White vestments
+            accent = Color.white
         case "y":
             accent = Color ( red: 0.72, green: 0.56, blue: 0.16 )   // gold
         case "g":

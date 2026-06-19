@@ -59,21 +59,24 @@ struct SimpleEntry: TimelineEntry {
 // MARK: - Widget Views
 
 struct SystemWidgetView: View {
+    @Environment(\.colorScheme) var colorScheme
     let entry: SimpleEntry
 
     var body: some View {
+        let isLightModeWhite = (colorScheme == .light && entry.theme.isWhite)
+
         VStack ( alignment: .leading, spacing: 6 ) {
             // Header: Today's date with thin tracked design using liturgical color
             HStack {
                 Text ( Date.now.formatted ( .dateTime.weekday ( .abbreviated ).day ( ).month ( .abbreviated ) ).uppercased ( ) )
                     .font ( .system ( size: 10, weight: .bold, design: .serif ) )
-                    .foregroundStyle ( entry.theme.accent )
+                    .foregroundStyle ( isLightModeWhite ? Color.primary : entry.theme.accent )
                     .tracking ( 1.2 )
                 Spacer ( )
             }
             
             Divider ( )
-                .background ( entry.theme.accent.opacity ( 0.25 ) )
+                .background ( isLightModeWhite ? Color.secondary.opacity ( 0.25 ) : entry.theme.accent.opacity ( 0.25 ) )
             
             Text ( entry.feast.title )
                 .font ( .system ( size: 13, weight: .semibold, design: .serif ) )
@@ -85,12 +88,12 @@ struct SystemWidgetView: View {
             
             Text ( "CLASS \(entry.feast.rank)" )
                 .font ( .system ( size: 10, weight: .bold, design: .serif ) )
-                .foregroundStyle ( entry.theme.accent )
+                .foregroundStyle ( isLightModeWhite ? Color.primary : entry.theme.accent )
                 .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
         }
         .frame ( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading )
         .padding ( 14 )
-        .containerBackground ( entry.theme.accentSubtle, for: .widget )
+        .containerBackground ( isLightModeWhite ? Color.white : entry.theme.accentSubtle, for: .widget )
     }
 }
 

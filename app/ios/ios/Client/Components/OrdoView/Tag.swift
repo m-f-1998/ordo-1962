@@ -8,18 +8,28 @@
 import SwiftUI
 
 struct Tag: View {
+    @Environment(\.colorScheme) var colorScheme
     let title: String
     let accent: Color
+    var isWhite: Bool = false
 
     var body: some View {
-        Text ( self.title )
+        let isLightModeWhite = (colorScheme == .light && isWhite)
+
+        Text ( verbatim: self.title )
             .font ( .system ( size: 11, weight: .semibold ) )
             .padding ( .horizontal, 8 )
             .padding ( .vertical, 4 )
-            .background ( accent.opacity ( 0.12 ) )
-            .foregroundStyle ( accent )
+            .background ( isLightModeWhite ? Color.white : accent.opacity ( 0.12 ) )
+            .foregroundStyle ( isLightModeWhite ? Color.primary : accent )
             .clipShape ( Capsule ( ) )
+            .overlay (
+                Capsule ( )
+                    .stroke ( Color.secondary.opacity ( 0.4 ), lineWidth: isLightModeWhite ? 1 : 0 )
+            )
             .multilineTextAlignment ( .center )
             .lineLimit ( 2 )
+            .fixedSize ( horizontal: false, vertical: true )
+            .layoutPriority ( 1 )
     }
 }

@@ -21,6 +21,7 @@ struct TabItem: View {
 }
 
 struct TabBar: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(TabStateHandler.self) private var state
     @Environment(ActiveData.self) private var activeData
 
@@ -32,6 +33,8 @@ struct TabBar: View {
     }
 
     var body: some View {
+        let isLightModeWhite = (colorScheme == .light && theme.isWhite)
+
         VStack {
             HStack {
                 ForEach ( TabService.allCases, id: \.self ) { item in
@@ -41,20 +44,31 @@ struct TabBar: View {
                         HStack ( spacing: 10 ) {
                             TabItem ( item: item )
                                 .foregroundStyle (
-                                    self.state.selected == item.rawValue ? theme.accent : .secondary
+                                    self.state.selected == item.rawValue
+                                        ? (isLightModeWhite ? Color.primary : theme.accent)
+                                        : .secondary
                                 )
                             if self.state.selected == item.rawValue {
                                 Text ( item.title )
                                     .font ( .system ( size: 14, weight: .semibold ) )
-                                    .foregroundStyle ( theme.accent )
+                                    .foregroundStyle ( isLightModeWhite ? Color.primary : theme.accent )
                             }
                         }
                         .frame (
                             maxWidth: self.state.selected == item.rawValue ? .infinity : 60,
                             maxHeight: 40, alignment: .center
                         )
-                        .background ( self.state.selected == item.rawValue ? theme.accentSubtle : .clear )
+                        .background (
+                            self.state.selected == item.rawValue
+                                ? (isLightModeWhite ? Color.white : theme.accentSubtle)
+                                : .clear
+                        )
                         .clipShape ( Capsule ( ) )
+                        .shadow ( color: Color.black.opacity ( (self.state.selected == item.rawValue && isLightModeWhite) ? 0.08 : 0 ), radius: 2, x: 0, y: 1 )
+                        .overlay (
+                            Capsule ( )
+                                .stroke ( Color.secondary.opacity ( 0.2 ), lineWidth: (self.state.selected == item.rawValue && isLightModeWhite) ? 1 : 0 )
+                        )
                     }
                 }
             }

@@ -6,12 +6,15 @@
 import SwiftUI
 
 struct TodayCard: View {
+    @Environment(\.colorScheme) var colorScheme
     let day: OrdoDay
 
     private var theme: LiturgicalTheme { LiturgicalTheme ( day: day ) }
 
     var body: some View {
         if let feast = day.celebrations.first {
+            let isLightModeWhite = (colorScheme == .light && theme.isWhite)
+
             NavigationLink {
                 DisplayPropers ( celebrations: day.celebrations.filter { $0.propers.count > 0 } )
             } label: {
@@ -20,11 +23,11 @@ struct TodayCard: View {
                         Text ( "Today — \(day.date.combined)" )
                             .font ( .caption )
                             .fontWeight ( .semibold )
-                            .foregroundStyle ( theme.accent )
+                            .foregroundStyle ( isLightModeWhite ? Color.primary : theme.accent )
                         Spacer ( )
                         Text ( day.season.title )
                             .font ( .caption )
-                            .foregroundStyle ( theme.accent.opacity ( 0.8 ) )
+                            .foregroundStyle ( isLightModeWhite ? Color.secondary : theme.accent.opacity ( 0.8 ) )
                     }
                     VStack(alignment: .leading, spacing: 4) {
                         Text ( feast.title )
@@ -58,7 +61,7 @@ struct TodayCard: View {
                 .clipShape ( RoundedRectangle ( cornerRadius: 12 ) )
                 .overlay (
                     RoundedRectangle ( cornerRadius: 12 )
-                        .stroke ( theme.accent.opacity ( 0.60 ), lineWidth: 2 )
+                        .stroke ( isLightModeWhite ? Color.secondary.opacity ( 0.40 ) : theme.accent.opacity ( 0.60 ), lineWidth: 2 )
                 )
             }
             .buttonStyle ( .plain )
