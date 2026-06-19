@@ -25,10 +25,7 @@ class Cache {
     func GetOrdo ( predicate: Predicate<OrdoYear> ) throws -> [ OrdoYear ] {
         let descriptor = FetchDescriptor <OrdoYear> ( predicate: predicate, sortBy: [ SortDescriptor ( \.year ) ] )
         let data = try self.context.fetch ( descriptor )
-        if data.count > 0 && data [ 0 ].year == CurrentYear ( ) {
-            return data
-        }
-        return [ ]
+        return data
     }
     
     func GetPrayers ( ) throws -> PrayerLanguageData? {

@@ -71,8 +71,8 @@ class ActiveData {
     }
 
     func GetIDToday ( ) -> String {
-        if self.ordo.count > 0 {
-            return self.ordo [ 0 ].getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ).date.combined
+        if let currentYearOrdo = GetYear ( ) {
+            return currentYearOrdo.getDay ( month: CurrentMonth ( ), day: CurrentDay ( ) ).date.combined
         }
         return ""
     }
@@ -90,11 +90,7 @@ class ActiveData {
     }
     
     func GetYear ( year: Int = CurrentYear ( ) ) -> OrdoYear? {
-        let index = year - 2023
-        if index >= 0 && index < self.ordo.count {
-            return self.ordo [ index ]
-        }
-        return nil
+        return self.ordo.first { $0.year == year }
     }
     
     // Snapshot for off-main-thread search

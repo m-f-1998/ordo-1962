@@ -63,17 +63,17 @@ struct SystemWidgetView: View {
 
     var body: some View {
         VStack ( alignment: .leading, spacing: 6 ) {
-            // Header: Today's date with thin tracked red design
+            // Header: Today's date with thin tracked design using liturgical color
             HStack {
                 Text ( Date.now.formatted ( .dateTime.weekday ( .abbreviated ).day ( ).month ( .abbreviated ) ).uppercased ( ) )
                     .font ( .system ( size: 10, weight: .bold, design: .serif ) )
-                    .foregroundStyle ( Color ( red: 0.65, green: 0.08, blue: 0.08 ) )
+                    .foregroundStyle ( entry.theme.accent )
                     .tracking ( 1.2 )
                 Spacer ( )
             }
             
             Divider ( )
-                .background ( Color ( red: 0.65, green: 0.08, blue: 0.08 ).opacity ( 0.15 ) )
+                .background ( entry.theme.accent.opacity ( 0.25 ) )
             
             Text ( entry.feast.title )
                 .font ( .system ( size: 13, weight: .semibold, design: .serif ) )
@@ -85,12 +85,12 @@ struct SystemWidgetView: View {
             
             Text ( "CLASS \(entry.feast.rank)" )
                 .font ( .system ( size: 10, weight: .bold, design: .serif ) )
-                .foregroundStyle ( .secondary )
+                .foregroundStyle ( entry.theme.accent )
                 .redacted ( reason: entry.isLoading ? .placeholder : [ ] )
         }
         .frame ( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading )
         .padding ( 14 )
-        .containerBackground ( Color ( .secondarySystemBackground ), for: .widget )
+        .containerBackground ( entry.theme.accentSubtle, for: .widget )
     }
 }
 

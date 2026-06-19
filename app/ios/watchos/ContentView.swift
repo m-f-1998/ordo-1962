@@ -13,12 +13,12 @@ struct WatchOrdoRow: View {
     private var theme: LiturgicalTheme { LiturgicalTheme ( day: day ) }
 
     var body: some View {
-        VStack ( alignment: .leading, spacing: 6 ) {
+        VStack ( alignment: .leading, spacing: 4 ) {
             // Sleek Header: Date info
             HStack {
                 Text ( day.date.combined.uppercased ( ) )
                     .font ( .system ( size: 10, weight: .bold, design: .serif ) )
-                    .foregroundStyle ( Color ( red: 0.65, green: 0.08, blue: 0.08 ) )
+                    .foregroundStyle ( theme.accent )
                     .tracking ( 1.2 )
                 
                 Spacer ( )
@@ -27,7 +27,7 @@ struct WatchOrdoRow: View {
             .padding ( .horizontal, 10 )
             
             Divider ( )
-                .background ( Color ( red: 0.65, green: 0.08, blue: 0.08 ).opacity ( 0.15 ) )
+                .background ( theme.accent.opacity ( 0.25 ) )
                 .padding ( .horizontal, 10 )
             
             ForEach ( day.celebrations, id: \.id ) { celebration in
@@ -39,16 +39,16 @@ struct WatchOrdoRow: View {
                         .lineLimit ( 3 )
                     Text ( "CLASS \(celebration.rank)" )
                         .font ( .system ( size: 9, weight: .bold, design: .serif ) )
-                        .foregroundStyle ( .secondary )
+                        .foregroundStyle ( theme.accent )
                 }
                 .padding ( .horizontal, 10 )
                 .padding ( .bottom, 8 )
             }
         }
         .frame ( maxWidth: .infinity, alignment: .leading )
-        .background ( Color.white.opacity ( 0.1 ) )
-        .clipShape ( RoundedRectangle ( cornerRadius: 12 ) )
-        .padding ( .vertical, 4 )
+        .background ( theme.accentSubtle )
+        .clipShape ( RoundedRectangle ( cornerRadius: 10, style: .continuous ) )
+        .padding ( .vertical, 2 )
     }
 }
 
@@ -57,18 +57,22 @@ struct WatchOrdoList: View {
 
     var body: some View {
         ScrollView ( .vertical, showsIndicators: false ) {
-            LazyVStack ( spacing: 8 ) {
+            LazyVStack ( spacing: 6 ) {
                 ForEach ( ordo, id: \.id ) { day in
-                    WatchOrdoRow ( day: day )
+                    NavigationLink ( destination: WatchDisplayPropers ( celebrations: day.celebrations ) ) {
+                        WatchOrdoRow ( day: day )
+                    }
+                    .buttonStyle ( .plain )
                 }
             }
+            .padding ( .horizontal, 4 )
         }
     }
 }
 
 struct WatchErrorView: View {
     let message: String
-    let api: API
+    let retryAction: ( ) async -> Void
 
     var body: some View {
         VStack ( spacing: 12 ) {
@@ -80,11 +84,7 @@ struct WatchErrorView: View {
                 .multilineTextAlignment ( .center )
             Button {
                 Task {
-                    do {
-                        try await api.UpdateCache ( )
-                    } catch {
-                        print ( "Cache update failed: \(error)" )
-                    }
+                    await retryAction ( )
                 }
             } label: {
                 Label ( "Retry", systemImage: "arrow.clockwise" )
@@ -114,35 +114,64 @@ struct ContentView: View {
                         .font ( .caption )
                         .foregroundStyle ( .secondary )
                 }
-                .onAppear { loadData ( ) }
+                .task { await loadData ( ) }
             } else if activeData.error {
-                WatchErrorView ( message: activeData.last_err, api: api )
-            } else if let year = activeData.GetYear ( ) {
-                WatchOrdoList ( ordo: year.getMonth ( month: CurrentMonth ( ) ) )
+                WatchErrorView ( message: activeData.last_err, retryAction: { await loadData ( ) } )
+            } else if activeData.GetYear ( ) != nil {
+                NavigationStack {
+                    WatchOrdoList ( ordo: getTwoWeeksDays ( ) )
+                }
             } else {
-                WatchErrorView ( message: "No data available", api: api )
+                WatchErrorView ( message: "No data available", retryAction: { await loadData ( ) } )
             }
         }
     }
 
-    private func loadData ( ) {
-        do {
-            if try api.cache.CacheExists ( predicate: #Predicate<OrdoYear> { _ in true } ) {
-                let ordo = try api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { _ in true } )
-                activeData.SetSuccess ( ordo: ordo, locale: try api.cache.GetLocale ( ), prayers: nil, votives: nil )
-            } else {
-                Task {
-                    do {
-                        try await api.UpdateCache ( )
-                        let ordo = try api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { _ in true } )
-                        activeData.SetSuccess ( ordo: ordo, locale: try api.cache.GetLocale ( ), prayers: nil, votives: nil )
-                    } catch {
-                        activeData.SetError ( error: "Could not load data" )
-                    }
+    private func getTwoWeeksDays ( ) -> [ OrdoDay ] {
+        var days: [ OrdoDay ] = [ ]
+        let calendar = Calendar.current
+        for i in 0..<14 {
+            if let date = calendar.date ( byAdding: .day, value: i, to: .now ) {
+                let yr = calendar.component ( .year, from: date )
+                let monthIdx = calendar.component ( .month, from: date ) - 1
+                let shortMonth = calendar.shortMonthSymbols [ monthIdx ]
+                let dy = calendar.component ( .day, from: date )
+                
+                if let ordoYear = activeData.GetYear ( year: yr ) {
+                    let ordoDay = ordoYear.getDay ( month: shortMonth, day: dy )
+                    days.append ( ordoDay )
                 }
             }
+        }
+        return days
+    }
+
+    private func loadData ( ) async {
+        do {
+            // Determine the years spanned by the next 14 days (usually 1 year, sometimes 2)
+            let calendar = Calendar.current
+            var yearsToLoad = Set<Int> ( )
+            for i in 0..<14 {
+                if let date = calendar.date ( byAdding: .day, value: i, to: .now ) {
+                    let yr = calendar.component ( .year, from: date )
+                    yearsToLoad.insert ( yr )
+                }
+            }
+            
+            // Load the required years directly from the bundle via API
+            var loadedOrdos: [ OrdoYear ] = [ ]
+            for yr in yearsToLoad.sorted ( ) {
+                let ordoYear = try await api.FetchOrdo ( year: String ( yr ) )
+                loadedOrdos.append ( ordoYear )
+            }
+            
+            // Fetch the locale directly from the bundle via API
+            let locale = try await api.LocaleRequest ( )
+            
+            // Populate activeData with only the loaded years and locale!
+            activeData.SetSuccess ( ordo: loadedOrdos, locale: locale, prayers: nil, votives: nil )
         } catch {
-            activeData.SetError ( error: "Could not load data" )
+            activeData.SetError ( error: "Could not load data: \(error.localizedDescription)" )
         }
     }
 }

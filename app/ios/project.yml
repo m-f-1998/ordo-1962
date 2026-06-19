@@ -1,7 +1,6 @@
 name: ordo-1962
 
 options:
-  bundleIdPrefix: com.mfrankland
   createIntermediateGroups: true
   deploymentTarget:
     iOS: "17.0"
@@ -53,24 +52,28 @@ targets:
     settings:
       base:
         PRODUCT_NAME: ordo-1962
+        PRODUCT_BUNDLE_IDENTIFIER: com.mfrankland.ordo-62
         INFOPLIST_FILE: ordo-1962-Info.plist
         GENERATE_INFOPLIST_FILE: NO
         SWIFT_VERSION: "5.9"
         TARGETED_DEVICE_FAMILY: "1"
         CODE_SIGNING_REQUIRED: NO
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: "T584ZT492H"
+        MARKETING_VERSION: "2.0"
+        CURRENT_PROJECT_VERSION: "1"
 
   watchos:
     type: application
     platform: watchOS
     deploymentTarget: "10.0"
-    bundleId: com.mfrankland.ordo-1962.watchkitapp
+    bundleId: com.mfrankland.ordo-62.watchos
     entitlements:
       path: ordo-1962-watch.entitlements
     info:
       path: watchos/Info.plist
       properties:
         WKApplication: true
+        WKWatchOnly: true
     sources:
       - watchos
       - path: ios/Server
@@ -85,10 +88,13 @@ targets:
     settings:
       base:
         PRODUCT_NAME: ordo-1962-watch
+        PRODUCT_BUNDLE_IDENTIFIER: com.mfrankland.ordo-62.watchos
         SWIFT_VERSION: "5.9"
         TARGETED_DEVICE_FAMILY: "4"
         CODE_SIGNING_REQUIRED: NO
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: "T584ZT492H"
+        MARKETING_VERSION: "2.0"
+        CURRENT_PROJECT_VERSION: "1"
 
   widget:
     type: app-extension
@@ -104,6 +110,7 @@ targets:
       - path: ios/Extensions.swift
       - path: ios/Client/Style/LiturgicalTheme.swift
       - path: ios/Client/Services/DateFormatter.swift
+      - ../../docs/data
     dependencies:
       - package: swift-collections
         product: OrderedCollections
@@ -111,9 +118,12 @@ targets:
     settings:
       base:
         PRODUCT_NAME: ordo-1962-widget
+        PRODUCT_BUNDLE_IDENTIFIER: com.mfrankland.ordo-62.widget
         INFOPLIST_FILE: widget/Info.plist
         GENERATE_INFOPLIST_FILE: NO
         SWIFT_VERSION: "5.9"
         TARGETED_DEVICE_FAMILY: "1"
         CODE_SIGNING_REQUIRED: NO
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: "T584ZT492H"
+        MARKETING_VERSION: "2.0"
+        CURRENT_PROJECT_VERSION: "1"

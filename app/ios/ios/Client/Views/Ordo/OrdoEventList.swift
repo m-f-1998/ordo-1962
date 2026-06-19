@@ -26,10 +26,20 @@ struct TodayCard: View {
                             .font ( .caption )
                             .foregroundStyle ( theme.accent.opacity ( 0.8 ) )
                     }
-                    Text ( feast.title )
-                        .font ( .system ( size: 18, weight: .semibold, design: .serif ) )
-                        .foregroundStyle ( .primary )
-                        .multilineTextAlignment ( .leading )
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text ( feast.title )
+                            .font ( .system ( size: 18, weight: .semibold, design: .serif ) )
+                            .foregroundStyle ( .primary )
+                            .multilineTextAlignment ( .leading )
+                        
+                        ForEach(feast.commemorations) { commemoration in
+                            Text("Commemoration: \(commemoration.title)")
+                                .font(.system(size: 13, design: .serif))
+                                .foregroundStyle(.secondary)
+                                .italic()
+                                .multilineTextAlignment(.leading)
+                        }
+                    }
                     HStack ( spacing: 8 ) {
                         Text ( "Class \(feast.rank)" )
                             .font ( .caption )

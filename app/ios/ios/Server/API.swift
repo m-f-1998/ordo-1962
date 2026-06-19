@@ -90,7 +90,7 @@ class API {
         return json
     }
     
-    private func LocaleRequest ( ) async throws -> LocaleOrdo {
+    func LocaleRequest ( ) async throws -> LocaleOrdo {
         let data = try await self.HTTP ( url: "locale.json" )
         let json: LocaleOrdo = try self.Decode ( data: data, type: LocaleOrdo.self )
         cache.Insert ( locale: json )
