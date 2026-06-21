@@ -30,29 +30,31 @@ class ActiveData {
         self.prayers = prayers
         self.locale = locale
         self.votives = votives
-        self.buildSearchIndex ( )
+        
+        self.searchIndex = [ : ]
+        for o in self.ordo {
+            self.buildSearchIndex ( for: o )
+        }
+        
         self.SetStatus ( )
     }
 
-    private func buildSearchIndex ( ) {
-        searchIndex = [ : ]
-        for ordoYear in ordo {
-            let entries = ordoYear.ordo.enumerated ( ).flatMap { ( mi, month ) in
-                month.enumerated ( ).map { ( di, day ) in
-                    let titles = [ 
-                        day.date.day, 
-                        day.date.month, 
-                        day.date.weekday, 
-                        day.date.combined, 
-                        day.season.title 
-                    ] + day.celebrations.flatMap { c in
-                        [ c.title, "class \(c.rank)" ] + c.commemorations.map { $0.title }
-                    } + day.fasting
-                    return ( text: titles.joined ( separator: " " ).lowercased ( ), month: mi, day: di )
-                }
+    private func buildSearchIndex ( for ordoYear: OrdoYear ) {
+        let entries = ordoYear.ordo.enumerated ( ).flatMap { ( mi, month ) in
+            month.enumerated ( ).map { ( di, day ) in
+                let titles = [ 
+                    day.date.day, 
+                    day.date.month, 
+                    day.date.weekday, 
+                    day.date.combined, 
+                    day.season.title 
+                ] + day.celebrations.flatMap { c in
+                    [ c.title, "class \(c.rank)" ] + c.commemorations.map { $0.title }
+                } + day.fasting
+                return ( text: titles.joined ( separator: " " ).lowercased ( ), month: mi, day: di )
             }
-            searchIndex [ ordoYear.year ] = entries
         }
+        searchIndex [ ordoYear.year ] = entries
     }
     
     func SetDownload ( download: Int ) {
@@ -89,8 +91,42 @@ class ActiveData {
         return locale?.feasts.locale [ country ]?.locale [ diocese ] ?? []
     }
     
+    private func LoadYearSync ( year: Int ) -> OrdoYear? {
+        let resourceName = "\(year)"
+        guard let url = Bundle.main.url ( forResource: resourceName, withExtension: "zlib", subdirectory: "data/ordo" )
+             ?? Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: "data/ordo" )
+             ?? Bundle.main.url ( forResource: resourceName, withExtension: "zlib", subdirectory: "data" )
+             ?? Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: "data" )
+             ?? Bundle.main.url ( forResource: resourceName, withExtension: "zlib" )
+             ?? Bundle.main.url ( forResource: resourceName, withExtension: "json" )
+        else { return nil }
+        
+        do {
+            let data = try Data ( contentsOf: url )
+            let finalData: Data
+            if url.pathExtension == "zlib" {
+                finalData = try ( data as NSData ).decompressed ( using: .zlib ) as Data
+            } else {
+                finalData = data
+            }
+            return try JSONDecoder ( ).decode ( OrdoYear.self, from: finalData )
+        } catch {
+            print ( "Failed to load year \(year): \(error)" )
+            return nil
+        }
+    }
+
     func GetYear ( year: Int = CurrentYear ( ) ) -> OrdoYear? {
-        return self.ordo.first { $0.year == year }
+        if let existing = self.ordo.first ( where: { $0.year == year } ) {
+            return existing
+        }
+        
+        if let newYear = LoadYearSync ( year: year ) {
+            self.ordo.append ( newYear )
+            self.buildSearchIndex ( for: newYear )
+            return newYear
+        }
+        return nil
     }
     
     // Snapshot for off-main-thread search

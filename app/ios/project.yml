@@ -41,7 +41,7 @@ targets:
     sources:
       - ios
       - PrivacyInfo.xcprivacy
-      - ../../docs/data
+      - ../data
     dependencies:
       - package: swift-collections
         product: OrderedCollections
@@ -81,7 +81,7 @@ targets:
       - path: ios/Extensions.swift
       - path: ios/Client/Style/LiturgicalTheme.swift
       - path: ios/Client/Services/DateFormatter.swift
-      - ../../docs/data
+      - ../data
     dependencies:
       - package: swift-collections
         product: OrderedCollections
@@ -110,7 +110,7 @@ targets:
       - path: ios/Extensions.swift
       - path: ios/Client/Style/LiturgicalTheme.swift
       - path: ios/Client/Services/DateFormatter.swift
-      - ../../docs/data
+      - ../data
     dependencies:
       - package: swift-collections
         product: OrderedCollections

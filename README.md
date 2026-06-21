@@ -22,10 +22,21 @@ This repository is open for data contributions — new locale data (countries or
 
 ## 🗂️ Data
 
-All liturgical data lives in `data/` as individual JSON files. On every push to `main`, a GitHub Actions workflow merges and publishes them to [GitHub Pages](https://m-f-1998.github.io/ordo-1962/) — this is what the iOS app fetches.
+All liturgical data lives in `data/` as individual JSON files. 
 
 **Adding locale data:** Add a new file in `data/locale/` following the existing format.  
 **Adding propers:** Edit the relevant file in `data/ordo/`.
+
+### Building Data
+
+The `docs/data` and `app/data` directories are generated automatically from the source files in `data/`. These generated files are explicitly ignored from source control.
+
+To generate these files locally (required before building the iOS app in Xcode), run:
+```bash
+python3 scripts/build.py
+```
+
+On every push to `main`, a GitHub Actions workflow automatically builds and publishes the generated data to [GitHub Pages](https://m-f-1998.github.io/ordo-1962/).
 
 ## 📄 Privacy Policy
 

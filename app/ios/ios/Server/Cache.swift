@@ -57,14 +57,13 @@ class Cache {
     }
     
     func CacheExists ( predicate: Predicate<OrdoYear> ) throws -> Bool {
-        let ordo = try GetOrdo ( predicate: predicate )
         if let version = UserDefaults.standard.string ( forKey: "version" ) {
             print ( "Version: \(version)" )
             if !version.isEmpty && version == Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? "" {
                 if try GetPrayers ( ) != nil {
                     if try GetLocale ( ) != nil {
                         if try GetVotives ( ) != nil {
-                            return ordo.count == 101 && ordo [ 0 ].year == 2023
+                            return true
                         }
                     }
                 }

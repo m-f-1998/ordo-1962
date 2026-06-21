@@ -22,39 +22,17 @@ class API {
 
     @MainActor
     func UpdateCache ( ) async throws {
-        try cache.DeleteAll ( )
         let locale = try await LocaleRequest ( )
         let votives = try await VotiveRequest ( )
-        self.activeData.SetDownload ( download: 4 )
+        self.activeData.SetDownload ( download: 40 )
 
         let prayers = try await PrayerRequest ( )
-        self.activeData.SetDownload ( download: 8 )
+        self.activeData.SetDownload ( download: 80 )
 
-        let startYear = 2023
-        let endYear = 2123
-        var ordoMap: [ Int : OrdoYear ] = [ : ]
-        
-        try await withThrowingTaskGroup ( of: ( Int, OrdoYear ).self ) { group in
-            for i in startYear...endYear {
-                group.addTask {
-                    let res = try await self.FetchOrdo ( year: String ( i ) )
-                    return ( i, res )
-                }
-            }
-            
-            var completedCount = 0
-            for try await ( year, yearOrdo ) in group {
-                ordoMap [ year ] = yearOrdo
-                completedCount += 1
-                let progress = Int ( ( Double ( completedCount ) / Double ( endYear - startYear + 1 ) ) * 90.0 ) + 8
-                self.activeData.SetDownload ( download: progress )
-            }
-        }
-        
-        let ordo = ( startYear...endYear ).compactMap { ordoMap [ $0 ] }
-        for o in ordo {
-            cache.Insert ( ordo: o )
-        }
+        // OrdoYears are loaded dynamically by ActiveData.GetYear(year:) when requested.
+        // We initialize with an empty array (or just the current year if we wanted to),
+        // but since GetYear will dynamically fetch it, an empty array is fine.
+        let ordo: [ OrdoYear ] = []
         
         cache.Save ( )
         let version = Bundle.main.infoDictionary? [ "CFBundleShortVersionString" ] as? String ?? ""
@@ -64,7 +42,7 @@ class API {
     }
     
     func FetchOrdo ( year: String ) async throws -> OrdoYear {
-        let data = try await self.HTTP ( url: "ordo/\(year).json" )
+        let data = try await self.HTTP ( url: "ordo/\(year).zlib" )
         return try self.Decode ( data: data, type: OrdoYear.self )
     }
     
@@ -77,9 +55,8 @@ class API {
     }
     
     private func OrdoRequest ( year: String ) async throws -> OrdoYear {
-        let data = try await self.HTTP ( url: "ordo/\(year).json" )
+        let data = try await self.HTTP ( url: "ordo/\(year).zlib" )
         let json: OrdoYear = try self.Decode ( data: data, type: OrdoYear.self )
-        cache.Insert ( ordo: json )
         return json
     }
     
@@ -105,30 +82,34 @@ class API {
     }
 
     private func HTTP ( url: String ) async throws -> Data {
-        let cleanPath = url.replacingOccurrences ( of: ".json", with: "" )
+        let cleanPath = url.replacingOccurrences ( of: ".json", with: "" ).replacingOccurrences ( of: ".zlib", with: "" )
         let components = cleanPath.components ( separatedBy: "/" )
         let resourceName = components.last ?? ""
+        let isOrdo = url.contains ( "ordo/" )
+        let ext = isOrdo ? "zlib" : "json"
         
         var fileURL: URL? = nil
         
-        // 1. Try absolute root bundle
-        fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json" )
+        fileURL = Bundle.main.url ( forResource: resourceName, withExtension: ext )
         
-        // 2. Try target folder reference (like "data/ordo")
         if fileURL == nil {
             let subDirectory = "data" + ( components.count > 1 ? "/" + components.dropLast ( ).joined ( separator: "/" ) : "" )
-            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: subDirectory )
+            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: ext, subdirectory: subDirectory )
         }
         
-        // 3. Try direct subdirectory (like "ordo" or "data")
         if fileURL == nil && components.count > 1 {
             let subDirectory = components.dropLast ( ).joined ( separator: "/" )
-            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: subDirectory )
+            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: ext, subdirectory: subDirectory )
         }
         
-        // 4. Try inside "data" folder directly
         if fileURL == nil {
-            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: "data" )
+            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: ext, subdirectory: "data" )
+        }
+        
+        if fileURL == nil && isOrdo {
+            fileURL = Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: "data/ordo" ) ??
+                      Bundle.main.url ( forResource: resourceName, withExtension: "json", subdirectory: "data" ) ??
+                      Bundle.main.url ( forResource: resourceName, withExtension: "json" )
         }
         
         guard let finalURL = fileURL else {
@@ -136,7 +117,11 @@ class API {
         }
         
         do {
-            return try Data ( contentsOf: finalURL )
+            let data = try Data ( contentsOf: finalURL )
+            if finalURL.pathExtension == "zlib" {
+                return try ( data as NSData ).decompressed ( using: .zlib ) as Data
+            }
+            return data
         } catch {
             throw APIError.fetching ( "Could not read file: \(error.localizedDescription)" )
         }

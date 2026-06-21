@@ -159,17 +159,13 @@ struct ContentView: View {
             }
             
             // Load the required years directly from the bundle via API
-            var loadedOrdos: [ OrdoYear ] = [ ]
-            for yr in yearsToLoad.sorted ( ) {
-                let ordoYear = try await api.FetchOrdo ( year: String ( yr ) )
-                loadedOrdos.append ( ordoYear )
-            }
+            // (Skipped here since ActiveData.GetYear loads on demand)
             
             // Fetch the locale directly from the bundle via API
             let locale = try await api.LocaleRequest ( )
-            
+
             // Populate activeData with only the loaded years and locale!
-            activeData.SetSuccess ( ordo: loadedOrdos, locale: locale, prayers: nil, votives: nil )
+            activeData.SetSuccess ( ordo: [], locale: locale, prayers: nil, votives: nil )
         } catch {
             activeData.SetError ( error: "Could not load data: \(error.localizedDescription)" )
         }

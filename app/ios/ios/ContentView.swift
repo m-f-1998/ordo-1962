@@ -34,15 +34,14 @@ struct ContentView: View {
                 }
                 return
             }
-            let ordo = try self.api.cache.GetOrdo ( predicate: #Predicate<OrdoYear> { year in true } )
-            guard !ordo.isEmpty,
-                  let prayers = try self.api.cache.GetPrayers ( ),
+            // Ordo is loaded on demand, so we ignore it from the cache
+            guard let prayers = try self.api.cache.GetPrayers ( ),
                   let locale = try self.api.cache.GetLocale ( ),
                   let votives = try self.api.cache.GetVotives ( ) else {
                 self.activeData.SetError ( error: "An Error Occurred Loading App Data" )
                 return
             }
-            self.activeData.SetSuccess ( ordo: ordo, locale: locale, prayers: prayers, votives: votives )
+            self.activeData.SetSuccess ( ordo: [], locale: locale, prayers: prayers, votives: votives )
         } catch {
             self.activeData.SetError ( error: "An Error Occurred Loading App Data" )
         }
